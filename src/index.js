@@ -1,14 +1,25 @@
-import React from 'react';
+import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { State, initState } from './state';
+
+function Root() {
+  const [state, setState] = useState(initState());
+
+  return (
+    <State.Provider value={{ state, setState }}>
+      <App />
+    </State.Provider>
+  );
+}
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <Root />
   </React.StrictMode>,
-  document.getElementById('root')
+  document.getElementById('root'),
 );
 
 // If you want to start measuring performance in your app, pass a function

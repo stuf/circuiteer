@@ -1,24 +1,24 @@
-import logo from './logo.svg';
-import './App.css';
+import { useContext } from 'react';
+
+import { Canvas, Sidebar, PowerMeter } from './components';
+import { State } from './state';
 
 function App() {
+  // eslint-disable-next-line
+  const { state, setState } = useContext(State);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <main className="h-full flex">
+      <div className="flex-1 flex">
+        <div className="flex-1 relative">
+          <Canvas entities={state.entities} gridSize={state.canvas.grid} />
+          <PowerMeter />
+        </div>
+        <div className="w-64">
+          <Sidebar />
+        </div>
+      </div>
+    </main>
   );
 }
 
