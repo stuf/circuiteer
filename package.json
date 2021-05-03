@@ -6,16 +6,35 @@
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
+    "@visx/annotation": "^1.9.0",
+    "@visx/axis": "^1.10.0",
+    "@visx/curve": "^1.7.0",
+    "@visx/drag": "^1.7.4",
+    "@visx/event": "^1.7.0",
+    "@visx/glyph": "^1.7.0",
+    "@visx/group": "^1.7.0",
+    "@visx/pattern": "^1.7.0",
+    "@visx/point": "^1.7.0",
+    "@visx/responsive": "^1.7.0",
+    "@visx/scale": "^1.7.0",
+    "@visx/shape": "^1.8.0",
+    "@visx/text": "^1.7.0",
+    "@visx/tooltip": "^1.7.2",
+    "classnames": "^2.3.1",
+    "d3-scale-chromatic": "^2.0.0",
+    "linear-algebra": "^3.1.4",
+    "partial.lenses": "^14.17.0",
+    "ramda": "^0.27.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-scripts": "4.0.3",
     "web-vitals": "^1.0.1"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "start": "craco start",
+    "build": "craco build",
+    "test": "craco test",
+    "eject": "craco eject"
   },
   "eslintConfig": {
     "extends": [
@@ -34,5 +53,11 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@craco/craco": "^6.1.2",
+    "autoprefixer": "^9.8.6",
+    "postcss": "^7.0.35",
+    "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.1.2"
   }
 }
