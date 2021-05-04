@@ -8,6 +8,7 @@ export const modules = {
     name: 'Generator (Dummy)',
     power: 5,
     tier: 1,
+    size: [2, 2],
   },
   dummyConsumer: {
     id: 'dummyConsumer',
@@ -15,6 +16,7 @@ export const modules = {
     name: 'Consumer (Dummy)',
     power: -2.5,
     tier: 1,
+    size: [2, 2],
   },
   mediumDummy: {
     id: 'mediumDummy',
@@ -22,6 +24,7 @@ export const modules = {
     name: 'Medium (Dummy)',
     power: 0,
     tier: 2,
+    size: [4, 4],
   },
   largeDummyConsumer: {
     id: 'largeDummyConsumer',
@@ -29,6 +32,7 @@ export const modules = {
     name: 'Large Consumer (Dummy)',
     power: -12,
     tier: 3,
+    size: [4, 4],
   },
   largeDummyGenerator: {
     id: 'largeDummyGenerator',
@@ -36,6 +40,7 @@ export const modules = {
     name: 'Large Generator (Dummy)',
     power: 11,
     tier: 3,
+    size: [4, 4],
   },
   xlargeDummy: {
     id: 'xlargeDummy',
@@ -43,5 +48,6 @@ export const modules = {
     name: 'X-Large (Dummy)',
     power: 0,
     tier: 4,
+    size: [8, 8],
   },
 };

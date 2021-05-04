@@ -1,17 +1,18 @@
 import React, { useState } from 'react';
+import { Provider } from 'react-redux';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { State, initState } from './state';
+import store from './store';
 
 function Root() {
-  const [state, setState] = useState(initState());
+  // const [state, setState] = useState(initState());
 
   return (
-    <State.Provider value={{ state, setState }}>
+    <Provider {...{ store }}>
       <App />
-    </State.Provider>
+    </Provider>
   );
 }
 

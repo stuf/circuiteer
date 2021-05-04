@@ -7,6 +7,7 @@ function EntityObject(props) {
   const { pos, size } = item;
   const [x, y] = pos;
   const [w, h] = size;
+  // console.log('EntityObject', { x, y, w, h });
 
   const [state, setState] = useState({ hover: false });
   const setHover = v => () => setState(s => ({ ...s, hover: v }));

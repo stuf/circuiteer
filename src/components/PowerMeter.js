@@ -6,7 +6,7 @@ import { Polygon } from '@visx/shape';
 import { interpolateRdYlGn } from 'd3-scale-chromatic';
 import * as L from 'partial.lenses';
 
-import { State } from '../state';
+import { State } from '../state_';
 import css from './PowerMeter.module.css';
 
 const defaultMargin = {

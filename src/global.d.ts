@@ -40,6 +40,14 @@ declare interface IEntityObject {
 declare interface IState {
   canvas: {
     grid: [number, number];
+    drag: {
+      dragging: boolean;
+      pos: [number, number];
+      size: [number, number];
+    };
+    mouse: {
+      pos: [number, number];
+    };
   };
   entities: IEntityObject[];
   modules: IModuleDict;

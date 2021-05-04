@@ -2,13 +2,15 @@ import { useContext } from 'react';
 import cx from 'classnames';
 import * as L from 'partial.lenses';
 
-import { State } from '../state';
+import { State } from '../state_';
 import { modules } from '../config';
 import { Input } from './form';
 import css from './Sidebar.module.css';
 
 function Sidebar(props) {
   const { state, setState } = useContext(State);
+
+  const setDragSize = ([w, h]) => setState(L.set(['drag', 'size'], [w, h]));
 
   const moduleTierDict = Object.values(modules).reduce(
     (o, it) => L.set([`${it.tier}`, L.appendTo], it, o),
@@ -36,6 +38,15 @@ function Sidebar(props) {
                         draggable
                         tabIndex="-1"
                         className="bg-white focus:ring-2 ring-pink-500 border border-black border-opacity-50 px-2 py-1 shadow hover:shadow-md space-y-1"
+                        onDragStart={e => {
+                          e.dataTransfer.dropEffect = 'copy';
+                          e.dataTransfer.setData(
+                            'application/json',
+                            JSON.stringify({
+                              module: it,
+                            }),
+                          );
+                        }}
                       >
                         <header>{it.name}</header>
                         <div
