@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Provider } from 'react-redux';
 import ReactDOM from 'react-dom';
 import './index.css';
@@ -7,8 +7,6 @@ import reportWebVitals from './reportWebVitals';
 import store from './store';
 
 function Root() {
-  // const [state, setState] = useState(initState());
-
   return (
     <Provider {...{ store }}>
       <App />

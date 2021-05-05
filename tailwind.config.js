@@ -3,6 +3,9 @@ module.exports = {
   darkMode: false, // or 'media' or 'class'
   theme: {
     extend: {
+      fontFamily: theme => ({
+        sans: ['Inter'],
+      }),
       fill: theme => ({
         none: 'none',
         white: theme('colors.white'),
