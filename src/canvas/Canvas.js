@@ -10,7 +10,6 @@ import { addEntity } from 'state/editor';
 import { resetDrag, setDragging } from 'state/drag';
 
 import EntityObject from './_/EntityObject';
-import PowerMeter from './_/PowerMeter';
 import Grid from './Grid';
 
 const { round } = Math;
@@ -49,7 +48,6 @@ function Canvas() {
         const [px, py] = gridToScreen(gxy, entity.pos);
         const [w, h] = gridToScreen(gxy, entity.module.size);
         return (
-          // <Group key={entity.id} left={px} top={py}>
           <EntityObject
             key={entity.id}
             object={entity}
@@ -58,12 +56,6 @@ function Canvas() {
             left={px}
             top={py}
           />
-          //   <rect
-          //     width={w}
-          //     height={h}
-          //     className="stroke-red stroke-2 fill-white module-object"
-          //   />
-          // </Group>
         );
       }),
     [entities, gxy],

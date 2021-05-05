@@ -20,7 +20,7 @@ const initialState = L.get(initL, undefined);
 
 //
 
-const reducer = createSlice({
+const slice = createSlice({
   name,
   initialState,
   reducers: {},
@@ -49,4 +49,4 @@ const reducer = createSlice({
   },
 });
 
-export default reducer;
+export default slice.reducer;

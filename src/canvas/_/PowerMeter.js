@@ -2,7 +2,7 @@ import * as L from 'partial.lenses';
 import { useMemo } from 'react';
 import { useSelector } from 'react-redux';
 
-import { Line, Polygon } from '@visx/shape';
+import { Line } from '@visx/shape';
 import { scaleLinear } from '@visx/scale';
 
 const allConsumers = [L.elems, L.when(x => x.module.power < 0)];

@@ -1,17 +1,27 @@
 import * as L from 'partial.lenses';
-import { createAction, createReducer } from '@reduxjs/toolkit';
+import { createAction, createSlice, original } from '@reduxjs/toolkit';
 
-export const setGridSize = createAction('setGridSize');
+const name = 'grid';
+const prefix = x => [name, x].join('/');
 
 //
 
-const reducer = createReducer(
-  {
-    size: [32, 32],
-  },
-  {
-    [setGridSize]: (s, a) => L.set('size', a.payload, s),
-  },
-);
+export const setGridSize = createAction(prefix('setGridSize'));
 
-export default reducer;
+//
+
+const initialState = {
+  size: [32, 32],
+};
+
+const slice = createSlice({
+  name,
+  initialState,
+  reducers: {},
+  extraReducers: builder =>
+    builder.addCase(setGridSize, (s, a) =>
+      L.set('size', a.payload, original(s)),
+    ),
+});
+
+export default slice.reducer;

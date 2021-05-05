@@ -42,7 +42,7 @@ export const toggleEntity = createAction(prefix('toggleEntity'));
  */
 const initialState = L.get(stateL, undefined);
 
-const reducer = createSlice({
+const slice = createSlice({
   name,
   initialState,
   reducers: {},
@@ -63,7 +63,7 @@ const reducer = createSlice({
   },
 });
 
-export default reducer;
+export default slice.reducer;
 
 //
 
