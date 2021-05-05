@@ -1,4 +1,5 @@
 import * as L from 'partial.lenses';
+import * as R from 'ramda';
 import { createSlice, createAction, original } from '@reduxjs/toolkit';
 import { v4 as uuid } from 'uuid';
 
@@ -25,8 +26,14 @@ const prefix = x => `${name}/${x}`;
 //
 
 export const addEntity = createAction(prefix('addEntity'), entity => ({
-  payload: L.set('id', uuid(), entity),
+  payload: L.set([entityL, 'id'], uuid(), entity),
 }));
+
+export const selectEntity = createAction(prefix('selectEntity'));
+
+export const resetCurrent = createAction(prefix('resetCurrent'));
+
+export const toggleEntity = createAction(prefix('toggleEntity'));
 
 //
 
@@ -39,9 +46,20 @@ const reducer = createSlice({
   name,
   initialState,
   reducers: {},
-  extraReducers: {
-    [addEntity]: (s, a) =>
-      L.set(['entities', L.appendTo], a.payload, original(s)),
+  extraReducers: builder => {
+    builder
+      .addCase(addEntity, (s, a) =>
+        L.set(['entities', L.appendTo], a.payload, original(s)),
+      )
+      .addCase(resetCurrent, s => L.remove('current', original(s)))
+      .addCase(selectEntity, (s, a) => L.set('current', a.payload, original(s)))
+      .addCase(toggleEntity, (s, a) =>
+        L.modify(
+          ['entities', L.whereEq({ id: a.payload.id }), 'enabled'],
+          R.not,
+          original(s),
+        ),
+      );
   },
 });
 
@@ -52,6 +70,7 @@ export default reducer;
 /**
  * @typedef {object} EditorState
  * @prop {boolean} dragging
+ * @prop {IEntity} current
  * @prop {IEntity[]} entities
  */
 

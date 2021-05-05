@@ -16,7 +16,7 @@ function Toggle(props) {
         <span
           className={`${
             checked ? 'translate-x-6' : 'translate-x-1'
-          } inline-block w-4 h-4 transform bg-white rounded-full`}
+          } inline-block w-4 h-4 transform bg-white rounded-full transition duration-75 ease-out`}
         ></span>
       </Switch>
 

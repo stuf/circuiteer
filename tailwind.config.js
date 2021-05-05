@@ -10,6 +10,7 @@ module.exports = {
         none: 'none',
         white: theme('colors.white'),
         red: theme('colors.red.500'),
+        green: theme('colors.green.500'),
         black: theme('colors.black'),
       }),
       stroke: theme => ({

@@ -2,13 +2,15 @@ import { useState, useMemo } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import * as L from 'partial.lenses';
 import { localPoint } from '@visx/event';
+import { PatternLines } from '@visx/pattern';
 import { ParentSizeModern as ParentSize } from '@visx/responsive';
 import { Group } from '@visx/group';
 
 import { addEntity } from 'state/editor';
 import { resetDrag, setDragging } from 'state/drag';
 
-import EntityObjectList from './_/EntityObjectList';
+import EntityObject from './_/EntityObject';
+import PowerMeter from './_/PowerMeter';
 import Grid from './Grid';
 
 const { round } = Math;
@@ -47,13 +49,21 @@ function Canvas() {
         const [px, py] = gridToScreen(gxy, entity.pos);
         const [w, h] = gridToScreen(gxy, entity.module.size);
         return (
-          <Group key={entity.id} left={px} top={py}>
-            <rect
-              width={w}
-              height={h}
-              className="stroke-red stroke-2 fill-white module-object"
-            />
-          </Group>
+          // <Group key={entity.id} left={px} top={py}>
+          <EntityObject
+            key={entity.id}
+            object={entity}
+            width={w}
+            height={h}
+            left={px}
+            top={py}
+          />
+          //   <rect
+          //     width={w}
+          //     height={h}
+          //     className="stroke-red stroke-2 fill-white module-object"
+          //   />
+          // </Group>
         );
       }),
     [entities, gxy],
@@ -89,11 +99,18 @@ function Canvas() {
                   }, 100);
                 }}
               >
+                <PatternLines
+                  id="diagonal"
+                  width={10}
+                  height={10}
+                  orientation={['diagonal']}
+                  stroke="#000"
+                  strokeWidth={3}
+                />
+
                 <Grid {...{ grid: gxy, size: [width, height] }} />
 
                 {entityList}
-
-                <EntityObjectList />
 
                 {isDragging && (
                   <Group left={currentPos[0]} top={currentPos[1]}>
