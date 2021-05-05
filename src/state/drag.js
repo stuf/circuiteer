@@ -1,52 +1,52 @@
 import * as L from 'partial.lenses';
-import { createAction, createReducer } from '@reduxjs/toolkit';
+import { createAction, createSlice, original } from '@reduxjs/toolkit';
 
-export const setDragging = createAction('setDragging');
-export const setDragPos = createAction('setDragPos');
-export const setDragSize = createAction('setDragSize');
-export const setDrag = createAction('setDrag');
-export const resetDrag = createAction('resetDrag');
+const name = 'drag';
+const prefix = x => [name, x].join('/');
+
+export const setDragging = createAction(prefix('setDragging'));
+export const setDragPos = createAction(prefix('setDragPos'));
+export const setDragSize = createAction(prefix('setDragSize'));
+export const setDrag = createAction(prefix('setDrag'));
+export const resetDrag = createAction(prefix('resetDrag'));
+
+const initL = L.pickIn({
+  dragging: L.define(false),
+  pos: L.define([0, 0]),
+  size: L.define([0, 0]),
+});
+
+const initialState = L.get(initL, undefined);
 
 //
 
-const reducer = createReducer(
-  {
-    dragging: false,
-    pos: [0, 0],
-    size: [0, 0],
+const reducer = createSlice({
+  name,
+  initialState,
+  reducers: {},
+  extraReducers: builder => {
+    builder
+      .addCase(resetDrag, s => L.remove(initL, original(s)))
+      .addCase(setDragging, (s, a) => L.set('dragging', a.payload, original(s)))
+      .addCase(setDragPos, (s, a) => L.set('pos', a.payload, original(s)))
+      .addCase(setDragSize, (s, a) => L.set('size', a.payload, original(s)))
+      .addCase(setDrag, (s, a) => {
+        const { payload } = a;
+        const { dragging, pos, size } = payload;
+
+        if (dragging) {
+          s.dragging = dragging;
+        }
+
+        if (pos) {
+          s.pos = pos;
+        }
+
+        if (size) {
+          s.size = size;
+        }
+      });
   },
-  {
-    [resetDrag]: (s, a) => {
-      s.dragging = false;
-      s.pos = [0, 0];
-      s.size = [0, 0];
-    },
-    [setDrag]: (s, a) => {
-      const { payload } = a;
-      const { dragging, pos, size } = payload;
-
-      if (dragging) {
-        s.dragging = dragging;
-      }
-
-      if (pos) {
-        s.pos = pos;
-      }
-
-      if (size) {
-        s.size = size;
-      }
-    },
-    [setDragging]: (s, a) => {
-      s.dragging = a.payload;
-    },
-    [setDragPos]: (s, a) => {
-      s.pos = a.payload;
-    },
-    [setDragSize]: (s, a) => {
-      s.size = a.payload;
-    },
-  },
-);
+});
 
 export default reducer;
