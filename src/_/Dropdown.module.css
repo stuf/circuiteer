@@ -1,0 +1,105 @@
+.root {
+}
+
+.button {
+  @apply border-2;
+  @apply w-full;
+  @apply py-2 pl-3 pr-10;
+  @apply text-left;
+  @apply bg-white;
+  @apply rounded-lg shadow-md;
+  @apply cursor-default;
+  @apply focus:outline-none;
+  @apply focus-within:ring-opacity-75;
+  @apply focus-within:ring-white;
+  @apply focus-within:ring-offset-green-300;
+  @apply focus-within:ring-offset-2;
+  @apply focus-within:border-indigo-500;
+  @apply sm:text-sm;
+}
+
+.buttonText {
+  @apply block truncate;
+}
+
+.buttonIconWrap {
+  @apply absolute;
+  @apply inset-y-0 right-0;
+  @apply flex items-center;
+  @apply pr-2 pointer-events-none;
+}
+
+.buttonIcon {
+  @apply w-5 h-5;
+  @apply text-gray-400;
+}
+
+.choices {
+  @apply absolute;
+  @apply w-full;
+  @apply py-1 mt-1;
+  @apply overflow-auto;
+  @apply text-base;
+  @apply bg-white;
+  @apply rounded-md shadow-lg;
+  @apply max-h-60;
+  @apply ring-1 ring-black ring-opacity-5;
+  @apply focus:outline-none;
+  @apply sm:text-sm;
+}
+
+.choice {
+  /* @apply border-2 border-pink-500; */
+  @apply text-gray-900;
+  @apply cursor-default select-none;
+  @apply relative;
+  @apply py-2 pl-10 pr-4;
+  @apply block truncate;
+}
+
+.active {
+  @apply bg-yellow-100;
+  @apply text-yellow-900;
+}
+
+.selected {
+  @apply font-medium;
+}
+
+.selectedIconWrap {
+  @apply absolute inset-y-0 left-0 flex items-center;
+  @apply pl-3;
+}
+
+.selectedIcon {
+  @apply w-5 h-5;
+}
+
+.unavailable {
+  @apply opacity-25;
+  /* @apply bg-red-500; */
+}
+
+.enter {
+  @apply transition duration-100 ease-out;
+}
+
+.enterFrom {
+  @apply transform scale-95 opacity-0;
+}
+
+.enterTo {
+  @apply transform scale-100 opacity-100;
+}
+
+.leave {
+  @apply transition duration-75 ease-out;
+}
+
+.leaveFrom {
+  @apply transform scale-100 opacity-100;
+}
+
+.leaveTo {
+  @apply transform scale-95 opacity-0;
+}

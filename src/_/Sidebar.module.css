@@ -1,0 +1,29 @@
+.root {
+  /* @apply divide-y-4 divide-red-500; */
+  @apply px-4 py-2;
+  @apply space-y-4;
+}
+
+.group {
+  /* @apply py-2; */
+}
+
+.groupHead,
+.groupBody {
+}
+
+.groupHead {
+  @apply font-bold;
+}
+
+.groupBody {
+  @apply space-y-2;
+}
+
+.groupBody details {
+}
+
+.groupBody summary {
+  @apply font-bold;
+  @apply mb-1;
+}
