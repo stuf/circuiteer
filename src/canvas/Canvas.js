@@ -5,10 +5,11 @@ import { localPoint } from '@visx/event';
 import { ParentSizeModern as ParentSize } from '@visx/responsive';
 import { Group } from '@visx/group';
 
+import { addEntity } from 'state/editor';
+import { resetDrag, setDragging } from 'state/drag';
+
+import EntityObjectList from './_/EntityObjectList';
 import Grid from './Grid';
-import { addEntity } from '../state/editor';
-import { resetDrag, setDragging } from '../state/drag';
-import { preventDefault } from '../common/util';
 
 const { round } = Math;
 
@@ -22,7 +23,6 @@ function Canvas() {
   const gxy = useSelector(L.get(['grid', 'size']));
   const entities = useSelector(L.get(['editor', 'entities', L.valueOr([])]));
   const isDragging = useSelector(L.get(['drag', 'dragging']));
-  const dragPos = useSelector(L.get(['drag', 'pos']));
 
   /**
    * Currently dragged element's size in grid space
@@ -36,16 +36,11 @@ function Canvas() {
 
   const [currentPos, setCurrentPos] = useState([0, 0]);
 
-  const pos = useMemo(
-    () => ({
-      left: dragPos[0],
-      top: dragPos[1],
-    }),
-    [dragPos],
-  );
-
   const setDragOff = () => !isDragging && update(setDragging(false));
 
+  /**
+   * Memoize list of placed structures for rendering
+   */
   const entityList = useMemo(
     () =>
       entities.map(entity => {
@@ -53,7 +48,11 @@ function Canvas() {
         const [w, h] = gridToScreen(gxy, entity.module.size);
         return (
           <Group key={entity.id} left={px} top={py}>
-            <rect width={w} height={h} stroke="#f00" />
+            <rect
+              width={w}
+              height={h}
+              className="stroke-red stroke-2 fill-white module-object"
+            />
           </Group>
         );
       }),
@@ -90,21 +89,21 @@ function Canvas() {
                   }, 100);
                 }}
               >
-                <Grid {...{ grid: [32, 32], size: [width, height] }} />
+                <Grid {...{ grid: gxy, size: [width, height] }} />
+
+                {entityList}
+
+                <EntityObjectList />
 
                 {isDragging && (
                   <Group left={currentPos[0]} top={currentPos[1]}>
                     <rect
                       width={mdw}
                       height={mdh}
-                      stroke="#f00"
-                      fill="#0006"
-                      strokeWidth={2}
+                      className="module-object stroke-2 stroke-black stroke-opacity-50 fill-white fill-opacity-50 stroke-dash-even"
                     />
                   </Group>
                 )}
-
-                {entityList}
               </svg>
             </>
           );

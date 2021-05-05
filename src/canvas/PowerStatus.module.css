@@ -1,0 +1,41 @@
+.root {
+  @apply grid grid-cols-3 gap-4;
+  /* @apply shadow-lg; */
+}
+
+.kvp {
+  @apply p-3;
+  @apply space-y-1;
+  @apply my-2;
+}
+
+.label {
+  @apply text-sm;
+}
+
+.value {
+  @apply text-3xl;
+}
+
+/**/
+
+.positive,
+.negative {
+  @apply text-white;
+}
+
+.positive {
+  @apply ring-2 ring-green-500 bg-green-500 rounded-md;
+}
+
+.positive .value {
+  /* @apply text-green-500; */
+}
+
+.negative {
+  @apply ring-red-500 ring-2 bg-red-500 rounded-md;
+}
+
+.negative .value {
+  /* @apply text-red-500; */
+}
