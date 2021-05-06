@@ -83,19 +83,19 @@ function Sidebar(props) {
                         }),
                       );
                     }}
-                    className="border border-gray-200 shadow hover:shadow-md px-2 py-1 font-mono"
+                    className="border border-gray-200 shadow hover:shadow-md px-2 py-1 font-mono flex flex-col"
                   >
+                    <div className="flex-1 font-sans mb-2">{x.name}</div>
                     <div className="flex justify-between">
-                      <span>{x.shortId}</span>
-                      <span
+                      <div>{x.size.join(' × ')}</div>
+                      <div
                         className={`${
                           x.power < 0 ? 'text-red-500' : 'text-green-500'
-                        }`}
+                        } font-bold`}
                       >
                         {x.power}
-                      </span>
+                      </div>
                     </div>
-                    <div>{x.size.join(' × ')}</div>
                   </li>
                 ))}
               </ul>
