@@ -11,9 +11,17 @@ export const togglePowerStatus = createAction(prefix('togglePowerStatus'));
 
 export const toggleHideInvalid = createAction(prefix('toggleHideInvalid'));
 
+export const toggleEntityEditor = createAction(prefix('toggleEntityEditor'));
+
 //
 
-const initialState = {};
+const initialState = {
+  flags: {
+    hideInvalid: false,
+    showPowerStatus: true,
+    showEditor: true,
+  },
+};
 
 const slice = createSlice({
   name,
@@ -26,6 +34,9 @@ const slice = createSlice({
       )
       .addCase(toggleHideInvalid, s =>
         L.modify(['flags', 'hideInvalid'], R.not, original(s)),
+      )
+      .addCase(toggleEntityEditor, s =>
+        L.modify(['flags', 'showEditor'], R.not, original(s)),
       );
   },
 });
