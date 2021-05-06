@@ -5,11 +5,14 @@ import { useSelector } from 'react-redux';
 import { Line } from '@visx/shape';
 import { scaleLinear } from '@visx/scale';
 
-const allConsumers = [L.elems, L.when(x => x.module.power < 0)];
-const allProducers = [L.elems, L.when(x => x.module.power > 0)];
+const allConsumers = [L.elems, L.when(x => x.module && x.module.power < 0)];
+const allProducers = [L.elems, L.when(x => x.module && x.module.power > 0)];
 
-const powerTotal = [L.elems, 'module', 'power'];
-const powerActive = [L.elems, L.when(x => x.enabled), 'module', 'power'];
+const powerTotal = [L.elems, L.orElse(L.zero, ['module', 'power'])];
+const powerActive = [
+  L.elems,
+  L.orElse(L.zero, [L.when(x => x.enabled), 'module', 'power']),
+];
 
 const allConsumersIn = L.collect(allConsumers);
 const allProducersIn = L.collect(allProducers);

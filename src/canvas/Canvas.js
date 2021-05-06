@@ -10,6 +10,7 @@ import { addEntity } from 'state/editor';
 import { resetDrag, setDragging } from 'state/drag';
 
 import EntityObject from './_/EntityObject';
+import Power from './_/Power';
 import Grid from './Grid';
 
 const { round } = Math;
@@ -45,8 +46,17 @@ function Canvas() {
   const entityList = useMemo(
     () =>
       entities.map(entity => {
+        if (!entity.module || !Object.keys(entity.module)) {
+          console.warn(
+            'Entity `%s` is missing its module definition',
+            entity.id,
+          );
+          return <EntityObject.Invalid key={entity.id} />;
+        }
+
         const [px, py] = gridToScreen(gxy, entity.pos);
         const [w, h] = gridToScreen(gxy, entity.module.size);
+
         return (
           <EntityObject
             key={entity.id}
@@ -113,6 +123,8 @@ function Canvas() {
                     />
                   </Group>
                 )}
+
+                <Power />
               </svg>
             </>
           );

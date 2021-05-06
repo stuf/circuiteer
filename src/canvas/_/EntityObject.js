@@ -5,6 +5,7 @@ import cx from 'classnames';
 
 import css from './EntityObject.module.css';
 import { selectEntity } from 'state/editor';
+import Invalid from './InvalidEntityObject';
 
 function EntityObject(props) {
   const { width, height, left, top, object } = props;
@@ -12,8 +13,6 @@ function EntityObject(props) {
 
   const currentId = useSelector(L.get(['editor', 'current']));
   const isEnabled = L.get(['enabled', L.reread(x => !!x)], object);
-
-  console.log(object.id, isEnabled);
 
   return (
     <>
@@ -58,5 +57,7 @@ function EntityObject(props) {
     </>
   );
 }
+
+EntityObject.Invalid = Invalid;
 
 export default EntityObject;
