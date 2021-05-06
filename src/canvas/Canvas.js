@@ -12,6 +12,7 @@ import { resetDrag, setDragging } from 'state/drag';
 import EntityObject from './_/EntityObject';
 import Power from './_/Power';
 import Grid from './Grid';
+import { resetCurrent } from 'state/editor';
 
 const { round } = Math;
 
@@ -99,6 +100,9 @@ function Canvas() {
                     update(addEntity({ pos, module }));
                     update(resetDrag());
                   }, 100);
+                }}
+                onClick={e => {
+                  update(resetCurrent());
                 }}
               >
                 <PatternLines

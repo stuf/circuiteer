@@ -27,7 +27,8 @@ function EntityObject(props) {
         <rect
           className={cx(css.rect, 'module-object')}
           {...{ width, height }}
-          onClick={() => {
+          onClick={e => {
+            e.stopPropagation();
             console.log('onclick', object.id, object);
             update(selectEntity(object.id));
           }}
