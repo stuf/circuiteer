@@ -13,13 +13,18 @@ export const toggleHideInvalid = createAction(prefix('toggleHideInvalid'));
 
 export const toggleEntityEditor = createAction(prefix('toggleEntityEditor'));
 
+export const toggleShoppingList = createAction(prefix('toggleShoppingList'));
+
 //
+
+const toggle = f => R.compose(L.modify(['flags', f], R.not), original);
 
 const initialState = {
   flags: {
     hideInvalid: false,
     showPowerStatus: true,
     showEditor: true,
+    showShoppingList: true,
   },
 };
 
@@ -29,15 +34,10 @@ const slice = createSlice({
   reducers: {},
   extraReducers: builder => {
     builder
-      .addCase(togglePowerStatus, s =>
-        L.modify(['flags', 'showPowerStatus'], R.not, original(s)),
-      )
-      .addCase(toggleHideInvalid, s =>
-        L.modify(['flags', 'hideInvalid'], R.not, original(s)),
-      )
-      .addCase(toggleEntityEditor, s =>
-        L.modify(['flags', 'showEditor'], R.not, original(s)),
-      );
+      .addCase(togglePowerStatus, toggle('showPowerStatus'))
+      .addCase(toggleHideInvalid, toggle('hideInvalid'))
+      .addCase(toggleEntityEditor, toggle('showEditor'))
+      .addCase(toggleShoppingList, toggle('showShoppingList'));
   },
 });
 

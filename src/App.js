@@ -1,19 +1,17 @@
-import * as L from 'partial.lenses';
 import { useSelector } from 'react-redux';
 import cx from 'classnames';
 
+import css from './App.module.css';
 import Canvas from 'canvas/Canvas';
+import PowerMeter from 'canvas/_/PowerMeter';
 import Options from './_/Options';
 import Sidebar from './_/Sidebar';
 import EntityEditor from './_/EntityEditor';
-import css from './App.module.css';
-import PowerMeter from 'canvas/_/PowerMeter';
+import { showSelectedEntityIn, optionFlagsIn } from 'common/selectors';
 
 function App() {
-  const showEditor = useSelector(
-    L.get(['editor', 'current', L.reread(x => !!x)]),
-  );
-  const flags = useSelector(L.get(['options', 'flags']));
+  const showEditor = useSelector(showSelectedEntityIn);
+  const flags = useSelector(optionFlagsIn);
 
   return (
     <main className="h-full flex flex-col overflow-hidden">

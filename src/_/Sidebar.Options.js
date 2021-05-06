@@ -4,6 +4,7 @@ import {
   toggleEntityEditor,
   toggleHideInvalid,
   togglePowerStatus,
+  toggleShoppingList,
 } from 'state/options';
 
 import Toggle from '_/Toggle';
@@ -23,6 +24,11 @@ const items = [
     label: 'Show entity editor',
     value: options => options.flags.showEditor,
     action: () => toggleEntityEditor(),
+  },
+  {
+    label: 'Show shopping list',
+    value: options => options.flags.showShoppingList,
+    action: () => toggleShoppingList(),
   },
 ];
 
