@@ -1,6 +1,7 @@
+import * as P from 'prop-types';
 import { Switch } from '@headlessui/react';
 
-function Toggle(props) {
+export default function Toggle(props) {
   const { label, checked, onChange } = props;
 
   return (
@@ -25,4 +26,8 @@ function Toggle(props) {
   );
 }
 
-export default Toggle;
+Toggle.propTypes = {
+  label: P.string,
+  checked: P.bool,
+  onChange: P.func,
+};

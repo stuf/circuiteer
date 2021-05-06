@@ -10,8 +10,10 @@ import css from './App.module.css';
 import PowerMeter from 'canvas/_/PowerMeter';
 
 function App() {
-  const currentId = useSelector(L.get(['editor', 'current']));
-  const showEditor = !!currentId;
+  const showEditor = useSelector(
+    L.get(['editor', 'current', L.reread(x => !!x)]),
+  );
+  const flags = useSelector(L.get(['options', 'flags']));
 
   return (
     <main className="h-full flex flex-col overflow-hidden">
@@ -22,13 +24,14 @@ function App() {
 
       <div className="flex h-full relative">
         <div className="flex-1 relative h-full">
-          {showEditor && (
+          {showEditor && flags.showEditor && (
             <div className="absolute top-2 right-2 bg-white rounded-md border-2 shadow-lg w-56">
               <EntityEditor />
             </div>
           )}
-          <PowerMeter />
-          {/* <PowerStatus className="absolute left-1/2 shadow-lg transform -translate-x-1/2 bg-white top-2 rounded-md px-2 border-2 text-center" /> */}
+
+          {flags.showPowerStatus && <PowerMeter />}
+
           <Canvas />
         </div>
         <div className="border-l-2 w-72 divide-y-2 h-full overflow-auto">

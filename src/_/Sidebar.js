@@ -7,6 +7,7 @@ import { setDrag } from '../state/drag';
 import { setGridSize } from 'state/grid';
 
 import css from './Sidebar.module.css';
+import SidebarOptions from './Sidebar.Options';
 
 function Sidebar(props) {
   const update = useDispatch();
@@ -41,6 +42,8 @@ function Sidebar(props) {
 
   return (
     <div className={css.root}>
+      <SidebarOptions />
+
       <section className={css.group}>
         <header className={css.groupHead}>Location</header>
 
