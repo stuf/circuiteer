@@ -50,7 +50,7 @@ function EntityObject(props) {
           )}
 
           <foreignObject {...{ x: 0, y: 0, width, height }}>
-            <div className="pointer-events-none border-2 h-full w-full border-red-500 flex flex-col items-center text-sm space-y-2 justify-center">
+            <div className="pointer-events-none h-full w-full flex flex-col items-center text-sm space-y-2 justify-center">
               <div>
                 <TierIcon
                   tier={object.module.tier}
