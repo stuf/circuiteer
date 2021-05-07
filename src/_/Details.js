@@ -4,8 +4,8 @@ export default function Details(props) {
   const { children, title, open } = props;
 
   return (
-    <details {...{ open: !!open }}>
-      <summary>{title}</summary>
+    <details {...{ open }}>
+      <summary className="mb-2">{title}</summary>
 
       <div>{children}</div>
     </details>
@@ -14,8 +14,8 @@ export default function Details(props) {
 
 Details.propTypes = {
   open: P.bool,
-  title: P.oneOf([P.node, P.string]),
-  children: P.oneOf([P.node, P.element, P.string]),
+  title: P.string,
+  children: P.any,
 };
 
 Details.defaultProps = {

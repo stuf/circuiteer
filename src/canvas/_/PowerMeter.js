@@ -28,13 +28,13 @@ function PowerMeter(props) {
   const consumersTotal = L.sum(powerTotal, consumers);
   const consumersActive = L.sum(powerActive, consumers);
 
-  console.log({ consumers, producers });
-  console.log({
-    producersTotal,
-    producersActive,
-    consumersTotal,
-    consumersActive,
-  });
+  // console.log({ consumers, producers });
+  // console.log({
+  //   producersTotal,
+  //   producersActive,
+  //   consumersTotal,
+  //   consumersActive,
+  // });
 
   const svgProps = {
     width: 320,

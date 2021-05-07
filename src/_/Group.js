@@ -13,6 +13,6 @@ export default function Group(props) {
 }
 
 Group.propTypes = {
-  children: P.oneOf([P.node, P.element, P.string]),
-  title: P.oneOf([P.node, P.string]),
+  children: P.any,
+  title: P.string,
 };

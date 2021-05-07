@@ -25,6 +25,7 @@ function Canvas() {
 
   const gxy = useSelector(L.get(['grid', 'size']));
   const entities = useSelector(L.get(['editor', 'entities', L.valueOr([])]));
+  const currentEntityId = useSelector(L.get(['editor', 'current']));
   const isDragging = useSelector(L.get(['drag', 'dragging']));
 
   /**
@@ -102,7 +103,7 @@ function Canvas() {
                   }, 100);
                 }}
                 onClick={e => {
-                  update(resetCurrent());
+                  if (currentEntityId) update(resetCurrent());
                 }}
               >
                 <PatternLines

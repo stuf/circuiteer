@@ -1,10 +1,13 @@
 import * as L from 'partial.lenses';
-import { useSelector, shallowEqual } from 'react-redux';
+import { useDispatch, useSelector, shallowEqual } from 'react-redux';
 
 import Group from '_/Group';
-import Dropdown from '_/Dropdown';
+import { changeLocation } from 'state/location';
+import { useMemo } from 'react';
 
-export default function Location(props) {
+export default function Location() {
+  const update = useDispatch();
+
   const { currentLocation, locations } = useSelector(
     L.get([
       'location',
@@ -25,17 +28,35 @@ export default function Location(props) {
     shallowEqual,
   );
 
-  const current = locations.find(x => x.value === currentLocation);
+  const current = useMemo(() => {
+    return locations.find(x => x.value === currentLocation);
+  }, [locations, currentLocation]);
 
   return (
     <Group title="Location">
-      <Dropdown
+      <select
+        value={current.value}
+        onChange={e => {
+          console.log(e.target.value);
+          update(changeLocation(+e.target.value));
+        }}
+      >
+        {locations.map((loc, i) => {
+          return (
+            <option key={i} value={loc.value}>
+              {loc.label}
+            </option>
+          );
+        })}
+      </select>
+      {/* <Dropdown
         value={current}
         choices={locations}
         onChange={e => {
           console.log('change', e);
+          update(changeLocation(e.value));
         }}
-      />
+      /> */}
     </Group>
   );
 }
