@@ -35,6 +35,7 @@ export default function Location() {
   return (
     <Group title="Location">
       <select
+        className="px-4 py-2 appearance-none block w-full rounded-md bg-white border-2"
         value={current.value}
         onChange={e => {
           console.log(e.target.value);
@@ -43,20 +44,12 @@ export default function Location() {
       >
         {locations.map((loc, i) => {
           return (
-            <option key={i} value={loc.value}>
+            <option key={i} className="px-4 py-2" value={loc.value}>
               {loc.label}
             </option>
           );
         })}
       </select>
-      {/* <Dropdown
-        value={current}
-        choices={locations}
-        onChange={e => {
-          console.log('change', e);
-          update(changeLocation(e.value));
-        }}
-      /> */}
     </Group>
   );
 }

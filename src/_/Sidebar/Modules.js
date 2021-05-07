@@ -39,7 +39,7 @@ export default function SidebarModules(props) {
                     }),
                   );
                 }}
-                className="border border-gray-200 shadow hover:shadow-md px-2 py-1 font-mono flex flex-col"
+                className="border border-gray-200 shadow hover:shadow-lg px-2 py-1 font-mono flex flex-col cursor-pointer"
               >
                 <div className="flex-1 font-sans mb-2">{moduleObj.name}</div>
                 <div className="flex justify-between">
