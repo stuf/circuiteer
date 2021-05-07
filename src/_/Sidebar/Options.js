@@ -7,6 +7,7 @@ import {
   toggleShoppingList,
 } from 'state/options';
 
+import Group from '_/Group';
 import Toggle from '_/Toggle';
 
 const items = [
@@ -37,19 +38,18 @@ export default function SidebarOptions(props) {
   const update = useDispatch();
 
   return (
-    <section>
-      <header className="font-bold mb-2">Options</header>
-
-      <div className="space-y-2">
-        {items.map((item, ix) => (
-          <Toggle
-            key={ix}
-            checked={(item.value || (a => a))(options)}
-            label={item.label}
-            onChange={() => update(item.action())}
-          />
-        ))}
-      </div>
-    </section>
+    <Group title="Options">
+      {items.map((item, ix) => (
+        <Toggle
+          key={ix}
+          checked={(item.value || (a => a))(options)}
+          label={item.label}
+          onChange={() => update(item.action())}
+        />
+      ))}
+    </Group>
+    // <section>
+    //   <header className="font-bold mb-2">Options</header>
+    // </section>
   );
 }

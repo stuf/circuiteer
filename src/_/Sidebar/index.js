@@ -1,62 +1,31 @@
 import * as L from 'partial.lenses';
 import { useSelector, useDispatch, shallowEqual } from 'react-redux';
 
-import Dropdown from '_/Dropdown';
-import Input from '../components/form/Input';
-import { setDrag } from '../state/drag';
+import Input from 'components/form/Input';
+import { setDrag } from 'state/drag';
 import { setGridSize } from 'state/grid';
 
 import css from './Sidebar.module.css';
-import SidebarOptions from './Sidebar.Options';
+import SidebarOptions from './Options';
+import SidebarLocation from './Location';
+import SidebarModules from './Modules';
 
 function Sidebar(props) {
   const update = useDispatch();
   const gxy = useSelector(L.get(['grid', 'size']), shallowEqual);
-  const { currentLocation, locations } = useSelector(
-    L.get([
-      'location',
-      L.valueOr({}),
-      L.pick({
-        currentLocation: 'current',
-        locations: [
-          'locations',
-          L.array(
-            L.pick({
-              value: 'id',
-              label: 'displayName',
-            }),
-          ),
-        ],
-      }),
-    ]),
-    shallowEqual,
-  );
+
   const modules = useSelector(
     L.get(['module', 'tier', L.valueOr({})]),
     shallowEqual,
   );
-
-  const current = locations.find(x => x.value === currentLocation);
 
   const [gw, gh] = gxy;
 
   return (
     <div className={css.root}>
       <SidebarOptions />
-
-      <section className={css.group}>
-        <header className={css.groupHead}>Location</header>
-
-        <div className={css.groupBody}>
-          <Dropdown
-            value={current}
-            choices={locations}
-            onChange={e => {
-              console.log('change', e);
-            }}
-          />
-        </div>
-      </section>
+      <SidebarLocation />
+      <SidebarModules />
 
       <section className={css.group}>
         <header className={css.groupHead}>Modules</header>
@@ -136,3 +105,7 @@ function Sidebar(props) {
 }
 
 export default Sidebar;
+
+export { default as Options } from './Options';
+export { default as Location } from './Location';
+export { default as Modules } from './Modules';
