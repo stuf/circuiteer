@@ -3,7 +3,7 @@
   @apply select-none;
 }
 
-.selected rect {
+.selected {
   stroke-width: 10px;
 }
 

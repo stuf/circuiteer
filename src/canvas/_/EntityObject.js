@@ -3,9 +3,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Group } from '@visx/group';
 import cx from 'classnames';
 
-import css from './EntityObject.module.css';
 import { selectEntity } from 'state/editor';
+import TierIcon, { TierIconSvg } from '_/TierIcon';
 import Invalid from './InvalidEntityObject';
+import css from './EntityObject.module.css';
 
 function EntityObject(props) {
   const { width, height, left, top, object } = props;
@@ -24,6 +25,7 @@ function EntityObject(props) {
           currentId === object.id && css.selected,
         )}
       >
+        {/* The main touch target for entities on canvas */}
         <rect
           className={cx(css.rect, 'module-object')}
           {...{ width, height }}
@@ -34,26 +36,32 @@ function EntityObject(props) {
           }}
         />
 
-        {!isEnabled && (
-          <rect
-            {...{ width, height }}
-            fill="url('#diagonal')"
-            className={cx(
-              css.disabledOverlay,
-              'pointer-events-none',
-              'module-object',
-            )}
-          />
-        )}
+        <Group className="pointer-events-none">
+          {!isEnabled && (
+            <rect
+              {...{ width, height }}
+              fill="url('#diagonal')"
+              className={cx(
+                css.disabledOverlay,
+                'pointer-events-none',
+                'module-object',
+              )}
+            />
+          )}
 
-        <text
-          x={width / 2}
-          y={height / 2}
-          className="text-sm font-bold uppercase pointer-events-none"
-          style={{ alignmentBaseline: 'middle', textAnchor: 'middle' }}
-        >
-          {object.module.shortId}
-        </text>
+          <foreignObject {...{ x: 0, y: 0, width, height }}>
+            <div className="pointer-events-none border-2 h-full w-full border-red-500 flex flex-col items-center text-sm space-y-2 justify-center">
+              <div>
+                <TierIcon
+                  tier={object.module.tier}
+                  className="w-8 h-8 rounded-lg border-2"
+                />
+              </div>
+
+              <div>{object.module.shortId}</div>
+            </div>
+          </foreignObject>
+        </Group>
       </Group>
     </>
   );
