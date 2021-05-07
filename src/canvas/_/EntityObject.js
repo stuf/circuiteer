@@ -4,7 +4,7 @@ import { Group } from '@visx/group';
 import cx from 'classnames';
 
 import { selectEntity } from 'state/editor';
-import TierIcon, { TierIconSvg } from '_/TierIcon';
+import TierIcon from '_/TierIcon';
 import Invalid from './InvalidEntityObject';
 import css from './EntityObject.module.css';
 
