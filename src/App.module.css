@@ -4,4 +4,5 @@
 .mainHeader {
   @apply p-1;
   @apply flex;
+  @apply items-center;
 }

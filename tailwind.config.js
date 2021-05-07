@@ -3,6 +3,9 @@ module.exports = {
   darkMode: false, // or 'media' or 'class'
   theme: {
     extend: {
+      fontSize: {
+        xxs: ['0.6rem', { lineHeight: '1rem' }],
+      },
       fontFamily: theme => ({
         sans: ['Inter'],
       }),
