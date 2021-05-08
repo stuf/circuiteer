@@ -7,6 +7,7 @@ import App from './App';
 import Splash from './Splash';
 import reportWebVitals from './reportWebVitals';
 import store from './store';
+import './typedef';
 
 function Root() {
   return (

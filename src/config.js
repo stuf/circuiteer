@@ -13,7 +13,7 @@ export const DefaultSize = {
 };
 
 /**
- * @type {IModuleDict}
+ * @type {Object.<string, ModuleObject>}
  */
 export const modules = {
   dummyGenerator: {

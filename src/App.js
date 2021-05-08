@@ -1,5 +1,4 @@
 import { useSelector } from 'react-redux';
-import { LightningBoltIcon } from '@heroicons/react/solid';
 import cx from 'classnames';
 
 import css from './App.module.css';
@@ -7,8 +6,8 @@ import Canvas from 'canvas/Canvas';
 import PowerMeter from 'canvas/_/PowerMeter';
 import Options from './_/Options';
 import Sidebar from './_/Sidebar';
+import Infobar from './_/Infobar';
 import EntityEditor from './_/EntityEditor';
-import Button from '_/Button';
 import { showSelectedEntityIn, optionFlagsIn } from 'common/selectors';
 
 function App() {
@@ -30,10 +29,7 @@ function App() {
 
       <div className="flex h-full relative">
         <div className="flex-1 flex flex-col">
-          <div className="border-b-2 px-4 py-1 space-x-1">
-            <Button icon={LightningBoltIcon}>Power</Button>
-            <Button>Poop</Button>
-          </div>
+          <Infobar />
 
           <div className="flex-1 relative">
             {showEditor && flags.showEditor && (

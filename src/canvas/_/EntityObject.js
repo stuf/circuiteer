@@ -50,7 +50,7 @@ function EntityObject(props) {
           )}
 
           <foreignObject {...{ x: 0, y: 0, width, height }}>
-            <div className="pointer-events-none h-full w-full flex flex-col items-center text-sm space-y-2 justify-center">
+            <div className="pointer-events-none h-full w-full flex flex-col items-center text-xs space-y-2 justify-center">
               <div>
                 <TierIcon
                   tier={object.module.tier}
@@ -58,7 +58,9 @@ function EntityObject(props) {
                 />
               </div>
 
-              <div>{object.module.shortId}</div>
+              <div className="w-full px-4 py-2 text-center">
+                {object.module.name}
+              </div>
             </div>
           </foreignObject>
         </Group>
