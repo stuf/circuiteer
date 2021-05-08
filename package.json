@@ -1,6 +1,18 @@
 {
-  "name": "circuiteer-wip",
-  "version": "0.1.0",
+  "name": "@etm12/circuiteer",
+  "description": "Circuiteer Experimental",
+  "keywords": [
+    "partial lenses",
+    "astroneer",
+    "planner"
+  ],
+  "author": {
+    "email": "stefan@rimaila.fi",
+    "name": "Stefan Rimaila",
+    "url": "https://github.com/stuf"
+  },
+  "contributors": [],
+  "version": "0.2.0",
   "private": true,
   "dependencies": {
     "@headlessui/react": "^1.1.1",
