@@ -3,13 +3,23 @@
   @apply select-none;
 }
 
-.selected {
+.selected .module-object {
   stroke-width: 10px;
+  stroke: #00f;
 }
 
-.root:hover .rect {
+.root:hover .rect,
+.root.selected .rect {
   stroke-width: 4px;
 }
+
+.root.selected .rect {
+  @apply stroke-green;
+}
+
+/* .root.selected .rect {
+  stroke-width: 10px;
+} */
 
 .root.rootDisabled .rect {
   /* stroke: #f0f; */
