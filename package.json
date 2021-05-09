@@ -19,7 +19,8 @@
     "build": "craco build",
     "test": "craco test",
     "eject": "craco eject",
-    "test:cov": "yarn test --coverage --watchAll=false"
+    "test:cov": "yarn test --coverage --watchAll=false",
+    "test:e2e": "cypress open"
   },
   "eslintConfig": {
     "extends": [
@@ -86,6 +87,8 @@
     "@types/react-redux": "^7.1.16",
     "@types/react-router-dom": "^5.1.7",
     "autoprefixer": "^9.8.6",
+    "cypress": "^7.2.0",
+    "eslint-plugin-cypress": "^2.11.3",
     "postcss": "^7.0.35",
     "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.1.2"
   }
