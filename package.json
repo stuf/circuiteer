@@ -14,6 +14,31 @@
   "contributors": [],
   "version": "0.2.0",
   "private": true,
+  "scripts": {
+    "start": "craco start",
+    "build": "craco build",
+    "test": "craco test",
+    "eject": "craco eject",
+    "test:cov": "yarn test --coverage --watchAll=false"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
   "dependencies": {
     "@headlessui/react": "^1.1.1",
     "@heroicons/react": "^1.0.1",
@@ -39,6 +64,7 @@
     "d3-scale-chromatic": "^2.0.0",
     "immer": "^9.0.2",
     "infestines": "^0.4.11",
+    "jest-extended": "^0.11.5",
     "linear-algebra": "^3.1.4",
     "partial.lenses": "^14.17.0",
     "partial.lenses.validation": "^2.0.0",
@@ -54,32 +80,9 @@
     "uuid": "^8.3.2",
     "web-vitals": "^1.0.1"
   },
-  "scripts": {
-    "start": "craco start",
-    "build": "craco build",
-    "test": "craco test",
-    "eject": "craco eject"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  },
   "devDependencies": {
     "@craco/craco": "^6.1.2",
+    "@testing-library/react-hooks": "^5.1.2",
     "@types/react-redux": "^7.1.16",
     "@types/react-router-dom": "^5.1.7",
     "autoprefixer": "^9.8.6",
