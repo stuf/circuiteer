@@ -9,6 +9,10 @@ import reportWebVitals from './reportWebVitals';
 import store from './store';
 import './typedef';
 
+if (window.Cypress) {
+  window.store = store;
+}
+
 function Root() {
   return (
     <Provider {...{ store }}>
