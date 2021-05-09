@@ -55,7 +55,7 @@ const slice = createSlice({
       .addCase(selectEntity, (s, a) => L.set('current', a.payload, original(s)))
       .addCase(toggleEntity, (s, a) =>
         L.modify(
-          ['entities', L.whereEq({ id: a.payload.id }), 'enabled'],
+          ['entities', L.elems, L.whereEq({ id: a.payload.id }), 'enabled'],
           R.not,
           original(s),
         ),

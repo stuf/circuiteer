@@ -1,4 +1,9 @@
-import reducer, { addEntity } from '../editor';
+import reducer, {
+  addEntity,
+  selectEntity,
+  resetCurrent,
+  toggleEntity,
+} from '../editor';
 
 describe('state/editor', () => {
   test('reducer does no-op on unhandled actions', () => {
@@ -18,6 +23,30 @@ describe('state/editor', () => {
       // Adding an entity with an ID doesn't regenerate its ID
       const a2 = addEntity({ id: '123' });
       expect(a2.payload.id).toBe('123');
+    });
+
+    test('selectEntity', () => {
+      const a = selectEntity('123');
+      const r = reducer({}, a);
+      const e = { current: '123' };
+
+      expect(r).toEqual(e);
+    });
+
+    test('resetCurrent', () => {
+      const a = resetCurrent();
+      const r = reducer({ current: '123' }, a);
+      const e = {};
+
+      expect(r).toEqual(e);
+    });
+
+    test('toggleEntity', () => {
+      const a = toggleEntity('123');
+      const r = reducer({ entities: [{ id: '123' }] }, a);
+      const e = { entities: [{ id: '123', enabled: true }] };
+
+      expect(r).toEqual(e);
     });
   });
 });
