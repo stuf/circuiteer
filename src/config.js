@@ -13,7 +13,59 @@ export const DefaultSize = {
 };
 
 /**
- * @type {Object.<string, ModuleObject>}
+ * @readonly
+ * @enum {PowerType}
+ */
+export const PowerType = {
+  ALWAYS: 'always',
+  POWERED: 'powered',
+  SUN: 'sun',
+  WIND: 'wind',
+};
+
+/* eslint-disable */
+/**
+ * @type {IModule[]}
+ */
+const small = [
+  {
+    id: 'smallWindTurbine',
+    shortId: 'swt',
+    name: 'Small Wind Turbine',
+    power: 1.5,
+    powerType: 'wind',
+  },
+  {
+    id: 'smallSolar',
+    shortId: 'ss',
+    name: 'Small Solar',
+    power: 1,
+    powerType: 'sun',
+  },
+];
+
+/**
+ * @type {IModule[]}
+ */
+const medium = [
+  {
+    id: 'mediumWindTurbine',
+    shortId: 'mwt',
+    name: 'Medium Wind Turbine',
+    power: 5,
+    powerType: 'wind',
+  },
+  {
+    id: 'mediumSolarPanel',
+    shortId: 'msp',
+    name: 'Medium Solar Panel',
+    power: 4,
+    powerType: 'sun',
+  },
+];
+
+/**
+ * @type {Object.<string, IModule>}
  */
 export const modules = {
   dummyGenerator: {
@@ -69,6 +121,7 @@ export const modules = {
     shortId: 'fs',
     name: 'Field Shelter',
     power: 0.5,
+    powerType: 'always',
     tier: Tier.MEDIUM,
     size: DefaultSize.MEDIUM,
   },
@@ -77,6 +130,7 @@ export const modules = {
     shortId: 'xlwt',
     name: 'XL Wind Turbine',
     power: 17,
+    powerType: 'wind',
     tier: Tier.XLARGE,
     size: DefaultSize.XLARGE,
   },
@@ -89,3 +143,5 @@ export const modules = {
     size: [8, 8],
   },
 };
+
+/* eslint-enable */

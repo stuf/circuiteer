@@ -3,7 +3,7 @@ declare interface IBaseEntityCtor {}
 declare interface IEntity {
   id: string;
   module: IModule;
-  pos: [number, number];
+  pos: Point;
   enabled: boolean;
 }
 
@@ -22,7 +22,22 @@ declare interface IModule {
    */
   power: number;
 
-  size: [number, number];
+  powerType?: ValueOf<IPowerType>;
+
+  size: Point;
+}
+
+type Tuple<A, B> = [A, B];
+
+type Point = Tuple<number, number>;
+
+type ValueOf<T> = T[keyof T];
+
+declare interface IPowerType {
+  ALWAYS: 'always';
+  POWERED: 'powered';
+  WIND: 'wind';
+  SUN: 'sun';
 }
 
 declare enum IModuleTier {
@@ -30,4 +45,11 @@ declare enum IModuleTier {
   MEDIUM = 2,
   LARGE = 3,
   XLARGE = 4,
+}
+
+//
+
+declare interface IBaseMaterial {
+  id: string;
+  displayName: string;
 }

@@ -26,7 +26,16 @@ const materials = {
     },
   ],
 
-  [MaterialType.REFINED]: [],
+  [MaterialType.REFINED]: [
+    {
+      id: 'copper',
+      displayName: 'Copper',
+    },
+    {
+      id: 'glass',
+      displayName: 'Glass',
+    },
+  ],
 
   [MaterialType.COMPOSITE]: [],
 
