@@ -26,7 +26,7 @@ const prefix = x => `${name}/${x}`;
 //
 
 export const addEntity = createAction(prefix('addEntity'), entity => ({
-  payload: L.set([entityL, 'id'], uuid(), entity),
+  payload: L.modify([entityL, 'id'], x => (!x ? uuid() : x), entity),
 }));
 
 export const selectEntity = createAction(prefix('selectEntity'));
