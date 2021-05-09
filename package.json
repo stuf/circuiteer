@@ -15,12 +15,18 @@
   "version": "0.2.0",
   "private": true,
   "scripts": {
-    "start": "craco start",
+    "start": "BROWSER=none craco start",
     "build": "craco build",
     "test": "craco test",
     "eject": "craco eject",
     "test:cov": "yarn test --coverage --watchAll=false",
     "test:e2e": "cypress open"
+  },
+  "jest": {
+    "coveragePathIgnorePatterns": [
+      "<rootDir>/src/(canvas|state|components|_)/index.js",
+      "typedefs?.js"
+    ]
   },
   "eslintConfig": {
     "extends": [
