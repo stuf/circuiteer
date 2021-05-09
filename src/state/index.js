@@ -1,3 +1,4 @@
+export { default as application } from './application';
 export { default as drag } from './drag';
 export { default as editor } from './editor';
 export { default as grid } from './grid';
