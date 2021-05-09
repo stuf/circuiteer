@@ -4,9 +4,9 @@ const name = 'application';
 const prefix = x => [name, x].join('/');
 
 const initialState = {
-  splashDelay: 1000,
-  flags: {
-    showSplash: true,
+  splash: {
+    delay: 1000,
+    show: true,
   },
 };
 
