@@ -34,6 +34,11 @@ export function EntityEditor(props) {
             (x={current.pos[0]}, y={current.pos[1]})
           </dd>
 
+          <dt>Size</dt>
+          <dd className="font-mono">
+            (w={current.module.size[0]}, h={current.module.size[1]})
+          </dd>
+
           <dt>Module</dt>
           <dd>
             <dl style={{ display: 'grid', gridTemplateColumns: '1fr 4fr' }}>
