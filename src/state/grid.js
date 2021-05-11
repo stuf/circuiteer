@@ -10,6 +10,9 @@ export const setGridSize = createAction(prefix('setGridSize'));
 
 //
 
+/**
+ * @type {App.State.Grid}
+ */
 const initialState = {
   size: [32, 32],
 };

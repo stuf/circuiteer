@@ -16,6 +16,9 @@ const initL = L.pickIn({
   size: L.define([0, 0]),
 });
 
+/**
+ * @type {App.State.Drag}
+ */
 const initialState = L.get(initL, undefined);
 
 //

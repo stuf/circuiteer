@@ -32,67 +32,73 @@ const Sun = {
   VERY_HIGH: 1.75,
 };
 
+/**
+ * @type {Game.ILocation[]}
+ */
+const locations = [
+  {
+    id: 1,
+    name: 'sylva',
+    displayName: 'Sylva',
+    difficulty: Difficulty.EASY,
+    wind: Wind.MEDIUM,
+    sun: Sun.MEDIUM,
+  },
+  {
+    id: 2,
+    name: 'desolo',
+    displayName: 'Desolo',
+    difficulty: Difficulty.EASY,
+    wind: Wind.LOW,
+    sun: Sun.HIGH,
+    cycle: 115,
+  },
+  {
+    id: 3,
+    name: 'calidor',
+    displayName: 'Calidor',
+    difficulty: Difficulty.MEDIUM,
+    wind: Wind.LOW,
+    sun: Sun.VERY_HIGH,
+  },
+  {
+    id: 4,
+    name: 'vesania',
+    displayName: 'Vesania',
+    difficulty: Difficulty.MEDIUM,
+    wind: Wind.LOW,
+    sun: Sun.HIGH,
+  },
+  {
+    id: 5,
+    name: 'novus',
+    displayName: 'Novus',
+    difficulty: Difficulty.MEDIUM,
+    wind: Wind.HIGH,
+    sun: Sun.HIGH,
+  },
+  {
+    id: 6,
+    name: 'glacio',
+    displayName: 'Glacio',
+    difficulty: Difficulty.HARD,
+    wind: Wind.VERY_HIGH,
+    sun: Sun.VERY_LOW,
+  },
+  {
+    id: 7,
+    name: 'atrox',
+    displayName: 'Atrox',
+    difficulty: Difficulty.VERY_HARD,
+    wind: Wind.LOW,
+    sun: Sun.LOW,
+  },
+];
+
 //
 
 const initialState = {
-  locations: [
-    {
-      id: 1,
-      name: 'sylva',
-      displayName: 'Sylva',
-      difficulty: Difficulty.EASY,
-      wind: Wind.MEDIUM,
-      sun: Sun.MEDIUM,
-    },
-    {
-      id: 2,
-      name: 'desolo',
-      displayName: 'Desolo',
-      difficulty: Difficulty.EASY,
-      wind: Wind.LOW,
-      sun: Sun.HIGH,
-    },
-    {
-      id: 3,
-      name: 'calidor',
-      displayName: 'Calidor',
-      difficulty: Difficulty.MEDIUM,
-      wind: Wind.LOW,
-      sun: Sun.VERY_HIGH,
-    },
-    {
-      id: 4,
-      name: 'vesania',
-      displayName: 'Vesania',
-      difficulty: Difficulty.MEDIUM,
-      wind: Wind.LOW,
-      sun: Sun.HIGH,
-    },
-    {
-      id: 5,
-      name: 'novus',
-      displayName: 'Novus',
-      difficulty: Difficulty.MEDIUM,
-      wind: Wind.HIGH,
-      sun: Sun.HIGH,
-    },
-    {
-      id: 6,
-      name: 'glacio',
-      displayName: 'Glacio',
-      difficulty: Difficulty.HARD,
-      wind: Wind.VERY_HIGH,
-      sun: Sun.VERY_LOW,
-    },
-    {
-      id: 7,
-      name: 'atrox',
-      displayName: 'Atrox',
-      difficulty: Difficulty.VERY_HARD,
-      wind: Wind.LOW,
-      sun: Sun.LOW,
-    },
-  ],
+  locations,
   current: 1,
 };
 
@@ -108,12 +114,3 @@ const slice = createSlice({
 });
 
 export default slice.reducer;
-
-//
-
-/**
- * @typedef {object} Location
- * @prop {number} id
- * @prop {string} name
- * @prop {string} displayName
- */

@@ -19,6 +19,9 @@ export const toggleShoppingList = createAction(prefix('toggleShoppingList'));
 
 const toggle = f => R.compose(L.modify(['flags', f], R.not), original);
 
+/**
+ * @type {App.State.Options}
+ */
 const initialState = {
   flags: {
     hideInvalid: false,
