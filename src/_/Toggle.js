@@ -1,11 +1,12 @@
 import * as P from 'prop-types';
 import { Switch } from '@headlessui/react';
+import cx from 'classnames';
 
 export default function Toggle(props) {
-  const { label, checked, onChange } = props;
+  const { label, checked, onChange, className } = props;
 
   return (
-    <div className="flex items-center">
+    <div className={cx('flex items-center', className)}>
       <Switch
         {...{ checked, onChange }}
         className={`${

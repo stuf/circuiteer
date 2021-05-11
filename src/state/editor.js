@@ -25,6 +25,10 @@ const prefix = x => `${name}/${x}`;
 
 //
 
+const selectEntityObject = id => ['entities', L.elems, L.whereEq({ id })];
+
+//
+
 export const addEntity = createAction(prefix('addEntity'), entity => ({
   payload: L.modify([entityL, 'id'], x => (!x ? uuid() : x), entity),
 }));
@@ -34,6 +38,12 @@ export const selectEntity = createAction(prefix('selectEntity'));
 export const resetCurrent = createAction(prefix('resetCurrent'));
 
 export const toggleEntity = createAction(prefix('toggleEntity'));
+
+export const startEntityMove = createAction(prefix('startEntityMove'));
+
+export const moveEntity = createAction(prefix('moveEntity'));
+
+export const stopEntityMove = createAction(prefix('stopEntityMove'));
 
 //
 
@@ -55,8 +65,21 @@ const slice = createSlice({
       .addCase(selectEntity, (s, a) => L.set('current', a.payload, original(s)))
       .addCase(toggleEntity, (s, a) =>
         L.modify(
-          ['entities', L.elems, L.whereEq({ id: a.payload.id }), 'enabled'],
+          [selectEntityObject(a.payload.id), 'enabled'],
           R.not,
+          original(s),
+        ),
+      )
+      .addCase(startEntityMove, (s, a) =>
+        L.set([selectEntityObject(a.payload.id), 'moving'], true, original(s)),
+      )
+      .addCase(stopEntityMove, (s, a) =>
+        L.set([selectEntityObject(a.payload.id), 'moving'], false, original(s)),
+      )
+      .addCase(moveEntity, (s, a) =>
+        L.set(
+          [selectEntityObject(a.payload.id), 'pos'],
+          a.payload.pos,
           original(s),
         ),
       );

@@ -1,0 +1,16 @@
+{
+  "enable": "Enable",
+  "selected": "Selected",
+  "options": "Options",
+  "option": {
+    "hideInvalid": "Hide invalid",
+    "showPowerStatus": "Show power status",
+    "showEditor": "Show entity editor",
+    "showShoppingList": "Show shopping list"
+  },
+  "location": "Location",
+  "modules": "Modules",
+  "grid": "Grid",
+  "width": "Width",
+  "height": "Height"
+}

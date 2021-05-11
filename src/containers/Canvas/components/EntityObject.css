@@ -1,0 +1,72 @@
+.entity-object {
+  /* @apply font-mono; */
+}
+
+/* DISABLED */
+
+.entity-object .entity-object__disabled-overlay {
+  transition: opacity 0.2s ease-out;
+  opacity: 0;
+}
+
+.entity-object.entity-object--disabled .entity-object__disabled-overlay {
+  opacity: 1;
+}
+
+.entity-object--disabled,
+.entity-object__disabled-overlay {
+  fill: url('#lines-diagonal');
+}
+
+.entity-object--disabled .entity-object__shape {
+  stroke-dasharray: 5 5;
+}
+
+/* /DISABLED */
+
+.entity-object--selected .entity-object__shape {
+  @apply stroke-red;
+  stroke-width: 4px;
+}
+
+.entity-object__shape {
+  @apply fill-white stroke-black stroke-2;
+  transition: all 0.1s ease-out;
+}
+
+.entity-object__controls {
+  x: -1rem;
+  y: -1rem;
+  @apply relative w-8 h-8 cursor-pointer;
+  @apply bg-white;
+  @apply ring-2 ring-blue-500 rounded-md;
+}
+
+.entity-object__controls-icon-wrapper {
+  @apply absolute -inset-y-0 -inset-x-0 flex items-center justify-center;
+}
+
+.entity-object__fo-body {
+  @apply select-none;
+  @apply shadow;
+  @apply hover:shadow-lg;
+  @apply transition-shadow ease-out;
+  @apply pointer-events-none;
+}
+
+.entity-object__fo-body-content {
+  @apply pointer-events-none;
+  @apply h-full w-full;
+  @apply flex flex-col items-center justify-center;
+  @apply text-xs space-y-2;
+  @apply relative;
+}
+
+.entity-object__icon {
+  @apply w-5 h-5;
+  @apply rounded-sm;
+  @apply ring-2 ring-blue-500;
+}
+
+.entity-object__control-icon {
+}

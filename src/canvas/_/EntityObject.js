@@ -1,4 +1,5 @@
 import * as L from 'partial.lenses';
+import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Group } from '@visx/group';
 import cx from 'classnames';
@@ -9,11 +10,39 @@ import Invalid from './InvalidEntityObject';
 import css from './EntityObject.module.css';
 
 function EntityObject(props) {
-  const { width, height, left, top, object } = props;
+  const {
+    width,
+    height,
+    left,
+    top,
+    object,
+    onMoveStart,
+    onMoveStop,
+    onMove,
+  } = props;
   const update = useDispatch();
+  const [state, setState] = useState({ dragging: false, pos: [0, 0] });
 
   const currentId = useSelector(L.get(['editor', 'current']));
   const isEnabled = L.get(['enabled', L.reread(x => !!x)], object);
+
+  const _onMoveStart = e => {
+    console.log('entity', object.id, 'move start');
+    setState(s => ({ ...s, dragging: true }));
+    onMoveStart(e);
+  };
+
+  const _onMoveStop = e => {
+    setState(s => ({ ...s, dragging: false }));
+    console.log('ON MOVE STOP', object.id);
+    onMoveStop(e);
+  };
+
+  const _onMove = e => {
+    if (state.dragging) {
+      onMove(e);
+    }
+  };
 
   return (
     <>
@@ -31,9 +60,12 @@ function EntityObject(props) {
           {...{ width, height }}
           onClick={e => {
             e.stopPropagation();
-            console.log('onclick', object.id, object);
+            // console.log('onclick', object.id, object);
             update(selectEntity(object.id));
           }}
+          onMouseMove={_onMove}
+          onMouseDown={_onMoveStart}
+          onMouseUp={_onMoveStop}
         />
 
         <Group className="pointer-events-none">

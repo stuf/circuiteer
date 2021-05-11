@@ -1,24 +1,26 @@
+/* eslint-disable */
 import { useState, useMemo } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import * as L from 'partial.lenses';
+import * as R from 'ramda';
 import { localPoint } from '@visx/event';
 import { PatternLines } from '@visx/pattern';
 import { ParentSizeModern as ParentSize } from '@visx/responsive';
 import { Group } from '@visx/group';
 
+import { gridToScreen, screenToGrid } from 'common/util';
 import { addEntity } from 'state/editor';
 import { resetDrag, setDragging } from 'state/drag';
 
 import EntityObject from './_/EntityObject';
 import Power from './_/Power';
 import Grid from './Grid';
-import { resetCurrent } from 'state/editor';
-
-const { round } = Math;
-
-const screenToGrid = ([mx, my], [sx, sy]) => [round(sx / mx), round(sy / my)];
-
-const gridToScreen = ([mx, my], [gx, gy]) => [gx * mx, gy * my];
+import {
+  resetCurrent,
+  startEntityMove as startMove,
+  stopEntityMove as stopMove,
+  moveEntity,
+} from '../state/editor';
 
 function Canvas() {
   const update = useDispatch();
@@ -42,6 +44,36 @@ function Canvas() {
 
   const setDragOff = () => !isDragging && update(setDragging(false));
 
+  let prevmpos = [0, 0];
+  /** @param {MouseEvent} e */
+  const updateEntityPos = id => e => {
+    const p = localPoint(e);
+    console.log({ p, e });
+    const mxy = Object.values(p);
+
+    const mxy_ = screenToGrid(gxy, mxy);
+
+    if (!R.equals(mxy_, prevmpos)) {
+      console.log('location', mxy_);
+      update(moveEntity({ id, pos: mxy_ }));
+    }
+
+    prevmpos[0] = mxy_[0];
+    prevmpos[1] = mxy_[1];
+
+    // console.log('updateEntityPos:', id, mxy_);
+  };
+
+  /** @param {MouseEvent} e */
+  const startEntityMove = id => e => {
+    update(startMove({ id }));
+  };
+
+  /** @param {MouseEvent} e */
+  const stopEntityMove = id => e => {
+    update(stopMove({ id }));
+  };
+
   /**
    * Memoize list of placed structures for rendering
    */
@@ -60,14 +92,18 @@ function Canvas() {
         const [w, h] = gridToScreen(gxy, entity.module.size);
 
         return (
-          <EntityObject
-            key={entity.id}
-            object={entity}
-            width={w}
-            height={h}
-            left={px}
-            top={py}
-          />
+          <></>
+          // <EntityObject
+          //   key={entity.id}
+          //   object={entity}
+          //   width={w}
+          //   height={h}
+          //   left={px}
+          //   top={py}
+          //   onMoveStart={startEntityMove(entity.id)}
+          //   onMoveStop={stopEntityMove(entity.id)}
+          //   onMove={updateEntityPos(entity.id)}
+          // />
         );
       }),
     [entities, gxy],

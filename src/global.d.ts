@@ -12,8 +12,6 @@ declare interface IModule {
 
   shortId: string;
 
-  name: string;
-
   tier: IModuleTier;
 
   /**
@@ -23,6 +21,8 @@ declare interface IModule {
   power: number;
 
   powerType?: ValueOf<IPowerType>;
+
+  capacity?: number;
 
   size: Point;
 }
@@ -52,4 +52,11 @@ declare enum IModuleTier {
 declare interface IBaseMaterial {
   id: string;
   displayName: string;
+}
+
+declare namespace Game {
+  declare interface IGameIcon {
+    src: string;
+    alt: string;
+  }
 }

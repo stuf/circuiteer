@@ -1,6 +1,23 @@
 import * as R from 'ramda';
 import * as L from 'partial.lenses';
 import { useEffect, useRef } from 'react';
+import { useSelector } from 'react-redux';
+
+import { Matrix } from 'common/linear';
+
+//
+
+export function useGridSize() {
+  const gxy = useSelector(L.get(['grid', 'size']));
+
+  return gxy;
+}
+
+export function useGridSizeMatrix() {
+  const gxy = useGridSize();
+
+  return new Matrix(gxy);
+}
 
 // #region useHotkey
 

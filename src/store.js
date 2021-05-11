@@ -2,6 +2,8 @@ import { configureStore } from '@reduxjs/toolkit';
 
 import * as reducers from './state';
 
+import { Tier, DefaultSize } from 'config';
+
 const preloadedState = {
   editor: {
     dragging: false,
@@ -9,38 +11,41 @@ const preloadedState = {
       {
         pos: [2, 2],
         module: {
-          id: 'largeDummyGenerator',
-          shortId: 'ldg',
-          name: 'Large Generator (Dummy)',
-          power: 11,
-          tier: 3,
-          size: [4, 4],
+          id: 'shelter',
+          shortId: 's',
+          name: 'Shelter',
+          power: 1,
+          tier: Tier.XLARGE,
+          size: DefaultSize.XLARGE,
+          powerType: 'always',
         },
         id: '262ec14e-940b-41b3-8c4a-6958afff5332',
         enabled: false,
       },
       {
-        pos: [7, 2],
+        pos: [11, 2],
         module: {
-          id: 'largeDummyConsumer',
-          shortId: 'ldc',
-          name: 'Large Consumer (Dummy)',
-          power: -12,
-          tier: 3,
-          size: [4, 4],
+          id: 'mediumWindTurbine',
+          shortId: 'mwt',
+          name: 'Medium Wind Turbine',
+          power: 5,
+          powerType: 'wind',
+          size: DefaultSize.MEDIUM,
+          tier: Tier.MEDIUM,
         },
         id: '9d2d6e06-7e1f-4021-b4cb-dbbb7b6515d0',
         enabled: true,
       },
       {
-        pos: [2, 7],
+        pos: [11, 7],
         module: {
-          id: 'largeDummyConsumer',
-          shortId: 'ldc',
-          name: 'Large Consumer (Dummy)',
-          power: -12,
-          tier: 3,
-          size: [4, 4],
+          id: 'mediumSolarPanel',
+          shortId: 'msp',
+          name: 'Medium Solar Panel',
+          power: 4,
+          powerType: 'sun',
+          size: DefaultSize.MEDIUM,
+          tier: Tier.MEDIUM,
         },
         id: '2fb98a1d-0738-4def-bf52-f0c91a0e1e45',
         enabled: false,
@@ -53,7 +58,7 @@ const preloadedState = {
     size: [0, 0],
   },
   grid: {
-    size: [32, 32],
+    size: [48, 48],
   },
 };
 

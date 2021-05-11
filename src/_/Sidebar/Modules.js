@@ -1,5 +1,6 @@
 import * as L from 'partial.lenses';
 import { useDispatch, useSelector, shallowEqual } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 import cx from 'classnames';
 
 import Group from '_/Group';
@@ -9,6 +10,7 @@ import { setDrag } from 'state/drag';
 
 export default function SidebarModules(props) {
   const update = useDispatch();
+  const { t } = useTranslation();
 
   const modules = useSelector(
     L.get(['module', 'tier', L.valueOr({})]),
@@ -41,7 +43,9 @@ export default function SidebarModules(props) {
                 }}
                 className="border border-gray-200 shadow hover:shadow-lg px-2 py-1 font-mono flex flex-col cursor-pointer"
               >
-                <div className="flex-1 font-sans mb-2">{moduleObj.name}</div>
+                <div className="flex-1 font-sans mb-2">
+                  {t(`game:module.${moduleObj.id}`)}
+                </div>
                 <div className="flex justify-between">
                   <div>{moduleObj.size.join(' × ')}</div>
                   <div

@@ -7,7 +7,7 @@ module.exports = {
         xxs: ['0.6rem', { lineHeight: '1rem' }],
       },
       fontFamily: theme => ({
-        sans: ['Inter'],
+        sans: ['"HK Grotesk"', 'Inter'],
       }),
       fill: theme => ({
         none: 'none',

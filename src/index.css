@@ -2,6 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
+@import './assets/fonts/HankenGrotesk.css';
+
 * {
   box-sizing: border-box;
 }
@@ -17,7 +19,13 @@ html,
   .module-object {
     rx: 4px;
     ry: 4px;
-    @apply svg-shadow;
+  }
+
+  dl {
+  }
+
+  dt {
+    @apply font-bold;
   }
 }
 

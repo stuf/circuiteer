@@ -1,4 +1,5 @@
 import { useContext } from 'react';
+import { useTranslation } from 'react-i18next';
 import cx from 'classnames';
 import * as L from 'partial.lenses';
 
@@ -9,6 +10,7 @@ import css from './Sidebar.module.css';
 
 function Sidebar(props) {
   const { state, setState } = useContext(State);
+  const { t } = useTranslation();
 
   const setDragSize = ([w, h]) => setState(L.set(['drag', 'size'], [w, h]));
 
@@ -69,7 +71,7 @@ function Sidebar(props) {
         </section>
 
         <section className={css.group}>
-          <header className={css.groupHead}>Grid</header>
+          <header className={css.groupHead}>{t('common:grid')}</header>
 
           <div className={css.groupBody}>
             <div className="grid grid-cols-2 gap-2">

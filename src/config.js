@@ -1,4 +1,5 @@
 export const Tier = {
+  OTHER: -1,
   SMALL: 1,
   MEDIUM: 2,
   LARGE: 3,
@@ -10,6 +11,7 @@ export const DefaultSize = {
   MEDIUM: [2, 2],
   LARGE: [4, 4],
   XLARGE: [8, 8],
+  XBOX: [16, 16],
 };
 
 /**
@@ -23,7 +25,6 @@ export const PowerType = {
   WIND: 'wind',
 };
 
-/* eslint-disable */
 /**
  * @type {IModule[]}
  */
@@ -31,117 +32,193 @@ const small = [
   {
     id: 'smallWindTurbine',
     shortId: 'swt',
-    name: 'Small Wind Turbine',
     power: 1.5,
-    powerType: 'wind',
+    powerType: PowerType.WIND,
   },
   {
-    id: 'smallSolar',
+    id: 'smallSolarPanel',
     shortId: 'ss',
-    name: 'Small Solar',
     power: 1,
-    powerType: 'sun',
+    powerType: PowerType.SUN,
   },
-];
+  {
+    id: 'smallGenerator',
+    shortId: 'sg',
+    power: 2,
+    powerType: PowerType.POWERED,
+  },
+  {
+    id: 'qtRtg',
+    shortId: 'qr',
+    power: 1,
+    powerType: PowerType.ALWAYS,
+  },
+  {
+    id: 'smallBattery',
+    shortId: 'sb',
+    power: 1,
+    powerType: PowerType.POWERED,
+    capacity: 32,
+  },
+  {
+    id: 'portableOxygenator',
+    shortId: 'po',
+    power: -1,
+  },
+].map(it => ({ ...it, tier: Tier.SMALL, size: DefaultSize.SMALL }));
 
 /**
  * @type {IModule[]}
  */
 const medium = [
   {
+    id: 'fieldShelter',
+    shortId: 'fs',
+    power: 0.5,
+    powerType: PowerType.ALWAYS,
+  },
+  {
     id: 'mediumWindTurbine',
     shortId: 'mwt',
-    name: 'Medium Wind Turbine',
     power: 5,
-    powerType: 'wind',
+    powerType: PowerType.WIND,
   },
   {
     id: 'mediumSolarPanel',
     shortId: 'msp',
-    name: 'Medium Solar Panel',
     power: 4,
-    powerType: 'sun',
+    powerType: PowerType.SUN,
+  },
+  {
+    id: 'mediumGenerator',
+    shortId: 'mg',
+    power: 9,
+    powerType: PowerType.POWERED,
+  },
+  {
+    id: 'mediumBattery',
+    shortId: 'mb',
+    power: 5,
+    powerType: PowerType.POWERED,
+    capacity: 512,
+  },
+  {
+    id: 'rtg',
+    shortId: 'rtg',
+    power: 4,
+    powerType: PowerType.ALWAYS,
+  },
+  {
+    id: 'autoArm',
+    shortId: 'aa',
+    power: -1,
+  },
+  {
+    id: 'mediumShredder',
+    shortId: 'ms',
+    power: -5,
+  },
+].map(it => ({ ...it, tier: Tier.MEDIUM, size: DefaultSize.MEDIUM }));
+
+/**
+ * @type {IModule[]}
+ */
+const large = [
+  {
+    id: 'largeWindTurbine',
+    shortId: 'lwt',
+    power: 10,
+    powerType: PowerType.WIND,
+  },
+  {
+    id: 'largeSolarPanel',
+    shortId: 'lsp',
+    power: 8,
+    powerType: PowerType.SUN,
+  },
+  {
+    id: 'researchChamber',
+    shortId: 'rc',
+    power: -2,
+  },
+  {
+    id: 'smeltingFurnace',
+    shortId: 'sf',
+    power: -5,
+  },
+  {
+    id: 'soilCentrifuge',
+    shortId: 'sc',
+    power: -6,
+  },
+  {
+    id: 'chemistryLab',
+    shortId: 'cl',
+    power: -10,
+  },
+  {
+    id: 'atmosphericCondenser',
+    shortId: 'ac',
+    power: -20,
+  },
+  {
+    id: 'largeShredder',
+    shortId: 'ls',
+    power: -7.5,
+  },
+].map(it => ({
+  ...it,
+  tier: Tier.LARGE,
+  size: DefaultSize.LARGE,
+}));
+
+/**
+ * @type {IModule[]}
+ */
+const extraLarge = [
+  {
+    id: 'shelter',
+    shortId: 's',
+    power: 1,
+    powerType: PowerType.ALWAYS,
+    size: DefaultSize.XLARGE,
+  },
+  {
+    id: 'xlargeWindTurbine',
+    shortId: 'xlwt',
+    power: 17,
+    powerType: PowerType.WIND,
+  },
+  {
+    id: 'solarArray',
+    shortId: 'sa',
+    power: 14,
+  },
+  {
+    id: 'extraLargeShredder',
+    shortId: 'xls',
+    power: -10,
+  },
+].map(it => ({ ...it, tier: Tier.XLARGE, size: DefaultSize.XLARGE }));
+
+/**
+ * @type {IModule[]}
+ */
+const other = [
+  {
+    id: 'wreckedSolarArray',
+    shortId: 'wsa',
+    power: 64,
+    powerType: PowerType.SUN,
+    tier: Tier.OTHER,
+    size: DefaultSize.XBOX,
   },
 ];
 
-/**
- * @type {Object.<string, IModule>}
- */
-export const modules = {
-  dummyGenerator: {
-    id: 'dummyGenerator',
-    shortId: 'dg',
-    name: 'Generator (Dummy)',
-    power: 5,
-    tier: 1,
-    size: [2, 2],
-  },
-  dummyConsumer: {
-    id: 'dummyConsumer',
-    shortId: 'dc',
-    name: 'Consumer (Dummy)',
-    power: -2.5,
-    tier: 1,
-    size: [2, 2],
-  },
-  mediumDummy: {
-    id: 'mediumDummy',
-    shortId: 'md',
-    name: 'Medium (Dummy)',
-    power: 0,
-    tier: 2,
-    size: [4, 4],
-  },
-  largeDummyConsumer: {
-    id: 'largeDummyConsumer',
-    shortId: 'ldc',
-    name: 'Large Consumer (Dummy)',
-    power: -12,
-    tier: 3,
-    size: [4, 4],
-  },
-  largeDummyGenerator: {
-    id: 'largeDummyGenerator',
-    shortId: 'ldg',
-    name: 'Large Generator (Dummy)',
-    power: 11,
-    tier: 3,
-    size: [4, 4],
-  },
-  shelter: {
-    id: 'shelter',
-    shortId: 's',
-    name: 'Shelter',
-    power: 1,
-    tier: Tier.XLARGE,
-    size: DefaultSize.XLARGE,
-  },
-  fieldShelter: {
-    id: 'fieldShelter',
-    shortId: 'fs',
-    name: 'Field Shelter',
-    power: 0.5,
-    powerType: 'always',
-    tier: Tier.MEDIUM,
-    size: DefaultSize.MEDIUM,
-  },
-  xlargeWindTurbine: {
-    id: 'xlargeWindTurbine',
-    shortId: 'xlwt',
-    name: 'XL Wind Turbine',
-    power: 17,
-    powerType: 'wind',
-    tier: Tier.XLARGE,
-    size: DefaultSize.XLARGE,
-  },
-  xlargeDummy: {
-    id: 'xlargeDummy',
-    shortId: 'xld',
-    name: 'X-Large (Dummy)',
-    power: 0,
-    tier: 4,
-    size: [8, 8],
-  },
-};
-
-/* eslint-enable */
+export const modules = [
+  ...small,
+  ...medium,
+  ...large,
+  ...extraLarge,
+  ...other,
+].reduce((o, it) => ({ ...o, [it.id]: it }), {});

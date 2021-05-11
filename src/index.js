@@ -7,7 +7,10 @@ import App from './App';
 import Splash from './Splash';
 import reportWebVitals from './reportWebVitals';
 import store from './store';
+import './core/i18n';
 import './typedef';
+
+import './containers/Canvas/hooks/useDragging';
 
 if (window.Cypress) {
   window.store = store;

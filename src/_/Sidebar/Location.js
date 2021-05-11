@@ -1,5 +1,6 @@
 import { useMemo } from 'react';
 import { useDispatch, useSelector, shallowEqual } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 import { SelectorIcon } from '@heroicons/react/solid';
 import * as L from 'partial.lenses';
 
@@ -8,6 +9,7 @@ import { changeLocation } from 'state/location';
 
 export default function Location() {
   const update = useDispatch();
+  const { t } = useTranslation();
 
   const { currentLocation, locations } = useSelector(
     L.get([
@@ -20,7 +22,7 @@ export default function Location() {
           L.array(
             L.pick({
               value: 'id',
-              label: 'displayName',
+              label: 'name',
             }),
           ),
         ],
@@ -34,7 +36,7 @@ export default function Location() {
   }, [locations, currentLocation]);
 
   return (
-    <Group title="Location">
+    <Group title={t('common:location')}>
       <div className="relative shadow-md rounded-md border-2 hover:shadow-lg bg-white">
         <span className="absolute inset-y-0 right-2 inline-flex items-center">
           <SelectorIcon className="w-5 h-5" />
@@ -47,7 +49,7 @@ export default function Location() {
           {locations.map((loc, i) => {
             return (
               <option key={i} className="px-4 py-2" value={loc.value}>
-                {loc.label}
+                {t(`game:location.${loc.label}`)}
               </option>
             );
           })}

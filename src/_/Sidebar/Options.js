@@ -1,5 +1,6 @@
 import * as L from 'partial.lenses';
 import { useDispatch, useSelector } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 import {
   toggleEntityEditor,
   toggleHideInvalid,
@@ -12,22 +13,22 @@ import Toggle from '_/Toggle';
 
 const items = [
   {
-    label: 'Hide invalid',
+    label: 'common:option.hideInvalid',
     value: options => options.flags.hideInvalid,
     action: () => toggleHideInvalid(),
   },
   {
-    label: 'Show power status',
+    label: 'common:option.showPowerStatus',
     value: options => options.flags.showPowerStatus,
     action: () => togglePowerStatus(),
   },
   {
-    label: 'Show entity editor',
+    label: 'common:option.showEditor',
     value: options => options.flags.showEditor,
     action: () => toggleEntityEditor(),
   },
   {
-    label: 'Show shopping list',
+    label: 'common:option.showShoppingList',
     value: options => options.flags.showShoppingList,
     action: () => toggleShoppingList(),
   },
@@ -36,6 +37,7 @@ const items = [
 export default function SidebarOptions(props) {
   const options = useSelector(L.get('options'));
   const update = useDispatch();
+  const { t } = useTranslation();
 
   return (
     <Group title="Options">
@@ -43,13 +45,10 @@ export default function SidebarOptions(props) {
         <Toggle
           key={ix}
           checked={(item.value || (a => a))(options)}
-          label={item.label}
+          label={t(item.label)}
           onChange={() => update(item.action())}
         />
       ))}
     </Group>
-    // <section>
-    //   <header className="font-bold mb-2">Options</header>
-    // </section>
   );
 }

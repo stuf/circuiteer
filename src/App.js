@@ -1,19 +1,12 @@
-import { useSelector } from 'react-redux';
 import cx from 'classnames';
 
 import css from './App.module.css';
-import Canvas from 'canvas/Canvas';
-import PowerMeter from 'canvas/_/PowerMeter';
+import { Canvas } from 'containers/Canvas/index';
 import Options from './_/Options';
 import Sidebar from './_/Sidebar';
 import Infobar from './_/Infobar';
-import EntityEditor from './_/EntityEditor';
-import { showSelectedEntityIn, optionFlagsIn } from 'common/selectors';
 
 function App() {
-  const showEditor = useSelector(showSelectedEntityIn);
-  const flags = useSelector(optionFlagsIn);
-
   return (
     <main className="h-full flex flex-col overflow-hidden">
       <header className={cx(css.mainHeader, 'border-b-2')}>
@@ -32,14 +25,6 @@ function App() {
           <Infobar />
 
           <div className="flex-1 relative">
-            {showEditor && flags.showEditor && (
-              <div className="absolute top-2 right-2 bg-white rounded-md border-2 shadow-lg w-56">
-                <EntityEditor />
-              </div>
-            )}
-
-            {flags.showPowerStatus && <PowerMeter />}
-
             <Canvas />
           </div>
         </div>

@@ -1,0 +1,40 @@
+{
+  "location": {
+    "sylva": "Sylva",
+    "desolo": "Desolo",
+    "calidor": "Calidor",
+    "vesania": "Vesania",
+    "novus": "Novus",
+    "glacio": "Glacio",
+    "atrox": "Atrox"
+  },
+  "module": {
+    "smallWindTurbine": "Small Wind Turbine",
+    "smallSolarPanel": "Small Solar Panel",
+    "smallGenerator": "Small Generator",
+    "smallBattery": "Small Battery",
+    "qtRtg": "QT-RTG",
+    "portableOxygenator": "Portable Oxygenator",
+    "mediumWindTurbine": "Medium Wind Turbine",
+    "mediumSolarPanel": "Medium Solar Panel",
+    "mediumGenerator": "Medium Generator",
+    "mediumBattery": "Medium Battery",
+    "rtg": "RTG",
+    "autoArm": "Auto Arm",
+    "mediumShredder": "Medium Shredder",
+    "largeWindTurbine": "Large Wind Turbine",
+    "largeSolarPanel": "Large Solar Panel",
+    "researchChamber": "Research Chamber",
+    "smeltingFurnace": "Smelting Furnace",
+    "soilCentrifuge": "Soil Centrifuge",
+    "chemistryLab": "Chemistry Lab",
+    "atmosphericCondenser": "Atmospheric Condenser",
+    "largeShredder": "Large Shredder",
+    "shelter": "Shelter",
+    "fieldShelter": "Field Shelter",
+    "xlargeWindTurbine": "XL Wind Turbine",
+    "solarArray": "Solar Array",
+    "extraLargeShredder": "Extra Large Shredder",
+    "wreckedSolarArray": "Wrecked Solar Array"
+  }
+}

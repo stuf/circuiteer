@@ -3,7 +3,18 @@ import * as I from 'infestines';
 
 //
 
+const { round } = Math;
+
 const setName = process.env.NODE_ENV === 'production' ? a => a : I.defineNameU;
+
+//
+
+export const screenToGrid = ([mx, my], [sx, sy]) => [
+  round(sx / mx),
+  round(sy / my),
+];
+
+export const gridToScreen = ([mx, my], [gx, gy]) => [gx * mx, gy * my];
 
 //
 
@@ -33,6 +44,8 @@ export const actions = function actions(...fnsIn) {
       };
   }
 };
+
+export const invokeIf = fn => x => fn && fn(x);
 
 const invokeE = name => setName(e => e[name](), name);
 
