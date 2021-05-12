@@ -1,5 +1,6 @@
 import { Group } from '@visx/group';
 import { ArrowsExpandIcon } from '@heroicons/react/solid';
+import { useTranslation } from 'react-i18next';
 import cx from 'classnames';
 
 import './EntityObject.css';
@@ -10,8 +11,10 @@ import { actions } from 'common/util';
  * @param {Props} props
  */
 export function EntityObject(props) {
-  const { x, y, width, height, object, selected, onSelect } = props;
+  const { x, y, width, height, object, module, selected, onSelect } = props;
   const elProps = { width, height };
+
+  const { t } = useTranslation();
 
   return (
     <Group
@@ -41,18 +44,12 @@ export function EntityObject(props) {
       >
         <div className="entity-object__fo-body-content">
           <div className="grid grid-cols-2 gap-2">
-            <GameIcon
-              name={object.module.powerType}
-              className="entity-object__icon"
-            />
-            <TierIcon
-              tier={object.module.tier}
-              className="entity-object__icon"
-            />
+            <GameIcon name={module.powerType} className="entity-object__icon" />
+            <TierIcon tier={module.tier} className="entity-object__icon" />
           </div>
 
           <div className="w-full px-4 text-center font-bold">
-            {object.module.name}
+            {t(`game:module.${module.id}`)}
           </div>
         </div>
       </foreignObject>

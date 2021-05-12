@@ -2,6 +2,8 @@ import * as L from 'partial.lenses';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectEntity } from 'state/editor';
 
+import { modules } from '../../../config';
+
 /**
  * @param {any} state
  * @return {IEntity[]}
@@ -19,6 +21,7 @@ export function useEntities() {
 
   return {
     entities: items,
+    modules,
     current: items.find(x => x.id === current),
     setCurrent: id => update(selectEntity(id)),
   };

@@ -11,10 +11,10 @@ import { PatternCircles } from '@visx/pattern';
 import { DiagonalPattern, GridPattern } from './components/Patterns';
 import { EntityEditor } from 'containers/EntityEditor/EntityEditor';
 
-function Canvas(props) {
+export function Canvas(props) {
   const { parentWidth: width, parentHeight: height } = props;
 
-  const { entities, current, setCurrent } = useEntities();
+  const { entities, modules, current, setCurrent } = useEntities();
   const gxy = useGridSize();
 
   const onSelect = id => () => setCurrent(id);
@@ -27,7 +27,11 @@ function Canvas(props) {
         {...{ width, height }}
         className="relative"
         patternUnits="userSpaceOnUse"
-        onClickCapture={() => setCurrent(null)}
+        onClickCapture={() => {
+          if (current) {
+            setCurrent(null);
+          }
+        }}
         onDragOver={e => {
           e.preventDefault();
         }}
@@ -44,11 +48,9 @@ function Canvas(props) {
         />
 
         {entities.map((entity, ix) => {
+          const module = modules[entity.module];
           const [x, y] = gridToScreen(gxy, entity.pos);
-          const [entityWidth, entityHeight] = gridToScreen(
-            gxy,
-            entity.module.size,
-          );
+          const [entityWidth, entityHeight] = gridToScreen(gxy, module.size);
 
           return (
             <Draggable
@@ -68,6 +70,7 @@ function Canvas(props) {
                     width: entityWidth,
                     height: entityHeight,
                     object: entity,
+                    module,
                     selected: current?.id === entity.id,
                     onSelect: onSelect(entity.id),
                   }}
