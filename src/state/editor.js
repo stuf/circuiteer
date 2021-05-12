@@ -26,6 +26,7 @@ const prefix = x => `${name}/${x}`;
 //
 
 const selectEntityObject = id => ['entities', L.elems, L.whereEq({ id })];
+const appendEntity = ['entities', L.appendTo];
 
 //
 
@@ -58,9 +59,7 @@ const slice = createSlice({
   reducers: {},
   extraReducers: builder => {
     builder
-      .addCase(addEntity, (s, a) =>
-        L.set(['entities', L.appendTo], a.payload, original(s)),
-      )
+      .addCase(addEntity, (s, a) => L.set(appendEntity, a.payload, original(s)))
       .addCase(resetCurrent, s => L.remove('current', original(s)))
       .addCase(selectEntity, (s, a) => L.set('current', a.payload, original(s)))
       .addCase(toggleEntity, (s, a) =>
