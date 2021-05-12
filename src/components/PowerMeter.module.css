@@ -1,7 +1,0 @@
-.root {
-  @apply transform -translate-x-1/2 left-1/2;
-  @apply absolute top-4;
-  /* @apply border-2 border-red-500; */
-  @apply h-16 w-48;
-  @apply text-center pointer-events-none;
-}

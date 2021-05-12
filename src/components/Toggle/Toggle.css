@@ -30,12 +30,12 @@
 
   @apply transform;
   /* Inactive state, to the right */
-  @apply translate-x-6;
+  @apply translate-x-1;
 }
 
 /* Toggle checked tick */
 .toggle--checked .toggle__tick {
-  @apply translate-x-1;
+  @apply translate-x-6;
 }
 
 /* Toggle switch label */

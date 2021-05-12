@@ -1,0 +1,33 @@
+.details {
+}
+
+.details--root {
+  @apply flex flex-col;
+}
+
+.details--enter,
+.details--leave {
+  @apply transition duration-100 ease-out;
+}
+
+.details--enter {
+}
+
+.details--enter-from {
+  @apply transform scale-95 opacity-0;
+}
+
+.details--enter-to {
+  @apply transform scale-100 opacity-100;
+}
+
+.details--leave {
+}
+
+.details--leave-from {
+  @apply transform scale-100 opacity-100;
+}
+
+.details--leave-to {
+  @apply transform scale-95 opacity-0;
+}
