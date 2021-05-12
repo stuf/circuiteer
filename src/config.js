@@ -215,6 +215,9 @@ const other = [
   },
 ];
 
+/**
+ * @type {ModuleDict}
+ */
 export const modules = [
   ...small,
   ...medium,
