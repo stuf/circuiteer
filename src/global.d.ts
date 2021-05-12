@@ -48,6 +48,10 @@ declare interface IModule {
   size: Point;
 }
 
+declare interface ITranslatedModule extends IModule {
+  displayName: string;
+}
+
 declare type ModuleDict = { [k: string]: IModule };
 
 declare type Tuple<A, B> = [A, B];
