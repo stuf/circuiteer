@@ -1,21 +1,29 @@
+// @ts-check
 import * as L from 'partial.lenses';
 
-import { createAction, createSlice, original } from '@reduxjs/toolkit';
+import { createSlice, original } from '@reduxjs/toolkit';
+import { createPrefixedAction } from 'common/util';
 
 const name = 'location';
-const prefix = x => [name, x].join('/');
+const createAction = createPrefixedAction(name);
 
 //
 
-export const changeLocation = createAction(prefix('changeLocation'));
+export const changeLocation = createAction('changeLocation');
 
+/**
+ * @type {Game.IDifficulty}
+ */
 const Difficulty = {
-  EASY: 1,
-  MEDIUM: 2,
-  HARD: 3,
-  VERY_HARD: 4,
+  EASY: 'easy',
+  MEDIUM: 'medium',
+  HARD: 'hard',
+  VERY_HARD: 'veryHard',
 };
 
+/**
+ * @type {Game.IPowerStrength}
+ */
 const Wind = {
   VERY_LOW: 0.25,
   LOW: 0.5,
@@ -24,6 +32,9 @@ const Wind = {
   VERY_HIGH: 1.75,
 };
 
+/**
+ * @type {Game.IPowerStrength}
+ */
 const Sun = {
   VERY_LOW: 0.25,
   LOW: 0.5,
@@ -37,58 +48,45 @@ const Sun = {
  */
 const locations = [
   {
-    id: 1,
-    name: 'sylva',
-    displayName: 'Sylva',
+    id: 'sylva',
     difficulty: Difficulty.EASY,
     wind: Wind.MEDIUM,
     sun: Sun.MEDIUM,
+    cycle: [720, 60],
   },
   {
-    id: 2,
-    name: 'desolo',
-    displayName: 'Desolo',
+    id: 'desolo',
     difficulty: Difficulty.EASY,
     wind: Wind.LOW,
     sun: Sun.HIGH,
     cycle: 115,
   },
   {
-    id: 3,
-    name: 'calidor',
-    displayName: 'Calidor',
+    id: 'calidor',
     difficulty: Difficulty.MEDIUM,
     wind: Wind.LOW,
     sun: Sun.VERY_HIGH,
   },
   {
-    id: 4,
-    name: 'vesania',
-    displayName: 'Vesania',
+    id: 'vesania',
     difficulty: Difficulty.MEDIUM,
     wind: Wind.LOW,
     sun: Sun.HIGH,
   },
   {
-    id: 5,
-    name: 'novus',
-    displayName: 'Novus',
+    id: 'novus',
     difficulty: Difficulty.MEDIUM,
     wind: Wind.HIGH,
     sun: Sun.HIGH,
   },
   {
-    id: 6,
-    name: 'glacio',
-    displayName: 'Glacio',
+    id: 'glacio',
     difficulty: Difficulty.HARD,
     wind: Wind.VERY_HIGH,
     sun: Sun.VERY_LOW,
   },
   {
-    id: 7,
-    name: 'atrox',
-    displayName: 'Atrox',
+    id: 'atrox',
     difficulty: Difficulty.VERY_HARD,
     wind: Wind.LOW,
     sun: Sun.LOW,
@@ -97,9 +95,12 @@ const locations = [
 
 //
 
+/**
+ * @type {App.State.Location}
+ */
 const initialState = {
   locations,
-  current: 1,
+  current: 'sylva',
 };
 
 const slice = createSlice({

@@ -1,19 +1,25 @@
 import * as L from 'partial.lenses';
 import * as R from 'ramda';
-import { createAction, createSlice, original } from '@reduxjs/toolkit';
+import { createSlice, original } from '@reduxjs/toolkit';
+
+import { createPrefixedAction } from 'common/util';
 
 const name = 'options';
-const prefix = x => [name, x].join('/');
+const createAction = createPrefixedAction(name);
 
 //
 
-export const togglePowerStatus = createAction(prefix('togglePowerStatus'));
+export const togglePowerStatus = createAction('togglePowerStatus');
 
-export const toggleHideInvalid = createAction(prefix('toggleHideInvalid'));
+export const toggleHideInvalid = createAction('toggleHideInvalid');
 
-export const toggleEntityEditor = createAction(prefix('toggleEntityEditor'));
+export const toggleEntityEditor = createAction('toggleEntityEditor');
 
-export const toggleShoppingList = createAction(prefix('toggleShoppingList'));
+export const toggleShoppingList = createAction('toggleShoppingList');
+
+export const toggleEfficiencyAsMultiplier = createAction(
+  'toggleEfficiencyAsMultiplier',
+);
 
 //
 
@@ -28,6 +34,7 @@ const initialState = {
     showPowerStatus: true,
     showEditor: true,
     showShoppingList: true,
+    showEfficiencyAsMultiplier: false,
   },
 };
 
@@ -40,7 +47,11 @@ const slice = createSlice({
       .addCase(togglePowerStatus, toggle('showPowerStatus'))
       .addCase(toggleHideInvalid, toggle('hideInvalid'))
       .addCase(toggleEntityEditor, toggle('showEditor'))
-      .addCase(toggleShoppingList, toggle('showShoppingList'));
+      .addCase(toggleShoppingList, toggle('showShoppingList'))
+      .addCase(
+        toggleEfficiencyAsMultiplier,
+        toggle('showEfficiencyAsMultiplier'),
+      );
   },
 });
 
