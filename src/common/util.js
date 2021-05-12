@@ -1,11 +1,17 @@
 import * as L from 'partial.lenses';
 import * as I from 'infestines';
+import * as R from 'ramda';
+import * as RJT from '@reduxjs/toolkit';
 
 //
 
 const { round } = Math;
 
 const setName = process.env.NODE_ENV === 'production' ? a => a : I.defineNameU;
+
+// Functions
+
+export const thru = (x, ...fns) => R.pipe(...fns)(x);
 
 //
 
@@ -52,3 +58,16 @@ const invokeE = name => setName(e => e[name](), name);
 export const preventDefault = invokeE('preventDefault');
 
 export const stopPropagation = invokeE('stopPropagation');
+
+//
+
+export const createPrefixedAction =
+  prefix =>
+  /**
+   *
+   * @param {string} type
+   * @param  {?function} prepareAction
+   * @returns {RJT.ActionCreator}
+   */
+  (type, prepareAction) =>
+    RJT.createAction([prefix, type].join('/'), prepareAction);
