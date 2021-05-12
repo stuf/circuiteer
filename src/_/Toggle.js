@@ -8,9 +8,12 @@ export default function Toggle(props) {
   return (
     <div className={cx('flex items-center', className)}>
       <Switch
-        {...{ checked, onChange }}
+        {...{
+          checked,
+          onChange,
+        }}
         className={`${
-          checked ? 'bg-blue-600' : 'bg-gray-200'
+          checked ? 'bg-purple-600' : 'bg-gray-200'
         } relative inline-flex items-center h-6 rounded-full w-11`}
       >
         <span className="sr-only">{label}</span>

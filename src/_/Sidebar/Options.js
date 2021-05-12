@@ -2,6 +2,7 @@ import * as L from 'partial.lenses';
 import { useDispatch, useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import {
+  toggleEfficiencyAsMultiplier,
   toggleEntityEditor,
   toggleHideInvalid,
   togglePowerStatus,
@@ -9,7 +10,8 @@ import {
 } from 'state/options';
 
 import Group from '_/Group';
-import Toggle from '_/Toggle';
+
+import { Toggle } from 'components';
 
 const items = [
   {
@@ -31,6 +33,11 @@ const items = [
     label: 'common:option.showShoppingList',
     value: options => options.flags.showShoppingList,
     action: () => toggleShoppingList(),
+  },
+  {
+    label: 'common:option.showEfficiencyAsMultiplier',
+    value: options => options.flags.showEfficiencyAsMultiplier,
+    action: () => toggleEfficiencyAsMultiplier(),
   },
 ];
 

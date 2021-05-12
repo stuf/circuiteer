@@ -1,0 +1,20 @@
+.sidebar-modules {
+  @apply relative;
+}
+
+.sidebar-modules .__search-clear-wrapper {
+  @apply absolute -inset-y-0 right-1;
+  @apply flex items-center;
+}
+
+.sidebar-modules .__search-clear-icon {
+  @apply w-6 h-6 mx-auto;
+}
+
+.sidebar-modules button {
+  @apply border;
+  @apply bg-purple-700;
+  @apply text-white;
+  @apply w-9 h-9;
+  @apply rounded-md;
+}

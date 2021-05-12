@@ -1,8 +1,15 @@
+const colors = require('tailwindcss/colors');
+
+const primary = colors.purple[700];
+
 module.exports = {
   purge: ['./src/**/*.{js,jsx,ts,tsx}', './public/index.html'],
   darkMode: false, // or 'media' or 'class'
   theme: {
     extend: {
+      colors: {
+        primary,
+      },
       fontSize: {
         xxs: ['0.6rem', { lineHeight: '1rem' }],
       },
@@ -26,7 +33,12 @@ module.exports = {
     },
   },
   variants: {
-    extend: {},
+    extend: {
+      borderWidth: ['group-focus', 'group-hover', 'focus-within'],
+      borderColor: ['group-focus', 'group-hover', 'focus-within'],
+      ringWidth: ['group-focus', 'group-hover', 'focus-within'],
+      ringColor: ['group-focus', 'group-hover', 'focus-within'],
+    },
   },
-  plugins: [],
+  plugins: [require('tailwindcss-interaction-variants')],
 };

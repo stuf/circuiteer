@@ -8,6 +8,17 @@
     "glacio": "Glacio",
     "atrox": "Atrox"
   },
+  "powerType": {
+    "wind": "Wind",
+    "sun": "Sun"
+  },
+  "powerStrength": {
+    "veryLow": "Very Low",
+    "low": "Low",
+    "medium": "Medium",
+    "high": "High",
+    "veryHigh": "Very High"
+  },
   "module": {
     "smallWindTurbine": "Small Wind Turbine",
     "smallSolarPanel": "Small Solar Panel",

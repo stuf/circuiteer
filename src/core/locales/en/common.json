@@ -6,7 +6,8 @@
     "hideInvalid": "Hide invalid",
     "showPowerStatus": "Show power status",
     "showEditor": "Show entity editor",
-    "showShoppingList": "Show shopping list"
+    "showShoppingList": "Show shopping list",
+    "showEfficiencyAsMultiplier": "Show efficiency as value"
   },
   "location": "Location",
   "modules": "Modules",
