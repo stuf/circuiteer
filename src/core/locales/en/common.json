@@ -17,5 +17,8 @@
   "filter": {
     "match": "One match",
     "match_plural": "{{ count }} matches"
+  },
+  "modal": {
+    "close": "Close"
   }
 }
