@@ -1,7 +1,14 @@
 .button {
-  @apply px-4 py-2 bg-black text-white rounded-md relative;
+  @apply relative;
+  @apply px-4 py-2;
+  @apply bg-black text-white;
+  @apply rounded;
   @apply hover:bg-purple-600 hover:shadow-md;
   @apply focus:bg-purple-500;
+
+  @apply ring-2 ring-purple-600;
+  @apply border-2 border-pink-500;
+  @apply ring-offset-2 ring-offset-white;
 }
 
 .button.button--with-icon {
