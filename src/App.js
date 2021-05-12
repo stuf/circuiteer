@@ -1,10 +1,10 @@
 import cx from 'classnames';
 
 import css from './App.module.css';
-import { Canvas } from 'containers/Canvas/index';
+import { AutosizeCanvas } from 'containers/Canvas/index';
 import Options from './_/Options';
 import Sidebar from './_/Sidebar';
-import Infobar from './_/Infobar';
+import { Infobar } from 'containers/Infobar';
 
 function App() {
   return (
@@ -25,7 +25,7 @@ function App() {
           <Infobar />
 
           <div className="flex-1 relative">
-            <Canvas />
+            <AutosizeCanvas />
           </div>
         </div>
         <div className="border-l-2 w-72 divide-y-2 h-full overflow-auto">
