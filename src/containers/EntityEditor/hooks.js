@@ -1,6 +1,7 @@
 import * as L from 'partial.lenses';
 import { useDispatch, useSelector } from 'react-redux';
 import { toggleEntity } from 'state/editor';
+import { modules } from 'config';
 
 /**
  * @param {any} state
@@ -19,10 +20,13 @@ export function useCurrentEntity() {
   const update = useDispatch();
 
   const items = useSelector(selectEntities);
-  const current = useSelector(selectCurrent);
+  const _current = useSelector(selectCurrent);
+  const current = items.find(x => x.id === _current);
+  const module = modules[current.module];
 
   return {
-    current: items.find(x => x.id === current),
+    current,
+    module,
     toggle: () => update(toggleEntity({ id: current })),
   };
 }
