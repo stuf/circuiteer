@@ -1,0 +1,1 @@
+export { Infobar } from './Infobar';
