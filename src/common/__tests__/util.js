@@ -4,6 +4,9 @@ import {
   stopPropagation,
   createPrefixedAction,
   thru,
+  screenToGrid,
+  gridToScreen,
+  invokeIf,
 } from '../util';
 
 describe('common/util', () => {
@@ -28,6 +31,41 @@ describe('common/util', () => {
       expect(output).toEqual([[2, 1], 2]);
       // It's composed left-to-right
       expect(fn1).toHaveBeenCalledBefore(fn2);
+    });
+  });
+
+  describe('conversion', () => {
+    test('screenToGrid', () => {
+      const gxy = [4, 4];
+      expect(screenToGrid(gxy, [4, 4])).toEqual([1, 1]);
+    });
+
+    test('gridToScreen', () => {
+      const gxy = [4, 4];
+      expect(gridToScreen(gxy, [4, 4])).toEqual([16, 16]);
+    });
+  });
+
+  describe('functions 123', () => {
+    test('invokeIf', () => {
+      const id = a => a;
+      const fn1 = jest.fn(id);
+      const fn2 = jest.fn(id);
+
+      const x = invokeIf(123, fn1);
+      const y = invokeIf(123, undefined);
+
+      const z = invokeIf(123);
+
+      expect(fn1).toHaveBeenCalled();
+      expect(x).toBe(123);
+      expect(y).toBeUndefined();
+
+      expect(z).toBeInstanceOf(Function);
+      expect(fn2).not.toHaveBeenCalled();
+      const z_ = z(fn2);
+      expect(z_).toBe(123);
+      expect(fn2).toHaveBeenCalled();
     });
   });
 

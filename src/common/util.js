@@ -22,13 +22,13 @@ export const screenToGrid = ([mx, my], [sx, sy]) => [
 
 export const gridToScreen = ([mx, my], [gx, gy]) => [gx * mx, gy * my];
 
-//
+// #region Functions
 
-export const scalePair = ([p1, p2], [m1, m2]) => [p1 * m1, p2 * m2];
+export const invokeIf = I.curry(function (x, fn) {
+  return fn && fn(x);
+});
 
-export const multiplyPair = ([a1, a2], [b1, b2]) => [a1 * b1, a2 * b2];
-
-export const multiplyPairScalar = ([p1, p2], m) => [p1 * m, p2 * m];
+// #endregion
 
 // Actions
 
@@ -50,8 +50,6 @@ export const actions = function actions(...fnsIn) {
       };
   }
 };
-
-export const invokeIf = fn => x => fn && fn(x);
 
 const invokeE = name => setName(e => e[name](), name);
 
