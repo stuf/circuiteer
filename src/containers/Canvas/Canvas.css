@@ -1,0 +1,19 @@
+.canvas {
+  @apply relative;
+}
+
+.canvas__underlay {
+  /* @apply pointer-events-none; */
+  fill: url('#grid-polkadots');
+}
+
+.canvas__overlay {
+  @apply pointer-events-none;
+  fill: url('#lines-diagonal');
+  @apply opacity-0;
+  @apply transition-opacity duration-200;
+}
+
+.canvas--is-dragging .canvas__overlay {
+  @apply opacity-100;
+}

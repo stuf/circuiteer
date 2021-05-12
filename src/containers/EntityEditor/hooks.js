@@ -27,6 +27,6 @@ export function useCurrentEntity() {
   return {
     current,
     module,
-    toggle: () => update(toggleEntity({ id: current })),
+    toggleCurrent: () => update(toggleEntity({ id: _current })),
   };
 }

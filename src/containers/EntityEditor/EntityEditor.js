@@ -1,14 +1,13 @@
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import Toggle from '_/Toggle';
+import { Toggle } from 'components';
 import { useCurrentEntity } from './hooks';
 
 export function EntityEditor(props) {
-  const { current, module, toggle } = useCurrentEntity();
+  const { current, module, toggleCurrent } = useCurrentEntity();
   const [state, setState] = useState({ showDebug: false });
   const { t } = useTranslation();
-  console.log({ current, module, toggle });
 
   return (
     <aside className="absolute top-2 right-2 bg-white shadow-md border-2 rounded-md z-10 text-xs w-96">
@@ -18,7 +17,7 @@ export function EntityEditor(props) {
           className="absolute flex items-center -inset-y-0 right-4 text-sm"
           checked={current.enabled}
           label={t('common:enable')}
-          onChange={toggle}
+          onChange={toggleCurrent}
         />
       </header>
 

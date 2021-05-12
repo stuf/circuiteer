@@ -1,20 +1,40 @@
 /* eslint-disable */
-import Draggable from 'react-draggable';
+import * as R from 'ramda';
+import { useRef, useCallback, useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { Group } from '@visx/group';
+import { localPoint } from '@visx/event';
 import { withParentSizeModern } from '@visx/responsive';
+import Draggable from 'react-draggable';
+import cx from 'classnames';
 
-import { gridToScreen } from 'common/util';
+import { gridToScreen, screenToGrid } from 'common/util';
+import { EntityEditor } from 'containers/EntityEditor/EntityEditor';
 import { useGridSize } from 'common/hooks';
 import { useEntities } from './hooks/useEntities';
-import { EntityObject } from './components/EntityObject';
-import { PatternCircles } from '@visx/pattern';
+import { useIsDragging, useDragSize } from './hooks/useDragging';
 import { DiagonalPattern, GridPattern } from './components/Patterns';
-import { EntityEditor } from 'containers/EntityEditor/EntityEditor';
+import { EntityObject } from './components/EntityObject';
+import { DragGhost } from './components/DragGhost';
+import { addEntity } from 'state/editor';
+import { setDragging } from 'state/drag';
+
+import './Canvas.css';
 
 export function Canvas(props) {
   const { parentWidth: width, parentHeight: height } = props;
+  const ref = useRef(null);
+  const drag = useRef([0, 0]);
+
+  const update = useDispatch();
+  const refCb = useCallback(node => {
+    ref.current = node;
+  }, []);
 
   const { entities, modules, current, setCurrent } = useEntities();
+  const isDragging = useIsDragging();
+  const dragSize = useDragSize();
+
   const gxy = useGridSize();
 
   const onSelect = id => () => setCurrent(id);
@@ -24,16 +44,33 @@ export function Canvas(props) {
       {current && <EntityEditor />}
 
       <svg
-        {...{ width, height }}
-        className="relative"
+        {...{ width, height, ref: refCb }}
+        className={cx('canvas', isDragging && 'canvas--is-dragging')}
         patternUnits="userSpaceOnUse"
-        onClickCapture={() => {
-          if (current) {
-            setCurrent(null);
-          }
-        }}
         onDragOver={e => {
           e.preventDefault();
+          const p = localPoint(e);
+          const xy = screenToGrid(gxy, [p.x, p.y]);
+          if (!R.equals(xy, drag.current)) {
+            drag.current = screenToGrid(gxy, [p.x, p.y]);
+          }
+        }}
+        onDrop={e => {
+          const p = localPoint(e);
+          const pos = screenToGrid(gxy, [p.x, p.y]);
+          const { module } = JSON.parse(
+            e.dataTransfer.getData('application/json'),
+          );
+
+          /** @type {IEntity} */
+          const entity = {
+            pos: pos,
+            module: module.id,
+            enabled: true,
+          };
+
+          update(addEntity(entity));
+          update(setDragging(false));
         }}
       >
         {/* Defs */}
@@ -43,8 +80,10 @@ export function Canvas(props) {
         {/* Backdrop */}
         <rect
           {...{ width, height }}
-          className="pointer-events-none"
-          fill="url('#grid-polkadots')"
+          onClick={() => {
+            if (current) update(setCurrent(null));
+          }}
+          className="canvas__underlay"
         />
 
         {entities.map((entity, ix) => {
@@ -79,6 +118,19 @@ export function Canvas(props) {
             </Draggable>
           );
         })}
+
+        <Group className="canvas__overlay-group">
+          <rect
+            className="canvas__overlay"
+            onDragEnd={e => {
+              console.log('dragend', e);
+            }}
+            {...{ width, height }}
+          />
+          {isDragging && (
+            <DragGhost grid={gxy} svgEl={ref.current} size={dragSize} />
+          )}
+        </Group>
       </svg>
     </>
   );
