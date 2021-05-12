@@ -3,6 +3,7 @@ import { useDispatch, useSelector, shallowEqual } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { SelectorIcon } from '@heroicons/react/solid';
 import * as L from 'partial.lenses';
+import * as R from 'ramda';
 
 import Group from '_/Group';
 import { changeLocation } from 'state/location';
@@ -11,29 +12,12 @@ export default function Location() {
   const update = useDispatch();
   const { t } = useTranslation();
 
-  const { currentLocation, locations } = useSelector(
-    L.get([
-      'location',
-      L.valueOr({}),
-      L.pick({
-        currentLocation: 'current',
-        locations: [
-          'locations',
-          L.array(
-            L.pick({
-              value: 'id',
-              label: 'name',
-            }),
-          ),
-        ],
-      }),
-    ]),
-    shallowEqual,
+  const locations = useSelector(L.get(['location', 'locations']), shallowEqual);
+  const currentId = useSelector(L.get(['location', 'current']));
+  const current = useMemo(
+    () => locations.find(R.whereEq({ id: currentId })),
+    [locations, currentId],
   );
-
-  const current = useMemo(() => {
-    return locations.find(x => x.value === currentLocation);
-  }, [locations, currentLocation]);
 
   return (
     <Group title={t('common:location')}>
@@ -43,13 +27,13 @@ export default function Location() {
         </span>
         <select
           className="px-4 py-2 appearance-none block w-full bg-transparent"
-          value={current.value}
-          onChange={e => update(changeLocation(+e.target.value))}
+          value={current.id}
+          onChange={e => update(changeLocation(e.target.value))}
         >
           {locations.map((loc, i) => {
             return (
-              <option key={i} className="px-4 py-2" value={loc.value}>
-                {t(`game:location.${loc.label}`)}
+              <option key={i} className="px-4 py-2" value={loc.id}>
+                {t(`game:location.${loc.id}`)}
               </option>
             );
           })}
