@@ -7,6 +7,14 @@ import { Matrix } from 'common/linear';
 
 //
 
+export function useOptions() {
+  /**
+   * @type {App.State.Options}
+   */
+  const options = useSelector(L.get('options'));
+  return options;
+}
+
 export function useGridSize() {
   const gxy = useSelector(L.get(['grid', 'size']));
 
