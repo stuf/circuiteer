@@ -13,5 +13,9 @@
   "modules": "Modules",
   "grid": "Grid",
   "width": "Width",
-  "height": "Height"
+  "height": "Height",
+  "filter": {
+    "match": "One match",
+    "match_plural": "{{ count }} matches"
+  }
 }

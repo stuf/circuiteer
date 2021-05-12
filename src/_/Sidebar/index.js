@@ -1,12 +1,13 @@
-import css from './Sidebar.module.css';
 import SidebarOptions from './Options';
 import SidebarLocation from './Location';
 import SidebarModules from './Modules';
 import SidebarGrid from './Grid';
 
+import './index.css';
+
 function Sidebar() {
   return (
-    <div className={css.root}>
+    <div className="sidebar sidebar--root">
       <SidebarOptions />
       <SidebarLocation />
       <SidebarModules />

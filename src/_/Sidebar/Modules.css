@@ -11,10 +11,27 @@
   @apply w-6 h-6 mx-auto;
 }
 
+.__search-clear--disabled {
+  @apply hidden;
+}
+
 .sidebar-modules button {
   @apply border;
   @apply bg-purple-700;
   @apply text-white;
   @apply w-9 h-9;
   @apply rounded-md;
+}
+
+.module-list {
+}
+
+.module-list mark {
+  @apply bg-pink-500;
+  @apply text-white;
+  @apply font-bold;
+  @apply inline-block;
+  @apply shadow;
+  padding: 0 2px;
+  margin: 0 1px;
 }
