@@ -1,17 +1,28 @@
 declare interface IBaseEntityCtor {}
 
+declare type EntityID = string;
+
 declare interface IEntity {
-  id: string;
-  module: IModule;
+  id: EntityID;
+  module: string;
   pos: Point;
   enabled: boolean;
 }
 
 declare interface IModule {
+  /**
+   * Internal ID for this module
+   */
   id: string;
 
+  /**
+   * Short ID string
+   */
   shortId: string;
 
+  /**
+   * Module size tier
+   */
   tier: IModuleTier;
 
   /**
@@ -20,42 +31,67 @@ declare interface IModule {
    */
   power: number;
 
+  /**
+   * The "kind" of power this module produces
+   */
   powerType?: ValueOf<IPowerType>;
 
+  /**
+   * If the module can keep a charge, define how many units of
+   * power it can store.
+   */
   capacity?: number;
 
+  /**
+   * The module's size on the grid
+   */
   size: Point;
 }
 
-type Tuple<A, B> = [A, B];
+declare type ModuleDict = { [k: string]: IModule };
 
-type Point = Tuple<number, number>;
+declare type Tuple<A, B> = [A, B];
 
-type ValueOf<T> = T[keyof T];
+/**
+ * A number pair type for defining a coordinate point
+ */
+declare type Point = Tuple<number, number>;
 
-declare interface IPowerStrength {
-  VERY_LOW: 0.25;
-  LOW: 0.5;
-  MEDIUM: 1;
-  HIGH: 1.5;
-  VERY_HIGH: 1.75;
-}
+/**
+ * A number pair type for defining an object's dimensions
+ */
+declare type Size = Tuple<number, number>;
+
+declare type ValueOf<T> = T[keyof T];
 
 declare interface IPowerType {
+  /**
+   * Power production is constant
+   */
   ALWAYS: 'always';
+
+  /**
+   * Power production is togglable (e.g. generator)
+   */
   POWERED: 'powered';
+
+  /**
+   * Power production depends on wind
+   */
   WIND: 'wind';
+
+  /**
+   * Power production depends on the sun
+   */
   SUN: 'sun';
 }
 
-declare interface IDifficulty {
-  EASY: 'easy';
-  MEDIUM: 'medium';
-  HARD: 'hard';
-  VERY_HARD: 'very_hard';
-}
-
 declare enum IModuleTier {
+  /**
+   * Tier that does not belong to any other tier,
+   * used for special thing such as wrecked solar arrays.
+   */
+  OTHER = -1,
   SMALL = 1,
   MEDIUM = 2,
   LARGE = 3,
@@ -69,36 +105,56 @@ declare interface IBaseMaterial {
   displayName: string;
 }
 
+/**
+ * Definitions relating to the application itself
+ */
 declare namespace App {
   declare namespace State {
+    declare interface Application {
+      /**
+       * Should we show the application splash screen on initial
+       * visit.
+       */
+      splash: {
+        delay: number;
+        show: boolean;
+      };
+    }
+
     declare interface Drag {
       dragging: boolean;
       pos: Point;
-      size: Tuple<number, number>;
+      size: Size;
     }
 
-    declare interface Editor {}
+    declare interface Editor {
+      dragging: boolean;
+      current?: EntityID;
+      entities: IEntity[];
+    }
 
     declare interface Grid {
-      size: Tuple<number, number>;
+      size: Size;
     }
 
     declare interface Location {
       locations: Game.ILocation[];
-      current: string;
+      current?: string;
     }
 
     declare interface Options {
-      flags: {
+      flags: Partial<{
         hideInvalid: boolean;
         showPowerStatus: boolean;
         showEditor: boolean;
         showShoppingList: boolean;
-      };
+        showEfficiencyAsMultiplier: boolean;
+      }>;
     }
   }
 
   declare interface Store {
+    application: State.Application;
     drag: State.Drag;
     editor: State.Editor;
     grid: State.Grid;
@@ -107,11 +163,58 @@ declare namespace App {
   }
 }
 
+/**
+ * Definitions relating to game mechanics
+ */
 declare namespace Game {
+  declare namespace Material {
+    declare interface BaseMaterial {}
+
+    declare interface NaturalMaterial extends BaseMaterial {}
+    declare interface RefinedMaterial extends BaseMaterial {}
+    declare interface CompositeMaterial extends BaseMaterial {}
+    declare interface AtmosphericMaterial extends BaseMaterial {}
+    declare interface OtherMaterial extends BaseMaterial {}
+  }
+
+  /**
+   * A location's power generation strength
+   */
+  declare interface IPowerStrength {
+    VERY_LOW: 0.25;
+    LOW: 0.5;
+    MEDIUM: 1;
+    HIGH: 1.5;
+    VERY_HIGH: 1.75;
+  }
+
+  declare interface IPlanetType {
+    TERRAN: 'terran';
+    TERRAN_MOON: 'terranMoon';
+    ARID: 'arid';
+    EXOTIC: 'exotic';
+    EXOTIC_MOON: 'exoticMoon';
+    TUNDRA: 'tundra';
+    RADIATED: 'radiated';
+  }
+
+  declare type PlanetType = ValueOf<IPlanetType>;
+
+  declare interface IDifficulty {
+    EASY: 'easy';
+    MEDIUM: 'medium';
+    HARD: 'hard';
+    VERY_HARD: 'veryHard';
+  }
+
+  declare type Difficulty = ValueOf<IDifficulty>;
+
   declare interface ILocation {
     id: string;
 
-    name: string;
+    name?: string;
+
+    type?: ValueOf<IPlanetType>;
 
     difficulty: ValueOf<IDifficulty>;
 
@@ -129,7 +232,7 @@ declare namespace Game {
      * Day/night cycle length in seconds, either as a single value
      * or a tuple of duration and margin of error.
      */
-    cycle: number | [number, number];
+    cycle?: number | [number, number];
   }
 
   declare interface IGameIcon {
