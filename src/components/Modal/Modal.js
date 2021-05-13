@@ -12,7 +12,7 @@ export function Modal(props) {
   const [state, setState] = useState({ open });
 
   const closeModal = () => setState(s => ({ ...s, open: false }));
-  const openModal = () => setState(s => ({ ...s, open: true }));
+  const openModal = () => setState(s => ({ ...s, open: true })); // eslint-disable-line
 
   const transition = {
     enter: 'ease-out duration-300',
