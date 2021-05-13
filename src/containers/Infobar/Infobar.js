@@ -42,8 +42,9 @@ export function Infobar() {
   return (
     <div className="flex justify-between w-full border-b-2 px-4 py-1 items-center">
       <div className="space-x-1">
-        <Button icon={LightningBoltIcon}>Power</Button>
-        <Button>Poop</Button>
+        <Button icon={LightningBoltIcon} disabled>
+          Power
+        </Button>
       </div>
 
       <div className="flex space-x-4">
