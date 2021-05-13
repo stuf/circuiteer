@@ -24,7 +24,8 @@
   },
   "jest": {
     "coveragePathIgnorePatterns": [
-      "<rootDir>/src/(canvas|state|components|_)/index.js",
+      "<rootDir>/src/(canvas|state|_)/index.js",
+      "<rootDir>/src/components/\\w+/index.js",
       "typedefs?.js"
     ]
   },
