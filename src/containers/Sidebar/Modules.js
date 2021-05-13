@@ -6,7 +6,7 @@ import { useTranslation } from 'react-i18next';
 import cx from 'classnames';
 
 import { BackspaceIcon } from '@heroicons/react/solid';
-import { Group, Details as Deets } from 'components';
+import { Marker, Group, Details as Deets } from 'components';
 
 import { setDrag } from 'state/drag';
 import './Modules.css';
@@ -15,12 +15,12 @@ export default function SidebarModules(props) {
   const update = useDispatch();
   const { t } = useTranslation();
   const [state, setState] = useState({ filterText: '' });
+  const highlightFilterText = !!state.filterText;
+
   const filterRegex = useMemo(
     () => (state.filterText ? new RegExp(state.filterText, 'i') : null),
     [state.filterText],
   );
-
-  console.log({ filterRegex });
 
   const mods = useSelector(
     L.get(['module', 'modules', L.valueOr([])]),
@@ -67,8 +67,6 @@ export default function SidebarModules(props) {
     );
   }, [filteredModuleList]);
 
-  const term = state.filterText;
-
   return (
     <Group title="Modules">
       <div className="sidebar-modules">
@@ -108,62 +106,47 @@ export default function SidebarModules(props) {
       {Object.entries(modsʼ).map(([tierNum, modules]) => (
         <Deets key={`tier-${tierNum}`} open head={`Tier ${tierNum}`}>
           <ul className="grid grid-cols-2 gap-2 text-xs module-list">
-            {modules.map((moduleObj, i) => {
-              let match;
-              const name = moduleObj.displayName;
+            {modules.map((moduleObj, i) => (
+              <li
+                key={`tier-${tierNum}-${i}`}
+                draggable
+                onDragStart={e => {
+                  const data_ = { module: moduleObj };
+                  const data = JSON.stringify(data_);
 
-              if (term === '') {
-                match = name;
-              } else {
-                // match = <div className="text-lg">Juha Hugedick</div>;
-                const len = term.length;
-                const res = filterRegex.exec(name);
+                  // Assign module data to the dragging event
+                  e.dataTransfer.dropEffect = 'copy';
+                  e.dataTransfer.setData('application/json', data);
 
-                match = (
-                  <>
-                    <span>{name.slice(0, res.index)}</span>
-                    <mark>{name.slice(res.index, res.index + len)}</mark>
-                    <span>{name.slice(res.index + len)}</span>
-                  </>
-                );
-              }
-
-              return (
-                <li
-                  key={`tier-${tierNum}-${i}`}
-                  draggable
-                  onDragStart={e => {
-                    const data_ = { module: moduleObj };
-                    const data = JSON.stringify(data_);
-
-                    // Assign module data to the dragging event
-                    e.dataTransfer.dropEffect = 'copy';
-                    e.dataTransfer.setData('application/json', data);
-
-                    update(
-                      setDrag({
-                        dragging: true,
-                        size: data_.module.size,
-                      }),
-                    );
-                  }}
-                  className="border border-gray-200 shadow hover:shadow-lg px-2 py-1 font-mono flex flex-col cursor-pointer"
-                >
-                  <div className="flex-1 font-sans mb-2">{match}</div>
-                  <div className="flex justify-between">
-                    <div>{moduleObj.size.join(' × ')}</div>
-                    <div
-                      className={cx(
-                        moduleObj.power < 0 ? 'text-red-500' : 'text-green-500',
-                        'font-bold',
-                      )}
-                    >
-                      {moduleObj.power}
-                    </div>
+                  update(
+                    setDrag({
+                      dragging: true,
+                      size: data_.module.size,
+                    }),
+                  );
+                }}
+                className="border border-gray-200 shadow hover:shadow-lg px-2 py-1 font-mono flex flex-col cursor-pointer"
+              >
+                <div className="flex-1 font-sans mb-2">
+                  <Marker
+                    text={moduleObj.displayName}
+                    highlight={highlightFilterText}
+                    pattern={filterRegex}
+                  />
+                </div>
+                <div className="flex justify-between">
+                  <div>{moduleObj.size.join(' × ')}</div>
+                  <div
+                    className={cx(
+                      moduleObj.power < 0 ? 'text-red-500' : 'text-green-500',
+                      'font-bold',
+                    )}
+                  >
+                    {moduleObj.power}
                   </div>
-                </li>
-              );
-            })}
+                </div>
+              </li>
+            ))}
           </ul>
         </Deets>
       ))}

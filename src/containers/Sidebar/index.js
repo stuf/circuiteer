@@ -5,7 +5,7 @@ import SidebarGrid from './Grid';
 
 import './index.css';
 
-function Sidebar() {
+export function Sidebar() {
   return (
     <div className="sidebar sidebar--root">
       <SidebarOptions />
@@ -15,8 +15,6 @@ function Sidebar() {
     </div>
   );
 }
-
-export { Sidebar };
 
 export { default as Options } from './Options';
 export { default as Location } from './Location';
