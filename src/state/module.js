@@ -1,23 +1,19 @@
-import * as L from 'partial.lenses';
-import { createAction, createSlice } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
+import { createPrefixedAction } from 'common/util';
 
 import { modules } from '../config';
 
 const name = 'module';
-const prefix = x => [name, x].join('/');
+const createAction = createPrefixedAction(name);
 
 //
 
-export const setModules = createAction(prefix('setModules'));
+export const setModules = createAction('setModules');
 
 //
 
-const initialState = {
+export const initialState = {
   modules,
-  tier: Object.values(modules).reduce(
-    (o, module) => L.set([`${module.tier}`, L.appendTo], module, o),
-    {},
-  ),
 };
 
 //
@@ -26,7 +22,6 @@ const slice = createSlice({
   name,
   initialState,
   reducers: {},
-  // extraReducers: builder => {},
 });
 
 export default slice.reducer;
