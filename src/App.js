@@ -3,8 +3,7 @@ import cx from 'classnames';
 import css from './App.module.css';
 import { AutosizeCanvas } from 'containers/Canvas/index';
 import Options from './_/Options';
-import Sidebar from './_/Sidebar';
-import { Infobar } from 'containers/Infobar';
+import { Sidebar, Infobar } from 'containers';
 
 function App() {
   return (

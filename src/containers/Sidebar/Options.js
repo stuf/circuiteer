@@ -9,7 +9,7 @@ import {
   toggleShoppingList,
 } from 'state/options';
 
-import { Toggle, Group } from 'components';
+import { Group, Toggle } from 'components';
 
 const items = [
   {

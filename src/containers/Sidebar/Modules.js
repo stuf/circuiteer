@@ -7,7 +7,6 @@ import cx from 'classnames';
 
 import { BackspaceIcon } from '@heroicons/react/solid';
 import { Group, Details as Deets } from 'components';
-import { TierName } from '../../config';
 
 import { setDrag } from 'state/drag';
 import './Modules.css';

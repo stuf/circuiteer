@@ -17,7 +17,7 @@ const powerActive = [
 const allConsumersIn = L.collect(allConsumers);
 const allProducersIn = L.collect(allProducers);
 
-export function PowerMeter() {
+export function PowerStatus() {
   const entities = useSelector(L.get(['editor', 'entities']));
 
   const consumers = useMemo(() => allConsumersIn(entities), [entities]);

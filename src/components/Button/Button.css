@@ -6,9 +6,9 @@
   @apply hover:bg-purple-600 hover:shadow-md;
   @apply focus:bg-purple-500;
 
-  @apply ring-2 ring-purple-600;
-  @apply border-2 border-pink-500;
-  @apply ring-offset-2 ring-offset-white;
+  @apply focus:ring-2 focus:ring-purple-600;
+  @apply focus:ring-offset-2 focus:ring-offset-white;
+  @apply border-2 border-transparent focus:border-pink-500;
 }
 
 .button.button--with-icon {

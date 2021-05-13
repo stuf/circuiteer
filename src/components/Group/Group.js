@@ -1,6 +1,6 @@
 import * as P from 'prop-types';
 
-export default function Group(props) {
+export function Group(props) {
   const { title, children } = props;
 
   return (

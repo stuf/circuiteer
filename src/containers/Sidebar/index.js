@@ -16,7 +16,7 @@ function Sidebar() {
   );
 }
 
-export default Sidebar;
+export { Sidebar };
 
 export { default as Options } from './Options';
 export { default as Location } from './Location';

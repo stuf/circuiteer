@@ -12,10 +12,6 @@ export const setModules = createAction(prefix('setModules'));
 
 //
 
-const init = {
-  modules,
-};
-
 const initialState = {
   modules,
   tier: Object.values(modules).reduce(

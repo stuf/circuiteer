@@ -2,7 +2,7 @@ import * as L from 'partial.lenses';
 import { useSelector, useDispatch, shallowEqual } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 
-import Group from '_/Group';
+import { Group } from 'components';
 import { Input } from 'components/form';
 import { setGridSize } from 'state/grid';
 import { gridSizeIn } from 'common/selectors';
