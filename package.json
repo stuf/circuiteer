@@ -50,6 +50,7 @@
   "dependencies": {
     "@headlessui/react": "^1.1.1",
     "@heroicons/react": "^1.0.1",
+    "@material-ui/icons": "^4.11.2",
     "@reduxjs/toolkit": "^1.5.1",
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
@@ -105,7 +106,7 @@
     "cypress": "^7.2.0",
     "dependency-cruiser": "^10.0.0",
     "eslint-plugin-cypress": "^2.11.3",
-    "postcss": "^7.0.35",
+    "postcss": ">=8.2.10",
     "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.1.2"
   }
 }
