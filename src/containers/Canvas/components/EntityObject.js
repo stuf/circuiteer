@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import cx from 'classnames';
 
 import './EntityObject.css';
-import { GameIcon, TierIcon } from 'components/GameIcon';
+import { GameIcon } from 'components';
 import { actions } from 'common/util';
 
 /**
@@ -45,7 +45,7 @@ export function EntityObject(props) {
         <div className="entity-object__fo-body-content">
           <div className="grid grid-cols-2 gap-2">
             <GameIcon name={module.powerType} className="entity-object__icon" />
-            <TierIcon tier={module.tier} className="entity-object__icon" />
+            {/* <TierIcon tier={module.tier} className="entity-object__icon" /> */}
           </div>
 
           <div className="w-full px-4 text-center font-bold">
