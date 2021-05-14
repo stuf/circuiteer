@@ -113,6 +113,18 @@ declare interface IBaseMaterial {
  * Definitions relating to the application itself
  */
 declare namespace App {
+  declare namespace Data {
+    declare interface Module extends IModule {}
+
+    declare interface SmallModule extends Module {
+      tier: IModuleTier.SMALL;
+    }
+
+    declare interface MediumModule extends Module {
+      tier: IModuleTier.MEDIUM;
+    }
+  }
+
   declare namespace State {
     declare interface Application {
       /**

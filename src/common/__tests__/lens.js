@@ -1,6 +1,6 @@
 import * as L from 'partial.lenses';
 import { Matrix } from '../linear';
-import { asGridPointI, gridI, matrixI } from '../lens';
+import { asGridPointI, matrixI } from '../lens';
 
 describe('common/lens', () => {
   test('matrixI', () => {
