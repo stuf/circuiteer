@@ -1,7 +1,9 @@
 import * as L from 'partial.lenses';
 import * as R from 'ramda';
-import { createSlice, createAction, original } from '@reduxjs/toolkit';
+import { createSlice, original } from '@reduxjs/toolkit';
 import { v4 as uuid } from 'uuid';
+
+import { createPrefixedAction } from 'common/util';
 
 //
 
@@ -21,6 +23,7 @@ const stateL = L.pickIn({
 //
 
 const name = 'editor';
+const createAction = createPrefixedAction(name);
 const prefix = x => `${name}/${x}`;
 
 //
@@ -34,17 +37,19 @@ export const addEntity = createAction(prefix('addEntity'), entity => ({
   payload: L.modify([entityL, 'id'], x => (!x ? uuid() : x), entity),
 }));
 
-export const selectEntity = createAction(prefix('selectEntity'));
+export const selectEntity = createAction('selectEntity');
 
-export const resetCurrent = createAction(prefix('resetCurrent'));
+export const resetCurrent = createAction('resetCurrent');
 
-export const toggleEntity = createAction(prefix('toggleEntity'));
+export const toggleEntity = createAction('toggleEntity');
 
-export const startEntityMove = createAction(prefix('startEntityMove'));
+export const startEntityMove = createAction('startEntityMove');
 
-export const moveEntity = createAction(prefix('moveEntity'));
+export const moveEntity = createAction('moveEntity');
 
-export const stopEntityMove = createAction(prefix('stopEntityMove'));
+export const moveEntityDelta = createAction('moveEntityDelta');
+
+export const stopEntityMove = createAction('stopEntityMove');
 
 //
 
@@ -79,6 +84,13 @@ const slice = createSlice({
         L.set(
           [selectEntityObject(a.payload.id), 'pos'],
           a.payload.pos,
+          original(s),
+        ),
+      )
+      .addCase(moveEntityDelta, (s, a) =>
+        L.modify(
+          [selectEntityObject(a.payload.id), 'pos'],
+          ([x, y]) => [x + a.payload.pos[0], y + a.payload.pos[1]],
           original(s),
         ),
       );

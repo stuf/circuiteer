@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux';
 
 import { Line } from '@visx/shape';
 import { scaleLinear } from '@visx/scale';
+import { usePopulatedEntities } from 'common/hooks';
 
 const allConsumers = [L.elems, L.when(x => x.module && x.module.power < 0)];
 const allProducers = [L.elems, L.when(x => x.module && x.module.power > 0)];
@@ -18,7 +19,8 @@ const allConsumersIn = L.collect(allConsumers);
 const allProducersIn = L.collect(allProducers);
 
 export function PowerStatus() {
-  const entities = useSelector(L.get(['editor', 'entities']));
+  const entities = usePopulatedEntities();
+  // const entities = useSelector(L.get(['editor', 'entities']));
 
   const consumers = useMemo(() => allConsumersIn(entities), [entities]);
   const producers = useMemo(() => allProducersIn(entities), [entities]);
@@ -35,6 +37,10 @@ export function PowerStatus() {
   //   consumersTotal,
   //   consumersActive,
   // });
+
+  const wrapProps = {
+    width: 320,
+  };
 
   const svgProps = {
     width: 320,
@@ -76,7 +82,10 @@ export function PowerStatus() {
 
   return (
     <>
-      <div className="absolute left-1/2 top-2 bg-white border-2 transform -translate-x-1/2 rounded-md">
+      <div
+        {...wrapProps}
+        className="bg-white border-2 transform -translate-x-1/2 rounded-md"
+      >
         <svg {...svgProps}>
           <Line
             from={{ x: xZero, y: 0 }}

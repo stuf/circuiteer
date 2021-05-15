@@ -11,6 +11,9 @@ import {
 
 import { Group, Toggle } from 'components';
 
+/**
+ * @type {App.UI.OptionList}
+ */
 const items = [
   {
     label: 'common:option.hideInvalid',

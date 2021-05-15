@@ -9,6 +9,10 @@ declare interface IEntity {
   enabled: boolean;
 }
 
+declare interface IPopulatedEntity extends IEntity {
+  module: IModule;
+}
+
 declare interface IModule {
   /**
    * Internal ID for this module
@@ -122,6 +126,17 @@ declare namespace App {
 
     declare interface MediumModule extends Module {
       tier: IModuleTier.MEDIUM;
+    }
+  }
+  declare namespace UI {
+    declare type OptionList = App.Internal.IOption[];
+  }
+
+  declare namespace Internal {
+    declare interface IOption {
+      label: string;
+      value: (v: any) => any;
+      action: () => any;
     }
   }
 

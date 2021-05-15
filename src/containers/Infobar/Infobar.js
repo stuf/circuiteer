@@ -8,6 +8,7 @@ import cx from 'classnames';
 import { Button } from 'components/Button';
 import { useOptions } from 'common/hooks';
 import { PowerStrengthLabel } from '../../config';
+import { PowerStatus } from '../PowerStatus';
 
 const inRange = R.curry((l, r, v) => v > l && v < r);
 
@@ -40,12 +41,18 @@ export function Infobar() {
   const loc = locations.find(x => x.id === current);
 
   return (
-    <div className="flex justify-between w-full border-b-2 px-4 py-1 items-center">
-      <div className="space-x-1">
+    <div className="flex w-full border-b-2 px-4 py-1 items-center">
+      <div className="space-x-1 w-full">
         <Button icon={LightningBoltIcon} disabled>
           Power
         </Button>
       </div>
+
+      <div>
+        <PowerStatus />
+      </div>
+
+      <div className="flex-1"></div>
 
       <div className="flex space-x-4">
         <span className="font-bold">Efficiency</span>

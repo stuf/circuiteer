@@ -27,21 +27,33 @@ const preloadedState = {
     current: '9d2d6e06-7e1f-4021-b4cb-dbbb7b6515d0',
     entities: [
       {
+        id: '262ec14e-940b-41b3-8c4a-6958afff5332',
         pos: [2, 2],
         module: 'shelter',
-        id: '262ec14e-940b-41b3-8c4a-6958afff5332',
         enabled: false,
       },
       {
+        id: '9d2d6e06-7e1f-4021-b4cb-dbbb7b6515d0',
         pos: [11, 2],
         module: 'mediumWindTurbine',
-        id: '9d2d6e06-7e1f-4021-b4cb-dbbb7b6515d0',
         enabled: true,
       },
       {
-        pos: [11, 7],
-        module: 'mediumSolarPanel',
         id: '2fb98a1d-0738-4def-bf52-f0c91a0e1e45',
+        pos: [11, 8],
+        module: 'mediumSolarPanel',
+        enabled: false,
+      },
+      {
+        id: 'ff6de281-5345-4ff4-af7c-eb9f2afd8694',
+        module: 'mediumShredder',
+        pos: [11, 5],
+        enabled: true,
+      },
+      {
+        id: '5b4c6fc0-5066-4962-973b-9d62316e4fa7',
+        module: 'mediumShredder',
+        pos: [14, 5],
         enabled: false,
       },
     ],

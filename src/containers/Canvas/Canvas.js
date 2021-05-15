@@ -16,7 +16,7 @@ import { useIsDragging, useDragSize } from './hooks/useDragging';
 import { DiagonalPattern, GridPattern } from './components/Patterns';
 import { EntityObject } from './components/EntityObject';
 import { DragGhost } from './components/DragGhost';
-import { addEntity } from 'state/editor';
+import { addEntity, moveEntityDelta } from 'state/editor';
 import { setDragging } from 'state/drag';
 
 import './Canvas.css';
@@ -89,17 +89,27 @@ export function Canvas(props) {
         {entities.map((entity, ix) => {
           const module = modules[entity.module];
           const [x, y] = gridToScreen(gxy, entity.pos);
+          const [dx, dy] = screenToGrid(gxy, [x, y]);
           const [entityWidth, entityHeight] = gridToScreen(gxy, module.size);
 
           return (
             <Draggable
               key={`entity-${ix}`}
               grid={gxy}
+              position={{ x: dx, y: dy }}
               cancel=".cancel"
-              handle=".handle"
               defaultClassName="draggable"
               defaultClassNameDragged="dragged"
               defaultClassNameDragging="dragging"
+              onDrag={(e, drag) => {
+                const mpos = localPoint(e);
+                const pos = [drag.x, drag.y];
+                const posDelta = screenToGrid(gxy, [drag.deltaX, drag.deltaY]);
+                const gpos = screenToGrid(gxy, pos);
+                const mposʼ = screenToGrid(gxy, [mpos.x, mpos.y]);
+                console.log('ondrag', { drag, pos, posDelta, gpos, mposʼ });
+                update(moveEntityDelta({ id: entity.id, pos: posDelta }));
+              }}
             >
               <Group>
                 <EntityObject

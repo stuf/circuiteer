@@ -5,7 +5,63 @@ import { useSelector } from 'react-redux';
 
 import { Matrix } from 'common/linear';
 
+const { abs } = Math;
+
 //
+
+/**
+ *
+ * @returns {IPopulatedEntity[]}
+ */
+export function usePopulatedEntities() {
+  const entities = useSelector(L.get(['editor', 'entities']));
+  const modules = useSelector(L.get(['module', 'modules']));
+  const modsʼ = L.transform(
+    [L.elems, 'module', L.modifyOp(id => modules[id])],
+    entities,
+  );
+
+  return modsʼ;
+}
+
+/**
+ * @typedef {object} PowerStatus
+ * @prop {number} absMaxima
+ * @prop {object} usage
+ * @prop {number} usage.total
+ * @prop {number} usage.active
+ * @prop {object} production
+ * @prop {number} production.total
+ * @prop {number} production.active
+ *
+ */
+
+export function usePowerStatus() {
+  const entities = usePopulatedEntities();
+
+  const takeUsage = xs => xs.filter(n => n < 0).reduce(R.add, 0);
+  const takeProduction = xs => xs.filter(n => n > 0).reduce(R.add, 0);
+
+  const power = L.collect([L.elems, 'module', 'power'], entities);
+  const powerActive = L.collect(
+    [L.elems, L.when(x => x.enabled), 'module', 'power'],
+    entities,
+  );
+
+  const status = {
+    usage: [takeUsage(power), takeUsage(powerActive)],
+    production: [takeProduction(power), takeProduction(powerActive)],
+  };
+
+  const maxima = Object.values(status)
+    .map(L.get([0, L.reread(abs)]))
+    .reduce((p, v) => Math.max(p, v), 0);
+
+  return {
+    ...status,
+    extent: [-maxima, maxima],
+  };
+}
 
 export function useOptions() {
   /**
