@@ -2,10 +2,12 @@ import { Group } from '@visx/group';
 import { ArrowsExpandIcon } from '@heroicons/react/solid';
 import { useTranslation } from 'react-i18next';
 import cx from 'classnames';
+import { Reorder } from '@material-ui/icons';
 
 import './EntityObject.css';
-import { GameIcon } from 'components';
+import { GameIcon, Icon } from 'components';
 import { actions } from 'common/util';
+import { Fragment } from 'react';
 
 /**
  * @param {Props} props
@@ -43,10 +45,7 @@ export function EntityObject(props) {
         className="entity-object__fo-body"
       >
         <div className="entity-object__fo-body-content">
-          <div className="grid grid-cols-2 gap-2">
-            <GameIcon name={module.powerType} className="entity-object__icon" />
-            {/* <TierIcon tier={module.tier} className="entity-object__icon" /> */}
-          </div>
+          <GameIcon name={module.id} className="entity-object__icon" />
 
           <div className="w-full px-4 text-center font-bold">
             {t(`game:module.${module.id}`)}
@@ -54,10 +53,10 @@ export function EntityObject(props) {
         </div>
       </foreignObject>
 
-      <foreignObject className="entity-object__controls handle">
-        <span className="entity-object__controls-icon-wrapper" title="Move">
-          <ArrowsExpandIcon className="w-full h-full p-1" />
-        </span>
+      <foreignObject className="entity-object__handle">
+        <div className="h-full w-full flex items-center justify-center hover:bg-pink-500 hover:text-white">
+          <Icon name="Reorder" />
+        </div>
       </foreignObject>
     </Group>
   );
@@ -70,6 +69,7 @@ export function EntityObject(props) {
  * @prop {number} width
  * @prop {number} height
  * @prop {IEntity} object
+ * @prop {IModule} module
  * @prop {boolean} selected
  * @prop {function} onSelect
  */

@@ -5,7 +5,7 @@ import { useDispatch, useSelector, shallowEqual } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import cx from 'classnames';
 
-import { BackspaceIcon } from '@heroicons/react/solid';
+import { Backspace } from '@material-ui/icons';
 import { Marker, Group, Details as Deets } from 'components';
 
 import { setDrag } from 'state/drag';
@@ -91,7 +91,7 @@ export default function SidebarModules(props) {
             )}
             disabled={!state.filterText}
           >
-            <BackspaceIcon
+            <Backspace
               className="__search-clear-icon"
               onClick={() => setState(s => ({ ...s, filterText: '' }))}
             />

@@ -20,6 +20,7 @@ import { addEntity, moveEntityDelta } from 'state/editor';
 import { setDragging } from 'state/drag';
 
 import './Canvas.css';
+import { moveEntity } from 'state/editor';
 
 export function Canvas(props) {
   const { parentWidth: width, parentHeight: height } = props;
@@ -101,15 +102,12 @@ export function Canvas(props) {
               defaultClassName="draggable"
               defaultClassNameDragged="dragged"
               defaultClassNameDragging="dragging"
-              onDrag={(e, drag) => {
-                const mpos = localPoint(e);
-                const pos = [drag.x, drag.y];
-                const posDelta = screenToGrid(gxy, [drag.deltaX, drag.deltaY]);
-                const gpos = screenToGrid(gxy, pos);
-                const mposʼ = screenToGrid(gxy, [mpos.x, mpos.y]);
-                console.log('ondrag', { drag, pos, posDelta, gpos, mposʼ });
-                update(moveEntityDelta({ id: entity.id, pos: posDelta }));
-              }}
+              // onStop={(e, drag) => {
+              //   // Remember to update the local state with the position in the end
+              //   const p = localPoint(e);
+              //   const pʼ = screenToGrid(gxy, [p.x, p.y], Math.floor);
+              //   update(moveEntity({ id: entity.id, pos: pʼ }));
+              // }}
             >
               <Group>
                 <EntityObject
