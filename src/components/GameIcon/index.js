@@ -1,0 +1,1 @@
+export { GameIcon } from './GameIcon';
