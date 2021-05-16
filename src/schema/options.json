@@ -1,0 +1,20 @@
+{
+  "$id": "https://github.com/stuf/circuiteer/blob/master/src/schema/options.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Options",
+  "type": "object",
+  "properties": {
+    "hideInvalid": {
+      "type": "boolean",
+      "description": "Hide invalid entities from editor"
+    },
+    "showShoppingList": {
+      "type": "boolean",
+      "description": "Show shopping list for entities in the editor"
+    },
+    "showPowerStatus": {
+      "type": "boolean",
+      "description": "Show current status of power usage and production"
+    }
+  }
+}
