@@ -1,24 +1,10 @@
-import cx from 'classnames';
-
-import css from './App.module.css';
 import { AutosizeCanvas } from 'containers/Canvas/index';
-import Options from './_/Options';
 import { Sidebar, Infobar } from 'containers';
+import { BaseLayout } from 'layout';
 
 function App() {
   return (
-    <main className="h-full flex flex-col overflow-hidden">
-      <header className={cx(css.mainHeader, 'border-b-2')}>
-        <header className="font-black pl-4 flex">
-          <div>Circuiteer</div>
-          <div className="text-xxs font-normal pl-2">Experimental</div>
-        </header>
-
-        <div className="flex-1" />
-
-        <Options />
-      </header>
-
+    <BaseLayout>
       <div className="flex h-full relative">
         <div className="flex-1 flex flex-col">
           <Infobar />
@@ -31,7 +17,7 @@ function App() {
           <Sidebar />
         </div>
       </div>
-    </main>
+    </BaseLayout>
   );
 }
 
