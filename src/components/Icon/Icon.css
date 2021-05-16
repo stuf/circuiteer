@@ -1,0 +1,16 @@
+.icon {
+  @apply w-6 h-6;
+}
+
+.icon,
+.icon__el {
+  @apply w-6 h-6;
+}
+
+.icon--ui {
+  /* @apply border-green-500; */
+}
+
+.icon__el {
+  /* @apply border border-blue-500; */
+}
