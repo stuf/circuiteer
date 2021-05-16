@@ -15,6 +15,14 @@
     "showPowerStatus": {
       "type": "boolean",
       "description": "Show current status of power usage and production"
+    },
+    "showEntityEditor": {
+      "type": "boolean",
+      "description": "Show entity editor on canvas"
+    },
+    "showRawEfficiencyValue": {
+      "type": "boolean",
+      "description": "Show raw value for location efficiency"
     }
   }
 }

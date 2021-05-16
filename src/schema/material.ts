@@ -11,7 +11,7 @@ export class Material {
   name: string;
   type: MaterialType;
 
-  constructor(id, name, type) {
+  constructor(id: string, name: string, type: MaterialType) {
     this.id = id;
     this.name = name;
     this.type = type;
@@ -27,31 +27,31 @@ export class Material {
 }
 
 export class NaturalMaterial extends Material {
-  constructor(id, name) {
+  constructor(id: string, name: string) {
     super(id, name, MaterialType.NATURAL);
   }
 }
 
 export class RefinedMaterial extends Material {
-  constructor(id, name) {
+  constructor(id: string, name: string) {
     super(id, name, MaterialType.REFINED);
   }
 }
 
 export class CompositeMaterial extends Material {
-  constructor(id, name) {
+  constructor(id: string, name: string) {
     super(id, name, MaterialType.COMPOSITE);
   }
 }
 
 export class AtmosphericMaterial extends Material {
-  constructor(id, name) {
+  constructor(id: string, name: string) {
     super(id, name, MaterialType.ATMOSPHERIC);
   }
 }
 
 export class OtherMaterial extends Material {
-  constructor(id, name) {
+  constructor(id: string, name: string) {
     super(id, name, MaterialType.OTHER);
   }
 }
