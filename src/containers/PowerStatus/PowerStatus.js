@@ -1,6 +1,5 @@
 import * as L from 'partial.lenses';
 import { useMemo } from 'react';
-import { useSelector } from 'react-redux';
 
 import { Line } from '@visx/shape';
 import { scaleLinear } from '@visx/scale';

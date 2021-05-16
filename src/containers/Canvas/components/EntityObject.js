@@ -1,13 +1,10 @@
 import { Group } from '@visx/group';
-import { ArrowsExpandIcon } from '@heroicons/react/solid';
 import { useTranslation } from 'react-i18next';
 import cx from 'classnames';
-import { Reorder } from '@material-ui/icons';
 
 import './EntityObject.css';
 import { GameIcon, Icon } from 'components';
 import { actions } from 'common/util';
-import { Fragment } from 'react';
 
 /**
  * @param {Props} props

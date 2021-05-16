@@ -1,7 +1,7 @@
 import cx from 'classnames';
 import * as P from 'prop-types';
 import * as icons from './icons';
-import { synonyms, tier as tiers } from './lookup';
+import { synonyms } from './lookup';
 
 import './GameIcon.css';
 
