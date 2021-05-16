@@ -50,6 +50,7 @@
   "dependencies": {
     "@headlessui/react": "^1.1.1",
     "@heroicons/react": "^1.0.1",
+    "@material-ui/core": "^4.11.4",
     "@material-ui/icons": "^4.11.2",
     "@reduxjs/toolkit": "^1.5.1",
     "@testing-library/jest-dom": "^5.11.4",
@@ -100,6 +101,7 @@
     "@craco/craco": "^6.1.2",
     "@testing-library/react-hooks": "^5.1.2",
     "@types/kefir": "^3.8.5",
+    "@types/ramda": "^0.27.40",
     "@types/react-redux": "^7.1.16",
     "@types/react-router-dom": "^5.1.7",
     "autoprefixer": "^9.8.6",
@@ -107,6 +109,7 @@
     "dependency-cruiser": "^10.0.0",
     "eslint-plugin-cypress": "^2.11.3",
     "postcss": ">=8.2.10",
-    "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.1.2"
+    "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.1.2",
+    "typescript": "^4.2.4"
   }
 }
