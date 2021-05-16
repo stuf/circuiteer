@@ -1,0 +1,6 @@
+.base-layout__header {
+  /* @apply h-24; */
+  @apply py-2;
+  @apply flex items-center;
+  @apply border-b-2;
+}
