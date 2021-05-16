@@ -15,9 +15,9 @@ export const thru = (x, ...fns) => R.pipe(...fns)(x);
 
 //
 
-export const screenToGrid = ([mx, my], [sx, sy]) => [
-  round(sx / mx),
-  round(sy / my),
+export const screenToGrid = ([mx, my], [sx, sy], roundingFn = round) => [
+  roundingFn(sx / mx),
+  roundingFn(sy / my),
 ];
 
 export const gridToScreen = ([mx, my], [gx, gy]) => [gx * mx, gy * my];
