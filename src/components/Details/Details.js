@@ -1,5 +1,5 @@
 import { Disclosure, Transition } from '@headlessui/react';
-import { ChevronRightIcon } from '@heroicons/react/solid';
+import { ChevronRight } from '@material-ui/icons';
 import cx from 'classnames';
 
 import './Details.css';
@@ -28,7 +28,7 @@ export function Details(props) {
             >
               <span>{head}</span>
 
-              <ChevronRightIcon
+              <ChevronRight
                 className={cx(
                   open && 'transform rotate-90',
                   'w-5 h-5 text-white',

@@ -50,8 +50,8 @@ html,
   }
 
   .module-object {
-    rx: 4px;
-    ry: 4px;
+    rx: 0.75rem;
+    ry: 0.75rem;
   }
 
   dl {
@@ -114,5 +114,13 @@ html,
   }
   .stroke-4 {
     stroke-width: 4px;
+  }
+
+  .x-0 {
+    x: 0;
+  }
+
+  .y-0 {
+    y: 0;
   }
 }
