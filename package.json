@@ -102,18 +102,21 @@
     "web-vitals": "^1.0.1"
   },
   "devDependencies": {
+    "@craco/craco": "^6.1.2",
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
-    "@testing-library/user-event": "^12.1.10",
-    "@craco/craco": "^6.1.2",
     "@testing-library/react-hooks": "^5.1.2",
+    "@testing-library/user-event": "^12.1.10",
     "@types/kefir": "^3.8.5",
     "@types/ramda": "^0.27.40",
     "@types/react-redux": "^7.1.16",
     "@types/react-router-dom": "^5.1.7",
+    "autoprefixer": "^9.8.6",
     "cypress": "^7.2.0",
     "dependency-cruiser": "^10.0.0",
     "eslint-plugin-cypress": "^2.11.3",
+    "postcss": "^7.0.35",
+    "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.1.2",
     "typescript": "^4.2.4"
   }
 }
