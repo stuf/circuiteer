@@ -13,13 +13,7 @@ export function Icon(props) {
 }
 
 Icon.propTypes = {
-  wrap: P.bool,
-  nowrap: P.bool,
   name: P.string,
-  size: P.number,
 };
 
-Icon.defaultProps = {
-  wrap: true,
-  size: 24,
-};
+Icon.defaultProps = {};
