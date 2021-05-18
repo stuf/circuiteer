@@ -1,23 +1,24 @@
 import * as P from 'prop-types';
 import cx from 'classnames';
 
+import { Icon } from 'components';
 import './Button.css';
 
 export function Button(props) {
-  const { children, className, label, size, type, icon: Icon, ...rest } = props;
+  const { children, className, label, size, type, icon, ...rest } = props;
 
   const cns = [
     'button',
-    Icon && 'button--with-icon',
+    icon && 'button--with-icon',
     type && `button--${type}`,
     size && `button--${size}`,
   ];
 
   return (
     <button className={cx(...cns)} {...rest}>
-      {Icon && (
+      {icon && (
         <span className="__icon-wrapper">
-          <Icon className="__icon" />
+          <Icon className="__icon" name={icon} />
         </span>
       )}
 
