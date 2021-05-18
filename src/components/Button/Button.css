@@ -2,19 +2,40 @@
   @apply relative;
   @apply px-4 py-2;
   @apply bg-black text-white;
-  @apply rounded;
-  @apply hover:bg-purple-600 hover:shadow-md;
-  @apply focus:bg-purple-500;
+  @apply rounded-lg;
 
-  @apply focus:ring-2 focus:ring-purple-600;
-  @apply focus:ring-offset-2 focus:ring-offset-white;
-  @apply border-2 border-transparent focus:border-pink-500;
+  @apply hover:opacity-100;
+  @apply hover:bg-blue-500;
+
+  @apply disabled:opacity-50;
+  @apply disabled:bg-black;
 }
 
-.button:disabled {
+.button.button--sm {
+  @apply px-2 py-1;
+  @apply text-xs;
+}
+
+.button.button--lg {
+  /* @apply px-6 py-3; */
+  @apply text-xl;
+}
+
+.button.button--secondary {
+  @apply bg-white hover:bg-white;
+  @apply border-black;
+  @apply text-black hover:text-purple-600;
+  @apply hover:border-purple-500;
+  @apply disabled:opacity-50 disabled:bg-black;
+}
+
+/* .button:disabled {
   @apply opacity-50;
-  @apply hover:bg-black hover:shadow-none;
   @apply cursor-not-allowed;
+} */
+
+.button.button--secondary:disabled {
+  @apply hover:bg-white;
 }
 
 .button.button--with-icon {

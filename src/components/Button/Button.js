@@ -4,9 +4,14 @@ import cx from 'classnames';
 import './Button.css';
 
 export function Button(props) {
-  const { children, className, icon: Icon, ...rest } = props;
+  const { children, className, label, size, type, icon: Icon, ...rest } = props;
 
-  const cns = ['button', Icon && 'button--with-icon'];
+  const cns = [
+    'button',
+    Icon && 'button--with-icon',
+    type && `button--${type}`,
+    size && `button--${size}`,
+  ];
 
   return (
     <button className={cx(...cns)} {...rest}>
@@ -16,13 +21,15 @@ export function Button(props) {
         </span>
       )}
 
-      {children}
+      {label || children}
     </button>
   );
 }
 
 Button.propTypes = {
-  children: P.any,
   className: P.string,
   icon: P.any,
+  label: P.oneOfType([P.string, P.node, P.elementType]),
+  type: P.oneOf(['primary', 'secondary']),
+  size: P.oneOf(['sm', 'md', 'lg']),
 };
