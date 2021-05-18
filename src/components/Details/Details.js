@@ -1,17 +1,18 @@
+import * as P from 'prop-types';
 import { Disclosure, Transition } from '@headlessui/react';
-import { ChevronRight } from '@material-ui/icons';
+// import { ChevronRight } from '@material-ui/icons';
 import cx from 'classnames';
 
 import './Details.css';
 
 export function Details(props) {
-  const { open, head, children, className } = props;
+  const { open: isOpen, head, children, className } = props;
 
   return (
     <div className="w-full max-w-md mx-auto bg-white overflow-hidden rounded-lg text-sm">
       <Disclosure
         className={cx('details details--root', className)}
-        defaultOpen={open}
+        defaultOpen={isOpen}
       >
         {({ open }) => (
           <>
@@ -26,15 +27,17 @@ export function Details(props) {
                 'focus-visible:ring-opacity-75',
               )}
             >
-              <span>{head}</span>
+              <span>
+                {head} {isOpen}
+              </span>
 
-              <ChevronRight
+              {/* <ChevronRight
                 className={cx(
                   open && 'transform rotate-90',
                   'w-5 h-5 text-white',
                   'transition-transform duration-200 ease-out',
                 )}
-              />
+              /> */}
             </Disclosure.Button>
 
             <Transition
@@ -55,3 +58,10 @@ export function Details(props) {
     </div>
   );
 }
+
+Details.propTypes = {
+  open: P.bool,
+  head: P.oneOfType([P.string, P.node, P.elementType]),
+  className: P.string,
+  children: P.oneOfType([P.string, P.node, P.elementType]),
+};
