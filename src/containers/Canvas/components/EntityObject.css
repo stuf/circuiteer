@@ -24,10 +24,11 @@
 
 .entity-object__handle {
   @apply w-8 h-8;
-  @apply shadow-md;
+  /* @apply shadow-md; */
   @apply rounded-lg;
   @apply cursor-move;
-  @apply bg-white bg-opacity-80;
+  text-shadow: -1px -1px 0 #fff, 1px -1px #fff, 1px 1px #fff, -1px 1px #fff;
+  /* @apply bg-white bg-opacity-80; */
   x: 2;
   y: 2;
 }
@@ -79,7 +80,6 @@
   @apply bg-blue-500;
   @apply p-1;
   @apply rounded-lg;
-  /* @apply ring-2 ring-blue-500; */
 }
 
 .entity-object__control-icon {

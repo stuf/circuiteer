@@ -23,7 +23,7 @@ import './Canvas.css';
 import { moveEntity } from 'state/editor';
 
 export function Canvas(props) {
-  const { parentWidth: width, parentHeight: height } = props;
+  const { parentWidth: width, parentHeight: height, className } = props;
   const ref = useRef(null);
   const drag = useRef([0, 0]);
 
@@ -46,7 +46,7 @@ export function Canvas(props) {
 
       <svg
         {...{ width, height, ref: refCb }}
-        className={cx('canvas', isDragging && 'canvas--is-dragging')}
+        className={cx(className, 'canvas', isDragging && 'canvas--is-dragging')}
         patternUnits="userSpaceOnUse"
         onDragOver={e => {
           e.preventDefault();

@@ -5,6 +5,7 @@ import cx from 'classnames';
 import './EntityObject.css';
 import { GameIcon, Icon } from 'components';
 import { actions } from 'common/util';
+import { Fragment } from 'react';
 
 /**
  * @param {Props} props
@@ -45,14 +46,22 @@ export function EntityObject(props) {
           <GameIcon name={module.id} className="entity-object__icon" />
 
           <div className="w-full px-4 text-center font-bold">
-            {t(`game:module.${module.id}`)}
+            <span className="bg-white shadow-sm">
+              {t(`game:module.${module.id}`)
+                .split(' ')
+                .map((x, xʼ) => (
+                  <Fragment key={xʼ}>
+                    {x} <wbr />
+                  </Fragment>
+                ))}
+            </span>
           </div>
         </div>
       </foreignObject>
 
       <foreignObject className="entity-object__handle">
-        <div className="h-full w-full flex items-center justify-center hover:bg-pink-500 hover:text-white">
-          <Icon name="Reorder" />
+        <div className="h-full w-full flex items-center justify-center">
+          <Icon name="drag_indicator" />
         </div>
       </foreignObject>
     </Group>
