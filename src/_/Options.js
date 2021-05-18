@@ -1,6 +1,6 @@
 import { Fragment } from 'react';
 import { Menu, Transition } from '@headlessui/react';
-import { CheckIcon, ChevronDownIcon } from '@heroicons/react/solid';
+// import { CheckIcon, ChevronDownIcon } from '@heroicons/react/solid';
 import cx from 'classnames';
 
 import css from './Options.module.css';
@@ -26,10 +26,10 @@ function Options(props) {
           <>
             <Menu.Button className={css.menuButton}>
               Options
-              <ChevronDownIcon
+              {/* <ChevronDownIcon
                 className="w-5 h-5 ml-2 -mr-1 text-violet-200 hover:text-violet-100"
                 aria-hidden="true"
-              />
+              /> */}
             </Menu.Button>
 
             <Transition
@@ -70,10 +70,10 @@ function Options(props) {
                           <span className="pl-10 pr-4">{item.label}</span>
                           {item.selected && (
                             <span className="absolute inset-y-0 left-0 flex items-center pl-3">
-                              <CheckIcon
+                              {/* <CheckIcon
                                 aria-hidden="true"
                                 className="w-5 h-5"
-                              />
+                              /> */}
                             </span>
                           )}
                         </button>

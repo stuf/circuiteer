@@ -15,14 +15,12 @@
   "version": "0.2.0",
   "private": true,
   "scripts": {
-    "start": "BROWSER=none craco start",
+    "start": "scripts/generate-env.js && BROWSER=none craco start",
     "build": "craco build",
     "test": "craco test",
     "eject": "craco eject",
     "test:cov": "yarn test --coverage --watchAll=false",
-    "test:e2e": "cypress open",
-    "storybook": "start-storybook -p 6006 -s public",
-    "build-storybook": "build-storybook -s public"
+    "test:e2e": "cypress open"
   },
   "jest": {
     "coveragePathIgnorePatterns": [
@@ -35,24 +33,6 @@
     "extends": [
       "react-app",
       "react-app/jest"
-    ],
-    "overrides": [
-      {
-        "files": [
-          "**/*.stories.*"
-        ],
-        "rules": {
-          "import/no-anonymous-default-export": "off"
-        }
-      },
-      {
-        "files": [
-          "**/*.stories.*"
-        ],
-        "rules": {
-          "import/no-anonymous-default-export": "off"
-        }
-      }
     ]
   },
   "browserslist": {
@@ -68,15 +48,7 @@
     ]
   },
   "dependencies": {
-    "@storybook/addon-actions": "^6.2.9",
-    "@storybook/addon-essentials": "^6.2.9",
-    "@storybook/addon-links": "^6.2.9",
-    "@storybook/addon-postcss": "^2.0.0",
-    "@storybook/node-logger": "^6.2.9",
-    "@storybook/preset-create-react-app": "^3.1.7",
-    "@storybook/react": "^6.2.9",
     "@headlessui/react": "^1.1.1",
-    "@heroicons/react": "^1.0.1",
     "@reduxjs/toolkit": "^1.5.1",
     "@visx/annotation": "^1.9.0",
     "@visx/axis": "^1.10.0",

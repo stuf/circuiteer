@@ -1,10 +1,14 @@
 import cx from 'classnames';
 import * as P from 'prop-types';
 import { Listbox, Transition } from '@headlessui/react';
-import { CheckIcon, SelectorIcon } from '@heroicons/react/solid';
 
 import css from './Dropdown.module.css';
 
+/**
+ * @deprecated
+ * @param {*} props
+ * @returns
+ */
 function Dropdown(props) {
   const { label, value, choices, onChange } = props;
 
@@ -18,7 +22,7 @@ function Dropdown(props) {
             <Listbox.Button className={css.button}>
               <span className={css.buttonText}>{value.label}</span>
               <span className={css.buttonIconWrap}>
-                <SelectorIcon className={css.buttonIcon} aria-hidden="true" />
+                {/* <SelectorIcon className={css.buttonIcon} aria-hidden="true" /> */}
               </span>
             </Listbox.Button>
 
@@ -51,10 +55,10 @@ function Dropdown(props) {
                         </span>
                         {selected ? (
                           <span className={css.selectedIconWrap}>
-                            <CheckIcon
+                            {/* <CheckIcon
                               aria-hidden="true"
                               className={css.selectedIcon}
-                            />
+                            /> */}
                           </span>
                         ) : null}
                       </>
