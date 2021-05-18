@@ -8,6 +8,10 @@ import _IconSolarPanel from 'assets/icons/Icon_Solar.png';
 import _IconCrane from 'assets/icons/Icon_Crane.png';
 import _IconShredder from 'assets/icons/Icon_Shredder.png';
 import _IconShelter from 'assets/icons/Icon_Shelter.png';
+import _IconSmeltingFurnace from 'assets/icons/Icon_Smelting_Furnace.png';
+import _IconSoilCentrifuge from 'assets/icons/Icon_Soil_Centrifuge.png';
+import _IconChemistryLab from 'assets/icons/Icon_Chemistry_Lab.png';
+import _IconAtmosphericCondenser from 'assets/icons/Icon_Atmospheric_Condenser.png';
 
 // Gateway icons
 import _IconGatewaySylva from 'assets/icons/Icon_Gateway_Sylva.png';
@@ -35,6 +39,13 @@ export const Crane = mkIcon('crane', _IconCrane);
 export const Shredder = mkIcon('shredder', _IconShredder);
 export const Shelter = mkIcon('shelter', _IconShelter);
 export const FieldShelter = mkIcon('fieldShelter', _IconShelter);
+export const SoilCentrifuge = mkIcon('soilCentrifuge', _IconSoilCentrifuge);
+export const ChemistryLab = mkIcon('chemistryLab', _IconChemistryLab);
+export const SmeltingFurnace = mkIcon('smeltingFurnace', _IconSmeltingFurnace);
+export const AtmosphericCondenser = mkIcon(
+  'atmosphericCondenser',
+  _IconAtmosphericCondenser,
+);
 
 // Gateway icons
 export const GatewaySylva = mkIcon('gwSylva', _IconGatewaySylva);
