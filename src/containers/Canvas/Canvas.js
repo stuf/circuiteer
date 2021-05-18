@@ -56,6 +56,9 @@ export function Canvas(props) {
             drag.current = screenToGrid(gxy, [p.x, p.y]);
           }
         }}
+        onDragEnd={e => {
+          console.log('end it', e);
+        }}
         onDrop={e => {
           const p = localPoint(e);
           const pos = screenToGrid(gxy, [p.x, p.y]);
@@ -102,12 +105,13 @@ export function Canvas(props) {
               defaultClassName="draggable"
               defaultClassNameDragged="dragged"
               defaultClassNameDragging="dragging"
-              // onStop={(e, drag) => {
-              //   // Remember to update the local state with the position in the end
-              //   const p = localPoint(e);
-              //   const pʼ = screenToGrid(gxy, [p.x, p.y], Math.floor);
-              //   update(moveEntity({ id: entity.id, pos: pʼ }));
-              // }}
+              onStop={(_, d) => {
+                const dxy = [d.x, d.y];
+                const dxyʼ = screenToGrid(gxy, dxy);
+                const xyʼ = [dx, dy];
+                const xyʼʼ = [xyʼ[0] + dxyʼ[0], xyʼ[1] + dxyʼ[1]];
+                update(moveEntity({ id: entity.id, pos: xyʼʼ }));
+              }}
             >
               <Group>
                 <EntityObject
