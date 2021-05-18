@@ -15,10 +15,6 @@ export function Header(props) {
         <div className="">{children}</div>
 
         <div className="flex-grow" />
-
-        <div>
-          <button className="button">lul</button>
-        </div>
       </div>
     </header>
   );

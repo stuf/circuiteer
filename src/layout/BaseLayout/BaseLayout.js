@@ -15,18 +15,7 @@ export function BaseLayout(props) {
          h-12
       `}
       >
-        <div className="space-x-1">
-          <button
-            className={`
-          bg-purple-500
-          text-white
-          px-2 py-1
-          rounded-lg
-          `}
-          >
-            Thing 1
-          </button>
-        </div>
+        <div className="space-x-1"></div>
       </Header>
 
       {/* Main content area */}
