@@ -5,8 +5,7 @@ import { useDispatch, useSelector, shallowEqual } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import cx from 'classnames';
 
-import { Backspace } from '@material-ui/icons';
-import { Marker, Group, Details as Deets } from 'components';
+import { Marker, Group, Icon, Details as Deets } from 'components';
 
 import { setDrag } from 'state/drag';
 import './Modules.css';
@@ -72,7 +71,7 @@ export default function SidebarModules(props) {
       <div className="sidebar-modules">
         <input
           type="search"
-          className="input--base"
+          className="input--base __search-field"
           defaultValue={state.filterText}
           onChange={e => {
             const text = e.target.value;
@@ -82,21 +81,6 @@ export default function SidebarModules(props) {
           }}
           placeholder={t('sidebar:modules.searchPlaceholder')}
         />
-
-        <div className="__search-clear-wrapper">
-          <button
-            className={cx(
-              'button--base __search-clear',
-              !state.filterText && '__search-clear--disabled',
-            )}
-            disabled={!state.filterText}
-          >
-            <Backspace
-              className="__search-clear-icon"
-              onClick={() => setState(s => ({ ...s, filterText: '' }))}
-            />
-          </button>
-        </div>
       </div>
 
       {!!state.filterText && (

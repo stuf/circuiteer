@@ -15,6 +15,13 @@
   @apply hidden;
 }
 
+/* .__search-field::-webkit-search-cancel-button {
+  @apply bg-purple-500;
+  @apply text-green-500;
+  position: relative;
+  right: 20px;
+} */
+
 .sidebar-modules button {
   @apply border;
   @apply bg-purple-700;
