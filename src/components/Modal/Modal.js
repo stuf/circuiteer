@@ -1,14 +1,12 @@
+import * as P from 'prop-types';
 import { Fragment, useState } from 'react';
-import { useTranslation } from 'react-i18next';
 import { Dialog, Transition } from '@headlessui/react';
 
-import { Button } from 'components';
 import './Modal.css';
 
 export function Modal(props) {
-  const { open = false, title, children } = props;
+  const { open = false, title, children, footer } = props;
 
-  const { t } = useTranslation();
   const [state, setState] = useState({ open });
 
   const closeModal = () => setState(s => ({ ...s, open: false }));
@@ -40,7 +38,7 @@ export function Modal(props) {
             as="div"
             open={state.open}
             onClose={closeModal}
-            className="modal--rtoot fixed inset-0 z-10 overflow-y-auto"
+            className="modal--root fixed inset-0 z-10 overflow-y-auto"
           >
             <div className="modal__body min-h-screen px-4 text-center">
               <Transition.Child {...transition}>
@@ -68,9 +66,8 @@ export function Modal(props) {
                   </div>
 
                   <div className="mt-4">
-                    <Button onClick={closeModal}>
-                      {t('common:modal.close')}
-                    </Button>
+                    {footer instanceof Function &&
+                      footer({ openModal, closeModal, open })}
                   </div>
                 </div>
               </Transition.Child>
@@ -81,3 +78,10 @@ export function Modal(props) {
     </>
   );
 }
+
+Modal.propTypes = {
+  open: P.bool,
+  title: P.oneOfType([P.string, P.node, P.elementType]),
+  children: P.oneOfType([P.string, P.node, P.elementType]),
+  footer: P.func,
+};

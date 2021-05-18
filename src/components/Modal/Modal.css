@@ -2,15 +2,15 @@
 }
 
 .modal--root {
-  border: solid 2px #f00;
+  /* border: solid 2px #f00; */
 }
 
 .modal__body {
-  border: solid 2px #f00;
+  /* border: solid 2px #f00; */
 }
 
 .modal__overlay {
-  border: solid 2px #00f;
+  /* border: solid 2px #00f; */
 }
 
 .modal__content {
