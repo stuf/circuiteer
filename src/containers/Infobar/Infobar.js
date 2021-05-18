@@ -2,7 +2,6 @@ import * as L from 'partial.lenses';
 import * as R from 'ramda';
 import { useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
-import { LightningBoltIcon } from '@heroicons/react/solid';
 import cx from 'classnames';
 
 import { Button } from 'components/Button';
@@ -43,7 +42,7 @@ export function Infobar() {
   return (
     <div className="flex w-full border-b-2 px-4 py-1 items-center">
       <div className="space-x-1 w-full">
-        <Button icon={LightningBoltIcon} disabled>
+        <Button icon="bolt" disabled>
           Power
         </Button>
       </div>

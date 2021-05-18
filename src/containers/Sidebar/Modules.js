@@ -5,7 +5,7 @@ import { useDispatch, useSelector, shallowEqual } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import cx from 'classnames';
 
-import { Marker, Group, Icon, Details as Deets } from 'components';
+import { Marker, Group, Details as Deets } from 'components';
 
 import { setDrag } from 'state/drag';
 import './Modules.css';
@@ -51,10 +51,9 @@ export default function SidebarModules(props) {
     [translatedList, filterRegex],
   );
 
-  const matchCount = useMemo(
-    () => filteredModuleList.length,
-    [filteredModuleList],
-  );
+  const matchCount = useMemo(() => filteredModuleList.length, [
+    filteredModuleList,
+  ]);
 
   const modsʼ = useMemo(() => {
     const modules = L.collect(L.values, filteredModuleList);
