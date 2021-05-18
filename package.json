@@ -1,6 +1,6 @@
 {
   "name": "@etm12/circuiteer",
-  "description": "Circuiteer Experimental",
+  "description": "Plan your Astroneer bases to get a shopping list and an overview of power usage",
   "keywords": [
     "partial lenses",
     "astroneer",
@@ -68,6 +68,13 @@
     ]
   },
   "dependencies": {
+    "@storybook/addon-actions": "^6.2.9",
+    "@storybook/addon-essentials": "^6.2.9",
+    "@storybook/addon-links": "^6.2.9",
+    "@storybook/addon-postcss": "^2.0.0",
+    "@storybook/node-logger": "^6.2.9",
+    "@storybook/preset-create-react-app": "^3.1.7",
+    "@storybook/react": "^6.2.9",
     "@headlessui/react": "^1.1.1",
     "@heroicons/react": "^1.0.1",
     "@reduxjs/toolkit": "^1.5.1",
@@ -111,12 +118,6 @@
   },
   "devDependencies": {
     "@craco/craco": "^6.1.2",
-    "@storybook/addon-actions": "^6.2.9",
-    "@storybook/addon-essentials": "^6.2.9",
-    "@storybook/addon-links": "^6.2.9",
-    "@storybook/node-logger": "^6.2.9",
-    "@storybook/preset-create-react-app": "^3.1.7",
-    "@storybook/react": "^6.2.9",
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
     "@testing-library/react-hooks": "^5.1.2",

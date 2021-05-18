@@ -33,11 +33,17 @@ module.exports = {
     },
   },
   variants: {
+    opacity: ({ variants }) => [...variants('opacity'), 'disabled'],
+    backgroundColor: ({ variants }) => [
+      ...variants('backgroundColor'),
+      'disabled',
+    ],
+    ringColor: ({ variants }) => [...variants('ringColor'), 'disabled'],
+    borderColor: ({ variants }) => [...variants('borderColor'), 'disabled'],
+
     extend: {
-      borderWidth: ['group-focus', 'group-hover', 'focus-within'],
-      borderColor: ['group-focus', 'group-hover', 'focus-within'],
-      ringWidth: ['group-focus', 'group-hover', 'focus-within'],
-      ringColor: ['group-focus', 'group-hover', 'focus-within'],
+      borderWidth: ['group-focus', 'group-hover', 'focus-within', 'disabled'],
+      ringWidth: ['group-focus', 'group-hover', 'focus-within', 'disabled'],
     },
   },
   plugins: [require('tailwindcss-interaction-variants')],
