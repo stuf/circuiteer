@@ -1,5 +1,4 @@
 import * as P from 'prop-types';
-// import { UnfoldMore } from '@material-ui/icons';
 
 import { actions } from 'common/util';
 
