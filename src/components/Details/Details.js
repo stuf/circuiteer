@@ -1,8 +1,8 @@
 import * as P from 'prop-types';
 import { Disclosure, Transition } from '@headlessui/react';
-// import { ChevronRight } from '@material-ui/icons';
 import cx from 'classnames';
 
+import { Icon } from 'components';
 import './Details.css';
 
 export function Details(props) {
@@ -31,13 +31,14 @@ export function Details(props) {
                 {head} {isOpen}
               </span>
 
-              {/* <ChevronRight
+              <Icon
+                name="chevron_right"
                 className={cx(
                   open && 'transform rotate-90',
                   'w-5 h-5 text-white',
                   'transition-transform duration-200 ease-out',
                 )}
-              /> */}
+              />
             </Disclosure.Button>
 
             <Transition
