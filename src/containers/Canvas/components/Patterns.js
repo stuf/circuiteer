@@ -12,7 +12,7 @@ export function GridPattern(props) {
   return (
     <PatternCircles
       id="grid-polkadots"
-      {...{ width, height }}
+      {...{ width: width + 1, height: height + 1 }}
       radius={2}
       {...style}
     />
