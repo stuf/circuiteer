@@ -1,23 +1,16 @@
-import { AutosizeCanvas } from 'containers/Canvas/index';
-import { Sidebar, Infobar } from 'containers';
-import { BaseLayout } from 'layout';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+
+import * as Views from './views';
 
 function App() {
   return (
-    <BaseLayout>
-      <div className="flex h-full relative">
-        <div className="flex-1 flex flex-col">
-          <Infobar />
-
-          <div className="flex-1 relative">
-            <AutosizeCanvas />
-          </div>
-        </div>
-        <div className="border-l-2 w-72 divide-y-2 h-full overflow-auto">
-          <Sidebar />
-        </div>
-      </div>
-    </BaseLayout>
+    <Router>
+      <Switch>
+        <Route path="/sink" component={Views.Sink} />
+        <Route path="/editor" component={Views.Editor} />
+        <Route path="/" component={Views.Splash} />
+      </Switch>
+    </Router>
   );
 }
 
