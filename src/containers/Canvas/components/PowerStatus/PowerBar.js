@@ -30,7 +30,7 @@ export function PowerBar(props) {
   return (
     <Group top={top}>
       <rect {..._raw} className="fill-green" />
-      <text
+      {/* <text
         y={height / 2}
         dx={8}
         fill="#fff"
@@ -38,7 +38,7 @@ export function PowerBar(props) {
         style={{ filter: 'drop-shadow(0 1px 1px #000)' }}
       >
         <tspan style={{ alignmentBaseline: 'middle' }}>{raw}</tspan>
-      </text>
+      </text> */}
 
       {!isEqual && <rect {..._adjusted} />}
     </Group>

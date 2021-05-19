@@ -26,6 +26,10 @@ export function useByRole() {
   );
 }
 
+/**
+ *
+ * @returns {PowerEffHookResult}
+ */
 export function usePowerWithEfficiency() {
   const eff = useCurrentLocationEfficiency();
   const { producer } = useByRole();
@@ -61,3 +65,19 @@ export function usePowerWithEfficiency() {
 
   return byPowerType;
 }
+
+/**
+ * @typedef {object} PowerEffHookResult
+ * @prop {IPowerSummary} always
+ * @prop {IPowerSummary} wind
+ * @prop {IPowerSummary} sun
+ * @prop {IPowerSummary} powered
+ */
+
+/**
+ * @typedef {object} IPowerSummary
+ * @prop {IEntity[]} entities
+ * @prop {object} meta
+ * @prop {number} meta.raw
+ * @prop {number} meta.adjusted
+ */

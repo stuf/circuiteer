@@ -2,7 +2,7 @@ import * as R from 'ramda';
 import * as L from 'partial.lenses';
 import { PowerBars } from './PowerBars';
 import { ParentSizeModern } from '@visx/responsive';
-import { Details } from 'components';
+import { Icon, Details } from 'components';
 
 import { usePowerWithEfficiency } from './hooks';
 
@@ -15,46 +15,33 @@ const color = {
  * @param {Props} props
  * @returns
  */
-export function PowerStatus(props) {
-  const { entities, efficiency } = props;
-
+export function PowerStatus() {
   const effByCat = usePowerWithEfficiency();
 
-  // const producers = entities.filter(e => e.module.power > 0);
-  // const usage = entities.filter(e => e.module.power < 0);
-
-  // const grouped = R.groupBy(L.get(['module', 'powerType']), producers);
-
-  // const constant = L.collect(['always', L.valueOr([]), L.elems], grouped);
-  // const occasional = L.collect(
-  //   [L.props('sun', 'wind'), L.values, L.elems],
-  //   grouped,
-  // );
-  // const wind = L.collect(['wind', L.elems], grouped);
-  // const sun = L.collect(['sun', L.elems], grouped);
-  // const powered = L.collect(['powered', L.valueOr([]), L.elems], grouped);
-
-  // const getSum = L.sum([L.elems, 'module', 'power']);
-
-  // const constantSum = getSum(constant);
-  // const occasionalSum = getSum(occasional);
-  // const envPowerSum = {
-  //   raw: {
-  //     wind: getSum(wind),
-  //     sun: getSum(sun),
-  //   },
-  //   adjusted: {
-  //     wind: getSum(wind) * efficiency.wind,
-  //     sun: getSum(sun) * efficiency.sun,
-  //   },
-  // };
-  // const poweredSum = getSum(powered);
+  const rawSum = L.sum([L.values, 'meta', 'raw'], effByCat);
+  const adjustedSum = L.sum([L.values, 'meta', 'adjusted'], effByCat);
 
   return (
-    <section style={{ width: 300 }}>
-      <header className="font-bold px-4 py-2">Power Status</header>
+    <section
+      className={`
+        absolute right-2 bottom-2 z-10
+        border-2
+        rounded-md
+        shadow-md
+        bg-white
+      `}
+    >
+      <header className="font-bold px-4 pt-2 py-1 border-b-2 relative overflow-hidden flex items-center justify-between">
+        <div className="">Power Status</div>
+        {/* <div className="absolute inset-y-0 right-2 flex items-center">
+          <Icon name="unfold_more" className="w-5 h-5" />
+        </div> */}
+        <div className="font-normal text-xs">
+          raw {rawSum}U/s / adjusted {adjustedSum}U/s
+        </div>
+      </header>
 
-      <div style={{ height: 100 }}>
+      <div style={{ height: 250, width: 300 }} className="px-4 py-2 pt-1">
         <ParentSizeModern>
           {({ width, height }) => (
             <svg width={width} height={height}>
@@ -66,8 +53,7 @@ export function PowerStatus(props) {
                 bars={[
                   {
                     label: 'Constant',
-                    raw: effByCat.always.meta.raw,
-                    adjusted: effByCat.always.meta.adjusted,
+                    ...effByCat.always.meta,
                   },
                   {
                     label: 'Wind',

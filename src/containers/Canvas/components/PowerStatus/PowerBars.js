@@ -70,7 +70,7 @@ export function PowerBars(props) {
   return (
     <Wrapper {...wrapperProps}>
       {showGrid && <GridColumns height={height} scale={scale} />}
-      {showAxis && <AxisBottom scale={scale} />}
+      {showAxis && <AxisBottom scale={scale} top={height - mb} />}
 
       <Group className={contentClassName}>
         {bars.map((it, ix) => (
