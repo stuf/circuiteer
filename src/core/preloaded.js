@@ -107,7 +107,7 @@ export const preloadedState = {
     ],
   },
   grid: {
-    size: [48, 48],
+    size: [40, 40],
   },
   location: {
     locations: [
