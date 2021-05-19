@@ -1,3 +1,8 @@
+export const color = {
+  production: '#10B981',
+  usage: '#EF4444',
+};
+
 export const Tier = {
   OTHER: -1,
   SMALL: 1,

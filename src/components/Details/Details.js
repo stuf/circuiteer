@@ -9,11 +9,13 @@ export function Details(props) {
   const { open: isOpen, head, children, className } = props;
 
   return (
-    <div className="w-full max-w-md mx-auto bg-white overflow-hidden rounded-lg text-sm">
-      <Disclosure
-        className={cx('details details--root', className)}
-        defaultOpen={isOpen}
-      >
+    <div
+      className={cx(
+        'mx-auto bg-white overflow-hidden rounded-lg text-sm',
+        className,
+      )}
+    >
+      <Disclosure className={cx('details details--root')} defaultOpen={isOpen}>
         {({ open }) => (
           <>
             <Disclosure.Button

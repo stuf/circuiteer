@@ -12,7 +12,12 @@ import { moveEntity, addEntity } from 'state/editor';
 import { setDragging } from 'state/drag';
 import { gridToScreen, screenToGrid } from 'common/util';
 import { EntityEditor } from 'containers/EntityEditor/EntityEditor';
-import { useGridSize, usePopulatedEntities } from 'common/hooks';
+import {
+  useCurrentLocation,
+  useCurrentLocationEfficiency,
+  useGridSize,
+  usePopulatedEntities,
+} from 'common/hooks';
 import { useEntities } from './hooks/useEntities';
 import { useIsDragging, useDragSize } from './hooks/useDragging';
 import {
@@ -37,6 +42,7 @@ export function Canvas(props) {
 
   const { entities, modules, current, setCurrent } = useEntities();
   const popEntities = usePopulatedEntities();
+  const efficiency = useCurrentLocationEfficiency();
   const isDragging = useIsDragging();
   const dragSize = useDragSize();
 
@@ -48,7 +54,7 @@ export function Canvas(props) {
     <>
       {current && <EntityEditor />}
 
-      <PowerStatus entities={popEntities} />
+      <PowerStatus entities={popEntities} efficiency={efficiency} />
 
       <svg
         {...{ width, height, ref: refCb }}
@@ -108,6 +114,7 @@ export function Canvas(props) {
               grid={gxy}
               position={{ x: dx, y: dy }}
               cancel=".cancel"
+              handle=".entity-object__handle"
               defaultClassName="draggable"
               defaultClassNameDragged="dragged"
               defaultClassNameDragging="dragging"
