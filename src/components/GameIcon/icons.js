@@ -12,6 +12,7 @@ import _IconSmeltingFurnace from 'assets/icons/Icon_Smelting_Furnace.png';
 import _IconSoilCentrifuge from 'assets/icons/Icon_Soil_Centrifuge.png';
 import _IconChemistryLab from 'assets/icons/Icon_Chemistry_Lab.png';
 import _IconAtmosphericCondenser from 'assets/icons/Icon_Atmospheric_Condenser.png';
+import _IconBattery from 'assets/icons/Icon_Battery.png';
 
 // Gateway icons
 import _IconGatewaySylva from 'assets/icons/Icon_Gateway_Sylva.png';
@@ -46,6 +47,7 @@ export const AtmosphericCondenser = mkIcon(
   'atmosphericCondenser',
   _IconAtmosphericCondenser,
 );
+export const Battery = mkIcon('battery', _IconBattery);
 
 // Gateway icons
 export const GatewaySylva = mkIcon('gwSylva', _IconGatewaySylva);

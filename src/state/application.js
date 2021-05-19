@@ -12,7 +12,7 @@ export const toggleSplashScreen = createAction(prefix('toggleSplashScreen'));
 //
 
 /**
- * @type {State}
+ * @type {import('./application').IState}
  */
 const initialState = {
   splash: {
@@ -23,6 +23,9 @@ const initialState = {
 
 //
 
+/**
+ * @type {import('./application').ThisSlice}
+ */
 const slice = createSlice({
   name,
   initialState,
@@ -35,6 +38,8 @@ const slice = createSlice({
 });
 
 //
+
+export const reducer = slice.reducer;
 
 export default slice.reducer;
 

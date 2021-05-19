@@ -8,19 +8,22 @@ import { withParentSizeModern } from '@visx/responsive';
 import Draggable from 'react-draggable';
 import cx from 'classnames';
 
+import { moveEntity, addEntity } from 'state/editor';
+import { setDragging } from 'state/drag';
 import { gridToScreen, screenToGrid } from 'common/util';
 import { EntityEditor } from 'containers/EntityEditor/EntityEditor';
-import { useGridSize } from 'common/hooks';
+import { useGridSize, usePopulatedEntities } from 'common/hooks';
 import { useEntities } from './hooks/useEntities';
 import { useIsDragging, useDragSize } from './hooks/useDragging';
-import { DiagonalPattern, GridPattern } from './components/Patterns';
-import { EntityObject } from './components/EntityObject';
-import { DragGhost } from './components/DragGhost';
-import { addEntity, moveEntityDelta } from 'state/editor';
-import { setDragging } from 'state/drag';
+import {
+  PowerStatus,
+  DragGhost,
+  EntityObject,
+  DiagonalPattern,
+  GridPattern,
+} from './components';
 
 import './Canvas.css';
-import { moveEntity } from 'state/editor';
 
 export function Canvas(props) {
   const { parentWidth: width, parentHeight: height, className } = props;
@@ -33,6 +36,7 @@ export function Canvas(props) {
   }, []);
 
   const { entities, modules, current, setCurrent } = useEntities();
+  const popEntities = usePopulatedEntities();
   const isDragging = useIsDragging();
   const dragSize = useDragSize();
 
@@ -43,6 +47,8 @@ export function Canvas(props) {
   return (
     <>
       {current && <EntityEditor />}
+
+      <PowerStatus entities={popEntities} />
 
       <svg
         {...{ width, height, ref: refCb }}

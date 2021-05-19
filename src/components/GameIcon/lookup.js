@@ -10,11 +10,17 @@ export const synonyms = {
   mediumWindTurbine: 'WindTurbine',
   mediumSolarPanel: 'SolarPanel',
   largeWindTurbine: 'WindTurbine',
+  largeSolarPanel: 'SolarPanel',
+  xlargeWindTurbine: 'WindTurbine',
   fieldShelter: 'Shelter',
   shelter: 'Shelter',
   chemistryLab: 'ChemistryLab',
   atmosphericCondenser: 'AtmosphericCondenser',
   smeltingFurnace: 'SmeltingFurnace',
+  rtg: 'Generator',
+  qtRtg: 'Generator',
+  smallBattery: 'Battery',
+  mediumBattery: 'Battery',
 };
 
 export const tier = {
