@@ -22,7 +22,12 @@
   stroke-dasharray: 5 5;
 }
 
+.entity-object:hover .entity-object__handle {
+  @apply block;
+}
+
 .entity-object__handle {
+  @apply hidden;
   @apply w-8 h-8;
   /* @apply shadow-md; */
   @apply rounded-lg;

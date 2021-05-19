@@ -43,7 +43,7 @@ export function EntityObject(props) {
         className="entity-object__fo-body"
       >
         <div className="entity-object__fo-body-content">
-          <GameIcon name={module.id} className="entity-object__icon" />
+          {/* <GameIcon name={module.id} className="entity-object__icon" /> */}
 
           <div className="w-full px-4 text-center font-bold">
             <span className="bg-white shadow-sm">
@@ -54,6 +54,17 @@ export function EntityObject(props) {
                     {x} <wbr />
                   </Fragment>
                 ))}
+            </span>
+          </div>
+
+          <div className="absolute right-2 bottom-2">
+            <span
+              className={`
+              inline-block px-1 text-white font-bold shadow
+              ${module.power < 0 ? 'bg-red-500' : 'bg-green-500'}
+            `}
+            >
+              {module.power}
             </span>
           </div>
         </div>
