@@ -1,11 +1,31 @@
 import * as R from 'ramda';
 import * as L from 'partial.lenses';
 import { useEffect, useRef } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, shallowEqual } from 'react-redux';
 
 import { Matrix } from 'common/linear';
 
 const { abs } = Math;
+
+export function useCurrentLocation() {
+  const { locations, current } = useSelector(
+    L.get(['location', L.props('locations', 'current')]),
+    shallowEqual,
+  );
+
+  const loc = locations.find(x => x.id === current);
+
+  return loc;
+}
+
+/**
+ * @returns {{ wind: number, sun: number }}
+ */
+export function useCurrentLocationEfficiency() {
+  const loc = useCurrentLocation();
+
+  return { always: 1, wind: loc.wind, sun: loc.sun, powered: 1 };
+}
 
 //
 
