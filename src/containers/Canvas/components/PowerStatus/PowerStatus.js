@@ -32,12 +32,17 @@ export function PowerStatus() {
       `}
     >
       <header className="font-bold px-4 pt-2 py-1 border-b-2 relative overflow-hidden flex items-center justify-between">
-        <div className="">Power Status</div>
-        {/* <div className="absolute inset-y-0 right-2 flex items-center">
-          <Icon name="unfold_more" className="w-5 h-5" />
-        </div> */}
-        <div className="font-normal text-xs">
-          raw {rawSum}U/s / adjusted {adjustedSum}U/s
+        <div>Power Status</div>
+        <div className="font-normal text-xs flex space-x-2">
+          <div className="flex items-center space-x-1">
+            <Icon name="error_outline" size={16} />
+            <div>{rawSum}U/s</div>
+          </div>
+
+          <div className="flex items-center space-x-1">
+            <Icon name="error" size={16} />
+            <div>{adjustedSum}U/s</div>
+          </div>
         </div>
       </header>
 
