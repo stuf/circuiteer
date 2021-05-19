@@ -1,6 +1,5 @@
 import * as R from 'ramda';
 import * as L from 'partial.lenses';
-import { Text } from '@visx/text';
 import { AxisBottom } from '@visx/axis';
 import { scaleLinear } from '@visx/scale';
 import { PatternLines, PatternCircles } from '@visx/pattern';
