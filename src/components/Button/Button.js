@@ -12,6 +12,7 @@ export function Button(props) {
     icon && 'button--with-icon',
     type && `button--${type}`,
     size && `button--${size}`,
+    className,
   ];
 
   return (
