@@ -9,8 +9,10 @@
     "atrox": "Atrox"
   },
   "powerType": {
+    "always": "Constant",
     "wind": "Wind",
-    "sun": "Sun"
+    "sun": "Solar",
+    "powered": "Powered"
   },
   "powerStrength": {
     "veryLow": "Very Low",
