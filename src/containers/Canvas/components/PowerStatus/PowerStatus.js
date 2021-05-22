@@ -1,14 +1,12 @@
-import * as R from 'ramda';
 import * as L from 'partial.lenses';
-import { PowerBars } from './PowerBars';
 import { ParentSizeModern } from '@visx/responsive';
-import { Icon, Details } from 'components';
+import { useTranslation } from 'react-i18next';
 
+import { Icon } from 'components';
+import { PowerBars } from './PowerBars';
 import { usePowerWithEfficiency } from './hooks';
 
-const color = {
-  production: '#10B981',
-};
+import './PowerStatus.css';
 
 /**
  *
@@ -16,6 +14,7 @@ const color = {
  * @returns
  */
 export function PowerStatus() {
+  const { t } = useTranslation();
   const effByCat = usePowerWithEfficiency();
 
   const rawSum = L.sum([L.values, 'meta', 'raw'], effByCat);
@@ -31,8 +30,8 @@ export function PowerStatus() {
         bg-white
       `}
     >
-      <header className="font-bold px-4 pt-2 py-1 border-b-2 relative overflow-hidden flex items-center justify-between">
-        <div>Power Status</div>
+      <header className="font-bold px-4 py-2 border-b-2 relative overflow-hidden flex items-center justify-between">
+        <div>{t('ui:section.powerStatus.title')}</div>
         <div className="font-normal text-xs flex space-x-2">
           <div className="flex items-center space-x-1">
             <Icon name="error_outline" size={16} />
@@ -57,19 +56,19 @@ export function PowerStatus() {
                 contentClassName="text-xs"
                 bars={[
                   {
-                    label: 'Constant',
+                    label: t('game:powerType.always'),
                     ...effByCat.always.meta,
                   },
                   {
-                    label: 'Wind',
+                    label: t('game:powerType.wind'),
                     ...effByCat.wind.meta,
                   },
                   {
-                    label: 'Solar',
+                    label: t('game:powerType.sun'),
                     ...effByCat.sun.meta,
                   },
                   {
-                    label: 'Powered',
+                    label: t('game:powerType.powered'),
                     ...effByCat.powered.meta,
                   },
                 ]}

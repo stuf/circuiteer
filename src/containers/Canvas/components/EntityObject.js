@@ -3,9 +3,9 @@ import { useTranslation } from 'react-i18next';
 import cx from 'classnames';
 
 import './EntityObject.css';
-import { GameIcon, Icon } from 'components';
 import { actions } from 'common/util';
 import { Fragment } from 'react';
+import { Icon } from 'components';
 
 /**
  * @param {Props} props

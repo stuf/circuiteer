@@ -1,5 +1,13 @@
 import { Group } from '@visx/group';
 
+const round = n => Math.round(n * 10e1) / 10e1;
+
+/**
+ * Renders a single power indication bar in the provided scale.
+ *
+ * @param {Props} props
+ * @returns
+ */
 export function PowerBar(props) {
   const { top, scale, height, raw, adjusted } = props;
   const adjustedʼ = adjusted;
@@ -7,14 +15,15 @@ export function PowerBar(props) {
 
   const isEqual = raw === adjusted;
 
-  const scaledRaw = !isEqual ? scale(rawʼ) : rawʼ;
-  const scaledAdjusted = !isEqual ? scale(adjustedʼ) : rawʼ;
-
-  const xMaxima = Math.max(scaledRaw, scaledAdjusted);
+  const scaledRaw = round(scale(rawʼ));
+  const scaledAdjusted = round(
+    !isEqual ? round(scale(adjustedʼ)) : round(rawʼ),
+  );
+  const ratio = scaledAdjusted / scaledRaw;
 
   const _raw = {
-    x: 0,
-    width: scale(raw),
+    x: scale(0),
+    width: scaledRaw,
     height,
   };
 
@@ -23,24 +32,44 @@ export function PowerBar(props) {
         x: raw < adjusted ? scaledRaw : scaledRaw - scaledAdjusted,
         width: Math.abs(scaledRaw - scaledAdjusted),
         height,
-        fill: raw < adjusted ? 'url("#lines-inverted")' : 'url("#dots")',
+        fill: ratio >= 1 ? '#047857' : '#eee',
       }
     : {};
+
+  const rawVal = {};
+
+  if (ratio === 1) {
+    rawVal.x = scaledAdjusted;
+  } else if (ratio < 1) {
+    rawVal.x = scaledRaw - scaledAdjusted;
+  } else if (ratio > 1) {
+    rawVal.x = scaledAdjusted;
+  }
+
+  console.groupEnd();
 
   return (
     <Group top={top}>
       <rect {..._raw} className="fill-green" />
-      {/* <text
-        y={height / 2}
-        dx={8}
-        fill="#fff"
-        className="font-bold"
-        style={{ filter: 'drop-shadow(0 1px 1px #000)' }}
-      >
-        <tspan style={{ alignmentBaseline: 'middle' }}>{raw}</tspan>
-      </text> */}
-
       {!isEqual && <rect {..._adjusted} />}
+
+      {!isEqual && (
+        <text className="barval" {...rawVal} y={height / 2} dx={-4}>
+          <tspan>{round(ratio * 100)}%</tspan>
+        </text>
+      )}
+
+      {!isEqual && (
+        <text className="barval" x={scaledRaw} y={height / 2} dx={-4}>
+          <tspan>100%</tspan>
+        </text>
+      )}
+
+      {isEqual && (
+        <text className="barval" x={scaledRaw} y={height / 2} dx={-4}>
+          <tspan>100%</tspan>
+        </text>
+      )}
     </Group>
   );
 }
@@ -53,7 +82,7 @@ export function LabeledPowerBar(props) {
       <text>
         <tspan>{label}</tspan>
       </text>
-      <PowerBar {...{ scale, height, raw, adjusted, top: 4 }} />
+      <PowerBar {...{ label, scale, height, raw, adjusted, top: 4 }} />
     </Group>
   );
 }

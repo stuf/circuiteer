@@ -1,6 +1,5 @@
 import * as P from 'prop-types';
-import * as R from 'ramda';
-import { useMemo, Fragment } from 'react';
+import { Fragment } from 'react';
 import { scaleBand, scaleLinear } from '@visx/scale';
 import { Group } from '@visx/group';
 import { AxisBottom } from '@visx/axis';
