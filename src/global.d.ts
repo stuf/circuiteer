@@ -50,6 +50,8 @@ declare interface IModule {
    * The module's size on the grid
    */
   size: Point;
+
+  recipe: { [k: string]: number };
 }
 
 declare interface ITranslatedModule extends IModule {
