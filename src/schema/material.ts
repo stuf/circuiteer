@@ -7,11 +7,11 @@ export enum MaterialType {
 }
 
 export class Material {
-  id: string;
-  name: string;
-  type: MaterialType;
-
-  constructor(id: string, name: string, type: MaterialType) {
+  constructor(
+    public id: string,
+    public name: string,
+    public type: MaterialType,
+  ) {
     this.id = id;
     this.name = name;
     this.type = type;

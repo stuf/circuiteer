@@ -1,13 +1,22 @@
-import { Tier } from './tier';
-
-interface IModule<T extends Tier> {
-  tier: T;
+interface IModule {
+  id: string;
+  shortId: string;
+  tier: number;
+  power: number;
+  powerType?: string;
+  capacity?: number;
+  size: Point;
+  recipe: { [k: string]: number };
 }
 
-export class Module<T extends Tier> implements IModule<T> {
-  tier: T;
+export class Module {
+  constructor(private obj: IModule) {}
 
-  constructor(tier: T) {
-    this.tier = tier;
+  toObject() {
+    return this.obj;
+  }
+
+  toJSON() {
+    return this.toObject();
   }
 }
