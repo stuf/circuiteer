@@ -20,12 +20,18 @@ export const small = [
     shortId: 'ss',
     power: 1,
     powerType: PowerType.SUN,
+    recipe: {
+      copper: 1,
+    },
   },
   {
     id: 'smallGenerator',
     shortId: 'sg',
     power: 2,
     powerType: PowerType.POWERED,
+    recipe: {
+      compound: 1,
+    },
   },
   {
     id: 'qtRtg',
@@ -39,10 +45,16 @@ export const small = [
     power: 1,
     powerType: PowerType.POWERED,
     capacity: 32,
+    recipe: {
+      zinc: 1,
+    },
   },
   {
     id: 'portableOxygenator',
     shortId: 'po',
     power: -1,
+    recipe: {
+      nanoCarbonAlloy: 1,
+    },
   },
 ].map(it => ({ ...it, tier: Tier.SMALL, size: DefaultSize.SMALL }));
