@@ -1,6 +1,6 @@
 import { PowerType } from '../powertype';
 import { Tier } from '../tier';
-import { DefaultSize } from '../../../config';
+import { DefaultSize } from '../default-size';
 
 /**
  * @type {IModule[]}
@@ -13,5 +13,6 @@ export const other = [
     powerType: PowerType.SUN,
     tier: Tier.OTHER,
     size: DefaultSize.XBOX,
+    recipe: null,
   },
 ];

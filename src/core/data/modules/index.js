@@ -1,5 +1,5 @@
-export * as small from './small';
-export * as medium from './medium';
-export * as large from './large';
-export * as extraLarge from './extra-large';
-export * as other from './other';
+export { small } from './small';
+export { medium } from './medium';
+export { large } from './large';
+export { extraLarge } from './extra-large';
+export { other } from './other';

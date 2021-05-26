@@ -1,4 +1,4 @@
-import { small, medium, large, extraLarge, other } from 'core/data/modules';
+import * as mods from 'core/data/modules';
 
 export const color = {
   production: '#10B981',
@@ -19,14 +19,6 @@ export const TierName = {
   [Tier.MEDIUM]: 'medium',
   [Tier.LARGE]: 'large',
   [Tier.XLARGE]: 'extraLarge',
-};
-
-export const DefaultSize = {
-  SMALL: [1, 1],
-  MEDIUM: [2, 2],
-  LARGE: [4, 4],
-  XLARGE: [8, 8],
-  XBOX: [16, 16],
 };
 
 /**
@@ -72,10 +64,11 @@ export const PowerType = {
 /**
  * @type {ModuleDict}
  */
+// export const modules = {};
 export const modules = [
-  ...small,
-  ...medium,
-  ...large,
-  ...extraLarge,
-  ...other,
+  ...mods.small,
+  ...mods.medium,
+  ...mods.large,
+  ...mods.extraLarge,
+  ...mods.other,
 ].reduce((o, it) => ({ ...o, [it.id]: it }), {});

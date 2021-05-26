@@ -1,6 +1,6 @@
 import { PowerType } from '../powertype';
 import { Tier } from '../tier';
-import { DefaultSize } from '../../../config';
+import { DefaultSize } from '../default-size';
 
 /**
  * @type {IModule[]}
@@ -11,21 +11,30 @@ export const medium = [
     shortId: 'fs',
     power: 0.5,
     powerType: PowerType.ALWAYS,
-    recipe: {},
+    recipe: {
+      silicone: 1,
+      graphene: 1,
+    },
   },
   {
     id: 'mediumWindTurbine',
     shortId: 'mwt',
     power: 5,
     powerType: PowerType.WIND,
-    recipe: {},
+    recipe: {
+      aluminum: 1,
+      ceramic: 1,
+    },
   },
   {
     id: 'mediumSolarPanel',
     shortId: 'msp',
     power: 4,
     powerType: PowerType.SUN,
-    recipe: {},
+    recipe: {
+      copper: 1,
+      glass: 1,
+    },
   },
   {
     id: 'mediumGenerator',
@@ -72,8 +81,15 @@ export const medium = [
     shortId: 'ms',
     power: -5,
     recipe: {
-      iron: 1,
-      tungstenCarbide: 1,
+      iron: 2,
+    },
+  },
+  {
+    id: 'mediumPrinter',
+    shortId: 'mp',
+    power: -2,
+    recipe: {
+      compound: 2,
     },
   },
 ].map(it => ({ ...it, tier: Tier.MEDIUM, size: DefaultSize.MEDIUM }));

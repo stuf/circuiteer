@@ -1,6 +1,6 @@
 import { PowerType } from '../powertype';
 import { Tier } from '../tier';
-import { DefaultSize } from '../../../config';
+import { DefaultSize } from '../default-size';
 
 /**
  * @type {IModule[]}
@@ -38,6 +38,7 @@ export const small = [
     shortId: 'qr',
     power: 1,
     powerType: PowerType.ALWAYS,
+    recipe: null,
   },
   {
     id: 'smallBattery',
