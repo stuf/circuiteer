@@ -20,7 +20,11 @@
     "test": "craco test",
     "eject": "craco eject",
     "test:cov": "yarn test --coverage --watchAll=false",
-    "test:e2e": "cypress open"
+    "test:e2e": "cypress open",
+    "deps:run": "depcruise -c .dependency-cruiser.js",
+    "deps:validate": "npm run deps:run -- src/",
+    "deps:save-cruise": "npm run deps:run -- -T json -f depcruise.json src/",
+    "deps:report-html": "depcruise-fmt -T err-html -f violations.html depcruise.json"
   },
   "jest": {
     "coveragePathIgnorePatterns": [
