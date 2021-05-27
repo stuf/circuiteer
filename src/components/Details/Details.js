@@ -2,25 +2,20 @@ import * as P from 'prop-types';
 import { Disclosure, Transition } from '@headlessui/react';
 import cx from 'classnames';
 
-import { Icon } from 'components';
+import { Icon } from 'components/Icon';
 import './Details.css';
 
 export function Details(props) {
   const { open: isOpen, head, children, className } = props;
 
   return (
-    <div
-      className={cx(
-        'mx-auto bg-white overflow-hidden rounded-lg text-sm',
-        className,
-      )}
-    >
+    <div className={cx('mx-auto bg-white rounded-md', className)}>
       <Disclosure className={cx('details details--root')} defaultOpen={isOpen}>
         {({ open }) => (
           <>
             <Disclosure.Button
               className={cx(
-                'flex justify-between w-full px-4 py-2 rounded-md',
+                'flex items-center justify-between w-full px-4 py-2 rounded-md',
                 'bg-purple-500',
                 'text-white',
                 'focus:outline-none',

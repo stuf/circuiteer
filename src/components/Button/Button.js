@@ -1,7 +1,7 @@
 import * as P from 'prop-types';
 import cx from 'classnames';
 
-import { Icon } from 'components';
+import { Icon } from 'components/Icon';
 import './Button.css';
 
 export function Button(props) {
