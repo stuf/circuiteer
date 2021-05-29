@@ -1,4 +1,5 @@
 .modal {
+  @apply relative z-10;
 }
 
 .modal--root {
@@ -7,6 +8,7 @@
 
 .modal__body {
   /* border: solid 2px #f00; */
+  min-width: 40vw;
 }
 
 .modal__overlay {

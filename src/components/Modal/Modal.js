@@ -1,87 +1,80 @@
 import * as P from 'prop-types';
-import { Fragment, useState } from 'react';
-import { Dialog, Transition } from '@headlessui/react';
+import { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Dialog } from '@headlessui/react';
+import cns from 'classnames';
+
+import { modal } from 'common/motion';
 
 import './Modal.css';
 
 export function Modal(props) {
-  const { open = false, title, children, footer } = props;
+  const { open, className, children, title, description } = props;
 
-  const [state, setState] = useState({ open });
+  const [isOpen, setIsOpen] = useState(open);
 
-  const closeModal = () => setState(s => ({ ...s, open: false }));
-  const openModal = () => setState(s => ({ ...s, open: true })); // eslint-disable-line
-
-  const transition = {
-    enter: 'ease-out duration-300',
-    enterFrom: 'opacity-0',
-    enterTo: 'opacity-100',
-    leave: 'ease-in duration-200',
-    leaveFrom: 'opacity-100',
-    leaveTo: 'opacity-0',
-  };
-
-  const transitionBody = {
-    enter: 'ease-out duration-300',
-    enterFrom: 'opacity-0 scale-95',
-    enterTo: 'opacity-100 scale-100',
-    leave: 'ease-in duration-200',
-    leaveFrom: 'opacity-100 scale-100',
-    leaveTo: 'opacity-0 scale-95',
+  const classNames = {
+    root: ['fixed', 'z-10', 'inset-0', 'overflow-y-auto'],
+    overlay: ['fixed', 'inset-0', 'bg-black opacity-30'],
+    modal: [
+      'modal__body',
+      'bg-white',
+      'z-10',
+      'rounded-lg',
+      'max-w-sm',
+      'mx-auto',
+      'px-6 py-4',
+      'space-y-2',
+      'shadow-xl',
+      className,
+    ],
+    title: ['text-xl', 'mb-4', 'font-bold'],
   };
 
   return (
     <>
-      <div>
-        <Transition appear show={state.open} as={Fragment}>
+      <AnimatePresence>
+        {isOpen && (
           <Dialog
-            as="div"
-            open={state.open}
-            onClose={closeModal}
-            className="modal--root fixed inset-0 z-10 overflow-y-auto"
+            static
+            open={isOpen}
+            as={motion.div}
+            onClose={() => setIsOpen(false)}
+            className={cns(classNames.root)}
           >
-            <div className="modal__body min-h-screen px-4 text-center">
-              <Transition.Child {...transition}>
-                <Dialog.Overlay className="modal__overlay fixed inset-0 bg-purple-500 bg-opacity-50" />
-              </Transition.Child>
+            <div className="flex items-center justify-center min-h-screen">
+              <Dialog.Overlay className={cns(classNames.overlay)} />
 
-              <span
-                className="inline-block h-screen align-middle"
-                aria-hidden="true"
+              <motion.div
+                variants={modal}
+                initial="hidden"
+                animate="visible"
+                exit="hidden"
+                transition={{ duration: 0.25 }}
+                className={cns(classNames.modal)}
               >
-                &#8203;
-              </span>
+                <Dialog.Title className={cns(classNames.title)}>
+                  {title}
+                </Dialog.Title>
 
-              <Transition.Child as={Fragment} {...transitionBody}>
-                <div className="modal__content">
-                  <Dialog.Title
-                    as="h3"
-                    className="text-lg font-medium leading-6 text-gray-900"
-                  >
-                    {title}
-                  </Dialog.Title>
+                {description && (
+                  <Dialog.Description>{description}</Dialog.Description>
+                )}
 
-                  <div className="modal__content-body">
-                    <p>{children}</p>
-                  </div>
-
-                  <div className="mt-4">
-                    {footer instanceof Function &&
-                      footer({ openModal, closeModal, open })}
-                  </div>
-                </div>
-              </Transition.Child>
+                <div>{children}</div>
+              </motion.div>
             </div>
           </Dialog>
-        </Transition>
-      </div>
+        )}
+      </AnimatePresence>
     </>
   );
 }
 
 Modal.propTypes = {
   open: P.bool,
-  title: P.oneOfType([P.string, P.node, P.elementType]),
-  children: P.oneOfType([P.string, P.node, P.elementType]),
-  footer: P.func,
+  className: P.string,
+  children: P.oneOfType([P.node, P.elementType, P.string]),
+  title: P.string,
+  description: P.string,
 };
