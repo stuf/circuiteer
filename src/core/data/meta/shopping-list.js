@@ -1,19 +1,30 @@
-import * as modules from 'core/data/modules';
+import { lookup } from './lookup';
 
 /**
  *
- * @param {IModule[]} modules
+ * @param {string[]} modules - list of module ids to collect from
  */
 export const shoppingList = modules => {
-  console.log(modules);
-  // const collected = {};
-  // for (const module of modules) {
-  //   const recipe =
-  //     module.recipe ||
-  //     (() =>
-  //       console.warn(
-  //         'module %s does not have a recipe associated with it',
-  //         module.id,
-  //       ) || {})();
-  // }
+  const collected = {};
+
+  for (const module of modules) {
+    const mod = lookup.module[module];
+    const recipe =
+      mod.recipe ||
+      (() =>
+        console.warn(
+          'module %s does not have a recipe associated with it',
+          mod.id,
+        ) || {})();
+
+    Object.entries(recipe).forEach(([material, count]) => {
+      if (!(material in collected)) {
+        collected[material] = 0;
+      }
+
+      collected[material] = collected[material] + count;
+    });
+  }
+
+  return collected;
 };
