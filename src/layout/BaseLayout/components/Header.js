@@ -12,9 +12,8 @@ export function Header(props) {
           <sup className="text-gray-500">Experimental</sup>
         </div>
 
-        <div className="">{children}</div>
-
         <div className="flex-grow" />
+        <div className="">{children}</div>
       </div>
     </header>
   );

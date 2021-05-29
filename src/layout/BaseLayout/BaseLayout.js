@@ -1,7 +1,8 @@
+import * as P from 'prop-types';
 import { Header } from './components';
 
 export function BaseLayout(props) {
-  const { children } = props;
+  const { children, header } = props;
 
   return (
     <main
@@ -15,7 +16,7 @@ export function BaseLayout(props) {
          h-12
       `}
       >
-        <div className="space-x-1"></div>
+        {header && <div className="space-x-1">{header}</div>}
       </Header>
 
       {/* Main content area */}
@@ -30,3 +31,8 @@ export function BaseLayout(props) {
     </main>
   );
 }
+
+BaseLayout.propTypes = {
+  children: P.oneOfType([P.node, P.elementType, P.string]),
+  header: P.oneOfType([P.node, P.elementType, P.string]),
+};
