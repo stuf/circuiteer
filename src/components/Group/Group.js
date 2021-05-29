@@ -1,10 +1,10 @@
 import * as P from 'prop-types';
 
 export function Group(props) {
-  const { title, children } = props;
+  const { title, children, className } = props;
 
   return (
-    <section className="">
+    <section className={className}>
       <header className="font-bold mb-2">{title}</header>
 
       <div className="space-y-2">{children}</div>
