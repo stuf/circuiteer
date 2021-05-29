@@ -13,7 +13,7 @@ export function Toolbar() {
         </div>
         <div className="relative">
           <Button label="Export" icon="file_download" />
-          <div className="absolute left-0 top-full z-10">
+          <div className="absolute left-0 top-full z-10 hidden">
             <div
               style={{ width: '40rem', height: '30rem' }}
               className="bg-white border-2 shadow-lg rounded-lg px-4 py-2 flex flex-col"

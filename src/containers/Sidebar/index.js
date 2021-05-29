@@ -1,5 +1,4 @@
 import * as P from 'prop-types';
-import cx from 'classnames';
 
 import SidebarOptions from './Options';
 import SidebarLocation from './Location';
@@ -9,14 +8,14 @@ import SidebarGrid from './Grid';
 import './index.css';
 
 export function Sidebar(props) {
-  const { className } = props;
-
   return (
-    <div className={cx('sidebar sidebar--root', className)}>
-      <SidebarOptions />
-      <SidebarLocation />
-      <SidebarModules />
-      <SidebarGrid />
+    <div className={'grid grid-cols-2 gap-2 border-l-2'} style={{ width: 400 }}>
+      <div className="overflow-auto">
+        <SidebarOptions />
+        <SidebarLocation />
+        <SidebarModules />
+        <SidebarGrid />
+      </div>
     </div>
   );
 }

@@ -21,7 +21,7 @@ export function PowerBars(props) {
     width,
     height,
     bars,
-    padX = 1.2,
+    padX = 1.05,
     showAxis,
     showGrid,
     contentClassName,

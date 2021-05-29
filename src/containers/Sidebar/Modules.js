@@ -10,7 +10,7 @@ import { Marker, Group, Details as Deets } from 'components';
 import { setDrag } from 'state/drag';
 import './Modules.css';
 
-export default function SidebarModules(props) {
+export function SidebarModules(props) {
   const update = useDispatch();
   const { t } = useTranslation();
   const [state, setState] = useState({ filterText: '' });
@@ -25,6 +25,8 @@ export default function SidebarModules(props) {
     L.get(['module', 'modules', L.valueOr([])]),
     shallowEqual,
   );
+
+  console.log({ mods });
 
   /**
    * @type {IModule[]}
@@ -51,9 +53,10 @@ export default function SidebarModules(props) {
     [translatedList, filterRegex],
   );
 
-  const matchCount = useMemo(() => filteredModuleList.length, [
-    filteredModuleList,
-  ]);
+  const matchCount = useMemo(
+    () => filteredModuleList.length,
+    [filteredModuleList],
+  );
 
   const modsʼ = useMemo(() => {
     const modules = L.collect(L.values, filteredModuleList);
@@ -136,3 +139,5 @@ export default function SidebarModules(props) {
     </Group>
   );
 }
+
+export default SidebarModules;

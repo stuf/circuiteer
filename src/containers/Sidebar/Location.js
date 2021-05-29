@@ -7,16 +7,16 @@ import * as R from 'ramda';
 import { Group, Icon } from 'components';
 import { changeLocation } from 'state/location';
 
-export default function Location() {
+export function SidebarLocation() {
   const update = useDispatch();
   const { t } = useTranslation();
 
   const locations = useSelector(L.get(['location', 'locations']), shallowEqual);
   const currentId = useSelector(L.get(['location', 'current']));
-  const current = useMemo(() => locations.find(R.whereEq({ id: currentId })), [
-    locations,
-    currentId,
-  ]);
+  const current = useMemo(
+    () => locations.find(R.whereEq({ id: currentId })),
+    [locations, currentId],
+  );
 
   return (
     <Group title={t('common:location')}>
@@ -42,3 +42,5 @@ export default function Location() {
     </Group>
   );
 }
+
+export default SidebarLocation;
