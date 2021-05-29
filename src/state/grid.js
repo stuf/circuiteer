@@ -1,12 +1,18 @@
+import * as R from 'ramda';
 import * as L from 'partial.lenses';
-import { createAction, createSlice, original } from '@reduxjs/toolkit';
+import { createSlice, original } from '@reduxjs/toolkit';
+
+import { createPrefixedAction } from 'common/util';
 
 const name = 'grid';
-const prefix = x => [name, x].join('/');
+
+const createAction = createPrefixedAction(name);
 
 //
 
-export const setGridSize = createAction(prefix('setGridSize'));
+export const setGridSize = createAction('setGridSize');
+
+export const toggleGrid = createAction('toggleGrid');
 
 //
 
@@ -15,6 +21,7 @@ export const setGridSize = createAction(prefix('setGridSize'));
  */
 const initialState = {
   size: [32, 32],
+  show: true,
 };
 
 const slice = createSlice({
@@ -22,9 +29,9 @@ const slice = createSlice({
   initialState,
   reducers: {},
   extraReducers: builder =>
-    builder.addCase(setGridSize, (s, a) =>
-      L.set('size', a.payload, original(s)),
-    ),
+    builder
+      .addCase(setGridSize, (s, a) => L.set('size', a.payload, original(s)))
+      .addCase(toggleGrid, s => L.modify('show', R.not, original(s))),
 });
 
 export default slice.reducer;

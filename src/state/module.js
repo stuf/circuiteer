@@ -8,6 +8,8 @@ const createAction = createPrefixedAction(name);
 
 //
 
+console.log({ modules });
+
 export const setModules = createAction('setModules');
 
 //

@@ -21,6 +21,14 @@ export const toggleEfficiencyAsMultiplier = createAction(
   'toggleEfficiencyAsMultiplier',
 );
 
+export const toggleMaterialRequirementBreakdown = createAction(
+  'toggleMaterialRequirementBreakdown',
+);
+
+export const toggleFlag = createAction('toggleFlag');
+
+export const toggleOptionsModal = createAction('toggleOptionsModal');
+
 //
 
 const toggle = f => R.compose(L.modify(['flags', f], R.not), original);
@@ -29,12 +37,14 @@ const toggle = f => R.compose(L.modify(['flags', f], R.not), original);
  * @type {App.State.Options}
  */
 const initialState = {
+  displayModal: false,
   flags: {
     hideInvalid: false,
     showPowerStatus: true,
     showEditor: true,
     showShoppingList: true,
     showEfficiencyAsMultiplier: false,
+    materialRequirementBreakdown: false,
   },
 };
 
@@ -44,14 +54,24 @@ const slice = createSlice({
   reducers: {},
   extraReducers: builder => {
     builder
+      .addCase(toggleOptionsModal, s => {
+        s.displayModal = !s.displayModal;
+      })
       .addCase(togglePowerStatus, toggle('showPowerStatus'))
       .addCase(toggleHideInvalid, toggle('hideInvalid'))
       .addCase(toggleEntityEditor, toggle('showEditor'))
       .addCase(toggleShoppingList, toggle('showShoppingList'))
       .addCase(
+        toggleMaterialRequirementBreakdown,
+        toggle('materialRequirementBreakdown'),
+      )
+      .addCase(
         toggleEfficiencyAsMultiplier,
         toggle('showEfficiencyAsMultiplier'),
-      );
+      )
+      .addCase(toggleFlag, (s, a) => {
+        s.flags[a.payload] = !s.flags[a.payload];
+      });
   },
 });
 
