@@ -1,11 +1,46 @@
 import * as R from 'ramda';
 import * as L from 'partial.lenses';
-import { useEffect, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useSelector, shallowEqual } from 'react-redux';
 
 import { Matrix } from 'common/linear';
 
 const { abs } = Math;
+
+//
+
+// #region Generic hooks
+
+/**
+ *
+ * @param {number} duration - duration of timeout
+ * @param {function} [fn] - optional thunk to call after duration has passed
+ * @return {[object, function]}
+ * @throws
+ */
+export function useTimeout(duration, fn) {
+  if (!duration) throw new Error('`useTimeout` requires a `duration`');
+
+  const [state, setState] = useState({ active: false });
+  let timer = useRef();
+
+  useEffect(() => {
+    if (!state.active) return;
+
+    timer.current = setTimeout(() => {
+      setState({ active: false });
+      if (fn) fn();
+    }, duration);
+  }, [state.active, fn, duration]);
+
+  const trigger = () => setState({ active: true });
+
+  return [state, trigger];
+}
+
+// #endregion
+
+// #region Game-specific hooks
 
 export function useCurrentLocation() {
   const { locations, current } = useSelector(
@@ -31,10 +66,20 @@ export function useCurrentLocationEfficiency() {
 
 /**
  *
+ * @returns {IEntity[]}
+ */
+export function useRawEntities() {
+  const entities = useSelector(L.get(['editor', 'entities']));
+
+  return entities;
+}
+
+/**
+ *
  * @returns {IPopulatedEntity[]}
  */
 export function usePopulatedEntities() {
-  const entities = useSelector(L.get(['editor', 'entities']));
+  const entities = useRawEntities();
   const modules = useSelector(L.get(['module', 'modules']));
   const modsʼ = L.transform(
     [L.elems, 'module', L.modifyOp(id => modules[id])],
@@ -174,5 +219,7 @@ export function useHotkey(hotkey, fn) {
     };
   });
 }
+
+// #endregion
 
 // #endregion
