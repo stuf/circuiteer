@@ -1,23 +1,35 @@
 import { BaseLayout } from 'layout';
+import { Button } from 'components';
 import { BuildInfo } from 'components/misc';
-import { Infobar, Sidebar, AutosizeCanvas } from 'containers';
+import { Infobar, AutosizeCanvas } from 'containers';
+
+import { Sidebar } from './components/Sidebar';
 
 export function Editor() {
   return (
-    <BaseLayout>
-      <section className="flex h-full">
-        <section className="flex flex-col flex-grow">
+    <BaseLayout
+      header={
+        <>
+          <Button disabled icon="settings">
+            Settings
+          </Button>
+        </>
+      }
+    >
+      <BuildInfo />
+
+      <div className="h-full grid grid-cols-12">
+        <div className="col-span-9 flex flex-col overflow-hidden">
           <Infobar />
 
-          <div className="relative h-full">
-            <AutosizeCanvas className="h-full" />
+          <div className="flex-grow relative">
+            <AutosizeCanvas />
           </div>
-        </section>
-
-        <Sidebar className="w-72 border-l-2 overflow-auto" />
-      </section>
-
-      <BuildInfo />
+        </div>
+        <div className="col-span-3 grid grid-cols-2 h-full overflow-hidden">
+          <Sidebar />
+        </div>
+      </div>
     </BaseLayout>
   );
 }
