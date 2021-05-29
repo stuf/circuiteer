@@ -18,6 +18,15 @@
   /* @apply bg-purple-600; */
 }
 
+.toggle--disabled {
+  @apply cursor-not-allowed;
+  @apply opacity-70;
+}
+
+.toggle--disabled .toggle__switch {
+  @apply pointer-events-none;
+}
+
 /* Toggle tick */
 .toggle__tick {
   @apply inline-block;
