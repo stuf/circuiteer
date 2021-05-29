@@ -27,4 +27,11 @@ const writeEnvFile = env => {
   writeFileSync(file, kvp);
 };
 
-module.exports = { exec, writeEnvFile };
+const exit = code => {
+  process.exit(code);
+};
+
+const exit0 = () => exit(0);
+const exit1 = () => exit(1);
+
+module.exports = { exec, writeEnvFile, exit, exit0, exit1 };
