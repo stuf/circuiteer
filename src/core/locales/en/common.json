@@ -1,14 +1,14 @@
 {
+  "close": "Close",
+  "ok": "OK",
+  "edit": "Edit",
+  "save": "Save",
+  "copy": "Copy",
   "enable": "Enable",
+  "disable": "Disable",
   "selected": "Selected",
   "options": "Options",
-  "option": {
-    "hideInvalid": "Hide invalid",
-    "showPowerStatus": "Show power status",
-    "showEditor": "Show entity editor",
-    "showShoppingList": "Show shopping list",
-    "showEfficiencyAsMultiplier": "Show efficiency as value"
-  },
+  "settings": "Settings",
   "location": "Location",
   "modules": "Modules",
   "grid": "Grid",
@@ -18,7 +18,5 @@
     "match": "One match",
     "match_plural": "{{ count }} matches"
   },
-  "modal": {
-    "close": "Close"
-  }
+  "copiedToClipboard": "Copied to clipboard"
 }
