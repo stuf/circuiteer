@@ -25,5 +25,6 @@ yarn-error.log*
 .env
 
 # Add depcruise files to ignore
+reports/
 violations.html
 depcruise.json
