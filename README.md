@@ -31,3 +31,4 @@ Currently due to funny business because of Tailwind's version requirements Yarn 
 - `deps:report-html` — create HTML file containing found violations of dependency validation
 
 [`dependency-cruiser`]: https://github.com/sverweij/dependency-cruiser
+[`.dependency-cruiser.js`]: ./.dependency-cruiser.js
