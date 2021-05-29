@@ -18,8 +18,8 @@ export class Module {
   shortId: string;
   tier: number;
   power: number;
-  powerType: string;
-  capacity: number;
+  powerType?: string;
+  capacity?: number;
   size: Point;
   recipe: { [k: string]: number };
 
@@ -51,11 +51,3 @@ export class Module {
     return this.toObject();
   }
 }
-const x = new Module({
-  id: 'asd',
-  shortId: 'asd',
-  tier: 1,
-  power: 1,
-  size: [200, 200],
-  recipe: {},
-});
