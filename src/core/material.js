@@ -1,3 +1,11 @@
+/**
+ * @module
+ * @deprecated
+ */
+
+/**
+ * Material type enum
+ */
 export const MaterialType = {
   NATURAL: 'natural',
   REFINED: 'refined',
@@ -6,6 +14,9 @@ export const MaterialType = {
   OTHER: 'other',
 };
 
+/**
+ * @deprecated
+ */
 const materials = {
   [MaterialType.NATURAL]: [
     {
@@ -44,6 +55,9 @@ const materials = {
   [MaterialType.OTHER]: [],
 };
 
+/**
+ * @deprecated
+ */
 export const Material = Object.entries(materials).reduce((o, [k, xs]) => {
   return Object.assign(
     {},
