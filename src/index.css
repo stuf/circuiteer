@@ -2,6 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
+@import-normalize;
+
 @import './assets/fonts/HankenGrotesk.css';
 
 * {
@@ -36,6 +38,14 @@ html,
     @apply focus:ring-offset-white ring-offset-2;
   }
 
+  .button {
+    @apply focus:border-pink-500;
+    @apply focus:ring-2 ring-purple-500;
+    @apply focus:ring-offset-white ring-offset-2;
+    @apply focus:outline-none;
+    @apply focus:shadow-lg;
+  }
+
   .input--base {
     @apply block w-full;
     @apply px-4 py-2;
@@ -47,6 +57,10 @@ html,
     @apply focus:ring-offset-white ring-offset-2;
     @apply focus:outline-none;
     @apply focus:shadow-lg;
+  }
+
+  .input--base.input--textarea {
+    @apply font-mono;
   }
 
   .module-object {
