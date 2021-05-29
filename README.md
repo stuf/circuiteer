@@ -1,12 +1,19 @@
 <img src="assets/logo.png" alt="Placeholder ETM12 logo" />
 
+![Travis (.com)](https://img.shields.io/travis/com/stuf/circuiteer?label=master)
+![Travis (.com) branch](https://img.shields.io/travis/com/stuf/circuiteer/development?label=development)
+![Codecov](https://img.shields.io/codecov/c/github/stuf/circuiteer)
+![Code Climate maintainability](https://img.shields.io/codeclimate/maintainability-percentage/stuf/circuiteer)
+![Code Climate issues](https://img.shields.io/codeclimate/issues/stuf/circuiteer)
+![Code Climate technical debt](https://img.shields.io/codeclimate/tech-debt/stuf/circuiteer)
+
 # `circuiteer`
 
 Experimental webapp for planning Astroneer bases, basically.
 
 > Try it out [here](https://circuiteer.etm12.moe) (alpha)
 
-![Screenshot](./assets/circuiteer.png)
+![Screenshot](./assets/circuiteer-202105.png)
 
 ## Getting started
 
