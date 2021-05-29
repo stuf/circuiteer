@@ -8,5 +8,6 @@ export { Marker } from './Marker';
 export { GameIcon } from './GameIcon';
 export { Icon } from './Icon';
 export { Dropdown } from './Dropdown';
+export { Portal } from './Portal';
 
 export * as misc from './misc';
