@@ -1,5 +1,5 @@
 import { render, logDOM, screen } from '@testing-library/react';
-import { BuildInfo } from './BuildInfo';
+import { BuildInfo } from '../BuildInfo';
 
 const setEnv = (k, v) => Object.assign(process.env, { [k]: v });
 
