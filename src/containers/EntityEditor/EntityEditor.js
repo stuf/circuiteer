@@ -9,8 +9,29 @@ export function EntityEditor(props) {
   const [state, setState] = useState({ showDebug: false });
   const { t } = useTranslation();
 
+  function Wrapper({ children }) {
+    return (
+      <aside className="absolute top-2 right-2 bg-white shadow-md border-2 rounded-md z-10 text-xs w-96">
+        {children}
+      </aside>
+    );
+  }
+
+  if (!current) {
+    return (
+      <Wrapper>
+        <header>Something is wrong</header>
+
+        <div>
+          You shouldn't be seeing this, as the entity editor should only be
+          shown when having selected an entity.
+        </div>
+      </Wrapper>
+    );
+  }
+
   return (
-    <aside className="absolute top-2 right-2 bg-white shadow-md border-2 rounded-md z-10 text-xs w-96">
+    <Wrapper>
       <header className="relative px-4 py-2 text-base font-bold">
         {t(`game:module.${module.id}`)}
         <Toggle
@@ -26,33 +47,35 @@ export function EntityEditor(props) {
           className="gap-2"
           style={{ display: 'grid', gridTemplateColumns: '1fr 4fr' }}
         >
-          <dt>ID</dt>
-          <dd className="font-mono">{current.id}</dd>
+          <dt id="entity-id">ID</dt>
+          <dd aria-labelledby="entity-id" className="font-mono">
+            {current.id}
+          </dd>
 
-          <dt>Position</dt>
-          <dd className="font-mono">
+          <dt id="entity-position">Position</dt>
+          <dd aria-labelledby="entity-position" className="font-mono">
             (x={current.pos[0]}, y={current.pos[1]})
           </dd>
 
-          <dt>Size</dt>
-          <dd className="font-mono">
+          <dt id="entity-size">Size</dt>
+          <dd aria-labelledby="entity-size" className="font-mono">
             (w={module.size[0]}, h={module.size[1]})
           </dd>
 
-          <dt>Module</dt>
-          <dd>
+          <dt id="entity-module">Module</dt>
+          <dd aria-labelledby="entity-module">
             <dl style={{ display: 'grid', gridTemplateColumns: '1fr 4fr' }}>
-              <dt>ID</dt>
-              <dd>{module.id}</dd>
+              <dt id="module-id">Module ID</dt>
+              <dd aria-labelledby="module-id">{module.id}</dd>
 
-              <dt>Power</dt>
-              <dd>{module.power} U/s</dd>
+              <dt id="module-power">Power</dt>
+              <dd aria-labelledby="module-power">{module.power} U/s</dd>
 
-              <dt>Type</dt>
-              <dd>{module.powerType}</dd>
+              <dt id="module-type">Type</dt>
+              <dd aria-labelledby="module-type">{module.powerType}</dd>
 
-              <dt>Tier</dt>
-              <dd>{module.tier}</dd>
+              <dt id="module-tier">Tier</dt>
+              <dd aria-labelledby="module-tier">{module.tier}</dd>
             </dl>
           </dd>
         </dl>
@@ -75,6 +98,6 @@ export function EntityEditor(props) {
           )}
         </fieldset>
       </div>
-    </aside>
+    </Wrapper>
   );
 }
