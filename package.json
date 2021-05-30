@@ -28,6 +28,8 @@
   },
   "jest": {
     "coveragePathIgnorePatterns": [
+      "<rootDir>/src/reportWebVitals.js",
+      "<rootDir>/src/test-utils.js",
       "<rootDir>/src/core/data/(modules/)?index.js",
       "<rootDir>/src/schema",
       "<rootDir>/src/core/locales/.*js$",

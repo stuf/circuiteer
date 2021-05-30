@@ -5,6 +5,9 @@ export const color = {
   usage: '#EF4444',
 };
 
+/**
+ * @deprecated
+ */
 export const Tier = {
   OTHER: -1,
   SMALL: 1,
