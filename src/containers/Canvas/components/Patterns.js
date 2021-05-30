@@ -1,3 +1,4 @@
+import * as P from 'prop-types';
 import { PatternCircles, PatternLines } from '@visx/pattern';
 
 export function GridPattern(props) {
@@ -19,6 +20,14 @@ export function GridPattern(props) {
   );
 }
 
+GridPattern.propTypes = {
+  width: P.number.isRequired,
+  height: P.number.isRequired,
+  style: P.object,
+};
+
+//
+
 export function DiagonalPattern(props) {
   const defaultStyle = {
     stroke: 'rgba(0, 0, 0, 0.1)',
@@ -36,3 +45,8 @@ export function DiagonalPattern(props) {
     />
   );
 }
+DiagonalPattern.propTypes = {
+  width: P.number,
+  height: P.number,
+  style: P.object,
+};
