@@ -1,4 +1,5 @@
 import * as P from 'prop-types';
+import cx from 'classnames';
 
 import { actions } from 'common/util';
 
@@ -7,12 +8,11 @@ export function Dropdown(props) {
 
   return (
     <div
-      className={`
-      relative shadow-md rounded-md border-2
-      ${!disabled && `hover:shadow-lg`}
-      ${disabled && `opacity-50`}
-      bg-white
-    `}
+      className={cx(
+        'relative shadow-md rounded-md border-2 bg-white',
+        !disabled ? `hover:shadow-lg` : '',
+        disabled ? `opacity-50` : '',
+      )}
     >
       <span className="absolute inset-y-0 right-2 inline-flex items-center">
         {/* <UnfoldMore className="w-5 h-5" /> */}
@@ -40,7 +40,7 @@ Dropdown.propTypes = {
       value: P.any,
       label: P.string,
     }),
-  ),
+  ).isRequired,
   onChange: P.func,
 };
 

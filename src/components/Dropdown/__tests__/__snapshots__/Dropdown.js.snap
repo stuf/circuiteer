@@ -1,0 +1,27 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Dropdown 1`] = `
+<div>
+  <div
+    class="relative shadow-md rounded-md border-2 bg-white hover:shadow-lg"
+  >
+    <span
+      class="absolute inset-y-0 right-2 inline-flex items-center"
+    />
+    <select
+      class="px-4 py-2 appearance-none block w-full bg-transparent"
+    >
+      <option
+        value="one"
+      >
+        One
+      </option>
+      <option
+        value="two"
+      >
+        Two
+      </option>
+    </select>
+  </div>
+</div>
+`;
