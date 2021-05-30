@@ -1,3 +1,4 @@
+import * as P from 'prop-types';
 import { localPoint } from '@visx/event';
 import { screenToGrid, gridToScreen } from 'common/util';
 import { useEffect, useMemo, useState } from 'react';
@@ -28,12 +29,9 @@ export function DragGhost(props) {
   };
 
   useEffect(() => {
-    console.log('ON effect');
-    console.log({ grid, size, svgEl });
     svgEl.addEventListener('dragover', onMove);
 
     return () => {
-      console.log('OFF effect');
       svgEl.removeEventListener('dragover', onMove);
     };
   }, []); // eslint-disable-line
@@ -49,6 +47,12 @@ export function DragGhost(props) {
     </>
   );
 }
+
+DragGhost.propTypes = {
+  grid: P.arrayOf(P.number),
+  size: P.arrayOf(P.number),
+  svgEl: P.instanceOf(HTMLElement),
+};
 
 /**
  * @typedef {object} Props
