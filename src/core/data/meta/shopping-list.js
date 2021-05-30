@@ -10,11 +10,11 @@ export const shoppingList = modules => {
   for (const module of modules) {
     const mod = lookup.module[module];
     const recipe =
-      mod.recipe ||
+      mod?.recipe ||
       (() =>
         console.warn(
           'module %s does not have a recipe associated with it',
-          mod.id,
+          mod?.id || module,
         ) || {})();
 
     Object.entries(recipe).forEach(([material, count]) => {
