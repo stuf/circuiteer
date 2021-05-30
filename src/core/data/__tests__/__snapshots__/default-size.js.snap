@@ -1,0 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DefaultSize 1`] = `
+Object {
+  "LARGE": Array [
+    4,
+    4,
+  ],
+  "MEDIUM": Array [
+    2,
+    2,
+  ],
+  "SMALL": Array [
+    1,
+    1,
+  ],
+  "XBOX": Array [
+    16,
+    16,
+  ],
+  "XLARGE": Array [
+    8,
+    8,
+  ],
+}
+`;

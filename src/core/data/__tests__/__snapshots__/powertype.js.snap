@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PowerType 1`] = `
+Object {
+  "ALWAYS": "always",
+  "POWERED": "powered",
+  "SUN": "sun",
+  "WIND": "wind",
+}
+`;

@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Tier 1`] = `
+Object {
+  "LARGE": 3,
+  "MEDIUM": 2,
+  "OTHER": -1,
+  "SMALL": 1,
+  "XLARGE": 4,
+}
+`;
