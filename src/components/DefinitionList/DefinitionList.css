@@ -1,0 +1,12 @@
+.definition-list {
+  @apply grid gap-2;
+  grid-template-columns: 1fr 4fr;
+}
+
+.definition-list__key {
+  @apply font-bold;
+}
+
+.definition-list__value {
+  @apply font-mono;
+}
