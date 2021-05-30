@@ -26,8 +26,6 @@ export function SidebarModules(props) {
     shallowEqual,
   );
 
-  console.log({ mods });
-
   /**
    * @type {IModule[]}
    */
