@@ -1,11 +1,4 @@
-import {
-  render,
-  logRoles,
-  logDOM,
-  fireEvent,
-  createEvent,
-  act,
-} from '@testing-library/react';
+import { render, fireEvent } from '@testing-library/react';
 import { Input } from '../Input';
 
 describe('Input', () => {
@@ -18,7 +11,9 @@ describe('Input', () => {
       onChange,
     };
 
-    const { container, findByRole } = render(<Input {...props} />);
+    const { container, findByLabelText, findByRole } = render(
+      <Input {...props} />,
+    );
 
     const input = await findByRole('textbox');
 
@@ -30,6 +25,18 @@ describe('Input', () => {
     fireEvent.change(input, { target: { value: '' } });
     expect(input.value).toBe('');
     expect(input.type).toBe('text');
+
+    await findByLabelText(/is this foo\?/i);
+  });
+
+  it('can be used without a label', async () => {
+    const props = {
+      id: 'foo',
+    };
+
+    const { container, findByRole } = render(<Input {...props} />);
+
+    await findByRole('textbox');
   });
 
   it('can be disabled', async () => {
