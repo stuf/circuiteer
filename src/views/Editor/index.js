@@ -10,7 +10,7 @@ export function Editor() {
     <BaseLayout
       header={
         <>
-          <Button disabled icon="settings">
+          <Button disabled icon="settings" onClick={() => {}}>
             Settings
           </Button>
         </>
