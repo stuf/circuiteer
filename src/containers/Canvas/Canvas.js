@@ -1,6 +1,6 @@
 /* eslint-disable */
 import * as R from 'ramda';
-import { useRef, useCallback, useState } from 'react';
+import { useRef, useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 import { Group } from '@visx/group';
 import { localPoint } from '@visx/event';
