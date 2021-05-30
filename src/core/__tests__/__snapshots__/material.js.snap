@@ -1,0 +1,45 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Material 1`] = `
+Object {
+  "Material": Object {
+    "compound": Object {
+      "displayName": "Compound",
+      "id": "compound",
+      "type": "natural",
+    },
+    "copper": Object {
+      "displayName": "Copper",
+      "id": "copper",
+      "type": "refined",
+    },
+    "glass": Object {
+      "displayName": "Glass",
+      "id": "glass",
+      "type": "refined",
+    },
+    "organic": Object {
+      "displayName": "Organic",
+      "id": "organic",
+      "type": "natural",
+    },
+    "resin": Object {
+      "displayName": "Resin",
+      "id": "resin",
+      "type": "natural",
+    },
+    "soil": Object {
+      "displayName": "Soil",
+      "id": "soil",
+      "type": "natural",
+    },
+  },
+  "MaterialType": Object {
+    "ATMOSPHERIC": "atmospheric",
+    "COMPOSITE": "composite",
+    "NATURAL": "natural",
+    "OTHER": "other",
+    "REFINED": "refined",
+  },
+}
+`;
