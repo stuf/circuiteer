@@ -22,6 +22,7 @@ export function Icon(props) {
 
 Icon.propTypes = {
   name: P.string,
+  size: P.number,
 };
 
 Icon.defaultProps = {};
