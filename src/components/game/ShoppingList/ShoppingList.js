@@ -22,10 +22,19 @@ export function ShoppingList(props) {
           R.sortBy(R.prop(0)),
           R.map(([material, count]) => (
             <div className="grid grid-cols-4 py-1" key={material}>
-              <dt className="font-normal col-span-3">
+              <dt
+                id={`shoppinglist-${material}`}
+                aria-label={t(`game:material.${material}`)}
+                className="font-normal col-span-3"
+              >
                 {t(`game:material.${material}`)}
               </dt>
-              <dd className="font-mono text-right">{count}</dd>
+              <dd
+                aria-labelledby={`shoppinglist-${material}`}
+                className="font-mono text-right"
+              >
+                {count}
+              </dd>
             </div>
           )),
         )}
