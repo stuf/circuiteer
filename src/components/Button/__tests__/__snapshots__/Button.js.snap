@@ -1,0 +1,66 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`supports different sizes, types and icons 1`] = `
+<div>
+  <button
+    class="button button--with-icon"
+  >
+    <span
+      class="__icon-wrapper"
+    >
+      <span
+        class="icon icon--uiflex items-center justify-center"
+        style="width: 20px; height: 20px;"
+      >
+        <span
+          class="material-icons material-icons-outlined"
+          style="font-size: 20px;"
+        >
+          settings
+        </span>
+      </span>
+    </span>
+    Settings
+  </button>
+  <button
+    class="button button--with-icon"
+  >
+    <span
+      class="__icon-wrapper"
+    >
+      <span
+        class="icon icon--uiflex items-center justify-center"
+        style="width: 20px; height: 20px;"
+      >
+        <span
+          class="material-icons material-icons-outlined"
+          style="font-size: 20px;"
+        >
+          settings
+        </span>
+      </span>
+    </span>
+    Settings
+  </button>
+  <button
+    class="button button--with-icon"
+  >
+    <span
+      class="__icon-wrapper"
+    >
+      <span
+        class="icon icon--uiflex items-center justify-center"
+        style="width: 20px; height: 20px;"
+      >
+        <span
+          class="material-icons material-icons-outlined"
+          style="font-size: 20px;"
+        >
+          settings
+        </span>
+      </span>
+    </span>
+    Settings
+  </button>
+</div>
+`;
