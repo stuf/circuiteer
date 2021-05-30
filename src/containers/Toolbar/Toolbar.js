@@ -2,6 +2,8 @@ import { useSelector } from 'react-redux';
 
 import { Button } from 'components';
 
+const noop = () => {};
+
 export function Toolbar() {
   const state = useSelector(a => a);
 
@@ -9,10 +11,12 @@ export function Toolbar() {
     <>
       <div className="flex space-x-1 pl-1 border-l-2">
         <div>
-          <Button label="Import" icon="file_upload" />
+          <Button label="Import" icon="file_upload" onClick={noop} />
         </div>
+
         <div className="relative">
-          <Button label="Export" icon="file_download" />
+          <Button label="Export" icon="file_download" onClick={noop} />
+
           <div className="absolute left-0 top-full z-10 hidden">
             <div
               style={{ width: '40rem', height: '30rem' }}
@@ -22,7 +26,7 @@ export function Toolbar() {
 
               <div className="flex-grow relative">
                 <div className="absolute top-2 right-4">
-                  <Button label="Copy" icon="content_copy" />
+                  <Button label="Copy" icon="content_copy" onClick={noop} />
                 </div>
 
                 <textarea

@@ -44,7 +44,7 @@ export function Infobar() {
   return (
     <div className="flex w-full border-b-2 px-4 py-1 items-center relative">
       <div className="space-x-1 w-full flex items-center">
-        <Button icon="bolt" disabled>
+        <Button icon="bolt" disabled onClick={() => {}}>
           Power
         </Button>
 
