@@ -26,6 +26,7 @@ export function SettingsModal(props) {
           <Group title={t('ui:section.settings.grid')}>
             <div className="grid grid-cols-2 gap-4">
               <Input
+                id="grid-width"
                 label={t('common:width')}
                 type="number"
                 value={grid.size[0]}
@@ -34,6 +35,7 @@ export function SettingsModal(props) {
                 }
               />
               <Input
+                id="grid-height"
                 label={t('common:height')}
                 type="number"
                 value={grid.size[1]}
@@ -78,7 +80,8 @@ export function SettingsModal(props) {
       </div>
 
       <footer className="mt-4 pt-4 text-right">
-        <Button>{t('common:close')}</Button>
+        {/* TODO Add closing logic */}
+        <Button onClick={() => {}}>{t('common:close')}</Button>
       </footer>
     </Modal>
   );

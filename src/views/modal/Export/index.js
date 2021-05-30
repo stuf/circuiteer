@@ -69,6 +69,7 @@ export function ExportModal(props) {
           </div>
 
           <Input
+            id="state-export"
             className="text-xs"
             type="textarea"
             rows={15}

@@ -24,7 +24,7 @@ export function OptionsModal(props) {
       </div>
 
       <footer className="mt-4 pt-4 text-right">
-        <Button>Close</Button>
+        <Button onClick={() => {}}>Close</Button>
       </footer>
     </Modal>
   );
