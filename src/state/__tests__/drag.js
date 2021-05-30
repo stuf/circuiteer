@@ -1,4 +1,9 @@
-import reducer, { setDrag } from '../drag';
+import reducer, {
+  setDrag,
+  setDragPos,
+  setDragSize,
+  setDragging,
+} from '../drag';
 
 describe('state/drag', () => {
   test('reducer does no-op on unhandled actions', () => {
@@ -22,6 +27,18 @@ describe('state/drag', () => {
       expect(r1).toEqual({ dragging: true });
       expect(r2).toEqual({ pos: [1, 1] });
       expect(r3).toEqual({ size: [2, 2] });
+    });
+
+    test('setDragPos', () => {
+      expect(reducer({}, setDragPos([1, 2]))).toEqual({ pos: [1, 2] });
+    });
+
+    test('setDragSize', () => {
+      expect(reducer({}, setDragSize([1, 2]))).toEqual({ size: [1, 2] });
+    });
+
+    test('setDragging', () => {
+      expect(reducer({}, setDragging(true))).toEqual({ dragging: true });
     });
   });
 });

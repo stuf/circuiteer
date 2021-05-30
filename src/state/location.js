@@ -1,4 +1,3 @@
-// @ts-check
 import * as L from 'partial.lenses';
 
 import { createSlice, original } from '@reduxjs/toolkit';
@@ -44,6 +43,7 @@ const Sun = {
 };
 
 /**
+ * @todo Extract these out from the store
  * @type {Game.ILocation[]}
  */
 const locations = [

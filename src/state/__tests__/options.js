@@ -3,6 +3,8 @@ import reducer, {
   togglePowerStatus,
   toggleShoppingList,
   toggleEntityEditor,
+  toggleMaterialRequirementBreakdown,
+  toggleEfficiencyAsMultiplier,
 } from '../options';
 
 describe('state/options', () => {
@@ -43,6 +45,22 @@ describe('state/options', () => {
       const a = toggleEntityEditor();
       const r = reducer({}, a);
       const e = { flags: { showEditor: true } };
+
+      expect(r).toEqual(e);
+    });
+
+    test('toggleMaterialRequirementBreakdown', () => {
+      const a = toggleMaterialRequirementBreakdown();
+      const r = reducer({}, a);
+      const e = { flags: { materialRequirementBreakdown: true } };
+
+      expect(r).toEqual(e);
+    });
+
+    test('toggleEfficiencyAsMultiplier', () => {
+      const a = toggleEfficiencyAsMultiplier();
+      const r = reducer({}, a);
+      const e = { flags: { showEfficiencyAsMultiplier: true } };
 
       expect(r).toEqual(e);
     });
