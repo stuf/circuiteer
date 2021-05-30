@@ -73,7 +73,11 @@ export function PowerBars(props) {
 
       <Group className={contentClassName}>
         {bars.map((it, ix) => (
-          <LabeledPowerBar key={ix} {...powerBarProps(it)} />
+          <LabeledPowerBar
+            key={ix}
+            id={`powerbar-${ix}`}
+            {...powerBarProps(it)}
+          />
         ))}
       </Group>
     </Wrapper>
@@ -93,6 +97,8 @@ PowerBars.propTypes = {
   showAxis: P.bool,
   showGrid: P.bool,
   wrapperProps: P.object,
+  width: P.number.isRequired,
+  height: P.number.isRequired,
 };
 
 PowerBars.defaultProps = {

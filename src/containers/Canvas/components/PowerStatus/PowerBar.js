@@ -1,3 +1,4 @@
+import * as P from 'prop-types';
 import { Group } from '@visx/group';
 
 const round = n => Math.round(n * 10e1) / 10e1;
@@ -46,15 +47,19 @@ export function PowerBar(props) {
     rawVal.x = scaledAdjusted;
   }
 
-  console.groupEnd();
-
   return (
-    <Group top={top}>
+    <Group top={top} role="graphics-object">
       <rect {..._raw} className="fill-green" />
       {!isEqual && <rect {..._adjusted} />}
 
       {!isEqual && (
-        <text className="barval" {...rawVal} y={height / 2} dx={-4}>
+        <text
+          role="graphics-dataunit"
+          className="barval"
+          {...rawVal}
+          y={height / 2}
+          dx={-4}
+        >
           <tspan>{round(ratio * 100)}%</tspan>
         </text>
       )}
@@ -74,15 +79,44 @@ export function PowerBar(props) {
   );
 }
 
+PowerBar.propTypes = {
+  top: P.number,
+  scale: P.func.isRequired,
+  height: P.number.isRequired,
+  raw: P.number,
+  adjusted: P.number,
+};
+
 export function LabeledPowerBar(props) {
-  const { label, className, top, left, scale, height, raw, adjusted } = props;
+  const { id, label, className, top, left, scale, height, raw, adjusted } =
+    props;
 
   return (
-    <Group {...{ className, top, left }}>
-      <text>
+    <Group
+      role="graphics-object"
+      id={`${id}-group`}
+      aria-label={label}
+      {...{ className, top, left }}
+    >
+      <text role="text" aria-label={label} id={id}>
         <tspan>{label}</tspan>
       </text>
-      <PowerBar {...{ label, scale, height, raw, adjusted, top: 4 }} />
+      <PowerBar
+        aria-labelledby={id}
+        {...{ label, scale, height, raw, adjusted, top: 4 }}
+      />
     </Group>
   );
 }
+
+LabeledPowerBar.propTypes = {
+  id: P.string.isRequired,
+  label: P.string.isRequired,
+  className: P.string,
+  top: P.number,
+  left: P.number,
+  height: P.number.isRequired,
+  scale: P.func.isRequired,
+  raw: P.number,
+  adjusted: P.number,
+};
