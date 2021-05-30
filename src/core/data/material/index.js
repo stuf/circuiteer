@@ -5,21 +5,21 @@
 /**
  *
  */
-const natural = {
+export const natural = {
   soil: { type: 'natural' },
   organic: { type: 'natural' },
   compound: { type: 'natural' },
   resin: { type: 'natural' },
 };
 
-const refined = {
+export const refined = {
   coal: {
     type: 'refined',
     from: 'organic',
   },
 };
 
-const composite = {
+export const composite = {
   rubber: {
     type: 'composite',
     from: ['organic', 'resin'],
@@ -30,7 +30,7 @@ const composite = {
   },
 };
 
-const atmospheric = {
+export const atmospheric = {
   hydrogen: {
     type: 'atmospheric',
   },

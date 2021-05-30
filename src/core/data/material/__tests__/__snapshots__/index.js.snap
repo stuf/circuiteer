@@ -1,0 +1,47 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`works 1`] = `
+Object {
+  "atmospheric": Object {
+    "hydrogen": Object {
+      "type": "atmospheric",
+    },
+  },
+  "composite": Object {
+    "plastic": Object {
+      "from": Array [
+        "compound",
+        "coal",
+      ],
+      "type": "composite",
+    },
+    "rubber": Object {
+      "from": Array [
+        "organic",
+        "resin",
+      ],
+      "type": "composite",
+    },
+  },
+  "natural": Object {
+    "compound": Object {
+      "type": "natural",
+    },
+    "organic": Object {
+      "type": "natural",
+    },
+    "resin": Object {
+      "type": "natural",
+    },
+    "soil": Object {
+      "type": "natural",
+    },
+  },
+  "refined": Object {
+    "coal": Object {
+      "from": "organic",
+      "type": "refined",
+    },
+  },
+}
+`;
