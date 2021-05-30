@@ -6,6 +6,7 @@ import { Textarea } from './Textarea';
 
 export const Input = forwardRef((props, ref) => {
   const {
+    id,
     value,
     readOnly,
     type,
@@ -18,6 +19,7 @@ export const Input = forwardRef((props, ref) => {
   } = props;
 
   const inputProps = {
+    id,
     defaultValue: value,
     disabled,
     onChange: actions(onChange),
@@ -29,19 +31,28 @@ export const Input = forwardRef((props, ref) => {
   if (type === 'textarea') {
     return (
       <div className={className}>
-        {label && <label className="block mb-1">{label}</label>}
+        {label && (
+          <label className="block mb-1" id={`label-${id}`}>
+            {label}
+          </label>
+        )}
 
-        <Textarea {...inputProps} rows={rows} />
+        <Textarea {...inputProps} rows={rows} aria-labelledby={`label-${id}`} />
       </div>
     );
   }
 
   return (
     <div className={className}>
-      {label && <label className="block mb-1">{label}</label>}
+      {label && (
+        <label className="block mb-1" id={`label-${id}`}>
+          {label}
+        </label>
+      )}
 
       <input
         className="input--base"
+        aria-labelledby={`label-${id}`}
         {...{
           ...inputProps,
           type,
@@ -52,6 +63,7 @@ export const Input = forwardRef((props, ref) => {
 });
 
 Input.propTypes = {
+  id: P.string.isRequired,
   value: P.any,
   type: P.oneOf(['text', 'number', 'search', 'textarea']),
   disabled: P.bool,
