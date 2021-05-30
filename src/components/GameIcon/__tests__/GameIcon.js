@@ -5,7 +5,5 @@ import { GameIcon } from '../GameIcon';
 describe('GameIcon', () => {
   test('woo hoo', () => {
     render(<GameIcon name="TierSmall" />);
-
-    screen.debug();
   });
 });
