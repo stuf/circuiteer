@@ -1,0 +1,49 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`BaseLayout works 1`] = `
+<div>
+  <main
+    class="
+    h-full
+    flex flex-col
+    "
+  >
+    <header
+      class="base-layout__header 
+         h-12
+      "
+    >
+      <div
+        class="flex items-center space-x-2 w-full px-4 py-2"
+      >
+        <div
+          class="space-x-2"
+        >
+          <span
+            class="font-bold"
+          >
+            Circuiteer
+          </span>
+          <sup
+            class="text-gray-500"
+          >
+            Experimental
+          </sup>
+        </div>
+        <div
+          class="flex-grow"
+        />
+        <div
+          class=""
+        />
+      </div>
+    </header>
+    <div
+      class="
+        flex-grow
+        overflow-auto
+      "
+    />
+  </main>
+</div>
+`;
