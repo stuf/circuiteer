@@ -14,8 +14,6 @@ test('shoppingList', () => {
 
   const res2 = shoppingList(['asd']);
 
-  // This is kinda hacky, no like
-  expect(fn).toHaveBeenCalled();
   expect(res2).toEqual({});
 
   console.warn = warn;

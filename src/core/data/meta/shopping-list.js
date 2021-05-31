@@ -9,13 +9,17 @@ export const shoppingList = modules => {
 
   for (const module of modules) {
     const mod = lookup.module[module];
-    const recipe =
+    let recipe = {};
+
+    recipe =
       mod?.recipe ||
-      (() =>
-        console.warn(
-          'module %s does not have a recipe associated with it',
-          mod?.id || module,
-        ) || {})();
+      (process.env.NODE_ENV !== 'test'
+        ? (() =>
+            console.warn(
+              'module %s does not have a recipe associated with it',
+              mod?.id || module,
+            ) || {})()
+        : {});
 
     Object.entries(recipe).forEach(([material, count]) => {
       if (!(material in collected)) {
