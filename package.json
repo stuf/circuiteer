@@ -21,6 +21,7 @@
     "eject": "craco eject",
     "test:cov": "yarn test --coverage --watchAll=false",
     "test:e2e": "cypress open",
+    "test:update-snapshots": "yarn test --watchAll=false -u",
     "deps:run": "depcruise -c .dependency-cruiser.js",
     "deps:validate": "npm run deps:run -- src/",
     "deps:save-cruise": "npm run deps:run -- -T json -f depcruise.json src/",
