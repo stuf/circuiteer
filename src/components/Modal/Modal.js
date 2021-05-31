@@ -1,6 +1,6 @@
 import * as P from 'prop-types';
 import { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+// import { motion, AnimatePresence } from 'framer-motion';
 import { Dialog } from '@headlessui/react';
 import cns from 'classnames';
 
@@ -33,40 +33,32 @@ export function Modal(props) {
 
   return (
     <>
-      <AnimatePresence>
-        {isOpen && (
-          <Dialog
-            static
-            open={isOpen}
-            as={motion.div}
-            onClose={() => setIsOpen(false)}
-            className={cns(classNames.root)}
-          >
-            <div className="flex items-center justify-center min-h-screen">
-              <Dialog.Overlay className={cns(classNames.overlay)} />
+      {/* <AnimatePresence> */}
+      {isOpen && (
+        <Dialog
+          static
+          open={isOpen}
+          onClose={() => setIsOpen(false)}
+          className={cns(classNames.root)}
+        >
+          <div className="flex items-center justify-center min-h-screen">
+            <Dialog.Overlay className={cns(classNames.overlay)} />
 
-              <motion.div
-                variants={modal}
-                initial="hidden"
-                animate="visible"
-                exit="hidden"
-                transition={{ duration: 0.25 }}
-                className={cns(classNames.modal)}
-              >
-                <Dialog.Title className={cns(classNames.title)}>
-                  {title}
-                </Dialog.Title>
+            <div className={cns(classNames.modal)}>
+              <Dialog.Title className={cns(classNames.title)}>
+                {title}
+              </Dialog.Title>
 
-                {description && (
-                  <Dialog.Description>{description}</Dialog.Description>
-                )}
+              {description && (
+                <Dialog.Description>{description}</Dialog.Description>
+              )}
 
-                <div>{children}</div>
-              </motion.div>
+              <div className="space-y-2">{children}</div>
             </div>
-          </Dialog>
-        )}
-      </AnimatePresence>
+          </div>
+        </Dialog>
+      )}
+      {/* </AnimatePresence> */}
     </>
   );
 }
