@@ -31,8 +31,10 @@ export function GameIcon(props) {
 
 GameIcon.propTypes = {
   tier: P.bool,
+  /**
+   * FIXME This is a bad validator
+   */
   name: (props, k, c) => {
-    // console.log({ k, c, p: props[k], i: icons[k] });
     const i = icons[props[k]];
 
     if (!i && !props.tier) {
