@@ -6,6 +6,7 @@ exports[`supports different sizes, types and icons 1`] = `
     class="button button--with-icon"
   >
     <span
+      aria-hidden="true"
       class="__icon-wrapper"
     >
       <span
@@ -26,6 +27,7 @@ exports[`supports different sizes, types and icons 1`] = `
     class="button button--with-icon"
   >
     <span
+      aria-hidden="true"
       class="__icon-wrapper"
     >
       <span
@@ -46,6 +48,7 @@ exports[`supports different sizes, types and icons 1`] = `
     class="button button--with-icon"
   >
     <span
+      aria-hidden="true"
       class="__icon-wrapper"
     >
       <span

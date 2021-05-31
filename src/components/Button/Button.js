@@ -29,7 +29,7 @@ export function Button(props) {
   return (
     <button className={cx(...cns)} onClick={actions(onClick)} {...rest}>
       {icon && (
-        <span className="__icon-wrapper">
+        <span className="__icon-wrapper" aria-hidden="true">
           <Icon className="__icon" name={icon} size={iconSize} />
         </span>
       )}
