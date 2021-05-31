@@ -1,0 +1,1014 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Infobar works by default 1`] = `
+<div>
+  <div
+    class="flex w-full border-b-2 px-4 py-1 items-center relative"
+  >
+    <div
+      class="space-x-1 w-full flex items-center"
+    >
+      <button
+        class="button button--with-icon"
+        disabled=""
+      >
+        <span
+          aria-hidden="true"
+          class="__icon-wrapper"
+        >
+          <span
+            class="icon icon--uiflex items-center justify-center"
+            style="width: 20px; height: 20px;"
+          >
+            <span
+              class="material-icons material-icons-outlined"
+              style="font-size: 20px;"
+            >
+              bolt
+            </span>
+          </span>
+        </span>
+        Power
+      </button>
+      <div
+        class="flex space-x-1 pl-1 border-l-2"
+      >
+        <div>
+          <button
+            class="button button--with-icon"
+          >
+            <span
+              aria-hidden="true"
+              class="__icon-wrapper"
+            >
+              <span
+                class="icon icon--uiflex items-center justify-center"
+                style="width: 20px; height: 20px;"
+              >
+                <span
+                  class="material-icons material-icons-outlined"
+                  style="font-size: 20px;"
+                >
+                  file_upload
+                </span>
+              </span>
+            </span>
+            Import
+          </button>
+        </div>
+        <div
+          class="relative"
+        >
+          <button
+            class="button button--with-icon"
+          >
+            <span
+              aria-hidden="true"
+              class="__icon-wrapper"
+            >
+              <span
+                class="icon icon--uiflex items-center justify-center"
+                style="width: 20px; height: 20px;"
+              >
+                <span
+                  class="material-icons material-icons-outlined"
+                  style="font-size: 20px;"
+                >
+                  file_download
+                </span>
+              </span>
+            </span>
+            Export
+          </button>
+          <div
+            class="absolute left-0 top-full z-10 hidden"
+          >
+            <div
+              class="bg-white border-2 shadow-lg rounded-lg px-4 py-2 flex flex-col"
+              style="width: 40rem; height: 30rem;"
+            >
+              <header
+                class="font-bold mb-2"
+              >
+                Export
+              </header>
+              <div
+                class="flex-grow relative"
+              >
+                <div
+                  class="absolute top-2 right-4"
+                >
+                  <button
+                    class="button button--with-icon"
+                  >
+                    <span
+                      aria-hidden="true"
+                      class="__icon-wrapper"
+                    >
+                      <span
+                        class="icon icon--uiflex items-center justify-center"
+                        style="width: 20px; height: 20px;"
+                      >
+                        <span
+                          class="material-icons material-icons-outlined"
+                          style="font-size: 20px;"
+                        >
+                          content_copy
+                        </span>
+                      </span>
+                    </span>
+                    Copy
+                  </button>
+                </div>
+                <textarea
+                  class="
+                    border-2 border-pink-500
+                    p-2 w-full h-full
+                    font-mono text-xs
+                    ring-2 ring-purple-500
+                    ring-offset-2 ring-offset-white
+                    rounded
+                  "
+                  readonly=""
+                >
+                  {
+  "application": {
+    "splash": {
+      "delay": 1000,
+      "show": true
+    }
+  },
+  "drag": {
+    "dragging": false,
+    "pos": [
+      0,
+      0
+    ],
+    "size": [
+      4,
+      4
+    ]
+  },
+  "editor": {
+    "dragging": false,
+    "current": null,
+    "entities": [
+      {
+        "id": "262ec14e-940b-41b3-8c4a-6958afff5332",
+        "pos": [
+          2,
+          2
+        ],
+        "module": "shelter",
+        "enabled": false
+      },
+      {
+        "id": "9d2d6e06-7e1f-4021-b4cb-dbbb7b6515d0",
+        "pos": [
+          9,
+          1
+        ],
+        "module": "mediumWindTurbine",
+        "enabled": true
+      },
+      {
+        "id": "2fb98a1d-0738-4def-bf52-f0c91a0e1e45",
+        "pos": [
+          1,
+          9
+        ],
+        "module": "mediumSolarPanel",
+        "enabled": false
+      },
+      {
+        "id": "ff6de281-5345-4ff4-af7c-eb9f2afd8694",
+        "module": "mediumShredder",
+        "pos": [
+          9,
+          5
+        ],
+        "enabled": true
+      },
+      {
+        "id": "5b4c6fc0-5066-4962-973b-9d62316e4fa7",
+        "module": "mediumShredder",
+        "pos": [
+          5,
+          9
+        ],
+        "enabled": false
+      },
+      {
+        "pos": [
+          22,
+          2
+        ],
+        "module": "qtRtg",
+        "enabled": true,
+        "id": "96da73e5-9776-44d6-b526-6ed7f47ac9ee"
+      },
+      {
+        "pos": [
+          22,
+          4
+        ],
+        "module": "qtRtg",
+        "enabled": true,
+        "id": "6fc5d160-d017-4db5-8279-63725936ee23"
+      },
+      {
+        "pos": [
+          22,
+          6
+        ],
+        "module": "rtg",
+        "enabled": true,
+        "id": "45fa3e7e-9e1e-4188-ac17-809a3a5847b8"
+      },
+      {
+        "pos": [
+          22,
+          9
+        ],
+        "module": "rtg",
+        "enabled": true,
+        "id": "4d7f50d9-1fb7-4fe7-bc30-001fb94eed41"
+      },
+      {
+        "pos": [
+          12,
+          2
+        ],
+        "module": "xlargeWindTurbine",
+        "enabled": true,
+        "id": "641f9330-d802-45a5-80f9-0b7a45a59a10"
+      },
+      {
+        "pos": [
+          11,
+          9
+        ],
+        "module": "mediumGenerator",
+        "enabled": true,
+        "id": "258a9d97-ac01-4849-84a1-381a2c915fc1"
+      },
+      {
+        "pos": [
+          15,
+          9
+        ],
+        "module": "mediumGenerator",
+        "enabled": true,
+        "id": "c03c7c14-416e-4ec8-b6b9-29b656573c98"
+      },
+      {
+        "pos": [
+          19,
+          9
+        ],
+        "module": "mediumBattery",
+        "enabled": true,
+        "id": "58a2e641-e2f8-4fba-a079-ff937e760837"
+      },
+      {
+        "pos": [
+          19,
+          5
+        ],
+        "module": "mediumSolarPanel",
+        "enabled": true,
+        "id": "db75958a-c48b-4a0b-b91e-2c8b6381c1c4"
+      },
+      {
+        "pos": [
+          36,
+          3
+        ],
+        "module": "largeSolarPanel",
+        "enabled": true,
+        "id": "83fb60a4-c57a-4d79-8f99-0d6faf7d3912"
+      }
+    ]
+  },
+  "grid": {
+    "size": [
+      40,
+      40
+    ],
+    "show": true
+  },
+  "location": {
+    "locations": [
+      {
+        "id": "sylva",
+        "difficulty": "easy",
+        "wind": 1,
+        "sun": 1,
+        "cycle": [
+          720,
+          60
+        ]
+      },
+      {
+        "id": "desolo",
+        "difficulty": "easy",
+        "wind": 0.5,
+        "sun": 1.5,
+        "cycle": 115
+      },
+      {
+        "id": "calidor",
+        "difficulty": "medium",
+        "wind": 0.5,
+        "sun": 1.75
+      },
+      {
+        "id": "vesania",
+        "difficulty": "medium",
+        "wind": 0.5,
+        "sun": 1.5
+      },
+      {
+        "id": "novus",
+        "difficulty": "medium",
+        "wind": 1.5,
+        "sun": 1.5
+      },
+      {
+        "id": "glacio",
+        "difficulty": "hard",
+        "wind": 1.75,
+        "sun": 0.25
+      },
+      {
+        "id": "atrox",
+        "difficulty": "veryHard",
+        "wind": 0.5,
+        "sun": 0.5
+      }
+    ],
+    "current": "calidor"
+  },
+  "module": {
+    "modules": {
+      "smallWindTurbine": {
+        "id": "smallWindTurbine",
+        "shortId": "swt",
+        "power": 1.5,
+        "powerType": "wind",
+        "recipe": {
+          "ceramic": 1
+        },
+        "tier": 1,
+        "size": [
+          1,
+          1
+        ]
+      },
+      "smallSolarPanel": {
+        "id": "smallSolarPanel",
+        "shortId": "ss",
+        "power": 1,
+        "powerType": "sun",
+        "recipe": {
+          "copper": 1
+        },
+        "tier": 1,
+        "size": [
+          1,
+          1
+        ]
+      },
+      "smallGenerator": {
+        "id": "smallGenerator",
+        "shortId": "sg",
+        "power": 2,
+        "powerType": "powered",
+        "recipe": {
+          "compound": 1
+        },
+        "tier": 1,
+        "size": [
+          1,
+          1
+        ]
+      },
+      "qtRtg": {
+        "id": "qtRtg",
+        "shortId": "qr",
+        "power": 1,
+        "powerType": "always",
+        "recipe": null,
+        "tier": 1,
+        "size": [
+          1,
+          1
+        ]
+      },
+      "smallBattery": {
+        "id": "smallBattery",
+        "shortId": "sb",
+        "power": 1,
+        "powerType": "powered",
+        "capacity": 32,
+        "recipe": {
+          "zinc": 1
+        },
+        "tier": 1,
+        "size": [
+          1,
+          1
+        ]
+      },
+      "portableOxygenator": {
+        "id": "portableOxygenator",
+        "shortId": "po",
+        "power": -1,
+        "recipe": {
+          "nanoCarbonAlloy": 1
+        },
+        "tier": 1,
+        "size": [
+          1,
+          1
+        ]
+      },
+      "fieldShelter": {
+        "id": "fieldShelter",
+        "shortId": "fs",
+        "power": 0.5,
+        "powerType": "always",
+        "recipe": {
+          "silicone": 1,
+          "graphene": 1
+        },
+        "tier": 2,
+        "size": [
+          2,
+          2
+        ]
+      },
+      "mediumWindTurbine": {
+        "id": "mediumWindTurbine",
+        "shortId": "mwt",
+        "power": 5,
+        "powerType": "wind",
+        "recipe": {
+          "aluminum": 1,
+          "ceramic": 1
+        },
+        "tier": 2,
+        "size": [
+          2,
+          2
+        ]
+      },
+      "mediumSolarPanel": {
+        "id": "mediumSolarPanel",
+        "shortId": "msp",
+        "power": 4,
+        "powerType": "sun",
+        "recipe": {
+          "copper": 1,
+          "glass": 1
+        },
+        "tier": 2,
+        "size": [
+          2,
+          2
+        ]
+      },
+      "mediumGenerator": {
+        "id": "mediumGenerator",
+        "shortId": "mg",
+        "power": 9,
+        "powerType": "powered",
+        "recipe": {
+          "tungsten": 1,
+          "aluminum": 1
+        },
+        "tier": 2,
+        "size": [
+          2,
+          2
+        ]
+      },
+      "mediumBattery": {
+        "id": "mediumBattery",
+        "shortId": "mb",
+        "power": 5,
+        "powerType": "powered",
+        "capacity": 512,
+        "recipe": {
+          "zinc": 1,
+          "lithium": 1
+        },
+        "tier": 2,
+        "size": [
+          2,
+          2
+        ]
+      },
+      "rtg": {
+        "id": "rtg",
+        "shortId": "rtg",
+        "power": 4,
+        "powerType": "always",
+        "recipe": {
+          "nanoCarbonAlloy": 1,
+          "lithium": 1
+        },
+        "tier": 2,
+        "size": [
+          2,
+          2
+        ]
+      },
+      "autoArm": {
+        "id": "autoArm",
+        "shortId": "aa",
+        "power": -1,
+        "recipe": {
+          "aluminum": 1,
+          "graphite": 1
+        },
+        "tier": 2,
+        "size": [
+          2,
+          2
+        ]
+      },
+      "mediumShredder": {
+        "id": "mediumShredder",
+        "shortId": "ms",
+        "power": -5,
+        "recipe": {
+          "iron": 2
+        },
+        "tier": 2,
+        "size": [
+          2,
+          2
+        ]
+      },
+      "mediumPrinter": {
+        "id": "mediumPrinter",
+        "shortId": "mp",
+        "power": -2,
+        "recipe": {
+          "compound": 2
+        },
+        "tier": 2,
+        "size": [
+          2,
+          2
+        ]
+      },
+      "largePrinter": {
+        "id": "largePrinter",
+        "shortId": "lp",
+        "power": -5,
+        "unlockCost": null,
+        "recipe": {
+          "compound": 3
+        },
+        "tier": 3,
+        "size": [
+          4,
+          4
+        ]
+      },
+      "largeWindTurbine": {
+        "id": "largeWindTurbine",
+        "shortId": "lwt",
+        "power": 10,
+        "powerType": "wind",
+        "recipe": {
+          "aluminumAlloy": 1,
+          "glass": 1,
+          "ceramic": 1
+        },
+        "tier": 3,
+        "size": [
+          4,
+          4
+        ]
+      },
+      "largeSolarPanel": {
+        "id": "largeSolarPanel",
+        "shortId": "lsp",
+        "power": 8,
+        "powerType": "sun",
+        "recipe": {
+          "aluminumAlloy": 1,
+          "glass": 1,
+          "copper": 1
+        },
+        "tier": 3,
+        "size": [
+          4,
+          4
+        ]
+      },
+      "researchChamber": {
+        "id": "researchChamber",
+        "shortId": "rc",
+        "power": -2,
+        "unlockCost": null,
+        "recipe": {
+          "compound": 2,
+          "resin": 1
+        },
+        "tier": 3,
+        "size": [
+          4,
+          4
+        ]
+      },
+      "smeltingFurnace": {
+        "id": "smeltingFurnace",
+        "shortId": "sf",
+        "power": -5,
+        "unlockCost": 250,
+        "recipe": {
+          "resin": 2,
+          "compound": 1
+        },
+        "tier": 3,
+        "size": [
+          4,
+          4
+        ]
+      },
+      "soilCentrifuge": {
+        "id": "soilCentrifuge",
+        "shortId": "sc",
+        "power": -6,
+        "unlockCost": 750,
+        "recipe": {
+          "compound": 2,
+          "aluminum": 1
+        },
+        "tier": 3,
+        "size": [
+          4,
+          4
+        ]
+      },
+      "chemistryLab": {
+        "id": "chemistryLab",
+        "shortId": "cl",
+        "power": -10,
+        "unlockCost": 1600,
+        "recipe": {
+          "ceramic": 1,
+          "tungsten": 1,
+          "glass": 1
+        },
+        "tier": 3,
+        "size": [
+          4,
+          4
+        ]
+      },
+      "atmosphericCondenser": {
+        "id": "atmosphericCondenser",
+        "shortId": "ac",
+        "power": -20,
+        "unlockCost": 2200,
+        "recipe": {
+          "plastic": 1,
+          "glass": 1,
+          "iron": 1
+        },
+        "tier": 3,
+        "size": [
+          4,
+          4
+        ]
+      },
+      "tradePlatform": {
+        "id": "tradePlatform",
+        "shortId": "tp",
+        "power": 0,
+        "unlockCost": 2500,
+        "recipe": {
+          "iron": 1,
+          "tungsten": 1,
+          "compound": 1
+        },
+        "tier": 3,
+        "size": [
+          4,
+          4
+        ]
+      },
+      "largeShredder": {
+        "id": "largeShredder",
+        "shortId": "ls",
+        "power": -7.5,
+        "unlockCost": 2500,
+        "recipe": {
+          "tungstenCarbide": 1,
+          "iron": 2
+        },
+        "tier": 3,
+        "size": [
+          4,
+          4
+        ]
+      },
+      "largeStorage": {
+        "id": "largeStorage",
+        "shortId": "ls",
+        "power": null,
+        "unlockCost": 2000,
+        "recipe": {
+          "ceramic": 3
+        },
+        "tier": 3,
+        "size": [
+          4,
+          4
+        ]
+      },
+      "largeStorageSiloA": {
+        "id": "largeStorageSiloA",
+        "shortId": "lssa",
+        "power": null,
+        "unlockCost": 5000,
+        "recipe": {
+          "aluminum": 2,
+          "steel": 1
+        },
+        "tier": 3,
+        "size": [
+          4,
+          4
+        ]
+      },
+      "largeStorageSiloB": {
+        "id": "largeStorageSiloB",
+        "shortId": "lssb",
+        "power": null,
+        "unlockCost": 7500,
+        "recipe": {
+          "steel": 3
+        },
+        "tier": 3,
+        "size": [
+          4,
+          4
+        ]
+      },
+      "largeActiveStorage": {
+        "id": "largeActiveStorage",
+        "shortId": " las",
+        "power": null,
+        "unlockCost": 2000,
+        "recipe": {
+          "zinc": 1,
+          "aluminum": 1,
+          "resin": 1
+        },
+        "tier": 3,
+        "size": [
+          4,
+          4
+        ]
+      },
+      "exoRequestPlatform": {
+        "id": "exoRequestPlatform",
+        "shortId": "erp",
+        "power": null,
+        "unlockCost": 1000,
+        "recipe": {
+          "resin": 2,
+          "ceramic": 1
+        },
+        "tier": 3,
+        "size": [
+          4,
+          4
+        ]
+      },
+      "buggy": {
+        "id": "buggy",
+        "shortId": "b",
+        "power": -0.031,
+        "unlockCost": 1500,
+        "recipe": {
+          "compound": 1,
+          "aluminum": 1
+        },
+        "tier": 3,
+        "size": [
+          4,
+          4
+        ]
+      },
+      "mediumRover": {
+        "id": "mediumRover",
+        "shortId": "mr",
+        "power": -0.5,
+        "unlockCost": 3750,
+        "recipe": {
+          "plastic": 2,
+          "rubber": 1
+        },
+        "tier": 3,
+        "size": [
+          4,
+          4
+        ]
+      },
+      "landingPad": {
+        "id": "landingPad",
+        "shortId": "lp",
+        "unlockCost": 750,
+        "recipe": {
+          "ceramic": 2,
+          "aluminum": 1
+        },
+        "tier": 3,
+        "size": [
+          4,
+          4
+        ]
+      },
+      "shelter": {
+        "id": "shelter",
+        "shortId": "s",
+        "power": 1,
+        "powerType": "always",
+        "unlockCost": null,
+        "recipe": {
+          "plastic": 2,
+          "silicone": 2
+        },
+        "tier": 4,
+        "size": [
+          8,
+          8
+        ]
+      },
+      "autoExtractor": {
+        "id": "autoExtractor",
+        "shortId": "ae",
+        "power": -8,
+        "unlockCost": 7500,
+        "recipe": {
+          "rubber": 1,
+          "tungstenCarbide": 1,
+          "steel": 2
+        },
+        "tier": 4,
+        "size": [
+          8,
+          8
+        ]
+      },
+      "xlargeWindTurbine": {
+        "id": "xlargeWindTurbine",
+        "shortId": "xlwt",
+        "power": 17,
+        "powerType": "wind",
+        "recipe": {
+          "iron": 1,
+          "ceramic": 1,
+          "graphene": 1,
+          "aluminumAlloy": 1
+        },
+        "tier": 4,
+        "size": [
+          8,
+          8
+        ]
+      },
+      "solarArray": {
+        "id": "solarArray",
+        "shortId": "sa",
+        "power": 14,
+        "recipe": {
+          "copper": 1,
+          "glass": 1,
+          "graphene": 1,
+          "aluminumAlloy": 1
+        },
+        "tier": 4,
+        "size": [
+          8,
+          8
+        ]
+      },
+      "extraLargeShredder": {
+        "id": "extraLargeShredder",
+        "shortId": "xls",
+        "power": -10,
+        "recipe": {
+          "steel": 2,
+          "tungstenCarbide": 2
+        },
+        "tier": 4,
+        "size": [
+          8,
+          8
+        ]
+      },
+      "extraLargeStorage": {
+        "id": "extraLargeStorage",
+        "shortId": "xlst",
+        "unlockCost": 2000,
+        "recipe": {
+          "iron": 2,
+          "ceramic": 2
+        },
+        "tier": 4,
+        "size": [
+          8,
+          8
+        ]
+      },
+      "wreckedSolarArray": {
+        "id": "wreckedSolarArray",
+        "shortId": "wsa",
+        "power": 64,
+        "powerType": "sun",
+        "tier": -1,
+        "size": [
+          16,
+          16
+        ],
+        "recipe": null
+      }
+    }
+  },
+  "options": {
+    "displayModal": true,
+    "flags": {
+      "hideInvalid": false,
+      "showEditor": true,
+      "showEfficiencyAsMultiplier": true,
+      "showPowerStatus": true,
+      "showShoppingList": true,
+      "materialRequirementBreakdown": false
+    }
+  },
+  "experiment": {
+    "ids": [],
+    "entities": {}
+  },
+  "modal": {
+    "modals": {
+      "export": true,
+      "import": false,
+      "settings": false
+    }
+  }
+}
+                </textarea>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="flex-grow"
+    />
+    <div
+      class="flex space-x-4"
+    >
+      <span
+        class="font-bold"
+      >
+        Efficiency
+      </span>
+      <div
+        class="flex space-x-2 text-yellow-500"
+      >
+        <div>
+          game:powerType.wind
+        </div>
+        <div
+          class="whitespace-nowrap"
+        >
+          0.50
+        </div>
+      </div>
+      <div
+        class="flex space-x-2 text-green-500"
+      >
+        <div>
+          game:powerType.sun
+        </div>
+        <div
+          class="whitespace-nowrap"
+        >
+          1.75
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
