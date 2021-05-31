@@ -58,6 +58,8 @@ export function Canvas(props) {
 
       <svg
         {...{ width, height, ref: refCb }}
+        role="application"
+        aria-label={'Editor canvas'}
         className={cx(className, 'canvas', isDragging && 'canvas--is-dragging')}
         patternUnits="userSpaceOnUse"
         onDragOver={e => {
@@ -69,7 +71,7 @@ export function Canvas(props) {
           }
         }}
         onDragEnd={e => {
-          console.log('end it', e);
+          // console.log('end it', e);
         }}
         onDrop={e => {
           const p = localPoint(e);

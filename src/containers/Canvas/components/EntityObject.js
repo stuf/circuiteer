@@ -1,3 +1,4 @@
+import * as P from 'prop-types';
 import { Group } from '@visx/group';
 import { useTranslation } from 'react-i18next';
 import cx from 'classnames';
@@ -78,6 +79,17 @@ export function EntityObject(props) {
     </Group>
   );
 }
+
+EntityObject.propTypes = {
+  x: P.number,
+  y: P.number,
+  width: P.number,
+  height: P.number,
+  object: P.object,
+  module: P.object,
+  selected: P.bool,
+  onSelect: P.func,
+};
 
 /**
  * @typedef {object} Props
