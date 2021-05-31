@@ -4,6 +4,7 @@ exports[`ShoppingList 1`] = `
 <div>
   <section>
     <header
+      aria-label="ui:section.shoppingList.title"
       class="font-bold mb-2"
     >
       ui:section.shoppingList.title

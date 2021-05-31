@@ -30,6 +30,7 @@ export function Details(props) {
 
               <Icon
                 name="chevron_right"
+                aria-hidden="true"
                 className={cx(
                   open && 'transform rotate-90',
                   'w-5 h-5 text-white',
