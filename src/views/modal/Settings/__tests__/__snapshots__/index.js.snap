@@ -1,3 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`SettingsModal 1`] = `<div />`;
+exports[`SettingsModal default 1`] = `<div />`;
+
+exports[`SettingsModal open by default 1`] = `<div />`;
