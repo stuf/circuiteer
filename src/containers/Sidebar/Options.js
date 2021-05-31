@@ -52,7 +52,7 @@ export default function SidebarOptions(props) {
       {items.map((item, ix) => (
         <Toggle
           key={ix}
-          checked={(item.value || (a => a))(options)}
+          checked={item.value(options)}
           label={t(item.label)}
           onChange={() => update(item.action())}
         />

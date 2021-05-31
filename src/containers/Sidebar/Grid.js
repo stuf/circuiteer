@@ -2,12 +2,11 @@ import * as L from 'partial.lenses';
 import { useSelector, useDispatch, shallowEqual } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 
-import { Group } from 'components';
-import { Input } from 'components/form';
+import { Group, Input } from 'components';
 import { setGridSize } from 'state/grid';
 import { gridSizeIn } from 'common/selectors';
 
-export default function Grid() {
+export function SidebarGrid() {
   const update = useDispatch();
   const { t } = useTranslation();
 
@@ -19,12 +18,14 @@ export default function Grid() {
       <Group title={t('common:grid')}>
         <div className="grid grid-cols-2 gap-4">
           <Input
+            id="sidebar-grid-width"
             label={t('common:width')}
             type="number"
             value={gw}
             onChange={e => update(setGridSize(L.set(0, +e.target.value, gxy)))}
           />
           <Input
+            id="sidebar-grid-height"
             label={t('common:height')}
             type="number"
             value={gh}
@@ -35,3 +36,5 @@ export default function Grid() {
     </>
   );
 }
+
+export default SidebarGrid;

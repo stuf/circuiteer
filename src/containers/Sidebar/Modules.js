@@ -69,7 +69,11 @@ export function SidebarModules(props) {
   return (
     <Group title="Modules">
       <div className="sidebar-modules">
+        <label id="module-search-label" className="sr-only">
+          {t('common:search')}
+        </label>
         <input
+          aria-labelledby="module-search-label"
           type="search"
           className="input--base __search-field"
           defaultValue={state.filterText}
@@ -88,11 +92,19 @@ export function SidebarModules(props) {
       )}
 
       {Object.entries(modsʼ).map(([tierNum, modules]) => (
-        <Deets key={`tier-${tierNum}`} open head={`Tier ${tierNum}`}>
-          <ul className="grid grid-cols-2 gap-2 text-xs module-list">
+        <Deets
+          key={`tier-${tierNum}`}
+          open
+          head={t(`game:tier.tier${tierNum}`)}
+        >
+          <ul
+            className="grid grid-cols-2 gap-2 text-xs module-list"
+            aria-label={t(`game:tier.tier${tierNum}`)}
+          >
             {modules.map((moduleObj, i) => (
               <li
                 key={`tier-${tierNum}-${i}`}
+                aria-label={moduleObj.displayName}
                 draggable
                 onDragStart={e => {
                   const data_ = { module: moduleObj };
