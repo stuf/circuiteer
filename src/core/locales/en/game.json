@@ -1,4 +1,11 @@
 {
+  "tier": {
+    "tier1": "Tier 1",
+    "tier2": "Tier 2",
+    "tier3": "Tier 3",
+    "tier4": "Tier 4",
+    "tier-1": "Tier -1"
+  },
   "location": {
     "sylva": "Sylva",
     "desolo": "Desolo",

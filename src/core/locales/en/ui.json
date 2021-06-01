@@ -23,7 +23,13 @@
       "title": "Export"
     },
     "import": {
-      "title": "Import"
+      "title": "Import",
+      "invalidJsonSyntax": {
+        "label": "Invalid JSON syntax"
+      },
+      "validationErrors": {
+        "label": "Validation errors"
+      }
     }
   },
   "option": {
