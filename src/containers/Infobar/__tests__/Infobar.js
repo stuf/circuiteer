@@ -7,17 +7,16 @@ import { Infobar } from '../Infobar';
 
 describe('Infobar', () => {
   it('works by default', async () => {
-    const { container, findByRole } = render(<Infobar />);
+    const { container, findByRole, findByLabelText } = render(<Infobar />);
 
     // logRoles(container);
 
     expect(container).toMatchSnapshot();
 
     const buttons = [
-      await findByRole('button', { name: /power/i }),
+      await findByLabelText(/power/i),
       await findByRole('button', { name: /import/i }),
       await findByRole('button', { name: /export/i }),
-      await findByRole('button', { name: /copy/i }),
     ];
 
     buttons.forEach(button => fireEvent.click(button));
@@ -30,5 +29,7 @@ describe('Infobar', () => {
       preloadedState,
     );
     const { container } = render(<Infobar />, { initialState });
+
+    logRoles(container);
   });
 });
