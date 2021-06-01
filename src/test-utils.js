@@ -5,6 +5,8 @@ import { preloadedState } from './core/preloaded';
 import * as reducers from './state';
 import { configureStore } from '@reduxjs/toolkit';
 
+import './test/index';
+
 //
 
 export function render(vdom, { initialState, store, ...renderOptions } = {}) {
