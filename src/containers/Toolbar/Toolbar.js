@@ -1,51 +1,53 @@
-import { useSelector } from 'react-redux';
-
+import { useTranslation } from 'react-i18next';
 import { Button } from 'components';
 
 const noop = () => {};
 
 export function Toolbar() {
-  const state = useSelector(a => a);
+  const { t } = useTranslation();
 
   return (
     <>
-      <div className="flex space-x-1 pl-1 border-l-2">
-        <div>
-          <Button label="Import" icon="file_upload" onClick={noop} />
-        </div>
+      <ul
+        id="canvas-toolbar"
+        role="menu"
+        aria-label={t('ui:toolbar.canvas.label')}
+        className="flex items-stretch space-x-1"
+      >
+        <li role="menuitem">
+          <Button
+            label={t('ui:button.power.label')}
+            icon="bolt"
+            onClick={noop}
+            disabled
+            pressed
+          >
+            {t('ui:button.power.body')}
+          </Button>
+        </li>
 
-        <div className="relative">
-          <Button label="Export" icon="file_download" onClick={noop} />
+        <li role="separator" className="relative border-r-2 border-dashed" />
 
-          <div className="absolute left-0 top-full z-10 hidden">
-            <div
-              style={{ width: '40rem', height: '30rem' }}
-              className="bg-white border-2 shadow-lg rounded-lg px-4 py-2 flex flex-col"
-            >
-              <header className="font-bold mb-2">Export</header>
+        <li role="menuitem">
+          <Button
+            label={t('ui:button.import.label')}
+            icon="file_upload"
+            onClick={noop}
+          >
+            {t('ui:button.import.body')}
+          </Button>
+        </li>
 
-              <div className="flex-grow relative">
-                <div className="absolute top-2 right-4">
-                  <Button label="Copy" icon="content_copy" onClick={noop} />
-                </div>
-
-                <textarea
-                  className={`
-                    border-2 border-pink-500
-                    p-2 w-full h-full
-                    font-mono text-xs
-                    ring-2 ring-purple-500
-                    ring-offset-2 ring-offset-white
-                    rounded
-                  `}
-                  value={JSON.stringify(state, null, 2)}
-                  readOnly
-                />
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+        <li role="menuitem">
+          <Button
+            label={t('ui:button.export.label')}
+            icon="file_download"
+            onClick={noop}
+          >
+            {t('ui:button.export.body')}
+          </Button>
+        </li>
+      </ul>
     </>
   );
 }
