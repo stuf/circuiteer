@@ -5,7 +5,6 @@ import { useTranslation } from 'react-i18next';
 import cx from 'classnames';
 
 import { Toolbar } from 'containers/Toolbar';
-import { Button } from 'components/Button';
 import { useOptions } from 'common/hooks';
 import { PowerStrengthLabel } from '../../config';
 

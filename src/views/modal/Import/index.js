@@ -13,7 +13,7 @@ export function ImportModal(props) {
     <Modal title={t('ui:modal.import.title')} open={open}>
       <div>
         Data must conform to an import schema. They are available{' '}
-        <a href="#">here</a>.
+        <a href="help/schema">here</a>.
       </div>
 
       <SchemaForm schema={schema} />
