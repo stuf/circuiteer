@@ -1,19 +1,23 @@
-import { act, logDOM, fireEvent } from '@testing-library/react';
+import { act, logDOM, fireEvent, logRoles } from '@testing-library/react';
 import { render } from 'test-utils';
 import { SettingsModal } from '../index';
 
 describe('SettingsModal', () => {
   test('default', async () => {
-    const { container } = render(<SettingsModal />);
+    const { container, findByRole } = render(<SettingsModal open={true} />);
 
     expect(container).toMatchSnapshot();
+
+    // logRoles(container);
   });
 
-  test('open by default', () => {
-    const { container, findByText } = render(<SettingsModal open={true} />);
+  test('opens', async () => {
+    let result;
 
-    // logDOM(container);
+    act(() => {
+      result = render(<SettingsModal open />);
+    });
 
-    expect(container).toMatchSnapshot();
+    const { container, findByRole } = result;
   });
 });

@@ -16,6 +16,7 @@ export const Input = forwardRef((props, ref) => {
     placeholder,
     rows,
     className,
+    required,
   } = props;
 
   const inputProps = {
@@ -26,6 +27,7 @@ export const Input = forwardRef((props, ref) => {
     placeholder,
     readOnly,
     ref,
+    required,
   };
 
   if (type === 'textarea') {

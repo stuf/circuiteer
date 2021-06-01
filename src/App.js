@@ -7,11 +7,16 @@ import { DefineSvgAssets } from './core/svg';
 function App() {
   const modals = useSelector(s => s.modal.modals);
 
+  console.log({ modals })
+
   return (
     <>
       <Views.Modal.ExportModal open={modals.export} />
       <Views.Modal.SettingsModal open={modals.settings} />
+      <Views.Modal.ImportModal open={modals.import} />
+
       <DefineSvgAssets />
+
       <Router>
         <Switch>
           <Route path="/sink" component={Views.Sink} />

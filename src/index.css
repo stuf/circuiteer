@@ -18,6 +18,19 @@ html,
 }
 
 @layer base {
+  a {
+    @apply inline-block;
+    @apply focus:outline-none;
+
+    text-shadow: 0 2px 2px #fff7;
+    box-shadow: inset 0 -1rem 0 -0.5rem #f43f5e;
+    padding: 1px 2px;
+  }
+
+  a:focus {
+    box-shadow: inset 0 -1.5rem 0 -0.5rem #f43f5e;
+  }
+
   .button--base {
     @apply bg-black;
     @apply hover:bg-purple-600 hover:shadow-md;

@@ -1,10 +1,7 @@
 import * as P from 'prop-types';
 import { useState } from 'react';
-// import { motion, AnimatePresence } from 'framer-motion';
 import { Dialog } from '@headlessui/react';
 import cns from 'classnames';
-
-import { modal } from 'common/motion';
 
 import './Modal.css';
 
@@ -36,7 +33,6 @@ export function Modal(props) {
       {/* <AnimatePresence> */}
       {isOpen && (
         <Dialog
-          static
           open={isOpen}
           onClose={() => setIsOpen(false)}
           className={cns(classNames.root)}

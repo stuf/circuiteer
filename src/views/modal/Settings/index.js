@@ -33,6 +33,7 @@ export function SettingsModal(props) {
                 onChange={e =>
                   update(setGridSize([+e.target.value, grid.size[1]]))
                 }
+                required
               />
               <Input
                 id="grid-height"
@@ -42,6 +43,7 @@ export function SettingsModal(props) {
                 onChange={e =>
                   update(setGridSize([grid.size[0], +e.target.value]))
                 }
+                required
               />
             </div>
 
