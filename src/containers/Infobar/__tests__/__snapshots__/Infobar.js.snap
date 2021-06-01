@@ -8,34 +8,51 @@ exports[`Infobar works by default 1`] = `
     <div
       class="space-x-1 w-full flex items-center"
     >
-      <button
-        class="button button--with-icon"
-        disabled=""
-        type="button"
+      <ul
+        aria-label="ui:toolbar.canvas.label"
+        class="flex items-stretch space-x-1"
+        id="canvas-toolbar"
+        role="menu"
       >
-        <span
-          aria-hidden="true"
-          class="__icon-wrapper"
+        <li
+          role="menuitem"
         >
-          <span
-            class="icon icon--uiflex items-center justify-center"
-            style="width: 20px; height: 20px;"
+          <button
+            aria-disabled="true"
+            aria-label="ui:button.power.label"
+            aria-pressed="true"
+            class="button button--with-icon"
+            disabled=""
+            type="button"
           >
             <span
-              class="material-icons material-icons-outlined"
-              style="font-size: 20px;"
+              aria-hidden="true"
+              class="__icon-wrapper"
             >
-              bolt
+              <span
+                class="icon icon--uiflex items-center justify-center"
+                style="width: 20px; height: 20px;"
+              >
+                <span
+                  class="material-icons material-icons-outlined"
+                  style="font-size: 20px;"
+                >
+                  bolt
+                </span>
+              </span>
             </span>
-          </span>
-        </span>
-        Power
-      </button>
-      <div
-        class="flex space-x-1 pl-1 border-l-2"
-      >
-        <div>
+            ui:button.power.body
+          </button>
+        </li>
+        <li
+          class="relative border-r-2 border-dashed"
+          role="separator"
+        />
+        <li
+          role="menuitem"
+        >
           <button
+            aria-label="ui:button.import.label"
             class="button button--with-icon"
             type="button"
           >
@@ -55,13 +72,14 @@ exports[`Infobar works by default 1`] = `
                 </span>
               </span>
             </span>
-            Import
+            ui:button.import.body
           </button>
-        </div>
-        <div
-          class="relative"
+        </li>
+        <li
+          role="menuitem"
         >
           <button
+            aria-label="ui:button.export.label"
             class="button button--with-icon"
             type="button"
           >
@@ -81,10 +99,10 @@ exports[`Infobar works by default 1`] = `
                 </span>
               </span>
             </span>
-            Export
+            ui:button.export.body
           </button>
-        </div>
-      </div>
+        </li>
+      </ul>
     </div>
     <div
       class="flex-grow"

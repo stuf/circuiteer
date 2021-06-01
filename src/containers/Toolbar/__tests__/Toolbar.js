@@ -24,6 +24,6 @@ describe('Toolbar', () => {
       fireEvent.click(b2);
     });
 
-    logRoles(container);
+    // logRoles(container);
   });
 });
