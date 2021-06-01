@@ -1,8 +1,14 @@
 import * as L from 'partial.lenses';
 import { Matrix } from '../linear';
-import { asGridPointI, matrixI } from '../lens';
+import { asGridPointI, matrixI, gridI } from '../lens';
 
 describe('common/lens', () => {
+  test('gridI', () => {
+    const asGridI = gridI([4, 4]);
+    expect(L.get(asGridI, [4, 4])).toEqual([1, 1]);
+    expect(L.set(asGridI, [1, 1], [0, 0])).toEqual([4, 4]);
+  });
+
   test('matrixI', () => {
     const p1 = [1, 2];
 

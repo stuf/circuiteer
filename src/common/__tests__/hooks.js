@@ -1,7 +1,17 @@
 import { renderHook, act } from '@testing-library/react-hooks';
 import { createEvent, fireEvent } from '@testing-library/react';
+import { Provider } from 'react-redux';
 
-import { useHotkey } from '../hooks';
+import {
+  useHotkey,
+  useOptions,
+  useGridSize,
+  useGridSizeMatrix,
+} from '../hooks';
+import { Matrix } from 'common/linear';
+import store from 'store';
+
+const wrapper = ({ children }) => <Provider store={store}>{children}</Provider>;
 
 describe('common/hooks', () => {
   test('useHotkey', () => {
@@ -30,5 +40,24 @@ describe('common/hooks', () => {
     });
 
     expect(cb).toHaveBeenCalledTimes(2);
+  });
+
+  test('useGridSize', () => {
+    const res = renderHook(() => useGridSize(), { wrapper });
+
+    expect(Array.isArray(res.result.current)).toBe(true);
+    expect(res.result.current).toHaveLength(2);
+  });
+
+  test('useGridSizeMatrix', () => {
+    const res = renderHook(() => useGridSizeMatrix(), { wrapper });
+
+    expect(res.result.current).toBeInstanceOf(Matrix);
+  });
+
+  test('useOptions', () => {
+    const res = renderHook(() => useOptions(), { wrapper });
+
+    expect(res).not.toBeUndefined();
   });
 });
