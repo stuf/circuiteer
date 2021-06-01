@@ -1,3 +1,7 @@
+import { stopEntityMove } from 'state/editor';
+import { moveEntityDelta } from 'state/editor';
+import { moveEntity } from 'state/editor';
+import { startEntityMove } from 'state/editor';
 import reducer, {
   addEntity,
   selectEntity,
@@ -45,6 +49,62 @@ describe('state/editor', () => {
       const a = toggleEntity('123');
       const r = reducer({ entities: [{ id: '123' }] }, a);
       const e = { entities: [{ id: '123', enabled: true }] };
+
+      expect(r).toEqual(e);
+    });
+
+    test('startEntityMove', () => {
+      const a = startEntityMove({ id: '123' });
+      const r = reducer({ entities: [{ id: '123' }, { id: '234' }] }, a);
+      const e = { entities: [{ id: '123', moving: true }, { id: '234' }] };
+
+      expect(r).toEqual(e);
+    });
+
+    test('stopEntityMove', () => {
+      const a = stopEntityMove({ id: '123' });
+      const r = reducer({ entities: [{ id: '123', moving: true }] }, a);
+      const e = { entities: [{ id: '123', moving: false }] };
+
+      expect(r).toEqual(e);
+    });
+
+    test('stopEntityMove (invalid, no-op)', () => {
+      const a = stopEntityMove({ id: '123' });
+      const r = reducer({}, a);
+      const e = {};
+
+      expect(r).toEqual(e);
+    });
+
+    test('moveEntity', () => {
+      const a = moveEntity({ id: '123', pos: [4, 0] });
+      const r = reducer({ entities: [{ id: '123', pos: [2, 0] }] }, a);
+      const e = { entities: [{ id: '123', pos: [4, 0] }] };
+
+      expect(r).toEqual(e);
+    });
+
+    test('moveEntity (invalid, no-op)', () => {
+      const a = moveEntity({ id: '123', pos: [4, 0] });
+      const r = reducer({}, a);
+      const e = {};
+
+      expect(r).toEqual(e);
+    });
+
+    test('moveEntityDelta', () => {
+      const a = moveEntityDelta({ id: '123', pos: [4, 2] });
+      const r = reducer({ entities: [{ id: '123', pos: [4, 2] }] }, a);
+      const e = { entities: [{ id: '123', pos: [8, 4] }] };
+
+      expect(r).toEqual(e);
+    });
+
+    test('moveEntityDelta (invalid, no-op)', () => {
+      const a = moveEntityDelta({ id: '123', pos: [4, 2] });
+      const r = reducer({}, a);
+      const e = {};
 
       expect(r).toEqual(e);
     });

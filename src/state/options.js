@@ -27,8 +27,6 @@ export const toggleMaterialRequirementBreakdown = createAction(
 
 export const toggleFlag = createAction('toggleFlag');
 
-export const toggleOptionsModal = createAction('toggleOptionsModal');
-
 //
 
 const toggle = f => R.compose(L.modify(['flags', f], R.not), original);
@@ -37,7 +35,6 @@ const toggle = f => R.compose(L.modify(['flags', f], R.not), original);
  * @type {App.State.Options}
  */
 const initialState = {
-  displayModal: false,
   flags: {
     hideInvalid: false,
     showPowerStatus: true,
@@ -54,9 +51,6 @@ const slice = createSlice({
   reducers: {},
   extraReducers: builder => {
     builder
-      .addCase(toggleOptionsModal, s => {
-        s.displayModal = !s.displayModal;
-      })
       .addCase(togglePowerStatus, toggle('showPowerStatus'))
       .addCase(toggleHideInvalid, toggle('hideInvalid'))
       .addCase(toggleEntityEditor, toggle('showEditor'))
