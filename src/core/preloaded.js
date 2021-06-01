@@ -183,8 +183,8 @@ export const preloadedState = {
   },
   modal: {
     modals: {
-      export: true,
-      import: false,
+      export: false,
+      import: true,
       settings: false,
     },
   },
