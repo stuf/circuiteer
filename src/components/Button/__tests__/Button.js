@@ -47,6 +47,4 @@ it('supports different sizes, types and icons', async () => {
       <Button icon="settings" label="Settings"></Button>
     </>,
   );
-
-  expect(container).toMatchSnapshot();
 });
