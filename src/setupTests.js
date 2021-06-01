@@ -4,33 +4,4 @@
 // learn more: https://github.com/testing-library/jest-dom
 import '@testing-library/jest-dom';
 import 'jest-extended';
-import ResizeObserver from 'resize-observer-polyfill';
-
-window.ResizeObserver = ResizeObserver;
-
-jest.mock('react-i18next', () => ({
-  // this mock makes sure any components using the translate hook can use it without a warning being shown
-  useTranslation: () => {
-    return {
-      t: str => str,
-      i18n: {
-        changeLanguage: () => new Promise(() => {}),
-      },
-    };
-  },
-}));
-
-//
-
-// Mock DataTransfer objects
-window.DataTransfer = class DataTransfer {
-  constructor() {
-    this.dropEffect = 'none';
-  }
-
-  setData() {}
-
-  getData() {}
-
-  clearData() {}
-};
+import './test/index';
