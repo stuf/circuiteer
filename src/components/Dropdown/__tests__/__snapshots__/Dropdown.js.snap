@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Dropdown 1`] = `
+exports[`Dropdown works as default 1`] = `
 <div>
   <div
     class="relative shadow-md rounded-md border-2 bg-white hover:shadow-lg"
