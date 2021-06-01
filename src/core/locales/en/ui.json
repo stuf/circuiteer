@@ -65,5 +65,24 @@
       "name": "Material requirement breakdown (TODO)",
       "help": "Break down refined and composite materials into their constituents"
     }
+  },
+  "toolbar": {
+    "canvas": {
+      "label": "Design tools"
+    }
+  },
+  "button": {
+    "import": {
+      "label": "Import design into editor",
+      "body": "Import"
+    },
+    "export": {
+      "label": "Export current design",
+      "body": "Export"
+    },
+    "power": {
+      "label": "Toggle power status",
+      "body": "Power status"
+    }
   }
 }
