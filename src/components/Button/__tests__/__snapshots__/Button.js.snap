@@ -3,7 +3,30 @@
 exports[`supports different sizes, types and icons 1`] = `
 <div>
   <button
+    aria-label="Settings"
     class="button button--with-icon"
+    type="button"
+  >
+    <span
+      aria-hidden="true"
+      class="__icon-wrapper"
+    >
+      <span
+        class="icon icon--uiflex items-center justify-center"
+        style="width: 20px; height: 20px;"
+      >
+        <span
+          class="material-icons material-icons-outlined"
+          style="font-size: 20px;"
+        >
+          settings
+        </span>
+      </span>
+    </span>
+  </button>
+  <button
+    class="button button--with-icon"
+    type="button"
   >
     <span
       aria-hidden="true"
@@ -24,7 +47,9 @@ exports[`supports different sizes, types and icons 1`] = `
     Settings
   </button>
   <button
+    aria-label="Settings"
     class="button button--with-icon"
+    type="button"
   >
     <span
       aria-hidden="true"
@@ -42,28 +67,6 @@ exports[`supports different sizes, types and icons 1`] = `
         </span>
       </span>
     </span>
-    Settings
-  </button>
-  <button
-    class="button button--with-icon"
-  >
-    <span
-      aria-hidden="true"
-      class="__icon-wrapper"
-    >
-      <span
-        class="icon icon--uiflex items-center justify-center"
-        style="width: 20px; height: 20px;"
-      >
-        <span
-          class="material-icons material-icons-outlined"
-          style="font-size: 20px;"
-        >
-          settings
-        </span>
-      </span>
-    </span>
-    Settings
   </button>
 </div>
 `;

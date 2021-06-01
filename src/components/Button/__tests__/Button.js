@@ -14,16 +14,10 @@ test('renders with sensible defaults', () => {
   render(<Button />);
 });
 
-it('uses label as text, otherwise children', async () => {
-  const { findAllByText } = render(
-    <>
-      <Button label="Label">Children</Button>
-      <Button label="">Children</Button>
-    </>,
-  );
+it('should create a label text to the button', async () => {
+  const { findByLabelText } = render(<Button label="label">children</Button>);
 
-  expect(await findAllByText('Children')).toHaveLength(1);
-  expect(await findAllByText('Label')).toHaveLength(1);
+  await findByLabelText('label');
 });
 
 it('should not throw when clicking without any given onClick handler', async () => {

@@ -9,10 +9,12 @@ export function Button(props) {
   const {
     children,
     className,
+    disabled,
     onClick,
     label,
     size,
     type,
+    pressed,
     icon,
     iconSize = 20,
     ...rest
@@ -26,15 +28,25 @@ export function Button(props) {
     className,
   ];
 
+  const buttonProps = {
+    type: 'button',
+    className: cx(...cns),
+    onClick: actions(onClick),
+    disabled,
+    'aria-label': label,
+    'aria-pressed': pressed,
+    'aria-disabled': disabled,
+  };
+
   return (
-    <button className={cx(...cns)} onClick={actions(onClick)} {...rest}>
+    <button {...buttonProps} {...rest}>
       {icon && (
         <span className="__icon-wrapper" aria-hidden="true">
           <Icon className="__icon" name={icon} size={iconSize} />
         </span>
       )}
 
-      {label || children}
+      {children}
     </button>
   );
 }
