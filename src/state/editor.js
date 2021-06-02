@@ -43,6 +43,8 @@ export const resetCurrent = createAction('resetCurrent');
 
 export const toggleEntity = createAction('toggleEntity');
 
+export const deleteEntity = createAction('deleteEntity');
+
 export const startEntityMove = createAction('startEntityMove');
 
 export const moveEntity = createAction('moveEntity');
@@ -65,6 +67,9 @@ const slice = createSlice({
   extraReducers: builder => {
     builder
       .addCase(addEntity, (s, a) => L.set(appendEntity, a.payload, original(s)))
+      .addCase(deleteEntity, (s, a) =>
+        L.remove(['entities', L.whereEq({ id: a.payload?.id })], original(s)),
+      )
       .addCase(resetCurrent, s => L.remove('current', original(s)))
       .addCase(selectEntity, (s, a) => L.set('current', a.payload, original(s)))
       .addCase(toggleEntity, (s, a) =>

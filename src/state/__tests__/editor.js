@@ -1,5 +1,6 @@
 import { stopEntityMove } from 'state/editor';
 import { moveEntityDelta } from 'state/editor';
+import { deleteEntity } from 'state/editor';
 import { moveEntity } from 'state/editor';
 import { startEntityMove } from 'state/editor';
 import reducer, {
@@ -27,6 +28,34 @@ describe('state/editor', () => {
       // Adding an entity with an ID doesn't regenerate its ID
       const a2 = addEntity({ id: '123' });
       expect(a2.payload.id).toBe('123');
+
+      expect(reducer({}, a1)).toEqual({ entities: [a1.payload] });
+      expect(reducer({}, a2)).toEqual({ entities: [a2.payload] });
+    });
+
+    test('deleteEntity', () => {
+      const a = deleteEntity({ id: 123 });
+      const r = reducer(
+        {
+          entities: [
+            { id: 123, foo: 1 },
+            { id: 124, bar: 2 },
+          ],
+        },
+        a,
+      );
+      const e = { entities: [{ id: 124, bar: 2 }] };
+
+      expect(a.payload).not.toBeUndefined();
+      expect(r).toEqual(e);
+    });
+
+    test('deleteEntity (invalid, no-op)', () => {
+      const a = deleteEntity();
+      const r = reducer({}, a);
+      const e = {};
+
+      expect(r).toEqual(e);
     });
 
     test('selectEntity', () => {
