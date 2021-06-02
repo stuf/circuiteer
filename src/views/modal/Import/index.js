@@ -10,7 +10,6 @@ export function ImportModal(props) {
   const { open = false } = props;
   const { t } = useTranslation();
   const { visible, hide, show } = useModal('import');
-  console.log('importModal', { open, visible, hide, show });
 
   return (
     <Modal title={t('ui:modal.import.title')} open={open} onClose={hide}>

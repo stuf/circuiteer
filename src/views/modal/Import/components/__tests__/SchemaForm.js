@@ -58,7 +58,7 @@ describe('SchemaForm', () => {
 
     const errors = await queryAllByRole('listitem');
 
-    expect(errors).toHaveLength(2);
+    expect(errors).toHaveLength(3);
   });
 
   it('has no errors with valid input', async () => {
