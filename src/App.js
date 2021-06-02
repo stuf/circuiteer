@@ -7,7 +7,7 @@ import { DefineSvgAssets } from './core/svg';
 function App() {
   const modals = useSelector(s => s.modal.modals);
 
-  console.log({ modals })
+  console.log({ modals });
 
   return (
     <>
@@ -19,7 +19,7 @@ function App() {
 
       <Router>
         <Switch>
-          <Route path="/sink" component={Views.Sink} />
+          <Route path="/docs" component={Views.Docs} />
           <Route path="/editor" component={Views.Editor} />
           <Route path="/" component={Views.Splash} />
         </Switch>

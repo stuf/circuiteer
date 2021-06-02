@@ -1,10 +1,13 @@
 import { useTranslation } from 'react-i18next';
 import { Button } from 'components';
+import { useModal } from 'common/hooks';
 
 const noop = () => {};
 
 export function Toolbar() {
   const { t } = useTranslation();
+  const importModal = useModal('import');
+  const exportModal = useModal('export');
 
   return (
     <>
@@ -32,7 +35,8 @@ export function Toolbar() {
           <Button
             label={t('ui:button.import.label')}
             icon="file_upload"
-            onClick={noop}
+            pressed={importModal.visible}
+            onClick={importModal.show}
           >
             {t('ui:button.import.body')}
           </Button>
@@ -42,7 +46,8 @@ export function Toolbar() {
           <Button
             label={t('ui:button.export.label')}
             icon="file_download"
-            onClick={noop}
+            pressed={exportModal.visible}
+            onClick={exportModal.show}
           >
             {t('ui:button.export.body')}
           </Button>

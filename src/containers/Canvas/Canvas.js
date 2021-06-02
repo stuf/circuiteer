@@ -139,6 +139,7 @@ export function Canvas(props) {
                     module,
                     selected: current?.id === entity.id,
                     onSelect: onSelect(entity.id),
+                    onDelete: () => {},
                   }}
                 />
               </Group>

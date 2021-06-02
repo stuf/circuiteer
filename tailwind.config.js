@@ -46,5 +46,8 @@ module.exports = {
       ringWidth: ['group-focus', 'group-hover', 'focus-within', 'disabled'],
     },
   },
-  plugins: [require('tailwindcss-interaction-variants')],
+  plugins: [
+    require('@tailwindcss/typography'),
+    require('tailwindcss-interaction-variants'),
+  ],
 };

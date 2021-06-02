@@ -1,5 +1,4 @@
 import * as P from 'prop-types';
-import { useState } from 'react';
 import { Dialog } from '@headlessui/react';
 import cns from 'classnames';
 
@@ -7,7 +6,6 @@ import './Modal.css';
 
 export function Modal(props) {
   const { open, className, children, title, description, onClose } = props;
-  console.log('Modal', { onClose });
 
   const classNames = {
     root: ['fixed', 'z-10', 'inset-0', 'overflow-y-auto'],

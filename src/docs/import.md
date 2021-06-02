@@ -1,3 +1,6 @@
+# Importing data
+
+```json
 {
   "$id": "https://github.com/stuf/circuiteer/blob/master/src/schema/app/import.json",
   "$schema": "http://json-schema.org/draft-07/schema#",
@@ -5,22 +8,7 @@
   "oneOf": [
     {
       "type": "object",
-      "required": [
-        "version",
-        "entities"
-      ],
-      "properties": {
-        "version": {
-          "const": "1.0.0-test"
-        }
-      }
-    },
-    {
-      "type": "object",
-      "required": [
-        "version",
-        "entities"
-      ],
+      "required": ["version", "entities"],
       "properties": {
         "version": {
           "const": "0.1.0"
@@ -53,15 +41,11 @@
                 "type": "boolean"
               }
             },
-            "required": [
-              "id",
-              "pos",
-              "module",
-              "enabled"
-            ]
+            "required": ["id", "pos", "module", "enabled"]
           }
         }
       }
     }
   ]
 }
+```

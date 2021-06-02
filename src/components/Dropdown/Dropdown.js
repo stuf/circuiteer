@@ -2,23 +2,29 @@ import * as P from 'prop-types';
 import cx from 'classnames';
 
 import { actions } from 'common/util';
+import { Icon } from '../Icon';
 
 export function Dropdown(props) {
-  const { value, onChange, choices, disabled } = props;
+  const { label, value, onChange, choices, disabled, className } = props;
 
   return (
     <div
       className={cx(
+        className,
         'relative shadow-md rounded-md border-2 bg-white',
         !disabled ? `hover:shadow-lg` : '',
         disabled ? `opacity-50` : '',
       )}
     >
-      <span className="absolute inset-y-0 right-2 inline-flex items-center">
-        {/* <UnfoldMore className="w-5 h-5" /> */}
+      <span
+        className="absolute inset-y-0 right-2 inline-flex items-center"
+        aria-hidden="true"
+      >
+        <Icon name="unfold_more" />
       </span>
+
       <select
-        className={`px-4 py-2 appearance-none block w-full bg-transparent`}
+        className={`px-4 py-2 pr-10 appearance-none block w-full bg-transparent`}
         value={value}
         onChange={actions(onChange)}
         disabled={disabled}

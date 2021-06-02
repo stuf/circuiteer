@@ -1,10 +1,6 @@
-import {
-  render,
-  fireEvent,
-  act,
-  logRoles,
-  screen,
-} from '@testing-library/react';
+import { fireEvent, act, logRoles, screen } from '@testing-library/react';
+import { render } from 'test-utils';
+
 import { Toolbar } from '../Toolbar';
 
 describe('Toolbar', () => {
