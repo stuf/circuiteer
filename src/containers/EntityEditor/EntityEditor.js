@@ -1,11 +1,11 @@
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { Toggle } from 'components';
+import { Button, Toggle } from 'components';
 import { useCurrentEntity } from './hooks';
 
 export function EntityEditor(props) {
-  const { current, module, toggleCurrent } = useCurrentEntity();
+  const { current, module, toggleCurrent, deleteCurrent } = useCurrentEntity();
   const [state, setState] = useState({ showDebug: false });
   const { t } = useTranslation();
 
@@ -34,6 +34,7 @@ export function EntityEditor(props) {
     <Wrapper>
       <header className="relative px-4 py-2 text-base font-bold">
         {t(`game:module.${module.id}`)}
+
         <Toggle
           className="absolute flex items-center -inset-y-0 right-4 text-sm"
           checked={current.enabled}
@@ -64,21 +65,35 @@ export function EntityEditor(props) {
 
           <dt id="entity-module">Module</dt>
           <dd aria-labelledby="entity-module">
-            <dl style={{ display: 'grid', gridTemplateColumns: '1fr 4fr' }}>
+            <dl style={{ display: 'grid', gridTemplateColumns: '1.4fr 4fr' }}>
               <dt id="module-id">Module ID</dt>
-              <dd aria-labelledby="module-id">{module.id}</dd>
+              <dd aria-labelledby="module-id" className="font-mono">
+                {module.id}
+              </dd>
 
               <dt id="module-power">Power</dt>
-              <dd aria-labelledby="module-power">{module.power} U/s</dd>
+              <dd aria-labelledby="module-power" className="font-mono">
+                {module.power} U/s
+              </dd>
 
               <dt id="module-type">Type</dt>
-              <dd aria-labelledby="module-type">{module.powerType}</dd>
+              <dd aria-labelledby="module-type" className="font-mono">
+                {module.powerType}
+              </dd>
 
               <dt id="module-tier">Tier</dt>
-              <dd aria-labelledby="module-tier">{module.tier}</dd>
+              <dd aria-labelledby="module-tier" className="font-mono">
+                {module.tier}
+              </dd>
             </dl>
           </dd>
         </dl>
+      </div>
+
+      <div className="px-4 py-2">
+        <Button label="Delete" icon="delete" onClick={() => deleteCurrent()}>
+          Delete
+        </Button>
       </div>
 
       <div className="px-4 py-2">

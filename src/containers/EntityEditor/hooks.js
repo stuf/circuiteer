@@ -1,6 +1,6 @@
 import * as L from 'partial.lenses';
 import { useDispatch, useSelector } from 'react-redux';
-import { toggleEntity } from 'state/editor';
+import { toggleEntity, deleteEntity } from 'state/editor';
 import { modules } from 'config';
 
 /**
@@ -45,5 +45,6 @@ export function useCurrentEntity() {
     current,
     module,
     toggleCurrent: () => update(toggleEntity({ id: _current })),
+    deleteCurrent: () => update(deleteEntity({ id: _current })),
   };
 }
