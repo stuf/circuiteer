@@ -1,9 +1,10 @@
 import * as R from 'ramda';
 import * as L from 'partial.lenses';
 import { useState, useEffect, useRef } from 'react';
-import { useSelector, shallowEqual } from 'react-redux';
+import { useDispatch, useSelector, shallowEqual } from 'react-redux';
 
 import { Matrix } from 'common/linear';
+import { showModal, hideModal, toggleModal } from 'state/modal';
 
 const { abs } = Math;
 
@@ -221,5 +222,21 @@ export function useHotkey(hotkey, fn) {
 }
 
 // #endregion
+
+// #endregion
+
+// #region UI
+export function useModal(name) {
+  const update = useDispatch();
+
+  const modalVisible = useSelector(L.get(['modal', 'modals', name]));
+
+  return {
+    visible: !!modalVisible,
+    show: () => update(showModal(name)),
+    hide: () => update(hideModal(name)),
+    toggle: () => update(toggleModal(name)),
+  };
+}
 
 // #endregion
