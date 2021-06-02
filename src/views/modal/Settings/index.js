@@ -7,6 +7,7 @@ import { Modal, Toggle, Button, Group, Input } from 'components';
 
 import './Settings.css';
 import { setGridSize, toggleGrid } from 'state/grid';
+import { useModal } from 'common/hooks';
 
 export function SettingsModal(props) {
   const flags = useSelector(s => s.options.flags);
@@ -14,12 +15,14 @@ export function SettingsModal(props) {
   const update = useDispatch();
   const { open = false } = props;
   const { t } = useTranslation();
+  const { hide } = useModal('settings');
 
   return (
     <Modal
       title={t('ui:modal.settings.title')}
       open={open}
       className="modal--settings"
+      onClose={hide}
     >
       <div className="grid grid-cols-2 gap-4">
         <div className="space-y-4">

@@ -4,13 +4,16 @@ import { Modal, Button } from 'components';
 
 import schema from 'schema/app/import.json';
 import { SchemaForm } from './components/SchemaForm';
+import { useModal } from 'common/hooks';
 
 export function ImportModal(props) {
   const { open = false } = props;
   const { t } = useTranslation();
+  const { visible, hide, show } = useModal('import');
+  console.log('importModal', { open, visible, hide, show });
 
   return (
-    <Modal title={t('ui:modal.import.title')} open={open}>
+    <Modal title={t('ui:modal.import.title')} open={open} onClose={hide}>
       <div>
         Data must conform to an import schema. They are available{' '}
         <a href="help/schema">here</a>.

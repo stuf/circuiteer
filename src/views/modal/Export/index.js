@@ -6,6 +6,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Button, Group, Input, Modal } from 'components';
 import { hideModal } from 'state/modal';
 import { peekInFade } from 'common/motion';
+import { useModal } from 'common/hooks';
 
 export function ExportModal(props) {
   const { open = false } = props;
@@ -15,6 +16,7 @@ export function ExportModal(props) {
   const [state, setState] = useState({ copied: false });
   const timer = useRef(null);
   const ref = useRef(null);
+  const { hide } = useModal('export');
 
   // TODO Use `useTimeout` hook instead
   useEffect(() => {
@@ -43,7 +45,7 @@ export function ExportModal(props) {
   }
 
   return (
-    <Modal title={t('ui:modal.export.title')} open={open}>
+    <Modal title={t('ui:modal.export.title')} open={open} onClose={hide}>
       <Group title="Editor state" className="relative">
         <div className="relative">
           <div className="absolute top-2 right-2 flex items-center space-x-2">
