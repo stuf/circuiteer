@@ -1,5 +1,6 @@
 import {
   actions,
+  debounce,
   preventDefault,
   stopPropagation,
   createPrefixedAction,
@@ -7,7 +8,13 @@ import {
   screenToGrid,
   gridToScreen,
   invokeIf,
+  construct0,
+  construct1,
+  construct2,
 } from '../util';
+import { MockClass, ctor } from '../mock';
+
+jest.mock('../mock');
 
 describe('common/util', () => {
   test('actions', () => {
@@ -31,6 +38,40 @@ describe('common/util', () => {
       expect(output).toEqual([[2, 1], 2]);
       // It's composed left-to-right
       expect(fn1).toHaveBeenCalledBefore(fn2);
+    });
+
+    test('debounce', done => {
+      const fn1 = jest.fn(() => done());
+      const def1 = debounce(fn1, 1);
+
+      def1(123);
+
+      expect(def1.name).toBe(`debounced<${fn1.name}>`);
+    });
+
+    describe('Class', () => {
+      beforeEach(() => {
+        ctor.mockClear();
+      });
+
+      test('construct0', () => {
+        const r = construct0(MockClass)(1, 2, 3);
+
+        expect(r).toBeTruthy();
+        expect(ctor).toHaveBeenCalledWith();
+      });
+
+      test('construct1', () => {
+        const r = construct1(MockClass)(1, 2, 3);
+        expect(r).toBeTruthy();
+        expect(ctor).toHaveBeenCalledWith(1);
+      });
+
+      test('construct2', () => {
+        const r = construct2(MockClass)(1, 2, 3);
+        expect(r).toBeTruthy();
+        expect(ctor).toHaveBeenCalledWith(1, 2);
+      });
     });
   });
 

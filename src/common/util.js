@@ -7,11 +7,33 @@ import * as RJT from '@reduxjs/toolkit';
 
 const { round } = Math;
 
-const setName = process.env.NODE_ENV === 'production' ? a => a : I.defineNameU;
-
 // Functions
 
 export const thru = (x, ...fns) => R.pipe(...fns)(x);
+
+export const debounce = (fn, ms) => {
+  let timeout;
+
+  const debounced = I.defineNameU(function debounced(...args) {
+    const deferred = () => {
+      timeout = null;
+
+      fn(...args);
+    };
+
+    clearTimeout(timeout);
+
+    timeout = setTimeout(deferred, ms);
+  }, `debounced<${fn.name}>`);
+
+  return debounced;
+};
+
+export const construct0 = R.constructN(0);
+
+export const construct1 = R.constructN(1);
+
+export const construct2 = R.constructN(2);
 
 //
 
@@ -51,7 +73,7 @@ export const actions = function actions(...fnsIn) {
   }
 };
 
-const invokeE = name => setName(e => e[name](), name);
+const invokeE = name => I.defineNameU(e => e[name](), name);
 
 export const preventDefault = invokeE('preventDefault');
 
