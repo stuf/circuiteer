@@ -2,6 +2,10 @@ import { shoppingList } from '../shopping-list';
 
 const warn = console.warn.bind(console.warn);
 
+afterEach(() => {
+  console.warn = warn;
+});
+
 test('shoppingList', () => {
   const fn = jest.fn();
   console.warn = fn;
@@ -16,5 +20,7 @@ test('shoppingList', () => {
 
   expect(res2).toEqual({});
 
-  console.warn = warn;
+  // It should warn with an unknown module (non-production)
+  shoppingList(['asd']);
+  expect(fn).toHaveBeenCalled();
 });
