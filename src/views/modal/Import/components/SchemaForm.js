@@ -1,19 +1,19 @@
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useRef, useState, useEffect, useCallback } from 'react';
+import * as R from 'ramda';
 import { useTranslation } from 'react-i18next';
 import * as L from 'partial.lenses';
 import * as P from 'prop-types';
-import Ajv from 'ajv';
 import cx from 'classnames';
 
+import ajv from 'schema/app';
+
 export function SchemaForm(props) {
-  const { schema, data } = props;
+  const { schemaName, data, onChange } = props;
 
   const { t } = useTranslation();
 
-  /**
-   * @type {React.MutableRefObject<{ ajv: Ajv }>}
-   */
-  const ajvRef = useRef({});
+  const validate = ajv.getSchema(schemaName);
+
   const [state, setState] = useState({
     validJsonSyntax: true,
     errors: [],
@@ -26,15 +26,7 @@ export function SchemaForm(props) {
   });
 
   useEffect(() => {
-    const ajvInstance = new Ajv();
-    ajvRef.current.ajv = ajvInstance;
-    ajvRef.current.validate = ajvInstance.compile(schema);
-  }, [schema]);
-
-  const { ajv, validate } = ajvRef.current;
-
-  useEffect(() => {
-    if (!ajv || !validate) {
+    if (!validate) {
       // What to do when we still don't have an instance
       return;
     }
@@ -44,17 +36,20 @@ export function SchemaForm(props) {
       const valResult = validate(json);
       const valErrors = !valResult ? validate.errors : [];
 
-      // if (valErrors) {
-      //   console.log({ valErrors });
-      // }
-
       setState(s => ({ ...s, errors: valErrors, validJsonSyntax: true }));
+
+      // console.log('before onChange', onChange);
+
+      if (onChange) {
+        console.count('onChange');
+        onChange({ data: json, errors: valErrors });
+      }
     } catch (e) {
       if (e instanceof SyntaxError) {
         setState(s => ({ ...s, validJsonSyntax: false }));
       }
     }
-  }, [ajv, validate, state.data]);
+  }, [onChange, validate, state.data]);
 
   const sharedCns = [
     // 'absolute inset-0',
@@ -66,6 +61,8 @@ export function SchemaForm(props) {
     'overflow-auto',
     'whitespace-nowrap',
   ];
+
+  const isValid = !state.validJsonSyntax || !state.errors.length;
 
   return (
     <>
@@ -79,11 +76,12 @@ export function SchemaForm(props) {
               sharedCns,
               'border-2',
               'rounded-md',
+
               'focus:outline-none',
               'ring-2 ring-transparent',
               'ring-offset-2 ring-offset-yellow-500',
-              state.validJsonSyntax && ['ring-offset-green-500'],
-              !state.validJsonSyntax && ['rounded-b-md ring-red-500'],
+              isValid && ['ring-offset-green-500'],
+              !isValid && ['rounded-b-md ring-red-500'],
             )}
             onChange={e => {
               setState(s => ({ ...s, data: e.target.value }));
@@ -106,24 +104,21 @@ export function SchemaForm(props) {
           aria-hidden={!state.errors.length}
           aria-label={t('ui:modal.import.validationErrors.label')}
         >
-          {state.errors.map((err, ix) => {
-            const path = err.instancePath;
-            const data = L.get(L.pointer(path), state.data);
-
+          {state.errors.slice(0, 1).map((err, ix) => {
             return (
               <li key={`err-${ix}`} aria-label={err.message}>
-                {path} {JSON.stringify(data)}
+                <pre className="font-mono">{JSON.stringify(err, null, 2)}</pre>
               </li>
             );
           })}
         </ul>
-
-        <pre>{JSON.stringify(state, null, 2)}</pre>
       </div>
     </>
   );
 }
 
 SchemaForm.propTypes = {
-  schema: P.any,
+  schemaName: P.string.isRequired,
+  data: P.any,
+  onChange: P.func,
 };
