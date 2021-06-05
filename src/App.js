@@ -7,8 +7,6 @@ import { DefineSvgAssets } from './core/svg';
 function App() {
   const modals = useSelector(s => s.modal.modals);
 
-  console.log({ modals });
-
   return (
     <>
       <Views.Modal.ExportModal open={modals.export} />

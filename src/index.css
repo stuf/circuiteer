@@ -18,6 +18,11 @@ html,
 }
 
 @layer base {
+  pre,
+  code {
+    @apply font-mono;
+  }
+
   a {
     @apply inline-block;
     @apply focus:outline-none;

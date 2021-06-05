@@ -31,10 +31,14 @@
     "testMatch": [
       "!cypress/**/*",
       "!**/test/**/*.[jt]s?(x)",
+      "!**/viewsDocs/**/*",
       "**/__tests__/**/*.[jt]s?(x)",
       "**/?(*.)+(spec|test).[jt]s?(x)"
     ],
     "coveragePathIgnorePatterns": [
+      "<rootDir>/src/index.js",
+      "<rootDir>/src/docs",
+      "<rootDir>/src/layout/.*/index.js$",
       "<rootDir>/src/core/i18n.js",
       "<rootDir>/src/test",
       "<rootDir>/src/reportWebVitals.js",
@@ -42,8 +46,9 @@
       "<rootDir>/src/core/data/(modules/)?index.js",
       "<rootDir>/src/schema",
       "<rootDir>/src/core/locales/.*js$",
-      "<rootDir>/src/(components|canvas|layout|views(/modal)?|state|_)/index.js",
+      "<rootDir>/src/(containers|components(/misc)?|canvas|layout|views(/modal)?|state|_)/index.js",
       "<rootDir>/src/.*(components|containers)/\\w+/index.js$",
+      "<rootDir>/src/views/Docs",
       "typedefs?.js"
     ]
   },

@@ -12,6 +12,11 @@ import './test/index';
 
 //
 
+export function wrapper(props) {
+  const store = configureStore({ preloadedState, reducer: reducers });
+  return <Provider store={store}>{props.children}</Provider>;
+}
+
 export function render(
   vdom,
   { router = {}, initialState, store, ...renderOptions } = {},
