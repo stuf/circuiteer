@@ -1,3 +1,5 @@
+import { createReducer } from '@reduxjs/toolkit';
+
 import {
   actions,
   debounce,
@@ -11,6 +13,7 @@ import {
   construct0,
   construct1,
   construct2,
+  createPrefixedAsyncAction,
 } from '../util';
 import { MockClass, ctor } from '../mock';
 
@@ -139,6 +142,15 @@ describe('common/util', () => {
 
       expect(a2(123)).toEqual({ type: 'foo/baz', payload: 123 });
       expect(fn2).toHaveBeenCalled();
+    });
+
+    test('createPrefixedAsyncAction', async () => {
+      const pre = 'foo';
+      const mkAction = createPrefixedAsyncAction(pre);
+
+      const a1 = mkAction('bar', (...args) => args);
+
+      // console.log({ mkAction, a1 });
     });
   });
 });

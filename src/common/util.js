@@ -11,6 +11,12 @@ const { round } = Math;
 
 export const thru = (x, ...fns) => R.pipe(...fns)(x);
 
+/**
+ *
+ * @param {Function} fn
+ * @param {number} ms
+ * @returns
+ */
 export const debounce = (fn, ms) => {
   let timeout;
 
@@ -91,3 +97,19 @@ export const createPrefixedAction =
    */
   (type, prepareAction) =>
     RJT.createAction([prefix, type].join('/'), prepareAction);
+
+export const createPrefixedAsyncAction = prefix => (type, thunk) => {
+  return RJT.createAsyncThunk([prefix, type].join('/'), (arg, api) => {
+    console.log('create async thunk');
+    return new Promise((resolve, reject) => {
+      console.log('keerp promse');
+      try {
+        console.log('resolve with thunkFn + args', arg);
+        resolve(thunk(arg));
+      } catch (err) {
+        console.log('oh no error!', err);
+        reject(api.rejectWithValue(err));
+      }
+    });
+  });
+};
