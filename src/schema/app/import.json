@@ -11,18 +11,6 @@
       ],
       "properties": {
         "version": {
-          "const": "1.0.0-test"
-        }
-      }
-    },
-    {
-      "type": "object",
-      "required": [
-        "version",
-        "entities"
-      ],
-      "properties": {
-        "version": {
           "const": "0.1.0"
         },
         "entities": {
