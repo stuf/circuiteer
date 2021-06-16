@@ -86,7 +86,7 @@ export function SettingsModal(props) {
 
       <footer className="mt-4 pt-4 text-right">
         {/* TODO Add closing logic */}
-        <Button onClick={() => {}}>{t('common:close')}</Button>
+        <Button onClick={hide}>{t('common:close')}</Button>
       </footer>
     </Modal>
   );

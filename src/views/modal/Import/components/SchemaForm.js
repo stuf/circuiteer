@@ -1,7 +1,5 @@
-import React, { useRef, useState, useEffect, useCallback } from 'react';
-import * as R from 'ramda';
+import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import * as L from 'partial.lenses';
 import * as P from 'prop-types';
 import cx from 'classnames';
 
@@ -101,6 +99,7 @@ export function SchemaForm(props) {
         )}
 
         <ul
+          className="my-2"
           aria-hidden={!state.errors.length}
           aria-label={t('ui:modal.import.validationErrors.label')}
         >

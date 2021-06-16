@@ -1,17 +1,19 @@
 import * as P from 'prop-types';
 import { useCallback, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useDispatch } from 'react-redux';
 import { Modal, Button } from 'components';
 
-import schema from 'schema/app/import.json';
 import { SchemaForm } from './components/SchemaForm';
 import { useModal } from 'common/hooks';
 import { debounce, actions } from 'common/util';
+import { importEntities } from 'state/editor';
 
 export function ImportModal(props) {
+  const update = useDispatch();
   const { open = false } = props;
   const { t } = useTranslation();
-  const { visible, hide, show } = useModal('import');
+  const { hide } = useModal('import');
   const [state, setState] = useState({
     data: {
       version: '0.1.0',
@@ -27,6 +29,12 @@ export function ImportModal(props) {
 
   const onChangeFn = useCallback(e => actions(debounce(onChange, 100))(e), []);
 
+  const onImport = actions(
+    () => console.log('Do import'),
+    () => update(importEntities(state.data.entities)),
+    () => hide(),
+  );
+
   return (
     <Modal title={t('ui:modal.import.title')} open={open} onClose={hide}>
       <div>
@@ -38,7 +46,7 @@ export function ImportModal(props) {
 
       <footer className="text-right">
         <Button
-          onClick={() => {}}
+          onClick={onImport}
           icon="upload"
           disabled={!!state.errors.length}
         >
