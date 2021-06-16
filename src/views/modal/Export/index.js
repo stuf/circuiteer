@@ -2,7 +2,6 @@ import { useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { motion, AnimatePresence } from 'framer-motion';
-import { inspect } from 'util';
 
 import { Button, Group, Input, Modal } from 'components';
 import { hideModal } from 'state/modal';
@@ -36,10 +35,6 @@ export function ExportModal(props) {
       clearTimeout(timer);
     };
   }, [state.copied]);
-
-  function replacerFn(key, value) {
-    return value;
-  }
 
   /**
    * Copy the textarea's content to clipboard
