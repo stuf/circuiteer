@@ -1,4 +1,3 @@
-import * as R from 'ramda';
 import Ajv from 'ajv';
 
 import importSchema from './import.json';
