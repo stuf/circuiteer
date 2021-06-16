@@ -59,4 +59,6 @@ Button.propTypes = {
   label: P.oneOfType([P.string, P.node, P.elementType]),
   type: P.oneOf(['primary', 'secondary']),
   size: P.oneOf(['sm', 'md', 'lg']),
+  pressed: P.bool,
+  disabled: P.bool,
 };

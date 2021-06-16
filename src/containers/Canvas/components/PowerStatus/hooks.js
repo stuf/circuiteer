@@ -44,7 +44,7 @@ export function usePowerWithEfficiency() {
     }),
   ];
   const categoryPowerSumT = [
-    L.values,
+    L.valueOr(L.zero, L.values),
     L.modifyOp(xs => ({
       entities: xs,
       meta: {

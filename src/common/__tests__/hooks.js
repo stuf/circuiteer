@@ -7,6 +7,7 @@ import {
   useOptions,
   useGridSize,
   useGridSizeMatrix,
+  useTimeout,
 } from '../hooks';
 import { Matrix } from 'common/linear';
 import store from 'store';
@@ -59,5 +60,21 @@ describe('common/hooks', () => {
     const res = renderHook(() => useOptions(), { wrapper });
 
     expect(res).not.toBeUndefined();
+  });
+
+  test('useTimeout', () => {
+    const fn1 = jest.fn();
+    const res = renderHook(() => useTimeout(10, fn1));
+
+    const { current, error } = res.result;
+
+    const [s, t] = current;
+
+    expect(s.active).toBe(false);
+    expect(fn1).not.toHaveBeenCalled();
+
+    act(() => {
+      t();
+    });
   });
 });

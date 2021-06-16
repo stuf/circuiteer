@@ -1,5 +1,6 @@
 import { stopEntityMove } from 'state/editor';
 import { moveEntityDelta } from 'state/editor';
+import { importEntities } from 'state/editor';
 import { deleteEntity } from 'state/editor';
 import { moveEntity } from 'state/editor';
 import { startEntityMove } from 'state/editor';
@@ -20,6 +21,22 @@ describe('state/editor', () => {
   });
 
   describe('actions', () => {
+    describe('importEntities', () => {
+      test('empty', () => {
+        const a1 = importEntities([]);
+        expect(a1.payload).toEqual([]);
+
+        const r1 = reducer({}, a1);
+        const e1 = { entities: [] };
+        expect(r1).toEqual(e1);
+      });
+
+      test('normalize imported (autogenerate uuid if no id)', () => {
+        const a = importEntities([{}, { id: 123 }, {}]);
+        // console.log(a);
+      });
+    });
+
     test('addEntity', () => {
       // Adding an entity without an ID generates an ID for it
       const a1 = addEntity();

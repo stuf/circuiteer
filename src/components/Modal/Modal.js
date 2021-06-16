@@ -1,14 +1,11 @@
 import * as P from 'prop-types';
-import { useState } from 'react';
 import { Dialog } from '@headlessui/react';
 import cns from 'classnames';
 
 import './Modal.css';
 
 export function Modal(props) {
-  const { open, className, children, title, description } = props;
-
-  const [isOpen, setIsOpen] = useState(open);
+  const { open, className, children, title, description, onClose } = props;
 
   const classNames = {
     root: ['fixed', 'z-10', 'inset-0', 'overflow-y-auto'],
@@ -30,31 +27,23 @@ export function Modal(props) {
 
   return (
     <>
-      {/* <AnimatePresence> */}
-      {isOpen && (
-        <Dialog
-          open={isOpen}
-          onClose={() => setIsOpen(false)}
-          className={cns(classNames.root)}
-        >
-          <div className="flex items-center justify-center min-h-screen">
-            <Dialog.Overlay className={cns(classNames.overlay)} />
+      <Dialog open={open} className={cns(classNames.root)} onClose={onClose}>
+        <div className="flex items-center justify-center min-h-screen">
+          <Dialog.Overlay className={cns(classNames.overlay)} />
 
-            <div className={cns(classNames.modal)}>
-              <Dialog.Title className={cns(classNames.title)}>
-                {title}
-              </Dialog.Title>
+          <div className={cns(classNames.modal)}>
+            <Dialog.Title className={cns(classNames.title)}>
+              {title}
+            </Dialog.Title>
 
-              {description && (
-                <Dialog.Description>{description}</Dialog.Description>
-              )}
+            {description && (
+              <Dialog.Description>{description}</Dialog.Description>
+            )}
 
-              <div className="space-y-2">{children}</div>
-            </div>
+            <div className="space-y-2">{children}</div>
           </div>
-        </Dialog>
-      )}
-      {/* </AnimatePresence> */}
+        </div>
+      </Dialog>
     </>
   );
 }
@@ -65,4 +54,5 @@ Modal.propTypes = {
   children: P.oneOfType([P.node, P.elementType, P.string]),
   title: P.string,
   description: P.string,
+  onClose: P.func.isRequired,
 };

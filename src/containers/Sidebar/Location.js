@@ -26,6 +26,7 @@ export function SidebarLocation() {
         </span>
 
         <select
+          aria-label="Location"
           className="px-4 py-2 appearance-none block w-full bg-transparent"
           value={current.id}
           onChange={e => update(changeLocation(e.target.value))}

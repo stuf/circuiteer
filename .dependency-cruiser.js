@@ -197,7 +197,7 @@ module.exports = {
           leave out if you want to exclude neither (recommended!)
     */
     exclude: {
-      path: ['/__tests__/', 'setupTests.js', 'react-app-env'],
+      path: ['/__tests__/', 'setupTests.js', 'react-app-env', 'src/test'],
     },
     // exclude : {
     //   path: '',

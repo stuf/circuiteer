@@ -31,10 +31,19 @@ const prefix = x => `${name}/${x}`;
 const selectEntityObject = id => ['entities', L.elems, L.whereEq({ id })];
 const appendEntity = ['entities', L.appendTo];
 
+const normalizeEntity = L.modify([entityL, 'id'], x => (!x ? uuid() : x));
+
 //
 
+export const importEntities = createAction(
+  'importEntities',
+  (entities = []) => ({
+    payload: entities.map(normalizeEntity),
+  }),
+);
+
 export const addEntity = createAction(prefix('addEntity'), entity => ({
-  payload: L.modify([entityL, 'id'], x => (!x ? uuid() : x), entity),
+  payload: normalizeEntity(entity),
 }));
 
 export const selectEntity = createAction('selectEntity');
@@ -69,6 +78,16 @@ const slice = createSlice({
       .addCase(addEntity, (s, a) => L.set(appendEntity, a.payload, original(s)))
       .addCase(deleteEntity, (s, a) =>
         L.remove(['entities', L.whereEq({ id: a.payload?.id })], original(s)),
+      )
+      .addCase(importEntities, (s, a) =>
+        L.set(
+          L.pickIn({
+            entities: L.define([]),
+            current: [],
+          }),
+          { entities: a.payload },
+          original(s),
+        ),
       )
       .addCase(resetCurrent, s => L.remove('current', original(s)))
       .addCase(selectEntity, (s, a) => L.set('current', a.payload, original(s)))

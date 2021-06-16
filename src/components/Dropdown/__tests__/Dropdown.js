@@ -12,7 +12,9 @@ describe('Dropdown', () => {
       onChange,
     };
 
-    const { container, findByRole } = render(<Dropdown {...props} />);
+    const { container, findByRole } = render(
+      <Dropdown id="dropdown" {...props} />,
+    );
 
     const input = await findByRole('combobox');
 
@@ -31,7 +33,9 @@ describe('Dropdown', () => {
       onChange: () => {},
     };
 
-    const { container, findByRole } = render(<Dropdown {...props} />);
+    const { container, findByRole } = render(
+      <Dropdown id="dropdown" {...props} />,
+    );
 
     expect(await findByRole('combobox')).toBeDisabled();
   });

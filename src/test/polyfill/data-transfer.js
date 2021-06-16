@@ -6,7 +6,9 @@ window.DataTransfer = class DataTransfer {
 
   setData() {}
 
-  getData() {}
+  getData() {
+    console.log('getData lul');
+  }
 
   clearData() {}
 };

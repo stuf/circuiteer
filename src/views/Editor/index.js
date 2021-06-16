@@ -4,13 +4,20 @@ import { BuildInfo } from 'components/misc';
 import { Infobar, AutosizeCanvas } from 'containers';
 
 import { Sidebar } from './components/Sidebar';
+import { useModal } from 'common/hooks';
 
 export function Editor() {
+  const settingsModal = useModal('settings');
+
   return (
     <BaseLayout
       header={
         <>
-          <Button disabled icon="settings" onClick={() => {}}>
+          <Button
+            icon="settings"
+            pressed={settingsModal.visible}
+            onClick={settingsModal.show}
+          >
             Settings
           </Button>
         </>

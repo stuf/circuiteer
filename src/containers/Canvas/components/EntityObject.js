@@ -89,6 +89,7 @@ EntityObject.propTypes = {
   module: P.object,
   selected: P.bool,
   onSelect: P.func,
+  onDelete: P.func,
 };
 
 /**

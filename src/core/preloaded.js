@@ -177,10 +177,6 @@ export const preloadedState = {
       materialRequirementBreakdown: false,
     },
   },
-  experiment: {
-    ids: [],
-    entities: {},
-  },
   modal: {
     modals: {
       export: false,

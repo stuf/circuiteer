@@ -1,11 +1,6 @@
 import { shoppingList } from '../shopping-list';
 
-const warn = console.warn.bind(console.warn);
-
 test('shoppingList', () => {
-  const fn = jest.fn();
-  console.warn = fn;
-
   const modules = ['mediumPrinter', 'mediumPrinter', 'largePrinter'];
 
   const res = shoppingList(modules);
@@ -15,6 +10,4 @@ test('shoppingList', () => {
   const res2 = shoppingList(['asd']);
 
   expect(res2).toEqual({});
-
-  console.warn = warn;
 });
