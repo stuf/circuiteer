@@ -20,7 +20,8 @@
       "title": "Settings"
     },
     "export": {
-      "title": "Export"
+      "title": "Export",
+      "explanationText": "Copy the contents of the textbox below and save it with the text editor of your choice."
     },
     "import": {
       "title": "Import",
