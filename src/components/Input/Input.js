@@ -47,13 +47,18 @@ export const Input = forwardRef((props, ref) => {
   return (
     <div className={className}>
       {label && (
-        <label className="block mb-1" id={`label-${id}`}>
+        <label
+          className="block mb-1"
+          htmlFor={`input-${id}`}
+          id={`label-${id}`}
+        >
           {label}
         </label>
       )}
 
       <input
         className="input--base"
+        id={`input-${id}`}
         aria-labelledby={`label-${id}`}
         {...{
           ...inputProps,
