@@ -62,7 +62,7 @@ describe('Canvas', () => {
     expect(els.classList.contains('dragged')).toBe(true);
   });
 
-  it('might have a working dragging', () => {
+  it.skip('might have a working dragging', () => {
     const initialState = L.set(['drag', 'dragging'], false, preloadedState);
     const { container, queryByRole, queryAllByRole, findByRole } = render(
       <Canvas />,
