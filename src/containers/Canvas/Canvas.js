@@ -1,4 +1,3 @@
-/* eslint-disable */
 import * as R from 'ramda';
 import { useRef, useCallback } from 'react';
 import { useDispatch } from 'react-redux';
@@ -12,16 +11,10 @@ import { moveEntity, addEntity } from 'state/editor';
 import { setDragging } from 'state/drag';
 import { gridToScreen, screenToGrid } from 'common/util';
 import { EntityEditor } from 'containers/EntityEditor/EntityEditor';
-import {
-  useCurrentLocation,
-  useCurrentLocationEfficiency,
-  useGridSize,
-  usePopulatedEntities,
-} from 'common/hooks';
+import { useGridSize } from 'common/hooks';
 import { useEntities } from './hooks/useEntities';
 import { useIsDragging, useDragSize } from './hooks/useDragging';
 import {
-  PowerStatus,
   DragGhost,
   EntityObject,
   DiagonalPattern,
@@ -41,8 +34,6 @@ export function Canvas(props) {
   }, []);
 
   const { entities, modules, current, setCurrent } = useEntities();
-  const popEntities = usePopulatedEntities();
-  const efficiency = useCurrentLocationEfficiency();
   const isDragging = useIsDragging();
   const dragSize = useDragSize();
 
@@ -53,8 +44,6 @@ export function Canvas(props) {
   return (
     <>
       {current && <EntityEditor />}
-
-      <PowerStatus entities={popEntities} efficiency={efficiency} />
 
       <svg
         {...{ width, height, ref: refCb }}

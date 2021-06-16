@@ -12,8 +12,7 @@ import { Icon } from 'components';
  * @param {Props} props
  */
 export function EntityObject(props) {
-  const { x, y, width, height, object, module, selected, onSelect, onDelete } =
-    props;
+  const { x, y, width, height, object, module, selected, onSelect } = props;
   const elProps = { width, height };
 
   const { t } = useTranslation();
