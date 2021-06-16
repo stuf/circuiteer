@@ -94,6 +94,7 @@
     "d3-scale-chromatic": "^2.0.0",
     "framer-motion": "^4.1.17",
     "i18next": "^20.2.2",
+    "i18next-react-postprocessor": "^3.0.7",
     "immer": "^9.0.2",
     "infestines": "^0.4.11",
     "jest-extended": "^0.11.5",
