@@ -35,9 +35,12 @@ const normalizeEntity = L.modify([entityL, 'id'], x => (!x ? uuid() : x));
 
 //
 
-export const importEntities = createAction('importEntities', entities => ({
-  payload: entities.map(normalizeEntity),
-}));
+export const importEntities = createAction(
+  'importEntities',
+  (entities = []) => ({
+    payload: entities.map(normalizeEntity),
+  }),
+);
 
 export const addEntity = createAction(prefix('addEntity'), entity => ({
   payload: normalizeEntity(entity),
