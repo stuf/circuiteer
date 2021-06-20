@@ -2,6 +2,8 @@
   border: dashed 2px #00f;
   height: 100%;
   position: relative;
+  // pointer-events: none;
+  user-select: none;
 }
 
 .canvas__card {
@@ -9,4 +11,16 @@
   left: 0;
   top: 0;
   border: solid 2px #000;
+}
+
+.canvas__card--current {
+  border: dashed 2px #f00;
+}
+
+.canvas__card-ghost {
+  left: 0;
+  top: 0;
+  pointer-events: none;
+
+  border: dotted 2px #00f;
 }
