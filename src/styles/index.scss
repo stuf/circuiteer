@@ -1,0 +1,18 @@
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+.App {
+  border: solid 2px #f00;
+  height: 100%;
+}
+
+@import 'base/_index';
+@import 'components/_index';
+@import 'util/_index';

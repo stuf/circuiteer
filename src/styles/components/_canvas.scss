@@ -1,0 +1,12 @@
+.canvas {
+  border: dashed 2px #00f;
+  height: 100%;
+  position: relative;
+}
+
+.canvas__card {
+  position: absolute;
+  left: 0;
+  top: 0;
+  border: solid 2px #000;
+}
