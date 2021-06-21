@@ -15,10 +15,7 @@ const { abs, pow, sqrt } = Math;
  * removing elements.
  */
 export class Canvas extends PureComponent {
-  /**
-   *
-   * @param {ICanvasProps} props
-   */
+  /** @param {ICanvasProps} props */
   constructor(props) {
     super(props);
 
@@ -41,6 +38,8 @@ export class Canvas extends PureComponent {
           size: { width: 100, height: 100 },
         },
         { id: '2', pos: { x: 150, y: 150 }, size: { width: 200, height: 200 } },
+        { id: '3', pos: { x: 200, y: 200 }, size: { width: 200, height: 200 } },
+        { id: '4', pos: { x: 250, y: 250 }, size: { width: 100, height: 100 } },
       ],
     };
 
@@ -258,19 +257,33 @@ export class Canvas extends PureComponent {
               )}
             >
               card {i + 1}
-              <div>
-                <div>
-                  <button>Front</button>
-                  <button>Forward</button>
-                  <button>Backward</button>
-                  <button>Back</button>
-                </div>
+              <div className="canvas__card-controls">
+                <ul>
+                  <li>
+                    <button>Front</button>
+                  </li>
+                  <li>
+                    <button disabled>Forward</button>
+                  </li>
+                  <li>
+                    <button disabled>Backward</button>
+                  </li>
+                  <li>
+                    <button>Back</button>
+                  </li>
+                </ul>
 
-                <div>
-                  <button>Edit</button>
-                  <button>Lock</button>
-                  <button>Disable</button>
-                </div>
+                <ul>
+                  <li>
+                    <button>Edit</button>
+                  </li>
+                  <li>
+                    <button>Lock</button>
+                  </li>
+                  <li>
+                    <button>Disable</button>
+                  </li>
+                </ul>
               </div>
             </div>
           );

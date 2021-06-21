@@ -19,6 +19,10 @@ $canvas-card-radius: $radius-md;
   border-radius: $canvas-card-radius;
 }
 
+.canvas__card:hover .canvas__card-controls {
+  display: block;
+}
+
 .canvas__card--current {
   border: dashed 2px #f00;
 }
@@ -31,4 +35,51 @@ $canvas-card-radius: $radius-md;
   border: dotted 2px #00f;
   background-color: rgba(#fff, 0.5);
   z-index: $canvas-ghost-z;
+}
+
+//
+
+// Canvas card controls
+.canvas__card-controls {
+  display: none;
+  position: absolute;
+  right: 0;
+  top: 0;
+  transform: translateX(100%);
+  border: solid 2px #f00;
+  background-color: #fff;
+
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0.5rem 0 0;
+
+    &:first-child {
+      margin-top: 0;
+    }
+
+    button {
+      display: block;
+      width: 100%;
+      text-align: left;
+    }
+  }
+}
+
+//
+
+.toolbar {
+  border: solid 2px #f00;
+  padding: map-get($spacing, '02');
+  width: 15rem;
+  max-height: 50vh;
+}
+
+.toolbar__items {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.toolbar__items > * {
+  border: solid 2px #f00;
 }

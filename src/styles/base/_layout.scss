@@ -1,4 +1,6 @@
 .view {
   height: 100%;
   border: dotted 4px #f00;
+  position: relative;
+  overflow: hidden;
 }
