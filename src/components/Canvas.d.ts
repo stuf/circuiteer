@@ -43,6 +43,8 @@ declare interface ICanvasOptions {
   onDragMove?: (e: MouseEvent) => void;
 
   onDragStop?: (e: MouseEvent) => void;
+
+  onDragOver?: (e: DragEvent) => void;
 }
 
 //

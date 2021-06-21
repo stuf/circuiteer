@@ -1,3 +1,7 @@
+/**
+ * @todo See if it makes sense to turn this into a stateful function component later on
+ * @todo Add support for dragOver, dragLeave, dragDrop
+ */
 import cx from 'clsx';
 import * as L from 'partial.lenses';
 import { PureComponent } from 'react';
@@ -5,6 +9,11 @@ import { inspect } from 'util';
 
 const { abs, pow, sqrt } = Math;
 
+/**
+ * Provides the business end of the application, which is the planning
+ * canvas that provides facilities for arranging, creating, editing and
+ * removing elements.
+ */
 export class Canvas extends PureComponent {
   /**
    *
@@ -100,7 +109,7 @@ export class Canvas extends PureComponent {
 
     const minDistance = this.state.options?.minimumDragDistance;
 
-    const id = this.state.drag.current;
+    // const id = this.state.drag.current;
 
     const drag = this.state.drag;
 
@@ -249,6 +258,20 @@ export class Canvas extends PureComponent {
               )}
             >
               card {i + 1}
+              <div>
+                <div>
+                  <button>Front</button>
+                  <button>Forward</button>
+                  <button>Backward</button>
+                  <button>Back</button>
+                </div>
+
+                <div>
+                  <button>Edit</button>
+                  <button>Lock</button>
+                  <button>Disable</button>
+                </div>
+              </div>
             </div>
           );
         })}
