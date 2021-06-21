@@ -1,15 +1,12 @@
-.absolute {
-  position: absolute;
-}
+$position: (
+  absolute: absolute,
+  relative: relative,
+  fixed: fixed,
+  static: static,
+);
 
-.relative {
-  position: relative;
-}
-
-.fixed {
-  position: fixed;
-}
-
-.static {
-  position: static;
+@each $name, $value in $position {
+  .#{$name} {
+    position: $value;
+  }
 }

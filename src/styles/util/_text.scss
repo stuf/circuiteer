@@ -1,0 +1,7 @@
+@import '../base/definitions';
+
+@each $name, $size in $font-size {
+  .text-#{$name} {
+    font-size: $size;
+  }
+}

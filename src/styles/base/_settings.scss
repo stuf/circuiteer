@@ -1,2 +1,9 @@
-$font-family-mono: 'Jetbrains Mono';
-$font-family-sans-serif: 'Apercu Pro';
+$font-family-mono: 'Jetbrains Mono' !default;
+$font-family-sans-serif: 'Apercu Pro' !default;
+
+$radius-md: 0.5rem !default;
+
+// Canvas draging ghost z-index
+$canvas-ghost-z: 10 !default;
+
+//

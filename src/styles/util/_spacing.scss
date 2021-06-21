@@ -1,0 +1,33 @@
+@import '../base/definitions';
+
+@each $id, $size in $spacing {
+  .m-#{$id} {
+    margin: $size;
+  }
+
+  .ml-#{$id} {
+    margin-left: $size;
+  }
+
+  .mr-#{$id} {
+    margin-right: $size;
+  }
+
+  .mt-#{$id} {
+    margin-top: $size;
+  }
+
+  .mb-#{$id} {
+    margin-bottom: $size;
+  }
+
+  .mx-#{$id} {
+    margin-left: $size;
+    margin-right: $size;
+  }
+
+  .my-#{$id} {
+    margin-top: $size;
+    margin-bottom: $size;
+  }
+}

@@ -1,8 +1,12 @@
+$canvas-card-border-color: rgba(#000, 1);
+$canvas-card-border-width: 2px;
+$canvas-card-bg: rgba(#fff, 1);
+$canvas-card-radius: $radius-md;
+
 .canvas {
-  border: dashed 2px #00f;
+  // border: dashed 2px #00f;
   height: 100%;
   position: relative;
-  // pointer-events: none;
   user-select: none;
 }
 
@@ -10,7 +14,9 @@
   position: absolute;
   left: 0;
   top: 0;
-  border: solid 2px #000;
+  border: solid $canvas-card-border-width $canvas-card-border-color;
+  background-color: $canvas-card-bg;
+  border-radius: $canvas-card-radius;
 }
 
 .canvas__card--current {
@@ -23,4 +29,6 @@
   pointer-events: none;
 
   border: dotted 2px #00f;
+  background-color: rgba(#fff, 0.5);
+  z-index: $canvas-ghost-z;
 }
