@@ -1,11 +1,7 @@
-import { Canvas } from "./components";
+import { MainView } from './views/Main';
 
 function App() {
-  return (
-    <div className="App">
-      <Canvas />
-    </div>
-  );
+  return <MainView />;
 }
 
 export default App;
