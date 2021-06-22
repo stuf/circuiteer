@@ -13,5 +13,7 @@ declare namespace Data {
     id: string;
     pos: Point;
     size: Size;
+    locked: boolean;
+    enabled: boolean;
   }
 }

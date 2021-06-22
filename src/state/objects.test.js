@@ -4,7 +4,13 @@ import reducer, {
   deleteObject,
   setObjects,
   updateObject,
+  lockObject,
+  enableObject,
+  disableObject,
+  unlockObject,
 } from './objects';
+
+import { replayState, show } from 'common/testutil';
 
 test('addObject', () => {
   const a = addObject({ id: '1' });
@@ -50,6 +56,38 @@ test('deleteObject', () => {
   const a = deleteObject({ id: '1' });
   const r = reducer({ entities: [{ id: '1' }, { id: '2' }] }, a);
   const e = { entities: [{ id: '2' }] };
+
+  expect(r).toEqual(e);
+});
+
+test('lockObject', () => {
+  const a = lockObject({ id: '1' });
+  const r = reducer({ entities: [{ id: '1' }] }, a);
+  const e = { entities: [{ id: '1', locked: true }] };
+
+  expect(r).toEqual(e);
+});
+
+test('unlockObject', () => {
+  const a = unlockObject({ id: '1' });
+  const r = reducer({ entities: [{ id: '1' }] }, a);
+  const e = { entities: [{ id: '1', locked: false }] };
+
+  expect(r).toEqual(e);
+});
+
+test('enableObject', () => {
+  const a = enableObject({ id: '1' });
+  const r = reducer({ entities: [{ id: '1' }] }, a);
+  const e = { entities: [{ id: '1', enabled: true }] };
+
+  expect(r).toEqual(e);
+});
+
+test('disableObject', () => {
+  const a = disableObject({ id: '1' });
+  const r = reducer({ entities: [{ id: '1', enabled: true }] }, a);
+  const e = { entities: [{ id: '1', enabled: false }] };
 
   expect(r).toEqual(e);
 });
