@@ -9,6 +9,12 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
+  "jest": {
+    "collectCoverageFrom": [
+      "!**/*.d.ts",
+      "!src/(components|containers|state)/index.js"
+    ]
+  },
   "eslintConfig": {
     "extends": [
       "react-app",
@@ -32,9 +38,12 @@
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
+    "@visx/responsive": "^1.10.1",
     "clsx": "^1.1.1",
+    "infestines": "^0.4.11",
     "normalize.css": "^8.0.1",
     "partial.lenses": "^14.17.0",
+    "ramda": "^0.27.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-redux": "^7.2.4",
