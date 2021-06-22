@@ -16,8 +16,6 @@ const draggedObject = ['drag', L.required(null)];
 
 //
 
-export const dummy = createAction('dummy');
-
 export const dragStart = createAction('dragStart');
 export const dragStop = createAction('dragStop');
 
@@ -29,7 +27,6 @@ const slice = createSlice({
   reducers: {},
   extraReducers: builder =>
     builder
-      .addCase(dummy, (s, a) => s)
       .addCase(dragStart, (s, a) =>
         L.transform(
           L.seq(
