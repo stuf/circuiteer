@@ -1,5 +1,11 @@
 declare interface ICanvasProps {
+  objects: IObject[];
   options?: Partial<ICanvasOptions>;
+
+  width?: number;
+  height?: number;
+  parentWidth?: number;
+  parentHeight?: number;
 }
 
 declare interface ICanvasState {
@@ -27,6 +33,9 @@ declare interface ICanvasState {
   };
 
   objects: IObject[];
+
+  width: number;
+  height: number;
 }
 
 //
@@ -42,8 +51,16 @@ declare interface ICanvasOptions {
 
   onDragMove?: (e: MouseEvent) => void;
 
+  /**
+   * Callback when an object has been dragged on the canvas
+   * and dropped
+   */
   onDragStop?: (e: MouseEvent) => void;
 
+  /**
+   * Callback when something is being dragged to the canvas
+   * from outside of it
+   */
   onDragOver?: (e: DragEvent) => void;
 }
 

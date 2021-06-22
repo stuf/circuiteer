@@ -3,6 +3,10 @@ $font-family-sans-serif: 'Apercu Pro' !default;
 
 $radius-md: 0.5rem !default;
 
+$canvas-underlay-z: 1 !default;
+$canvas-main-z: 5 !default;
+$canvas-overlay-z: 11 !default;
+
 // Canvas draging ghost z-index
 $canvas-ghost-z: 10 !default;
 

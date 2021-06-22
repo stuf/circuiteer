@@ -6,6 +6,11 @@ import cx from 'clsx';
 import * as L from 'partial.lenses';
 import { PureComponent } from 'react';
 import { inspect } from 'util';
+import { withParentSizeModern } from '@visx/responsive';
+
+import { actions, preventDefault } from 'common/util';
+import { CanvasUnderlay } from './CanvasUnderlay';
+import { CanvasOverlay } from './CanvasOverlay';
 
 const { abs, pow, sqrt } = Math;
 
@@ -29,18 +34,13 @@ export class Canvas extends PureComponent {
         onDragStart: props.options?.onDragStart,
         onDragMove: props.options?.onDragMove,
         onDragStop: props.options?.onDragStop,
+        onDragOver: props.options?.onDragOver,
       },
       drag: null,
-      objects: [
-        {
-          id: '1',
-          pos: { x: 100, y: 100 },
-          size: { width: 100, height: 100 },
-        },
-        { id: '2', pos: { x: 150, y: 150 }, size: { width: 200, height: 200 } },
-        { id: '3', pos: { x: 200, y: 200 }, size: { width: 200, height: 200 } },
-        { id: '4', pos: { x: 250, y: 250 }, size: { width: 100, height: 100 } },
-      ],
+      objects: props.objects,
+
+      width: props.parentWidth ?? props.width,
+      height: props.parentHeight ?? props.height,
     };
 
     this.drag = {
@@ -92,7 +92,7 @@ export class Canvas extends PureComponent {
     const maybeFn = this.state.options?.onDragStart;
     if (maybeFn && maybeFn instanceof Function) {
       this.log('call onDragStart event with event:', e);
-      maybeFn(e);
+      maybeFn(e, object);
     }
 
     this.setState(stateʼ);
@@ -128,7 +128,7 @@ export class Canvas extends PureComponent {
     };
 
     // Calculate diagonal (distance) to origin
-    const distance = sqrt(pow(delta.x, 2), pow(delta.y, 2));
+    const distance = sqrt(pow(delta.x, 2) + pow(delta.y, 2));
 
     const newState = { distance, pos: { x, y }, moved: false };
 
@@ -171,7 +171,6 @@ export class Canvas extends PureComponent {
     }
 
     const id = this.state.drag.current;
-    console.log('drag stop for %s', id);
 
     const stateʼ = L.transform(
       L.seq(
@@ -186,15 +185,23 @@ export class Canvas extends PureComponent {
       this.state,
     );
 
+    const obj = L.get(['objects', L.find(o => o.id === id)], stateʼ);
+
     const maybeFn = this.state.options?.onDragStop;
     if (maybeFn && maybeFn instanceof Function) {
       this.log('call onDragStop with event:', e);
-      maybeFn(e);
+      maybeFn(e, obj);
     }
 
     this.setState(stateʼ);
 
     this.drag.moved = false;
+  };
+
+  onDragOver = e => {
+    // console.log('onDragOver');
+    const pos = { x: e.clientX, y: e.clientY };
+    // console.log('x=%s, y=%s', pos.x, pos.y);
   };
 
   render() {
@@ -212,85 +219,83 @@ export class Canvas extends PureComponent {
       transform: pos && `translateX(${pos.x}px) translateY(${pos.y}px)`,
     };
 
+    if (!this.state.objects?.length) {
+      return null;
+    }
+
     return (
-      <div
-        className="canvas"
-        onMouseDownCapture={this.onStart}
-        onMouseMove={this.onMove}
-        onMouseUpCapture={this.onStop}
-      >
+      <>
+        <CanvasUnderlay width={this.state.width} height={this.state.height} />
+        <CanvasOverlay width={this.state.width} height={this.state.height} />
         <div
-          className="absolute"
-          style={{ fontSize: 12, background: '#fff', zIndex: 1, right: 0 }}
+          className="canvas"
+          onMouseDownCapture={this.onStart}
+          onMouseMove={this.onMove}
+          onMouseUpCapture={this.onStop}
+          onDragOver={actions(preventDefault, this.onDragOver)}
         >
-          <fieldset>
-            <legend>Drag</legend>
-            <pre>{inspect(this.drag, { colors: false })}</pre>
-          </fieldset>
+          <div
+            className="absolute"
+            style={{ fontSize: 12, background: '#fff', zIndex: 1, right: 0 }}
+          >
+            <fieldset>
+              <legend>Drag</legend>
+              <pre className="font-mono">
+                {inspect(this.drag, {
+                  compact: 1,
+                  breakLength: 5,
+                  colors: false,
+                })}
+              </pre>
+            </fieldset>
 
-          <fieldset>
-            <legend>State</legend>
-            <pre>{inspect(this.state, { colors: false, depth: Infinity })}</pre>
-          </fieldset>
-        </div>
+            <fieldset>
+              <legend>State</legend>
+              <pre>
+                {inspect(this.state, {
+                  colors: false,
+                  compact: true,
+                  depth: Infinity,
+                })}
+              </pre>
+            </fieldset>
+          </div>
 
-        {/* If we're currently dragging, show position ghost */}
-        {showGhost && (
-          <div className="canvas__card-ghost absolute" style={ghostStyle}></div>
-        )}
-
-        {this.state.objects.map((object, i) => {
-          const { id, pos, size } = object;
-          const style = {
-            ...size,
-            transform: `translateX(${pos.x}px) translateY(${pos.y}px)`,
-          };
-
-          return (
+          {/* If we're currently dragging, show position ghost */}
+          {showGhost && (
             <div
-              key={id}
-              style={{ ...style }}
-              id={id}
-              className={cx(
-                'canvas__card',
-                id === this.state.drag?.current && 'canvas__card--current',
-              )}
-            >
-              card {i + 1}
-              <div className="canvas__card-controls">
-                <ul>
-                  <li>
-                    <button>Front</button>
-                  </li>
-                  <li>
-                    <button disabled>Forward</button>
-                  </li>
-                  <li>
-                    <button disabled>Backward</button>
-                  </li>
-                  <li>
-                    <button>Back</button>
-                  </li>
-                </ul>
+              className="canvas__card-ghost absolute"
+              style={ghostStyle}
+            ></div>
+          )}
 
-                <ul>
-                  <li>
-                    <button>Edit</button>
-                  </li>
-                  <li>
-                    <button>Lock</button>
-                  </li>
-                  <li>
-                    <button>Disable</button>
-                  </li>
-                </ul>
+          {this.state.objects.map((object, i) => {
+            const { id, pos, size } = object;
+            const style = {
+              ...size,
+              transform: `translateX(${pos.x}px) translateY(${pos.y}px)`,
+            };
+
+            return (
+              <div
+                key={id}
+                style={{ ...style }}
+                id={id}
+                className={cx(
+                  'canvas__card',
+                  id === this.state.drag?.current && 'canvas__card--current',
+                )}
+              >
+                card {id}
               </div>
-            </div>
-          );
-        })}
-      </div>
+            );
+          })}
+        </div>
+      </>
     );
   }
 }
+
+export const AutosizeCanvas = withParentSizeModern(Canvas);
 
 export default Canvas;
