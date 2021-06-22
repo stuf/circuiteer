@@ -5,13 +5,34 @@ $position: (
   static: static,
 );
 
+@mixin position($pos) {
+  position: map-get($position, $pos);
+}
+
 @each $name, $value in $position {
   .#{$name} {
-    position: $value;
+    @include position($name);
   }
 }
 
-.bottom-right {
+@mixin inset() {
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+}
+
+@mixin make-bottom-right() {
   bottom: 0;
   right: 0;
+}
+
+//
+
+.inset {
+  @include inset;
+}
+
+.bottom-right {
+  @include make-bottom-right;
 }
