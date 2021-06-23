@@ -27,6 +27,11 @@ $position: (
   right: 0;
 }
 
+@mixin make-top-right() {
+  top: 0;
+  right: 0;
+}
+
 //
 
 .inset {
@@ -35,4 +40,8 @@ $position: (
 
 .bottom-right {
   @include make-bottom-right;
+}
+
+.top-right {
+  @include make-top-right;
 }

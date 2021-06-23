@@ -96,6 +96,7 @@ $canvas-card-radius: $radius-md;
   padding: map-get($spacing, '02');
   width: 15rem;
   max-height: 50vh;
+  z-index: 11;
 }
 
 .module-palette__items {
