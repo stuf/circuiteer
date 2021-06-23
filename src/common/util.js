@@ -2,6 +2,14 @@ import * as L from 'partial.lenses';
 import * as I from 'infestines';
 import * as RTK from '@reduxjs/toolkit';
 
+//
+
+const { abs, sqrt, pow } = Math;
+
+//
+
+export const invokeIf = (f, x) => f(x);
+
 export const createPrefixedActionCreator = prefix => (type, prepareFn) => {
   const prefixedType = [prefix, type].join('/');
 
@@ -42,3 +50,8 @@ export const actions = (...fnsIn) => {
       };
   }
 };
+
+//
+
+export const euclideanDistance = (p1, p2) =>
+  sqrt(pow(abs(p1.x - p2.x), 2) + pow(abs(p1.y - p2.y), 2));
