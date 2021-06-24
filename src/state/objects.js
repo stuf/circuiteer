@@ -26,6 +26,15 @@ export const toggleObject = createAction('toggleObject');
 
 const findObjectL = id => ['entities', L.find(o => o.id === id)];
 
+const normalizeObjectL = L.pickIn({
+  id: [],
+  pos: [],
+  size: [],
+  entity: [],
+  disabled: L.define(false),
+  locked: L.define(false),
+});
+
 //
 
 const initialState = {
@@ -46,7 +55,13 @@ const slice = createSlice({
       .addCase(addObjects, (s, a) =>
         L.modify('entities', xs => xs.concat(a.payload), original(s)),
       )
-      .addCase(setObjects, (s, a) => L.set('entities', a.payload, original(s)))
+      .addCase(setObjects, (s, a) =>
+        L.set(
+          ['entities'],
+          L.collect([L.elems, normalizeObjectL], a.payload),
+          original(s),
+        ),
+      )
       .addCase(updateObject, (s, a) =>
         L.modify(
           findObjectL(a.payload.id),
@@ -64,10 +79,10 @@ const slice = createSlice({
         L.set([findObjectL(a.payload.id), 'locked'], false, original(s)),
       )
       .addCase(enableObject, (s, a) =>
-        L.set([findObjectL(a.payload.id), 'enabled'], true, original(s)),
+        L.remove([findObjectL(a.payload.id), 'disabled'], original(s)),
       )
       .addCase(disableObject, (s, a) =>
-        L.set([findObjectL(a.payload.id), 'enabled'], false, original(s)),
+        L.set([findObjectL(a.payload.id), 'disabled'], true, original(s)),
       ),
 });
 
