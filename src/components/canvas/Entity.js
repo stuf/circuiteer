@@ -21,6 +21,7 @@ export function Entity(props) {
       <div className="entity__label">{object.entity?.id}</div>
       <div className="entity__stats">{object.entity?.power} U/s</div>
       <div className="entity__power-type">{object.entity?.powerType}</div>
+
       <div className="entity__toggles">
         <button
           className={clsx(cns.disabled)}

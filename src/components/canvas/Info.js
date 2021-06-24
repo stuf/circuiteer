@@ -13,8 +13,6 @@ import { EfficiencyI } from 'common/constants';
 export function Info(props) {
   const { className, location, power, flags } = props;
 
-  console.log({ flags });
-
   const locationObjects = useMemo(
     () => Object.values(location.entities),
     [location.entities],
@@ -31,8 +29,6 @@ export function Info(props) {
       wind: showEffFn(currentLocation.wind),
     };
   }, [flags.flags.showEfficiencyPercentage, currentLocation]);
-
-  console.log({ currentLocation });
 
   const powerʼ = useMemo(
     () => ({
