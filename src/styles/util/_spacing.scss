@@ -31,3 +31,9 @@
     margin-bottom: $size;
   }
 }
+
+.space-x {
+  > * + * {
+    margin-top: 0.5rem;
+  }
+}

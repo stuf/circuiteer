@@ -1,5 +1,10 @@
+@import './mixins';
+
+code,
 pre {
   margin: 0;
+  font-size: inherit;
+  font-weight: 100;
 }
 
 ul,
@@ -10,6 +15,17 @@ dl {
   margin: 0;
 }
 
+fieldset {
+  border-style: solid;
+  border-color: $base-border-color;
+  max-width: 100%;
+
+  & > legend {
+    @include padding('01', x);
+    @include font-weight('bold');
+  }
+}
+
 // @shame
 
 dl {
@@ -17,4 +33,48 @@ dl {
     display: grid;
     grid-template-columns: 1fr 4fr;
   }
+
+  dt {
+    @include font-weight('bold');
+  }
+}
+
+input[type='checkbox'] {
+  position: relative;
+  appearance: none;
+  width: 1.25rem;
+  height: 1.25rem;
+  margin-right: 0.4rem;
+  @include border;
+
+  &::after {
+    position: absolute;
+    top: -2px;
+    right: -2px;
+    left: -2px;
+    bottom: -2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &:checked {
+    // background: $blueprint-blue-light;
+
+    &::after {
+      // content: '╳';
+      content: '✓';
+      // color: $blueprint-blue-dark;
+      color: $blueprint-blue-light;
+    }
+  }
+}
+
+select {
+  display: block;
+  width: 100%;
+  background: $blueprint-blue-dark;
+  color: $blueprint-blue-light;
+  border: none;
+  @include border(bottom);
 }

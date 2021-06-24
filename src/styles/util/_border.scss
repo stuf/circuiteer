@@ -1,0 +1,11 @@
+.divide-x {
+  > * + * {
+    @include border(left);
+  }
+}
+
+.divide-y {
+  > * + * {
+    @include border(top);
+  }
+}

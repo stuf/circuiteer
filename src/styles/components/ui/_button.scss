@@ -1,0 +1,30 @@
+@import '../../base/definitions';
+
+@mixin make-button-style($prefix) {
+  $p: unquote($prefix);
+
+  $button-text-size: map-get($font-size, '01');
+
+  border: solid 1px $button-border-color;
+  background: $button-bg-color;
+  color: $button-text-color;
+  font-size: $button-text-size;
+  height: 1.5rem;
+
+  &.#{$p}--pressed {
+    background: $button-text-color;
+    color: $button-bg-color;
+  }
+
+  // &:hover {
+  //   transform: translateY(-2px);
+  // }
+
+  // &:active {
+  //   transform: translateY(2px);
+  // }
+}
+
+.button {
+  @include make-button-style('button');
+}

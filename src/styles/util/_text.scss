@@ -1,15 +1,22 @@
 @use "sass:string";
 
 @import '../base/definitions';
+@import '../base/mixins';
 
 @each $name, $size in $font-size {
   .text-#{$name} {
-    font-size: $size;
+    @include font-size($size);
   }
 }
 
 @each $family, $value in $font-family {
   .font-#{$family} {
     font-family: unquote($value);
+  }
+}
+
+@each $weight, $value in $font-weight {
+  .font-#{$weight} {
+    @include font-weight($value);
   }
 }

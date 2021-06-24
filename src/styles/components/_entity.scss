@@ -1,0 +1,45 @@
+@mixin make-entity-style($prefix) {
+  $p: unquote($prefix);
+
+  height: 100%;
+  width: 100%;
+  display: flex;
+  gap: 0.25rem;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-style: italic;
+  pointer-events: none;
+
+  // border: solid 2px #f00;
+
+  // .#{$p}__label {
+  //   border: solid 2px #f00;
+  // }
+
+  .#{$p}__toggles {
+    position: absolute;
+    left: 0.5rem;
+    bottom: 0.5rem;
+    pointer-events: all;
+    display: none;
+  }
+
+  .#{$p}__stats {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    font-size: map-get($font-size, '01');
+  }
+
+  .#{$p}__power-type {
+    position: absolute;
+    left: 0.5rem;
+    top: 0.5rem;
+    font-size: map-get($font-size, '01');
+  }
+}
+
+.entity {
+  @include make-entity-style($prefix: 'entity');
+}

@@ -1,5 +1,5 @@
 $font-family-mono: 'Jetbrains Mono' !default;
-$font-family-sans-serif: 'Apercu Pro' !default;
+$font-family-sans-serif: 'Routed Gothic' !default;
 
 $radius-md: 0.5rem !default;
 
@@ -11,3 +11,35 @@ $canvas-overlay-z: 11 !default;
 $canvas-ghost-z: 10 !default;
 
 //
+
+$blueprint-blue-dark: #405cb1;
+$blueprint-blue-medium: #98aedd;
+$blueprint-blue-light: #e4eaf6;
+
+//
+
+$base-border-color: $blueprint-blue-light !default;
+
+$main-bg-color: $blueprint-blue-dark !default;
+$main-text-color: $blueprint-blue-light !default;
+
+$card-bg-color: $blueprint-blue-dark !default;
+$card-border-color: $blueprint-blue-light !default;
+$card-border-width: 1px !default;
+$card-border-radius: $radius-md !default;
+$card-border-style: solid !default;
+
+$default-border: (
+  width: 2px,
+  style: solid,
+  radius: $radius-md,
+  color: $blueprint-blue-light,
+) !default;
+
+$card-border: $default-border;
+
+//
+
+$button-bg-color: $blueprint-blue-dark !default;
+$button-text-color: $blueprint-blue-light !default;
+$button-border-color: map-get($default-border, color);
