@@ -1,7 +1,10 @@
 import * as L from 'partial.lenses';
-import { useMemo } from 'react';
 import { useSelector } from 'react-redux';
 
+/**
+ *
+ * @returns {Hooks.Objects.UseCanvasObjectsHook}
+ */
 export function useCanvasObjects() {
   const objects = useSelector(L.get(['objects', 'entities', L.valueOr([])]));
 
@@ -9,7 +12,6 @@ export function useCanvasObjects() {
   const entities = L.modify([L.entries], ([k, v]) => [v.id, v], objects);
 
   return {
-    objects,
     ids,
     entities,
   };

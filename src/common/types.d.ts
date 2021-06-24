@@ -14,6 +14,78 @@ declare namespace Data {
     pos: Point;
     size: Size;
     locked: boolean;
-    enabled: boolean;
+    disabled: boolean;
+    entity: string;
+  }
+
+  export interface GameEntityObject {
+    id: string;
+    tier: -1 | 1 | 2 | 3 | 4;
+    powerType: 'constant' | 'solar' | 'wind' | 'toggle';
+    power: number;
+  }
+
+  export interface PopulatedCanvasObject extends CanvasObject {
+    entity: GameEntityObject;
+  }
+
+  export type Difficulty = 'easy' | 'medium' | 'hard' | 'veryHard';
+
+  export type Efficiency = 0.25 | 0.5 | 1 | 1.5 | 1.75;
+
+  export interface Location {
+    id: string;
+    difficulty: Difficulty;
+    wind: Efficiency;
+    solar: Efficiency;
+  }
+}
+
+declare namespace Hooks {
+  export namespace Objects {
+    export interface UseCanvasObjectsHook {
+      ids: string[];
+      entities: Record<string, Data.CanvasObject>;
+    }
+  }
+
+  export namespace GameEntities {
+    export interface UseGameEntitiesHook {
+      ids: string[];
+      entities: Record<string, Data.GameEntityObject>;
+    }
+  }
+
+  export namespace Locations {
+    export interface UseGameLocationsHook {
+      ids: string[];
+      entities: Record<string, Data.Location>;
+      current: string;
+      actions: {
+        setCurrent(id: string): void;
+      };
+    }
+  }
+
+  export namespace Derived {
+    export interface UseCanvasGameObjectsOptions {
+      useEntitySize?: boolean;
+    }
+
+    export interface UseCanvasGameObjectsHook {
+      ids: string[];
+      entities: Record<string, Data.PopulatedCanvasObject>;
+    }
+
+    export interface UsePowerEfficiencyHook {
+      power: {
+        producers: Record<string, Data.PopulatedCanvasObject>;
+        consumers: Record<string, Data.PopulatedCanvasObject>;
+      };
+      sum: {
+        producers: number;
+        consumers: number;
+      };
+    }
   }
 }

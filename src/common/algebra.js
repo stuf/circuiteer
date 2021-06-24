@@ -8,3 +8,17 @@ export const Point = {
   // Functor
   map: (f, a) => f(a),
 };
+
+export const Size = {};
+
+Size.Multiply = {
+  concat: (a, b) => ({ width: a.width * b.width, height: a.height * b.height }),
+
+  empty: () => ({ width: 1, height: 1 }),
+
+  map: (f, a) => f(a),
+
+  of: a => ({ width: a, height: a }),
+};
+
+Size.mul = Size.Multiply;

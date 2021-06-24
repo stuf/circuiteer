@@ -16,6 +16,15 @@ export const createPrefixedActionCreator = prefix => (type, prepareFn) => {
   return RTK.createAction(prefixedType, prepareFn);
 };
 
+export function normalize(items) {
+  const ids = L.collect([L.elems, 'id'], items);
+  const entities = L.modify(L.entries, ([k, v]) => [v.id, v], items);
+
+  return {
+    ids,
+    entities,
+  };
+}
 //
 
 /**
@@ -55,3 +64,7 @@ export const actions = (...fnsIn) => {
 
 export const euclideanDistance = (p1, p2) =>
   sqrt(pow(abs(p1.x - p2.x), 2) + pow(abs(p1.y - p2.y), 2));
+
+//
+
+export const percent = v => `${v * 100}%`;

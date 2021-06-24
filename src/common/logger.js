@@ -25,6 +25,14 @@ const createLogger = name => {
   return logger;
 };
 
+export const getLogger = name => {
+  if (!winston.loggers.has(name)) {
+    winston.loggers.add(name, loggerOptions(name));
+  }
+
+  return winston.loggers.get(name);
+};
+
 export const appLog = createLogger('app');
 export const canvasLog = createLogger('canvas');
 export const storeLog = createLogger('store');
