@@ -27,7 +27,6 @@ export const setGameObjects = createAction('setGameObjects');
 const initialState = {
   ids: [],
   entities: {},
-  objects: [],
 };
 
 //
