@@ -25,6 +25,10 @@ declare namespace Data {
     power: number;
   }
 
+  export interface NormalizedGameEntityObject extends GameEntityObject {
+    size: Size;
+  }
+
   export interface PopulatedCanvasObject extends CanvasObject {
     entity: GameEntityObject;
   }
@@ -38,6 +42,14 @@ declare namespace Data {
     difficulty: Difficulty;
     wind: Efficiency;
     solar: Efficiency;
+  }
+}
+
+declare namespace Callback {
+  export namespace Drag {
+    export interface OnExternalDrag {
+      (o: Data.GameEntityObject): void;
+    }
   }
 }
 
@@ -68,6 +80,11 @@ declare namespace Hooks {
   }
 
   export namespace Derived {
+    export interface UseNormalizedGameObjectsHook {
+      ids: string[];
+      entities: Record<string, Data.NormalizedGameEntityObject>;
+    }
+
     export interface UseCanvasGameObjectsOptions {
       useEntitySize?: boolean;
     }

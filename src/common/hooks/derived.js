@@ -11,6 +11,44 @@ import { getLogger } from 'common/logger';
 const logger = getLogger('hooks/derived');
 
 /**
+ *
+ * @returns {Hooks.Derived.UseNormalizedGameObjectsHook}
+ */
+export function useNormalizedGameObjects() {
+  const gameEntities = useGameEntities();
+
+  const entitiesʼ = L.transform(
+    [
+      'entities',
+      L.values,
+      L.modifyOp(
+        /**
+         *
+         * @param {Data.GameEntityObject} o
+         */
+        o => {
+          console.log(o);
+          // if (o.size && o.tier) return o;
+          const tier = o.tier;
+          const size = DefaultSize[tier];
+          console.log(o.id, tier, o.size, DefaultSize, DefaultSize[3]);
+
+          // console.log('o =>', o);
+          // console.log('size =>', size);
+
+          return L.set('size', size, o);
+        },
+      ),
+    ],
+    gameEntities,
+  );
+
+  console.log({ entitiesʼ });
+
+  return entitiesʼ;
+}
+
+/**
  * Hook for selecting the currently placed objects on the canvas
  * with all their 'references' populated with the appropriate
  * values.
@@ -23,54 +61,16 @@ const logger = getLogger('hooks/derived');
  */
 export function useCanvasGameObjects(options) {
   const objects = useCanvasObjects();
-  const gameEntities = useGameEntities();
+  const gameEntities = useNormalizedGameObjects();
+
+  const tfnEntity = useMemo(
+    () => ['entity', L.modifyOp(id => gameEntities.entities[id])],
+    [gameEntities.entities],
+  );
 
   const objectsʼ = useMemo(
-    () =>
-      L.transform(
-        [
-          'entities',
-          L.values,
-          L.seq(
-            ['entity', L.modifyOp(id => gameEntities.entities[id])],
-            L.modifyOp(
-              /**
-               *
-               * @param {Data.PopulatedCanvasObject} o
-               */
-              o => {
-                if (!options?.useEntitySize) return o;
-
-                if (!o.entity?.tier) {
-                  logger.log(
-                    'info',
-                    'object `%s` (of type `%s`) does not have entity populated',
-                    o.id,
-                    o.entity?.id,
-                  );
-                  return o;
-                }
-
-                const size = DefaultSize[o.entity.tier];
-
-                if (!size) {
-                  logger.log(
-                    'info',
-                    'object `%s` does not have a default size defined',
-                    o.id,
-                  );
-
-                  return o;
-                }
-
-                return L.set('size', size, o);
-              },
-            ),
-          ),
-        ],
-        objects,
-      ),
-    [objects, options, gameEntities],
+    () => L.transform(['entities', L.values, tfnEntity], objects),
+    [objects, tfnEntity],
   );
 
   return objectsʼ;

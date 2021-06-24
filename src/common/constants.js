@@ -28,6 +28,13 @@ export const Tier = {
   4: 'extraLarge',
 };
 
+export const TierI = {
+  small: '1',
+  medium: '2',
+  large: '3',
+  extraLarge: '4',
+};
+
 export const PowerType = {
   ON_DEMAND: 'onDemand',
   CONSTANT: 'constant',
