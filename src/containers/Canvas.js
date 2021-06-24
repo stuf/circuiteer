@@ -1,3 +1,6 @@
+/**
+ * @todo Add some a11y considerations to UI elements
+ */
 import clsx from 'clsx';
 import * as L from 'partial.lenses';
 import React, { useCallback, useState, useMemo, useRef } from 'react';
@@ -5,16 +8,27 @@ import { withParentSizeModern } from '@visx/responsive';
 import { inspect } from 'util';
 
 import { euclideanDistance } from 'common/util';
+import { AutosizeUnderlay, Entity } from 'components/canvas';
 
 export function Canvas(props) {
-  const { width, height, objects, options } = props;
+  const {
+    // width,
+    // height,
+    objects,
+    options,
+  } = props;
 
   const {
     minimumDragDistance = 10,
     onDragStart,
     onDragMove,
     onDragStop,
-  } = options ?? {};
+  } = options || {};
+
+  const entityActions = useMemo(
+    () => props.options?.entityActions,
+    [props.options?.entityActions],
+  );
 
   const currentObj = useRef(null);
 
@@ -24,12 +38,6 @@ export function Canvas(props) {
     objects,
   });
 
-  const distance = useMemo(() => {
-    if (!state.dragging) return;
-
-    return euclideanDistance(state.dragging.from, state.dragging.to);
-  }, [state.dragging]);
-
   // #region Dragging handlers
 
   const dragStart = useCallback(
@@ -37,14 +45,17 @@ export function Canvas(props) {
       const id = e.target.getAttribute('id');
       if (!id) return;
 
-      console.log('drag start', id);
-
       const obj = state.objects.find(o => o.id === id);
       currentObj.current = obj;
 
       setState(
         L.set(L.pick({ pos: ['dragging'], current: 'current' }), {
-          pos: { from: obj.pos, to: obj.pos, size: obj.size },
+          pos: {
+            from: obj.pos,
+            to: obj.pos,
+            size: obj.size,
+            overThreshold: false,
+          },
           current: id,
         }),
       );
@@ -64,20 +75,34 @@ export function Canvas(props) {
       const x = dx + state.dragging.to.x;
       const y = dy + state.dragging.to.y;
 
-      setState(L.transform(['dragging', 'to', L.setOp({ x, y })]));
+      const origin = state.dragging.from;
+      const draggedDistance = euclideanDistance(origin, { x, y });
+      const overThreshold = draggedDistance >= minimumDragDistance;
+
+      setState(
+        L.transform(
+          L.seq([
+            'dragging',
+            L.seq(
+              ['to', L.setOp({ x, y })],
+              ['distance', L.setOp(draggedDistance)],
+              ['overThreshold', L.setOp(overThreshold)],
+            ),
+          ]),
+        ),
+      );
 
       if (onDragMove) {
         onDragMove(e, currentObj.current);
       }
     },
-    [state.dragging, onDragMove],
+    [state.dragging, minimumDragDistance, onDragMove],
   );
 
   const dragStop = useCallback(
     e => {
       if (state.dragging === null) return;
 
-      console.log('drag stop');
       const newPos = L.get('to', state.dragging);
 
       currentObj.current = L.set('pos', newPos, currentObj.current);
@@ -115,11 +140,11 @@ export function Canvas(props) {
 
         return (
           <div key={id} id={id} className={clsx('canvas__card')} style={style}>
-            {JSON.stringify(o)}
+            <Entity object={o} actions={entityActions} />
           </div>
         );
       }),
-    [state.objects],
+    [state.objects, entityActions],
   );
 
   const ghostStyle = useMemo(
@@ -144,23 +169,16 @@ export function Canvas(props) {
         {children}
       </div>
 
+      {/* Dragging placeholder for element being dragged */}
       {state.dragging && (
-        <div className="canvas__card-ghost absolute" style={ghostStyle}>
-          asd
-        </div>
+        <div className="canvas__card-ghost absolute" style={ghostStyle} />
       )}
 
-      <div className="absolute top-right">
-        <fieldset>
-          <legend>Dragging</legend>
-
-          <div>
-            <dl className="pairs">
-              <dt>Distance</dt>
-              <dd>{distance}</dd>
-            </dl>
-          </div>
-        </fieldset>
+      {/* Dev placeholder */}
+      <div
+        className="canvas-debug absolute top-right text-01"
+        style={{ width: 300 }}
+      >
         <fieldset>
           <legend>State</legend>
           <div>
@@ -168,6 +186,7 @@ export function Canvas(props) {
           </div>
         </fieldset>
       </div>
+      <AutosizeUnderlay />
     </>
   );
 }

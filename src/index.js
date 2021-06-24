@@ -7,6 +7,11 @@ import { Provider } from 'react-redux';
 import { store } from './store';
 import 'normalize.css';
 import './styles/index.scss';
+import { getLogger } from 'common/logger';
+
+const logger = getLogger('main');
+
+logger.log('info', 'entry point init');
 
 render(
   <StrictMode>
