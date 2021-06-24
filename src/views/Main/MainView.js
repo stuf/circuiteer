@@ -1,20 +1,23 @@
 import { useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 
-import { useCanvasGameObjects, usePowerEfficiency } from 'common/hooks/derived';
 import { AutosizeCanvas } from 'containers/Canvas';
-import { Info } from 'components/canvas';
+import { Info, EntityPalette } from 'components/canvas';
 
+import { dragExternalStart } from 'state/canvas';
 import { updateObject } from 'state/objects';
 import { getLogger } from 'common/logger';
+import { useCanvasGameObjects, usePowerEfficiency } from 'common/hooks/derived';
 import { useGameLocations } from 'common/hooks/locations';
 import { useOptionFlags } from 'common/hooks/options';
+import { useGameEntities } from 'common/hooks/game-entities';
 
 const logger = getLogger('app');
 
 export function MainView(props) {
   const update = useDispatch();
 
+  const gameObjects = useGameEntities();
   const { ids, entities } = useCanvasGameObjects({ useEntitySize: true }); // eslint-disable-line
   const location = useGameLocations();
   const power = usePowerEfficiency();
@@ -47,6 +50,15 @@ export function MainView(props) {
     );
   }
 
+  /**
+   *
+   * @type {Callback.Drag.OnExternalDrag}
+   */
+  const onModulePaletteDragStart = o => {
+    logger.log('info', 'start external drag');
+    console.log({ o });
+  };
+
   return (
     <main className="view">
       <AutosizeCanvas
@@ -54,6 +66,10 @@ export function MainView(props) {
         options={{ onDragStop, onDragStart, entityActions }}
       />
       <Info location={location} power={power} flags={flags} />
+      <EntityPalette
+        gameObjects={gameObjects}
+        actions={{ onModulePaletteDragStart }}
+      />
     </main>
   );
 }

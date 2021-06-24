@@ -64,7 +64,7 @@ export function Canvas(props) {
           pos: {
             from: obj.pos,
             to: obj.pos,
-            size: obj.size,
+            size: obj.entity?.size,
             overThreshold: false,
           },
           current: id,
@@ -154,7 +154,8 @@ export function Canvas(props) {
   const children = useMemo(
     () =>
       state.objects.map((o, i) => {
-        const { id, pos, size } = o;
+        const { id, pos } = o;
+        const size = o.entity.size;
         const style = {
           ...size,
           transform: `translateX(${pos.x}px) translateY(${pos.y}px)`,
