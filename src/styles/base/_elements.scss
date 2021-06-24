@@ -58,6 +58,14 @@ input[type='checkbox'] {
     justify-content: center;
   }
 
+  &:disabled {
+    &,
+    & + label {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+  }
+
   &:checked {
     // background: $blueprint-blue-light;
 
