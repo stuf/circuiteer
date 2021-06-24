@@ -1,0 +1,42 @@
+@mixin make-entity-palette-style($prefix) {
+  $p: unquote($prefix);
+
+  .#{$p} {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    z-index: 20;
+    border: solid 2px #fff;
+    background: $blueprint-blue-dark;
+    padding: $base-pad;
+    width: 200px;
+  }
+
+  .#{$p}__head {
+    padding-bottom: map-get($spacing, '02');
+    margin-bottom: map-get($spacing, '02');
+  }
+
+  .#{$p}__list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: map-get($spacing, '03');
+    font-size: map-get($font-size, '02');
+  }
+
+  .#{$p}__list-item {
+    @include border;
+    padding: map-get($spacing, '03');
+    overflow: hidden;
+  }
+
+  .#{$p}__list-item-stats {
+    margin-top: map-get($spacing, '01');
+    padding-top: map-get($spacing, '01');
+    font-size: map-get($font-size, '01');
+    display: flex;
+    justify-content: space-between;
+  }
+}
+
+@include make-entity-palette-style('entity-palette');

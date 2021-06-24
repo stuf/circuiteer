@@ -1,11 +1,17 @@
 $font-family-mono: 'Jetbrains Mono' !default;
 $font-family-sans-serif: 'Routed Gothic' !default;
 
+// Might not be needed, too many typefaces
+$font-family-mono-secondary: 'CMU Typewriter Text' !default;
+
+//
+
 $radius-md: 0.5rem !default;
 
 $canvas-underlay-z: 1 !default;
 $canvas-main-z: 5 !default;
 $canvas-overlay-z: 11 !default;
+$canvas-hover-element: 20 !default;
 
 // Canvas draging ghost z-index
 $canvas-ghost-z: 10 !default;
@@ -18,6 +24,7 @@ $blueprint-blue-light: #e4eaf6;
 
 //
 
+$base-pad: map-get($spacing, '03') !default;
 $base-border-color: $blueprint-blue-light !default;
 
 $main-bg-color: $blueprint-blue-dark !default;
