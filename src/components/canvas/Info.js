@@ -1,7 +1,9 @@
+import * as R from 'ramda';
 import { useMemo } from 'react';
 import clsx from 'clsx';
 
 import { percent } from 'common/util';
+import { EfficiencyI } from 'common/constants';
 
 /**
  *
@@ -9,7 +11,9 @@ import { percent } from 'common/util';
  * @returns
  */
 export function Info(props) {
-  const { className, location, power } = props;
+  const { className, location, power, flags } = props;
+
+  console.log({ flags });
 
   const locationObjects = useMemo(
     () => Object.values(location.entities),
@@ -17,6 +21,26 @@ export function Info(props) {
   );
 
   const currentLocation = location.entities[location.current];
+  const showEfficiency = useMemo(() => {
+    const showEffFn = flags.flags.showEfficiencyPercentage
+      ? percent
+      : v => EfficiencyI[v];
+
+    return {
+      solar: showEffFn(currentLocation.solar),
+      wind: showEffFn(currentLocation.wind),
+    };
+  }, [flags.flags.showEfficiencyPercentage, currentLocation]);
+
+  console.log({ currentLocation });
+
+  const powerʼ = useMemo(
+    () => ({
+      producers: power.producers,
+      consumers: power.consumers,
+    }),
+    [power],
+  );
 
   const blocks = [
     {
@@ -44,18 +68,16 @@ export function Info(props) {
     },
   ];
 
+  const cellWidths = [100, 100, 200];
+
   const effBlocks = [
     {
       label: 'Solar',
-      body: () => (
-        <div className="info-value--big">{percent(currentLocation.solar)}</div>
-      ),
+      body: () => <div className="info-value--big">{showEfficiency.solar}</div>,
     },
     {
       label: 'Wind',
-      body: () => (
-        <div className="info-value--big">{percent(currentLocation.wind)}</div>
-      ),
+      body: () => <div className="info-value--big">{showEfficiency.wind}</div>,
     },
     {},
   ];
@@ -74,16 +96,31 @@ export function Info(props) {
       ),
     },
     {
-      label: 'Toggles',
+      label: 'Options',
       body: () => (
         <div className="info-value--normal space-x">
           <div className="info-checkbox">
-            <input id="cb1" type="checkbox" checked />
+            <input
+              id="cb1"
+              type="checkbox"
+              checked={flags.flags.showEfficiencyPercentage}
+              onChange={() =>
+                flags.actions.toggleFlag('showEfficiencyPercentage')
+              }
+            />
             <label for="cb1">Efficiency as percentage</label>
           </div>
 
           <div className="info-checkbox">
-            <input id="cb2" type="checkbox" />
+            <input
+              id="cb2"
+              type="checkbox"
+              disabled
+              checked={flags.flags.showLocationAdjustedEfficiency}
+              onChange={() =>
+                flags.actions.toggleFlag('showLocationAdjustedEfficiency')
+              }
+            />
             <label for="cb2">Location efficiency</label>
           </div>
         </div>
@@ -111,7 +148,7 @@ export function Info(props) {
 
           <tr>
             {effBlocks.map((block, i) => (
-              <td key={i} className="info__block">
+              <td key={i} className="info__block" style={{ width: 100 }}>
                 <div className="info-label">{block.label}</div>
                 <div className="info-value">{block.body && block.body()}</div>
               </td>
@@ -120,7 +157,11 @@ export function Info(props) {
 
           <tr>
             {dataBlocks.map((block, i) => (
-              <td key={`block-02-${i}`} className="info__block">
+              <td
+                key={`block-02-${i}`}
+                className="info__block"
+                style={{ width: cellWidths[i] }}
+              >
                 <div className="info-label">{block.label}</div>
                 {block.body && <div className="info-value">{block.body()}</div>}
               </td>

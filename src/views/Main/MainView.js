@@ -6,8 +6,11 @@ import { AutosizeCanvas } from 'containers/Canvas';
 import { Info } from 'components/canvas';
 
 import { updateObject } from 'state/objects';
-import { appLog as logger } from 'common/logger';
+import { getLogger } from 'common/logger';
 import { useGameLocations } from 'common/hooks/locations';
+import { useOptionFlags } from 'common/hooks/options';
+
+const logger = getLogger('app');
 
 export function MainView(props) {
   const update = useDispatch();
@@ -15,39 +18,33 @@ export function MainView(props) {
   const { ids, entities } = useCanvasGameObjects({ useEntitySize: true }); // eslint-disable-line
   const location = useGameLocations();
   const power = usePowerEfficiency();
+  const flags = useOptionFlags();
 
   const objects = Object.values(entities);
 
   const onDragStop = useCallback(
     (e, o) => {
-      logger.info(
-        'onDragStop called with object `%s` in position: x=%s, y=%s',
-        o.id,
-        o.pos.x,
-        o.pos.y,
-      );
+      logger.info('update object `%s` in state', o.id);
       update(updateObject(o));
     },
     [update],
   );
 
   const onDragStart = useCallback((e, o) => {
-    logger.info('onDragStart called with object `%s`', o.id);
+    // logger.info('onDragStart called with object `%s`', o.id);
     // console.log('onDragStart in MainView', { e, o });
     // console.log('onDragStart');
   }, []);
 
   const entityActions = {
-    toggleObjectLock: () => {
-      alert('lock it');
-    },
-    toggleObjectDisabled: () => {
-      alert('disable it');
-    },
+    toggleObjectLock: () => {},
+    toggleObjectDisabled: () => {},
   };
 
   if (!objects?.length) {
-    return <div>nothing</div>;
+    return (
+      <div>Did you misfire a rocket? TODO: Pleasefix asap :sad: (´・ω・｀)</div>
+    );
   }
 
   return (
@@ -56,7 +53,7 @@ export function MainView(props) {
         objects={objects}
         options={{ onDragStop, onDragStart, entityActions }}
       />
-      <Info location={location} power={power} />
+      <Info location={location} power={power} flags={flags} />
     </main>
   );
 }

@@ -8,7 +8,10 @@ import { withParentSizeModern } from '@visx/responsive';
 import { inspect } from 'util';
 
 import { euclideanDistance } from 'common/util';
+import { getLogger } from 'common/logger';
 import { AutosizeUnderlay, Entity } from 'components/canvas';
+
+const logger = getLogger('canvas');
 
 export function Canvas(props) {
   const {
@@ -47,6 +50,14 @@ export function Canvas(props) {
 
       const obj = state.objects.find(o => o.id === id);
       currentObj.current = obj;
+
+      logger.log(
+        'info',
+        'start drag for object `%s` from (%s, %s)',
+        id,
+        obj.pos.x,
+        obj.pos.y,
+      );
 
       setState(
         L.set(L.pick({ pos: ['dragging'], current: 'current' }), {
@@ -103,10 +114,21 @@ export function Canvas(props) {
     e => {
       if (state.dragging === null) return;
 
+      const oldPos = L.get('from', state.dragging);
       const newPos = L.get('to', state.dragging);
 
       currentObj.current = L.set('pos', newPos, currentObj.current);
       const { id, pos } = L.get(L.props('id', 'pos'), currentObj.current);
+
+      logger.log(
+        'info',
+        'stop drag for object `%s` (%s, %s) to (%s, %s)',
+        id,
+        oldPos.x,
+        oldPos.y,
+        newPos.x,
+        newPos.y,
+      );
 
       setState(
         L.transform(
