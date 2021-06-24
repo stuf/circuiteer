@@ -4,9 +4,12 @@ import { useDispatch } from 'react-redux';
 import { setObjects } from 'state/objects';
 import { setGameObjects } from 'state/game-entities';
 import { setLocations } from 'state/location';
+import { setFlags } from 'state/options';
+
 import objects from 'dev/objects';
 import { objects as gameObjects } from 'dev/game-entities';
 import locationObjects from 'dev/location';
+import { flags } from 'dev/options';
 
 export function useDebugObjects() {
   const update = useDispatch();
@@ -17,5 +20,6 @@ export function useDebugObjects() {
     update(setObjects(objects));
     update(setGameObjects(gameObjects));
     update(setLocations(locationObjects));
+    update(setFlags(flags));
   }, [update]);
 }
