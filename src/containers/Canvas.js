@@ -13,19 +13,19 @@ import { AutosizeUnderlay, Entity } from 'components/canvas';
 
 const logger = getLogger('canvas');
 
+/**
+ *
+ * @param {import('./Canvas').Props} props
+ */
 export function Canvas(props) {
-  const {
-    // width,
-    // height,
-    objects,
-    options,
-  } = props;
+  const { objects, options, flags, currentlyAdding } = props;
 
   const {
     minimumDragDistance = 10,
     onDragStart,
     onDragMove,
     onDragStop,
+    onCommitObject,
   } = options || {};
 
   const entityActions = useMemo(
@@ -37,6 +37,7 @@ export function Canvas(props) {
 
   const [state, setState] = useState({
     dragging: null,
+    adding: currentlyAdding,
     current: null,
     objects,
   });
@@ -45,6 +46,21 @@ export function Canvas(props) {
 
   const dragStart = useCallback(
     e => {
+      if (flags.isAddingNew) {
+        const newPos = { x: e.clientX, y: e.clientY };
+        logger.log(
+          'info',
+          "adding a new element, don't do the dragging thing ",
+        );
+        console.log('currently adding =>', currentlyAdding, newPos);
+        const newObj = {
+          pos: newPos,
+          entity: currentlyAdding.entity,
+        };
+
+        onCommitObject(newObj);
+      }
+
       const id = e.target.getAttribute('id');
       if (!id) return;
 
@@ -75,16 +91,23 @@ export function Canvas(props) {
         onDragStart(e, currentObj.current);
       }
     },
-    [state.objects, onDragStart],
+    [
+      state.objects,
+      onDragStart,
+      currentlyAdding,
+      onCommitObject,
+      flags.isAddingNew,
+    ],
   );
 
   const dragMove = useCallback(
     e => {
       if (state.dragging === null) return;
 
+      const pxRatio = window.devicePixelRatio;
       const { movementX: dx, movementY: dy } = e;
-      const x = dx + state.dragging.to.x;
-      const y = dy + state.dragging.to.y;
+      const x = dx / pxRatio + state.dragging.to.x;
+      const y = dy / pxRatio + state.dragging.to.y;
 
       const origin = state.dragging.from;
       const draggedDistance = euclideanDistance(origin, { x, y });
@@ -153,8 +176,13 @@ export function Canvas(props) {
 
   const children = useMemo(
     () =>
-      state.objects.map((o, i) => {
+      objects.map((o, i) => {
         const { id, pos } = o;
+        // console.log('o', o);
+
+        if (!o.entity?.size) {
+          return null;
+        }
         const size = o.entity.size;
         const style = {
           ...size,
@@ -167,7 +195,7 @@ export function Canvas(props) {
           </div>
         );
       }),
-    [state.objects, entityActions],
+    [objects, entityActions],
   );
 
   const ghostStyle = useMemo(
@@ -182,9 +210,9 @@ export function Canvas(props) {
   return (
     <>
       <div
-        className="canvas"
+        className={clsx('canvas', flags.isAddingNew && 'canvas--adding-new')}
         {...{
-          onMouseDown: dragStart,
+          onMouseDownCapture: dragStart,
           onMouseMove: dragMove,
           onMouseUp: dragStop,
         }}
@@ -209,7 +237,8 @@ export function Canvas(props) {
           </div>
         </fieldset>
       </div>
-      <AutosizeUnderlay />
+
+      <AutosizeUnderlay isAddingNew={flags.isAddingNew} />
     </>
   );
 }
