@@ -1,3 +1,7 @@
+@use 'sass:map';
+@use '../base/settings' as S;
+@use '../base/definitions' as D;
+
 $info-block-border-color: map-get($default-border, color);
 $info-block-border-width: 2px;
 $info-block-border-style: solid;
@@ -10,13 +14,14 @@ $info-block-pad: 0.4rem;
 $info-label-font-size: 0.8rem;
 
 @mixin make-info-style {
+  $offset: S.$body-offset !default;
+
   @include position(absolute);
   background-color: $blueprint-blue-dark;
-  z-index: 20;
+  z-index: map.get(D.$z-index, 'overlay');
   pointer-events: all;
-  right: 1rem;
-  bottom: 1rem;
-  // border: $info-block-border;
+  right: $offset;
+  bottom: $offset;
   min-width: 24rem;
 
   &__child {

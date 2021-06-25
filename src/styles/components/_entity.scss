@@ -1,6 +1,9 @@
 @mixin make-entity-style($prefix) {
   $p: unquote($prefix);
 
+  @include border;
+  border-radius: $radius-md;
+  background: $blueprint-blue-dark;
   height: 100%;
   width: 100%;
   display: flex;
@@ -10,6 +13,7 @@
   justify-content: center;
   font-style: italic;
   pointer-events: none;
+  user-select: none;
 
   // border: solid 2px #f00;
 

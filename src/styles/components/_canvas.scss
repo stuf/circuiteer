@@ -5,12 +5,18 @@ $canvas-card-border-width: 1px;
 $canvas-card-bg: rgba(#fff, 1);
 $canvas-card-radius: $radius-md;
 
+$cns-adding-new: unquote('adding-new');
+
 .canvas {
   // border: dashed 2px #00f;
   height: 100%;
   position: relative;
   user-select: none;
   z-index: $canvas-main-z;
+}
+
+.canvas--#{$cns-adding-new} {
+  border: solid 4px #f00;
 }
 
 .canvas__card {
@@ -48,16 +54,20 @@ $canvas-card-radius: $radius-md;
 
 // Canvas underlay
 
-.canvas-underlay {
-  // border: solid 2px #f00;
-  z-index: $canvas-underlay-z;
-  // opacity: 0;
-  // background: #f00;
-  pointer-events: none;
-  @include position(absolute);
-  @include inset;
-  // border: solid 2px #f0f;
-}
+// .canvas-underlay {
+//   // border: solid 2px #f00;
+//   z-index: $canvas-underlay-z;
+//   // opacity: 0;
+//   // background: #f00;
+//   pointer-events: none;
+//   @include position(absolute);
+//   @include inset;
+//   // border: solid 2px #f0f;
+// }
+
+// .canvas-underlay--#{$cns-adding-new} {
+//   opacity: 0.5;
+// }
 
 // Canvas overlay
 .canvas-overlay {

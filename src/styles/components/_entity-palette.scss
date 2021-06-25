@@ -1,10 +1,14 @@
+@use '../base/settings' as S;
+
 @mixin make-entity-palette-style($prefix) {
   $p: unquote($prefix);
 
+  $offset: S.$body-offset !default;
+
   .#{$p} {
     position: absolute;
-    top: 1rem;
-    right: 1rem;
+    top: $offset;
+    right: $offset;
     z-index: 20;
     border: solid 2px #fff;
     background: $blueprint-blue-dark;

@@ -1,0 +1,17 @@
+@use 'sass:map';
+@use '../../base/definitions' as D;
+
+@mixin make-canvas-style($prefix) {
+  $p: unquote($prefix);
+
+  // .#{$p} {
+  //   border: dashed 4px #f00;
+  // }
+
+  .#{$p}__object {
+    position: absolute;
+    z-index: map.get(D.$z-index, 'base');
+  }
+}
+
+@include make-canvas-style('canvas-el');

@@ -1,5 +1,8 @@
+@use 'sass:map';
+@use 'definitions' as D;
+
 $font-family-mono: 'Jetbrains Mono' !default;
-$font-family-sans-serif: 'Routed Gothic' !default;
+$font-family-sans-serif: 'National Park' !default;
 
 // Might not be needed, too many typefaces
 $font-family-mono-secondary: 'CMU Typewriter Text' !default;
@@ -7,6 +10,8 @@ $font-family-mono-secondary: 'CMU Typewriter Text' !default;
 //
 
 $radius-md: 0.5rem !default;
+
+$body-offset: 20px !default;
 
 $canvas-underlay-z: 1 !default;
 $canvas-main-z: 5 !default;
@@ -24,17 +29,11 @@ $blueprint-blue-light: #e4eaf6;
 
 //
 
-$base-pad: map-get($spacing, '03') !default;
+$base-pad: map.get(D.$spacing, '03') !default;
 $base-border-color: $blueprint-blue-light !default;
 
 $main-bg-color: $blueprint-blue-dark !default;
 $main-text-color: $blueprint-blue-light !default;
-
-$card-bg-color: $blueprint-blue-dark !default;
-$card-border-color: $blueprint-blue-light !default;
-$card-border-width: 1px !default;
-$card-border-radius: $radius-md !default;
-$card-border-style: solid !default;
 
 $default-border: (
   width: 2px,
@@ -42,6 +41,12 @@ $default-border: (
   radius: $radius-md,
   color: $blueprint-blue-light,
 ) !default;
+
+$card-bg-color: $blueprint-blue-dark !default;
+$card-border-color: $blueprint-blue-light !default;
+$card-border-width: map.get($default-border, 'width') !default;
+$card-border-radius: $radius-md !default;
+$card-border-style: solid !default;
 
 $card-border: $default-border;
 
