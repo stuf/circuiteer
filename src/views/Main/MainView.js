@@ -1,47 +1,48 @@
+import * as L from 'partial.lenses';
 import { useCallback } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { AutosizeCanvas } from 'containers/Canvas';
 import { Info, EntityPalette } from 'components/canvas';
+import { AutosizeCanvasElement } from 'containers/CanvasElement';
 
-import { dragExternalStart } from 'state/canvas';
-import { updateObject } from 'state/objects';
+import { addingNew } from 'state/canvas';
+import { addObject, updateObject } from 'state/objects';
 import { getLogger } from 'common/logger';
-import { useCanvasGameObjects, usePowerEfficiency } from 'common/hooks/derived';
+
+import { useCanvasState } from 'common/hooks/canvas';
+import {
+  useNormalizedGameObjects,
+  usePowerEfficiency,
+  useUsageObjectThings,
+} from 'common/hooks/derived';
+
 import { useGameLocations } from 'common/hooks/locations';
 import { useOptionFlags } from 'common/hooks/options';
 import { useGameEntities } from 'common/hooks/game-entities';
+import { useCanvasObjects } from 'common/hooks/objects';
+import { normalize } from 'common/util';
 
 const logger = getLogger('app');
 
 export function MainView(props) {
   const update = useDispatch();
 
+  const canvasStuff = useUsageObjectThings();
+
   const gameObjects = useGameEntities();
-  const { ids, entities } = useCanvasGameObjects({ useEntitySize: true }); // eslint-disable-line
+
+  // const asd = useCanvasGameObjects({ useEntitySize: true }); // eslint-disable-line
   const location = useGameLocations();
   const power = usePowerEfficiency();
   const flags = useOptionFlags();
 
-  const objects = Object.values(entities);
+  // const objects = Object.values(entities);
+  const objects = Object.values(canvasStuff.entities);
 
-  const onDragStop = useCallback(
-    (e, o) => {
-      logger.info('update object `%s` in state', o.id);
-      update(updateObject(o));
-    },
-    [update],
-  );
-
-  const onDragStart = useCallback((e, o) => {
-    // logger.info('onDragStart called with object `%s`', o.id);
-    // console.log('onDragStart in MainView', { e, o });
-    // console.log('onDragStart');
-  }, []);
-
-  const entityActions = {
-    toggleObjectLock: () => {},
-    toggleObjectDisabled: () => {},
+  const onAddNewEntity = o => {
+    console.log('onAddNewEntity', o);
+    update(addingNew(o));
   };
 
   if (!objects?.length) {
@@ -50,25 +51,14 @@ export function MainView(props) {
     );
   }
 
-  /**
-   *
-   * @type {Callback.Drag.OnExternalDrag}
-   */
-  const onModulePaletteDragStart = o => {
-    logger.log('info', 'start external drag');
-    console.log({ o });
-  };
-
   return (
     <main className="view">
-      <AutosizeCanvas
-        objects={objects}
-        options={{ onDragStop, onDragStart, entityActions }}
-      />
+      <AutosizeCanvasElement />
       <Info location={location} power={power} flags={flags} />
       <EntityPalette
         gameObjects={gameObjects}
-        actions={{ onModulePaletteDragStart }}
+        isCurrentlyAdding={false}
+        actions={{ onAddNewEntity }}
       />
     </main>
   );
