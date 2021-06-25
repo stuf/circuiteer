@@ -30,7 +30,7 @@ declare namespace Data {
   }
 
   export interface PopulatedCanvasObject extends CanvasObject {
-    entity: GameEntityObject;
+    entity: NormalizedGameEntityObject;
   }
 
   export type Difficulty = 'easy' | 'medium' | 'hard' | 'veryHard';
@@ -46,6 +46,11 @@ declare namespace Data {
 }
 
 declare namespace Callback {
+  export namespace Entity {
+    export interface AddNew {
+      (o: Data.GameEntityObject): void;
+    }
+  }
   export namespace Drag {
     export interface OnExternalDrag {
       (o: Data.GameEntityObject): void;
@@ -54,6 +59,29 @@ declare namespace Callback {
 }
 
 declare namespace Hooks {
+  export namespace Canvas {
+    export type CurrentlyAdding = null | {
+      entity: Data.NormalizedGameEntityObject;
+    };
+
+    export type CurrentlyDragging = null | {};
+
+    export type CurrentlyAddingExternal = null | {};
+
+    export interface CanvasStateFlags {
+      isAddingNew: boolean;
+      isAddingExternal: boolean;
+      isDragging: boolean;
+    }
+
+    export interface UseCanvasStateHook {
+      adding: CurrentlyAdding;
+      drag: CurrentlyDragging;
+      external: CurrentlyAddingExternal;
+      flags: CanvasStateFlags;
+    }
+  }
+
   export namespace Objects {
     export interface UseCanvasObjectsHook {
       ids: string[];
@@ -103,6 +131,11 @@ declare namespace Hooks {
         producers: number;
         consumers: number;
       };
+    }
+
+    export interface UseUsageThingsHook {
+      ids: string[];
+      entities: Record<string, Data.PopulatedCanvasObject>;
     }
   }
 }

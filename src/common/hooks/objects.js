@@ -1,18 +1,16 @@
 import * as L from 'partial.lenses';
+import { useMemo } from 'react';
 import { useSelector } from 'react-redux';
+
+import { normalize } from 'common/util';
 
 /**
  *
  * @returns {Hooks.Objects.UseCanvasObjectsHook}
  */
 export function useCanvasObjects() {
-  const objects = useSelector(L.get(['objects', 'entities', L.valueOr([])]));
+  const objects = useSelector(L.get(['entities', L.valueOr([])]));
+  const normalized = useMemo(() => normalize(objects), [objects]);
 
-  const ids = L.collect([L.elems, 'id'], objects);
-  const entities = L.modify([L.entries], ([k, v]) => [v.id, v], objects);
-
-  return {
-    ids,
-    entities,
-  };
+  return normalized;
 }

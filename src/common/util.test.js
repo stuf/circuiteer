@@ -61,12 +61,30 @@ test('U.persist', () => {
   expect(fn).toHaveBeenCalled();
 });
 
-test('U.createPrefixedActionCreator', () => {
-  const prefix = 'prefix';
-  const createAction = U.createPrefixedActionCreator(prefix);
+describe('Store', () => {
+  test('U.createPrefixedActionCreator', () => {
+    const prefix = 'prefix';
+    const createAction = U.createPrefixedActionCreator(prefix);
 
-  expect(createAction).toBeInstanceOf(Function);
+    expect(createAction).toBeInstanceOf(Function);
 
-  const a1 = createAction('actionType');
-  expect(a1(123)).toEqual({ type: `${prefix}/actionType`, payload: 123 });
+    const a1 = createAction('actionType');
+    expect(a1(123)).toEqual({ type: `${prefix}/actionType`, payload: 123 });
+  });
+
+  test('U.normalize', () => {
+    const xs = [{ id: '1' }, { id: '2' }];
+    const r = U.normalize(xs);
+    const e = { ids: ['1', '2'], entities: { 1: { id: '1' }, 2: { id: '2' } } };
+
+    expect(r).toEqual(e);
+  });
+
+  test('U.denormalize', () => {
+    const o = { ids: ['1', '2'], entities: { 1: { id: '1' }, 2: { id: '2' } } };
+    const r = U.denormalize(o);
+    const e = [{ id: '1' }, { id: '2' }];
+
+    expect(r).toEqual(e);
+  });
 });

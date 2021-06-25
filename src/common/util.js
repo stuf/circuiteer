@@ -1,6 +1,7 @@
 import * as L from 'partial.lenses';
 import * as I from 'infestines';
 import * as RTK from '@reduxjs/toolkit';
+import * as U from 'util';
 
 //
 
@@ -25,6 +26,17 @@ export function normalize(items) {
     entities,
   };
 }
+
+export function denormalize({ ids = [], entities = {} }) {
+  const items = [];
+  for (let i = 0, len = ids.length; i < len; i++) {
+    const id = ids[i];
+    items.push(entities[id]);
+  }
+
+  return items;
+}
+
 //
 
 /**
@@ -68,3 +80,7 @@ export const euclideanDistance = (p1, p2) =>
 //
 
 export const percent = v => `${v * 100}%`;
+
+//
+
+export const show = x => U.inspect(x, { colors: false, depth: Infinity });

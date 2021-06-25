@@ -1,20 +1,24 @@
 import * as L from 'partial.lenses';
 import { useMemo } from 'react';
+import { useSelector } from 'react-redux';
 
 import { useCanvasObjects } from './objects';
 import { useGameEntities } from './game-entities';
 import { DefaultSize } from 'common/defaults';
+import { normalize } from 'common/util';
+import { canvasObject } from 'common/lens';
 // import { useGameLocations } from './locations';
 
-import { getLogger } from 'common/logger';
+// import { getLogger } from 'common/logger';
 
-const logger = getLogger('hooks/derived');
+// const logger = getLogger('hooks/derived');
 
 /**
  *
  * @returns {Hooks.Derived.UseNormalizedGameObjectsHook}
  */
 export function useNormalizedGameObjects() {
+  // logger.log('info', 'use normalized game objects');
   const gameEntities = useGameEntities();
 
   const entitiesʼ = L.transform(
@@ -27,11 +31,11 @@ export function useNormalizedGameObjects() {
          * @param {Data.GameEntityObject} o
          */
         o => {
-          console.log(o);
+          // console.log(o);
           // if (o.size && o.tier) return o;
           const tier = o.tier;
           const size = DefaultSize[tier];
-          console.log(o.id, tier, o.size, DefaultSize, DefaultSize[3]);
+          // console.log(o.id, tier, o.size, DefaultSize, DefaultSize[3]);
 
           // console.log('o =>', o);
           // console.log('size =>', size);
@@ -43,7 +47,7 @@ export function useNormalizedGameObjects() {
     gameEntities,
   );
 
-  console.log({ entitiesʼ });
+  // console.log({ entitiesʼ });
 
   return entitiesʼ;
 }
@@ -62,6 +66,8 @@ export function useNormalizedGameObjects() {
 export function useCanvasGameObjects(options) {
   const objects = useCanvasObjects();
   const gameEntities = useNormalizedGameObjects();
+
+  console.log('useCanvasGameObjects', objects);
 
   const tfnEntity = useMemo(
     () => ['entity', L.modifyOp(id => gameEntities.entities[id])],
@@ -105,4 +111,26 @@ export function usePowerEfficiency() {
   };
 
   return { power, sum };
+}
+
+/**
+ *
+ * @returns {Hooks.Derived.UseUsageThingsHook}
+ */
+export function useUsageObjectThings() {
+  const gameObjs = useNormalizedGameObjects();
+  const objs = useSelector(s => normalize(s.objects.entities));
+
+  const norms = L.transform(
+    [
+      'entities',
+      L.values,
+      canvasObject,
+      'entity',
+      L.modifyOp(id => gameObjs.entities[id]),
+    ],
+    objs,
+  );
+
+  return norms;
 }

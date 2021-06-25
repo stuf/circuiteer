@@ -27,3 +27,9 @@ export function wrapper(props, preloadedState) {
 
   return <Provider store={store}>{props.children}</Provider>;
 }
+
+export function createStore(preloadedState) {
+  const store = configureStore({ preloadedState, reducer });
+
+  return store;
+}
