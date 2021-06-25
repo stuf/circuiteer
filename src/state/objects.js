@@ -24,7 +24,7 @@ export const toggleObject = createAction('toggleObject');
 
 //
 
-const findObjectL = id => ['entities', L.find(o => o.id === id)];
+const findObjectL = id => ['entities', L.define([]), L.find(o => o.id === id)];
 
 const normalizeObjectL = L.pickIn({
   id: [],
@@ -50,22 +50,16 @@ const slice = createSlice({
   extraReducers: builder =>
     builder
       .addCase(addObject, (s, a) =>
-        L.set(['entities', L.appendTo], a.payload, original(s)),
+        L.set(findObjectL(a.payload.id), a.payload, original(s)),
       )
       .addCase(addObjects, (s, a) =>
         L.modify('entities', xs => xs.concat(a.payload), original(s)),
       )
-      .addCase(setObjects, (s, a) =>
-        L.set(
-          ['entities'],
-          L.collect([L.elems, normalizeObjectL], a.payload),
-          original(s),
-        ),
-      )
+      .addCase(setObjects, (s, a) => L.set('entities', a.payload, original(s)))
       .addCase(updateObject, (s, a) =>
         L.modify(
-          findObjectL(a.payload.id),
-          o => Object.assign({}, o, a.payload),
+          [findObjectL(a.payload.id), L.propsExcept('entity')],
+          o => ({ ...o, ...a.payload }),
           original(s),
         ),
       )
@@ -73,16 +67,31 @@ const slice = createSlice({
         L.remove(findObjectL(a.payload.id), original(s)),
       )
       .addCase(lockObject, (s, a) =>
-        L.set([findObjectL(a.payload.id), 'locked'], true, original(s)),
+        L.set(
+          [findObjectL(a.payload.id), normalizeObjectL, 'locked'],
+          true,
+          original(s),
+        ),
       )
       .addCase(unlockObject, (s, a) =>
-        L.set([findObjectL(a.payload.id), 'locked'], false, original(s)),
+        L.set(
+          [findObjectL(a.payload.id), normalizeObjectL, 'locked'],
+          false,
+          original(s),
+        ),
       )
       .addCase(enableObject, (s, a) =>
-        L.remove([findObjectL(a.payload.id), 'disabled'], original(s)),
+        L.remove(
+          [findObjectL(a.payload.id), normalizeObjectL, 'disabled'],
+          original(s),
+        ),
       )
       .addCase(disableObject, (s, a) =>
-        L.set([findObjectL(a.payload.id), 'disabled'], true, original(s)),
+        L.set(
+          [findObjectL(a.payload.id), normalizeObjectL, 'disabled'],
+          true,
+          original(s),
+        ),
       ),
 });
 

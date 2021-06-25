@@ -1,3 +1,4 @@
+import U from 'util';
 import reducer, {
   addObject,
   addObjects,
@@ -14,16 +15,20 @@ import { replayState, show } from 'common/testutil';
 
 test('addObject', () => {
   const a = addObject({ id: '1' });
-  const r = reducer({}, a);
-  const e = { entities: [{ id: '1' }] };
+  const r = reducer({ entities: [{ id: '2' }] }, a);
+  const e = { entities: [{ id: '2' }, { id: '1' }] };
 
   expect(r).toEqual(e);
 });
 
 test('addObjects', () => {
   const a = addObjects([{ id: '1' }, { id: '2' }, { id: '3' }]);
+
   const r = reducer({ entities: [{ id: '0' }] }, a);
-  const e = { entities: [{ id: '0' }, { id: '1' }, { id: '2' }, { id: '3' }] };
+
+  const e = {
+    entities: [{ id: '0' }, { id: '1' }, { id: '2' }, { id: '3' }],
+  };
 
   expect(r).toEqual(e);
 });
@@ -31,7 +36,9 @@ test('addObjects', () => {
 test('setObjects', () => {
   const a = setObjects([{ id: '1' }]);
   const r = reducer({ entities: [{ id: '123' }] }, a);
-  const e = { entities: [{ id: '1' }] };
+  const e = {
+    entities: [{ id: '1' }],
+  };
 
   expect(r).toEqual(e);
 });
@@ -46,8 +53,21 @@ test('updateObject: insert', () => {
 
 test('updateObject: merge', () => {
   const a = updateObject({ id: '1', name: 'turbokakn' });
-  const r = reducer({ entities: [{ id: '1', foo: true }] }, a);
-  const e = { entities: [{ id: '1', name: 'turbokakn', foo: true }] };
+  const r = reducer(
+    {
+      entities: [
+        { id: '-1', foo: true },
+        { id: '1', foo: true },
+      ],
+    },
+    a,
+  );
+  const e = {
+    entities: [
+      { id: '-1', foo: true },
+      { id: '1', name: 'turbokakn', foo: true },
+    ],
+  };
 
   expect(r).toEqual(e);
 });
@@ -63,7 +83,7 @@ test('deleteObject', () => {
 test('lockObject', () => {
   const a = lockObject({ id: '1' });
   const r = reducer({ entities: [{ id: '1' }] }, a);
-  const e = { entities: [{ id: '1', locked: true }] };
+  const e = { entities: [{ id: '1', locked: true, disabled: false }] };
 
   expect(r).toEqual(e);
 });
@@ -71,23 +91,23 @@ test('lockObject', () => {
 test('unlockObject', () => {
   const a = unlockObject({ id: '1' });
   const r = reducer({ entities: [{ id: '1' }] }, a);
-  const e = { entities: [{ id: '1', locked: false }] };
+  const e = { entities: [{ id: '1', locked: false, disabled: false }] };
 
   expect(r).toEqual(e);
 });
 
 test('enableObject', () => {
   const a = enableObject({ id: '1' });
-  const r = reducer({ entities: [{ id: '1' }] }, a);
-  const e = { entities: [{ id: '1', enabled: true }] };
+  const r = reducer({ entities: [{ id: '1', disabled: true }] }, a);
+  const e = { entities: [{ id: '1', disabled: false, locked: false }] };
 
   expect(r).toEqual(e);
 });
 
 test('disableObject', () => {
   const a = disableObject({ id: '1' });
-  const r = reducer({ entities: [{ id: '1', enabled: true }] }, a);
-  const e = { entities: [{ id: '1', enabled: false }] };
+  const r = reducer({ entities: [{ id: '1', disabled: false }] }, a);
+  const e = { entities: [{ id: '1', disabled: true, locked: false }] };
 
   expect(r).toEqual(e);
 });

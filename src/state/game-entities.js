@@ -8,26 +8,15 @@ const createAction = createPrefixedActionCreator(name);
 
 //
 
-function normalize(items) {
-  const ids = L.collect([L.elems, 'id'], items);
-  const entities = L.modify(L.entries, ([k, v]) => [v.id, v], items);
-
-  return {
-    ids,
-    entities,
-  };
-}
-
-//
-
 export const setGameObjects = createAction('setGameObjects');
 
 //
 
 const initialState = {
-  ids: [],
-  entities: {},
+  entities: [],
 };
+
+const entitiesL = ['entities', L.define([])];
 
 //
 
@@ -37,7 +26,7 @@ const slice = createSlice({
   reducers: {},
   extraReducers: builder =>
     builder.addCase(setGameObjects, (s, a) =>
-      L.set(L.props('ids', 'entities'), normalize(a.payload), original(s)),
+      L.set(entitiesL, a.payload, original(s)),
     ),
 });
 
