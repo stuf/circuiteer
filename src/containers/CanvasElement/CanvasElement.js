@@ -2,7 +2,6 @@ import { useState, useMemo } from 'react';
 import { withParentSizeModern } from '@visx/responsive';
 
 import { getCanvasObjectStyle } from 'common/canvas';
-import { show } from 'common/util';
 import { useUsageObjectThings } from 'common/hooks/derived';
 
 import { AutosizeUnderlay, Entity } from 'components/canvas';
@@ -22,6 +21,7 @@ export function CanvasElement(props) {
     [objects.entities],
   );
 
+  // eslint-disable-next-line
   const [state, setState] = useState({
     action: Action.NONE,
   });

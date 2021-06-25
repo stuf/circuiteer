@@ -1,29 +1,18 @@
-import * as L from 'partial.lenses';
-import { useCallback } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
-import { AutosizeCanvas } from 'containers/Canvas';
 import { Info, EntityPalette } from 'components/canvas';
 import { AutosizeCanvasElement } from 'containers/CanvasElement';
 
 import { addingNew } from 'state/canvas';
-import { addObject, updateObject } from 'state/objects';
 import { getLogger } from 'common/logger';
 
-import { useCanvasState } from 'common/hooks/canvas';
-import {
-  useNormalizedGameObjects,
-  usePowerEfficiency,
-  useUsageObjectThings,
-} from 'common/hooks/derived';
+import { usePowerEfficiency, useUsageObjectThings } from 'common/hooks/derived';
 
 import { useGameLocations } from 'common/hooks/locations';
 import { useOptionFlags } from 'common/hooks/options';
 import { useGameEntities } from 'common/hooks/game-entities';
-import { useCanvasObjects } from 'common/hooks/objects';
-import { normalize } from 'common/util';
 
-const logger = getLogger('app');
+const logger = getLogger('app'); // eslint-disable-line
 
 export function MainView(props) {
   const update = useDispatch();
@@ -32,12 +21,10 @@ export function MainView(props) {
 
   const gameObjects = useGameEntities();
 
-  // const asd = useCanvasGameObjects({ useEntitySize: true }); // eslint-disable-line
   const location = useGameLocations();
   const power = usePowerEfficiency();
   const flags = useOptionFlags();
 
-  // const objects = Object.values(entities);
   const objects = Object.values(canvasStuff.entities);
 
   const onAddNewEntity = o => {
