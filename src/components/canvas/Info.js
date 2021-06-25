@@ -1,4 +1,3 @@
-import * as R from 'ramda';
 import { useMemo } from 'react';
 import clsx from 'clsx';
 
@@ -30,13 +29,13 @@ export function Info(props) {
     };
   }, [flags.flags.showEfficiencyPercentage, currentLocation]);
 
-  const powerʼ = useMemo(
-    () => ({
-      producers: power.producers,
-      consumers: power.consumers,
-    }),
-    [power],
-  );
+  // const powerʼ = useMemo(
+  //   () => ({
+  //     producers: power.producers,
+  //     consumers: power.consumers,
+  //   }),
+  //   [power],
+  // );
 
   const blocks = [
     {

@@ -2,8 +2,9 @@ import { FunctionComponent } from 'react';
 
 export interface Props {
   gameObjects: Hooks.GameEntities.UseGameEntitiesHook;
+  isCurrentlyAdding: boolean;
   actions: {
-    onModulePaletteDragStart: Callback.Drag.OnExternalDrag;
+    onAddNewEntity: Callback.Entity.AddNew;
   };
 }
 

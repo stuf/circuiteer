@@ -2,6 +2,18 @@ import { Tier } from 'common/constants';
 
 /**
  *
+ * @param {React.DragEvent<HTMLDivElement>} e
+ * @param {Data.GameEntityObject} o
+ */
+// eslint-disable-next-line
+const onDragStart = (e, o, fn) => {
+  e.dataTransfer.setData('application/json', JSON.stringify(o));
+  e.dataTransfer.dropEffect = 'copy';
+  fn(o);
+};
+
+/**
+ *
  * @param {import('components/canvas/EntityPalette').Props} props
  * @returns
  */
@@ -19,10 +31,8 @@ export function EntityPalette(props) {
           <div
             key={i}
             className="entity-palette__list-item"
-            draggable
-            onDragStart={e => {
-              e.dataTransfer.setData('application/json', JSON.stringify(o));
-              actions.onModulePaletteDragStart(o);
+            onClick={e => {
+              actions.onAddNewEntity(o);
             }}
           >
             {o.id}
