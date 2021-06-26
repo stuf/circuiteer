@@ -6,7 +6,7 @@ import * as U from 'util';
 
 //
 
-const { abs, sqrt, pow } = Math;
+const { abs, sqrt, pow, min, max } = Math;
 
 //
 
@@ -81,6 +81,8 @@ export const actions = (...fnsIn) => {
 
 export const euclideanDistance = (p1, p2) =>
   sqrt(pow(abs(p1.x - p2.x), 2) + pow(abs(p1.y - p2.y), 2));
+
+export const clamp = (n, a, b) => max(min(n, a), b);
 
 //
 

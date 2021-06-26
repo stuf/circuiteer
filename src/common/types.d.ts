@@ -1,4 +1,4 @@
-import { SyntheticEvent } from 'react';
+// import { SyntheticEvent } from 'react';
 
 declare namespace Data {
   export interface Point {
@@ -48,10 +48,6 @@ declare namespace Data {
 }
 
 declare namespace Callback {
-  export interface EventHandler<T = HTMLDivElement, E = MouseEvent> {
-    (e: SyntheticEvent<T, E>): void;
-  }
-
   export namespace Entity {
     export interface AddNew {
       (o: Data.GameEntityObject): void;
