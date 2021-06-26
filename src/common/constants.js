@@ -1,3 +1,27 @@
+// #region Canvas
+
+/**
+ * Current "mouse mode" of the canvas
+ */
+export const Action = {
+  /**
+   * Default, no action happening
+   */
+  NONE: null,
+  /**
+   * Dragging an existing element
+   */
+  DRAG: 'drag',
+  /**
+   * Adding a new element onto the canvas
+   */
+  ADD_NEW: 'addNew',
+};
+
+// #endregion
+
+//
+
 export const Difficulty = {
   EASY: 'easy',
   MEDIUM: 'medium',
