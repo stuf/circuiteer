@@ -1,5 +1,5 @@
 export function Ghost(props) {
-  const { pos, size } = props;
+  const { pos, size, id } = props;
 
   return (
     <div
@@ -9,6 +9,8 @@ export function Ghost(props) {
         height: size.height,
         transform: `translateX(${pos.x}px) translateY(${pos.y}px)`,
       }}
-    ></div>
+    >
+      {id}
+    </div>
   );
 }

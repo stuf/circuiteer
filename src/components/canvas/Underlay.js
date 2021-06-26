@@ -1,38 +1,53 @@
 import clsx from 'clsx';
-import { useState } from 'react';
-import { localPoint } from '@visx/event';
+// import * as R from 'ramda';
 import { Group } from '@visx/group';
 import { PatternLines } from '@visx/pattern';
 import { withParentSizeModern } from '@visx/responsive';
-import { clamp } from 'common/util';
 
 export function Underlay(props) {
   const width = props.parentWidth ?? props.width;
   const height = props.parentHeight ?? props.height;
   const pos = props.pos ?? {};
+  // const size = props.size ?? {};
 
   const { isAddingNew } = props;
 
   const margin = 20;
+  // const hasSize = !R.isEmpty(size);
 
   const x = pos.x;
   const y = pos.y;
 
   const tick = { className: 'stroke-light', strokeWidth: 2 };
-  const ext = { strokeDasharray: '2 2', strokeWidth: 1 };
-  const xPosTick = { x1: x, x2: x, y1: 0, y2: margin, ...tick };
-  const yPosTick = { x1: 0, x2: margin, y1: y, y2: y, ...tick };
-  const xPosTickExt = { ...xPosTick, ...ext, y1: margin, y2: y };
-  const yPosTickExt = { ...yPosTick, ...ext, x1: margin, x2: x };
+  const h1 = height - margin;
+  const h2 = height;
+  const w1 = width - margin;
+  const w2 = width;
 
-  const ext1 = {
-    x1: x,
-    x2: x,
-    y1: margin,
-    y2: margin * 2,
-    strokeWidth: 1,
+  const xTickBase = { x1: x, x2: x, ...tick };
+  const xTicks = [
+    { ...xTickBase, y1: 0, y2: margin },
+    { ...xTickBase, y1: h1, y2: h2 },
+  ];
+
+  const yTickBase = { y1: y, y2: y, ...tick };
+  const yTicks = [
+    { ...yTickBase, x1: 0, x2: margin },
+    { ...yTickBase, x1: w1, x2: w2 },
+  ];
+
+  const xline = { x1: margin, x2: width - margin };
+  const yline = { y1: margin, y2: height - margin };
+
+  const crossBase = {
     className: 'stroke-light',
+    strokeDasharray: '2 2',
+    strokeWidth: 1,
   };
+  const crosshair = [
+    { ...crossBase, ...xline, y1: y, y2: y },
+    { ...crossBase, ...yline, x1: x, x2: x },
+  ];
 
   return (
     <div
@@ -46,13 +61,21 @@ export function Underlay(props) {
           id="grid"
           width={32}
           height={32}
-          strokeDasharray="4 2"
+          strokeDasharray="4 4"
           orientation={['horizontal', 'vertical']}
         />
-        <line {...xPosTick} />
-        <line {...yPosTick} />
-        <line {...xPosTickExt} />
-        <line {...yPosTickExt} />
+        {xTicks.map((xt, i) => (
+          <line key={`x-${i}`} {...xt} />
+        ))}
+        {yTicks.map((yt, i) => (
+          <line key={`y-${i}`} {...yt} />
+        ))}
+        {crosshair.map((ch, i) => (
+          <line key={`ch-${i}`} {...ch} />
+        ))}
+        {/* <line {...yPosTick} /> */}
+        {/* <line {...xPosTickExt} />
+        <line {...yPosTickExt} /> */}
 
         {/* <text
           fill="none"
