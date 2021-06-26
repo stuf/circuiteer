@@ -16,6 +16,12 @@
     width: 200px;
   }
 
+  .#{$p}--adding-new {
+    .#{$p}__list-item {
+      color: rgba($blueprint-blue-light, 0.5);
+    }
+  }
+
   .#{$p}__head {
     padding: map-get($spacing, '03');
     // margin-bottom: map-get($spacing, '02');

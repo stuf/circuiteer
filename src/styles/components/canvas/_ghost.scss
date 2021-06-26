@@ -5,11 +5,19 @@
   $p: unquote($prefix);
 
   .#{$p} {
+    text-align: center;
+    font-style: italic;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     position: absolute;
     left: 0;
     top: 0;
-    border: solid 2px #f00;
-    background: rgba(#00f, 0.5);
+    @include border;
+    border-radius: $radius-md;
+    background-color: rgba($blueprint-blue-dark, 0.75);
+    // border: solid 2px #f00;
+
     z-index: map.get(D.$z-index, 'hover');
   }
 }
