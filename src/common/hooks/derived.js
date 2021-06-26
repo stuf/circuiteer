@@ -9,9 +9,9 @@ import { normalize } from 'common/util';
 import { canvasObject } from 'common/lens';
 // import { useGameLocations } from './locations';
 
-// import { getLogger } from 'common/logger';
+import { getLogger } from 'common/logger';
 
-// const logger = getLogger('hooks/derived');
+const logger = getLogger('hooks/derived');
 
 /**
  *
@@ -67,7 +67,9 @@ export function useCanvasGameObjects(options) {
   const objects = useCanvasObjects();
   const gameEntities = useNormalizedGameObjects();
 
-  console.log('useCanvasGameObjects', objects);
+  logger.info('use canvas game objects (derived)');
+
+  // console.log('useCanvasGameObjects', objects);
 
   const tfnEntity = useMemo(
     () => ['entity', L.modifyOp(id => gameEntities.entities[id])],

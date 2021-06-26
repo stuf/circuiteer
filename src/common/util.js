@@ -1,3 +1,4 @@
+import * as R from 'ramda';
 import * as L from 'partial.lenses';
 import * as I from 'infestines';
 import * as RTK from '@reduxjs/toolkit';
@@ -8,6 +9,10 @@ import * as U from 'util';
 const { abs, sqrt, pow } = Math;
 
 //
+
+export const curry2 = R.curryN(2);
+
+export const curry3 = R.curryN(3);
 
 export const invokeIf = (f, x) => f(x);
 
