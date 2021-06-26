@@ -11,6 +11,7 @@ import { useUsageObjectThings } from 'common/hooks/derived';
 import { AutosizeUnderlay, Entity, Ghost, State } from 'components/canvas';
 
 import { updateObject } from 'state/objects';
+import { show } from 'common/util';
 
 const logger = getLogger('CanvasElement');
 
@@ -32,6 +33,9 @@ const Action = {
   ADD_NEW: 'addNew',
 };
 
+const posL = L.props('x', 'y');
+const sizeL = L.props('width', 'height');
+
 const stateL = L.pickIn({
   action: L.define(Action.NONE),
   id: L.define(null),
@@ -39,10 +43,12 @@ const stateL = L.pickIn({
   y: L.define(0),
   width: L.define(0),
   height: L.define(0),
+  origin: [L.props('x', 'y')],
 });
 
-const posL = L.props('x', 'y');
-const sizeL = L.props('width', 'height');
+const posIn = L.get(posL);
+const sizeIn = L.get(sizeL);
+const stateIn = L.get(stateL);
 
 export function CanvasElement(props) {
   const width = props.parentWidth ?? props.width;
@@ -58,15 +64,11 @@ export function CanvasElement(props) {
   // eslint-disable-next-line
   const [state, setState] = useState(L.get(stateL, {}));
 
-  const statePos = useMemo(
-    () => ({ x: state.x, y: state.y }),
-    [state.x, state.y],
-  );
+  // eslint-disable-next-line
+  const statePos = useMemo(() => posIn(state), [state]);
 
-  const stateSize = useMemo(
-    () => ({ width: state.width, height: state.height }),
-    [state.width, state.height],
-  );
+  // eslint-disable-next-line
+  const stateSize = useMemo(() => sizeIn(state), [state]);
 
   const children = useMemo(
     () =>
@@ -102,7 +104,6 @@ export function CanvasElement(props) {
     logger.info('got element with ID `%s`', id);
 
     const object = objects.entities[id];
-    console.log('object', object);
     const pos = L.get('pos', object);
     const size = L.get(['entity', 'size'], object);
 
@@ -110,25 +111,34 @@ export function CanvasElement(props) {
       L.set(
         [
           stateL,
-          L.pick({ action: 'action', id: 'id', pos: posL, size: sizeL }),
+          L.pick({
+            action: 'action',
+            id: 'id',
+            pos: posL,
+            size: sizeL,
+            origin: 'origin',
+          }),
         ],
-        { action: Action.DRAG, id, pos, size },
+        { action: Action.DRAG, id, pos, size, origin: pos },
       ),
     );
   };
 
   /** @param {MouseEvent} e */
   const onMouseMove = e => {
+    // eslint-disable-next-line
     const { action, id } = state;
 
     if (!id) {
+      const pos = { x: e.clientX, y: e.clientY };
+      setState(L.set(L.props('x', 'y'), pos));
       return;
     }
 
     const { devicePixelRatio } = window;
     const { movementX: x, movementY: y } = e;
-    const pos = L.get(posL, state);
-    const size = L.get(sizeL, state);
+    // const pos = L.get(posL, state);
+    // const size = L.get(sizeL, state);
 
     setState(
       L.modify(
@@ -158,6 +168,9 @@ export function CanvasElement(props) {
         style={{ width, height }}
         {...{ onMouseDown, onMouseMove, onMouseUp }}
       >
+        <pre className="absolute" style={{ left: 400 }}>
+          {show(state)}
+        </pre>
         <State state={state} />
         {state.action === 'drag' && (
           <Ghost
@@ -166,7 +179,7 @@ export function CanvasElement(props) {
           />
         )}
         <div className="canvas-el__body">{children}</div>
-        <AutosizeUnderlay />
+        <AutosizeUnderlay pos={statePos} />
       </section>
     </>
   );
