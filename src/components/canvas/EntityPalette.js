@@ -22,6 +22,8 @@ export function EntityPalette(props) {
 
   const objects = Object.values(gameObjects.entities);
 
+  const uneven = objects.length % 2 === 1;
+
   return (
     <div className="entity-palette">
       <header className="entity-palette__head">Modules</header>
@@ -42,6 +44,7 @@ export function EntityPalette(props) {
             </div>
           </div>
         ))}
+        {uneven && <div className="entity-palette__list-item" />}
       </div>
     </div>
   );
