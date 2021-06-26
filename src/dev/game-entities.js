@@ -28,6 +28,6 @@ export const objects = [
     tier: 3,
     power: -6,
     powerType: 'onDemand',
-    size: DefaultSize[4],
+    size: DefaultSize[3],
   },
 ];

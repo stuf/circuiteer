@@ -1,50 +1,24 @@
 import * as L from 'partial.lenses';
-import { useState, useMemo } from 'react';
+import { nanoid } from '@reduxjs/toolkit';
+import { useState, useMemo, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { withParentSizeModern } from '@visx/responsive';
 
 import { Point } from 'common/algebra';
+import { Action } from 'common/constants';
+import { posL, sizeL, stateL } from 'common/lens';
 import { getLogger } from 'common/logger';
 import { getCanvasObjectStyle } from 'common/canvas';
 import { useUsageObjectThings } from 'common/hooks/derived';
 
 import { AutosizeUnderlay, Entity, Ghost, State } from 'components/canvas';
 
-import { updateObject } from 'state/objects';
+import { addObject, updateObject } from 'state/objects';
 import { show } from 'common/util';
+import { useCanvasState } from 'common/hooks/canvas';
+import { addedNew } from 'state/canvas';
 
 const logger = getLogger('CanvasElement');
-
-/**
- * Current "mouse mode" of the canvas
- */
-const Action = {
-  /**
-   * Default, no action happening
-   */
-  NONE: null,
-  /**
-   * Dragging an existing element
-   */
-  DRAG: 'drag',
-  /**
-   * Adding a new element onto the canvas
-   */
-  ADD_NEW: 'addNew',
-};
-
-const posL = L.props('x', 'y');
-const sizeL = L.props('width', 'height');
-
-const stateL = L.pickIn({
-  action: L.define(Action.NONE),
-  id: L.define(null),
-  x: L.define(0),
-  y: L.define(0),
-  width: L.define(0),
-  height: L.define(0),
-  origin: [L.props('x', 'y')],
-});
 
 const posIn = L.get(posL);
 const sizeIn = L.get(sizeL);
@@ -70,6 +44,23 @@ export function CanvasElement(props) {
   // eslint-disable-next-line
   const stateSize = useMemo(() => sizeIn(state), [state]);
 
+  const cs = useCanvasState();
+  useEffect(() => {
+    if (cs.flags.isAddingNew) {
+      const o = cs.adding.entity;
+      setState(
+        L.set([stateL, L.pick({ action: 'action', size: sizeL })], {
+          action: Action.ADD_NEW,
+          size: o.size,
+        }),
+      );
+    }
+
+    if (!cs.flags.isAddingNew && state.action === Action.ADD_NEW) {
+      setState(L.remove([stateL, L.propsExcept('x', 'y')]));
+    }
+  }, [cs.flags.isAddingNew, cs.adding?.entity, state.action]);
+
   const children = useMemo(
     () =>
       objectList.map((o, i) => (
@@ -85,6 +76,11 @@ export function CanvasElement(props) {
     [objectList],
   );
 
+  const showGhost = useMemo(
+    () => state.action === Action.ADD_NEW || state.action === Action.DRAG,
+    [state.action],
+  );
+
   // #region Event handlers
   /** @param {MouseEvent} */
   const onMouseDown = e => {
@@ -96,9 +92,20 @@ export function CanvasElement(props) {
     // TODO: This type of handling is probably just relevant when dragging elements
     //       and will require some additional conditions if we're adding a new element
     //       onto the canvas
-    if (!id) {
+    if (!id && state.action !== Action.ADD_NEW) {
       logger.info('clicked element does not have ID, bailing out');
       return null;
+    }
+
+    if (state.action === Action.ADD_NEW) {
+      console.log('should add new');
+      const o = cs.adding.entity;
+      const pos = { x: state.x, y: state.y };
+      logger.info('add new element at %s, %s', pos.x, pos.y);
+      console.log('add entity like this:', show(o));
+      update(addObject({ id: nanoid(), pos, size: o.size, entity: o.id }));
+      update(addedNew());
+      return;
     }
 
     logger.info('got element with ID `%s`', id);
@@ -150,14 +157,15 @@ export function CanvasElement(props) {
 
   const onMouseUp = e => {
     const { id } = state;
-    if (!id) {
+    if (!id && state.action === Action.ADD_NEW) return;
+    else if (!id) {
       logger.info('no current ID, bailing out');
       return;
+    } else {
+      update(updateObject({ id, pos: { x: state.x, y: state.y } }));
+
+      setState(L.remove([stateL]));
     }
-
-    update(updateObject({ id, pos: { x: state.x, y: state.y } }));
-
-    setState(L.remove([stateL]));
   };
   // #endregion
 
@@ -168,18 +176,19 @@ export function CanvasElement(props) {
         style={{ width, height }}
         {...{ onMouseDown, onMouseMove, onMouseUp }}
       >
-        <pre className="absolute" style={{ left: 400 }}>
+        {/* <pre className="absolute" style={{ left: 400 }}>
           {show(state)}
-        </pre>
+        </pre> */}
         <State state={state} />
-        {state.action === 'drag' && (
+        {showGhost && (
           <Ghost
             pos={{ x: state.x, y: state.y }}
             size={{ width: state.width, height: state.height }}
+            id="laitta nimi här"
           />
         )}
         <div className="canvas-el__body">{children}</div>
-        <AutosizeUnderlay pos={statePos} />
+        <AutosizeUnderlay pos={statePos} size={stateSize} />
       </section>
     </>
   );
