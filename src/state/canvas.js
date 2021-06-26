@@ -25,6 +25,7 @@ export const dragExternalStop = createAction('dragExternalStop');
 export const dragStart = createAction('dragStart');
 export const dragStop = createAction('dragStop');
 export const addingNew = createAction('addingNew');
+export const addedNew = createAction('addedNew');
 
 //
 
@@ -37,6 +38,7 @@ const slice = createSlice({
       .addCase(addingNew, (s, a) =>
         L.set([addingNewObject, 'entity'], a.payload, original(s)),
       )
+      .addCase(addedNew, (s, a) => L.remove(addingNewObject, original(s)))
       .addCase(dragExternalStart, (s, a) =>
         L.set([externalObject, 'size'], a.payload.size, original(s)),
       )
