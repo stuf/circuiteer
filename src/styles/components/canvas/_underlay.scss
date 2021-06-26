@@ -9,6 +9,7 @@
   $stroke-color: S.$blueprint-blue-light;
 
   .#{$p} {
+    pointer-events: painted;
     position: relative;
     z-index: map.get(D.$z-index, 'underlay');
 
