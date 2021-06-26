@@ -1,5 +1,6 @@
 export function State(props) {
   const { state = {} } = props;
+  const { origin = {} } = state;
 
   return (
     <aside className="debug-state">
@@ -12,6 +13,12 @@ export function State(props) {
 
         <dt>Position</dt>
         <dd>
+          {origin.x && origin.y && (
+            <>
+              {origin.x}, {origin.y}
+              <br />
+            </>
+          )}
           {state.x}, {state.y}
         </dd>
 
