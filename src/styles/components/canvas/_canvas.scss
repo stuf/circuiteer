@@ -7,10 +7,12 @@
   // .#{$p} {
   //   border: dashed 4px #f00;
   // }
-
   .#{$p}__object {
     position: absolute;
     z-index: map.get(D.$z-index, 'base');
+    > * {
+      pointer-events: none;
+    }
   }
 }
 

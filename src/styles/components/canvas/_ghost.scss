@@ -1,0 +1,17 @@
+@use 'sass:map';
+@use '../../base/definitions' as D;
+
+@mixin make-ghost-style($prefix) {
+  $p: unquote($prefix);
+
+  .#{$p} {
+    position: absolute;
+    left: 0;
+    top: 0;
+    border: solid 2px #f00;
+    background: rgba(#00f, 0.5);
+    z-index: map.get(D.$z-index, 'hover');
+  }
+}
+
+@include make-ghost-style('ghost');

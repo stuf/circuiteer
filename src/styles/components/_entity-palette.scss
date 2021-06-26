@@ -12,24 +12,28 @@
     z-index: 20;
     border: solid 2px #fff;
     background: $blueprint-blue-dark;
-    padding: $base-pad;
+    // padding: $base-pad;
     width: 200px;
   }
 
   .#{$p}__head {
-    padding-bottom: map-get($spacing, '02');
-    margin-bottom: map-get($spacing, '02');
+    padding: map-get($spacing, '03');
+    // margin-bottom: map-get($spacing, '02');
   }
 
   .#{$p}__list {
+    border-top: solid 2px $blueprint-blue-light;
     display: grid;
+    background-color: $blueprint-blue-light;
     grid-template-columns: repeat(2, 1fr);
-    grid-gap: map-get($spacing, '03');
+    grid-gap: 2px;
+    // grid-gap: map-get($spacing, '03');
     font-size: map-get($font-size, '02');
   }
 
   .#{$p}__list-item {
-    @include border;
+    // @include border;
+    background-color: $blueprint-blue-dark;
     padding: map-get($spacing, '03');
     overflow: hidden;
   }
