@@ -22,7 +22,7 @@ $info-label-font-size: 0.8rem;
   pointer-events: all;
   right: $offset;
   bottom: $offset;
-  min-width: 24rem;
+  min-width: 28rem;
 
   &__child {
     border-top: $info-block-border;
@@ -41,6 +41,10 @@ $info-label-font-size: 0.8rem;
     @include border;
     padding: $info-block-pad;
     vertical-align: top;
+
+    &:first-child {
+      width: 100px;
+    }
   }
 }
 
@@ -86,9 +90,8 @@ $info-label-font-size: 0.8rem;
 
 .info-label {
   font-size: $info-label-font-size;
-  padding-bottom: $info-block-pad / 2;
-  margin-bottom: $info-block-pad / 2;
-  // text-transform: uppercase;
+  padding-bottom: $info-block-pad * 0.5;
+  margin-bottom: $info-block-pad * 0.5;
 }
 
 .info-value {

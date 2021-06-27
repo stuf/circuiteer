@@ -86,3 +86,10 @@ select {
   border: none;
   @include border(bottom);
 }
+
+a {
+  display: inline-block;
+  color: $blueprint-blue-dark;
+  text-decoration: none;
+  border-bottom: solid 1px $blueprint-blue-dark;
+}

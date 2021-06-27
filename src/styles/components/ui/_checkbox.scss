@@ -1,0 +1,58 @@
+@use 'sass:map';
+@use '../../base/settings' as S;
+@use '../../base/definitions' as D;
+
+@mixin make-checkbox-style($prefix, $color1, $color2) {
+  $p: unquote($prefix);
+
+  .#{$p} {
+    display: flex;
+    align-items: center;
+  }
+
+  .#{$p} input[type='checkbox'] {
+    position: relative;
+    appearance: none;
+    width: 1.25rem;
+    height: 1.25rem;
+    margin-right: 0.4rem;
+    background: $color2;
+    border: solid 2px $color1;
+
+    &::after {
+      position: absolute;
+      top: -2px;
+      right: -2px;
+      left: -2px;
+      bottom: -2px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    &:disabled {
+      &,
+      & + label {
+        opacity: 0.5;
+        cursor: not-allowed;
+      }
+    }
+
+    &:checked {
+      // background: $blueprint-blue-light;
+
+      &::after {
+        // content: '╳';
+        content: '✓';
+        // color: $blueprint-blue-dark;
+        color: $color1;
+      }
+    }
+  }
+}
+
+@include make-checkbox-style(
+  'checkbox',
+  $blueprint-blue-dark,
+  $blueprint-blue-light
+);
