@@ -29,13 +29,15 @@ export function Info(props) {
     };
   }, [flags.flags.showEfficiencyPercentage, currentLocation]);
 
-  // const powerʼ = useMemo(
-  //   () => ({
-  //     producers: power.producers,
-  //     consumers: power.consumers,
-  //   }),
-  //   [power],
-  // );
+  const powerʼ = useMemo(
+    () => ({
+      producers: power.producers,
+      consumers: power.consumers,
+    }),
+    [power],
+  );
+
+  console.log(powerʼ);
 
   const blocks = [
     {
@@ -93,7 +95,7 @@ export function Info(props) {
     {
       label: 'Options',
       body: () => (
-        <div className="info-value--normal space-x">
+        <div className="info-value--normal space-y">
           <div className="info-checkbox">
             <input
               id="cb1"

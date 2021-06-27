@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import { useDispatch } from 'react-redux';
-import { addingNew } from 'state/canvas';
+import { setCurrentEntity, addingNew } from 'state/canvas';
 
 import { Tier } from 'common/constants';
 import { useCanvasState } from 'common/hooks/canvas';
