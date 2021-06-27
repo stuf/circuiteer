@@ -8,12 +8,14 @@ const createAction = createPrefixedActionCreator(name);
 //
 
 const initialState = {
+  current: null,
   adding: null,
   drag: null,
   external: null,
   move: null,
 };
 
+const currentObject = ['current', L.define(null)];
 const addingNewObject = ['adding', L.required(null)];
 const draggedObject = ['drag', L.required(null)];
 const externalObject = ['external', L.required(null)];
@@ -26,6 +28,8 @@ export const dragStart = createAction('dragStart');
 export const dragStop = createAction('dragStop');
 export const addingNew = createAction('addingNew');
 export const addedNew = createAction('addedNew');
+export const setCurrentEntity = createAction('setCurrentEntity');
+export const clearCurrentEntity = createAction('clearCurrentEntity');
 
 //
 
@@ -35,6 +39,14 @@ const slice = createSlice({
   reducers: {},
   extraReducers: builder =>
     builder
+      .addCase(setCurrentEntity, (s, a) =>
+        L.set(
+          [currentObject, L.props('id', 'entity')],
+          { id: a.payload.id, entity: a.payload.entity },
+          original(s),
+        ),
+      )
+      .addCase(clearCurrentEntity, s => L.remove(currentObject, original(s)))
       .addCase(addingNew, (s, a) =>
         L.set([addingNewObject, 'entity'], a.payload, original(s)),
       )

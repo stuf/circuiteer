@@ -1,12 +1,21 @@
 import reducer, { setGameObjects } from './game-entities';
 
-test('setGameObjects', () => {
-  const a = setGameObjects([{ id: 'qtRtg' }, { id: 'rtg' }]);
+test('identity', () => {
+  const a = { type: 'asd' };
   const r = reducer({}, a);
-  const e = {
-    ids: ['qtRtg', 'rtg'],
-    entities: { qtRtg: { id: 'qtRtg' }, rtg: { id: 'rtg' } },
-  };
+  const e = {};
 
   expect(r).toEqual(e);
+});
+
+describe('actions', () => {
+  test('setGameObjects', () => {
+    const a = setGameObjects([{ id: 'qtRtg' }, { id: 'rtg' }]);
+    const r = reducer({}, a);
+    const e = {
+      entities: [{ id: 'qtRtg' }, { id: 'rtg' }],
+    };
+
+    expect(r).toEqual(e);
+  });
 });
