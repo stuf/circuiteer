@@ -22,6 +22,12 @@ export const Action = {
 
 //
 
+export const Pattern = {
+  DIAGONAL: 'diagonal',
+};
+
+//
+
 export const Difficulty = {
   EASY: 'easy',
   MEDIUM: 'medium',
