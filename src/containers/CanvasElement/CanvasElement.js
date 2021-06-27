@@ -10,13 +10,13 @@ import { posL, sizeL, stateL } from 'common/lens';
 import { getLogger } from 'common/logger';
 import { getCanvasObjectStyle } from 'common/canvas';
 import { useUsageObjectThings } from 'common/hooks/derived';
+import { show } from 'common/util';
+import { useCanvasState, useCurrentCanvasEntity } from 'common/hooks/canvas';
 
 import { AutosizeUnderlay, Entity, Ghost, State } from 'components/canvas';
 
 import { addObject, updateObject } from 'state/objects';
-import { show } from 'common/util';
-import { useCanvasState } from 'common/hooks/canvas';
-import { addedNew } from 'state/canvas';
+import { setCurrentEntity, clearCurrentEntity, addedNew } from 'state/canvas';
 
 const logger = getLogger('CanvasElement');
 
@@ -98,12 +98,14 @@ export function CanvasElement(props) {
     }
 
     if (state.action === Action.ADD_NEW) {
-      console.log('should add new');
       const o = cs.adding.entity;
       const pos = { x: state.x, y: state.y };
+      const newId = nanoid();
+
       logger.info('add new element at %s, %s', pos.x, pos.y);
-      console.log('add entity like this:', show(o));
-      update(addObject({ id: nanoid(), pos, size: o.size, entity: o.id }));
+
+      update(setCurrentEntity({ id: newId, entity: o.id }));
+      update(addObject({ id: newId, pos, size: o.size, entity: o.id }));
       update(addedNew());
       return;
     }
@@ -113,6 +115,9 @@ export function CanvasElement(props) {
     const object = objects.entities[id];
     const pos = L.get('pos', object);
     const size = L.get(['entity', 'size'], object);
+    const entity = L.get(['entity', 'id'], object);
+
+    update(setCurrentEntity({ id, entity }));
 
     setState(
       L.set(
@@ -144,8 +149,6 @@ export function CanvasElement(props) {
 
     const { devicePixelRatio } = window;
     const { movementX: x, movementY: y } = e;
-    // const pos = L.get(posL, state);
-    // const size = L.get(sizeL, state);
 
     setState(
       L.modify(
@@ -163,6 +166,7 @@ export function CanvasElement(props) {
       return;
     } else {
       update(updateObject({ id, pos: { x: state.x, y: state.y } }));
+      update(clearCurrentEntity());
 
       setState(L.remove([stateL]));
     }
@@ -176,15 +180,12 @@ export function CanvasElement(props) {
         style={{ width, height }}
         {...{ onMouseDown, onMouseMove, onMouseUp }}
       >
-        {/* <pre className="absolute" style={{ left: 400 }}>
-          {show(state)}
-        </pre> */}
         <State state={state} />
         {showGhost && (
           <Ghost
             pos={{ x: state.x, y: state.y }}
             size={{ width: state.width, height: state.height }}
-            id="laitta nimi här"
+            id={cs.adding?.entity?.id}
           />
         )}
         <div className="canvas-el__body">{children}</div>

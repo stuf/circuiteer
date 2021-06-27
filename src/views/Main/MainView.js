@@ -1,5 +1,6 @@
 import { Info, EntityPalette } from 'components/canvas';
 import { AutosizeCanvasElement } from 'containers/CanvasElement';
+import { Menu } from 'containers/Menu';
 
 import { getLogger } from 'common/logger';
 
@@ -42,6 +43,7 @@ export function MainView() {
         gameObjects={gameObjects}
         isCurrentlyAdding={false}
       />
+      <Menu />
     </main>
   );
 }
