@@ -61,6 +61,17 @@ declare namespace Callback {
 }
 
 declare namespace Hooks {
+  export namespace App {
+    export interface UseAppStateHook {
+      flags: {
+        menuVisible: boolean;
+      };
+      actions: {
+        toggleMenu(): void;
+      };
+    }
+  }
+
   export namespace Canvas {
     export type CurrentlyAdding = null | {
       entity: Data.NormalizedGameEntityObject;
