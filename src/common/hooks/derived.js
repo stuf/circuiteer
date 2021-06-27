@@ -90,27 +90,26 @@ export function useCanvasGameObjects(options) {
  */
 export function usePowerEfficiency() {
   // const location = useGameLocations();
-  const objects = useCanvasGameObjects();
 
-  const power = { producers: {}, consumers: {} };
-  for (let i = 0, len = objects.ids.length; i < len; i++) {
-    const id = objects.ids[i];
-    const o = objects.entities[id];
-    if (!(o && o.entity)) {
-      break;
-    }
+  const objects = useUsageObjectThings();
 
-    if (o.entity.power >= 0) {
-      power.producers[id] = o;
-    } else {
-      power.consumers[id] = o;
-    }
-  }
+  const whenPower = fn => ['entities', L.values, 'entity', 'power', L.when(fn)];
+  const whenProd = whenPower(n => n >= 0);
+  const whenCons = whenPower(n => n < 0);
+
+  const power = {
+    producers: L.collect(whenProd, objects),
+    consumers: L.collect(whenCons, objects),
+  };
+
+  console.log(power);
 
   const sum = {
-    producers: L.sum(['producers', L.values, 'entity', 'power'], power),
-    consumers: L.sum(['consumers', L.values, 'entity', 'power'], power),
+    producers: L.sum(['producers', L.elems], power),
+    consumers: L.sum(['consumers', L.elems], power),
   };
+
+  console.log(sum);
 
   return { power, sum };
 }

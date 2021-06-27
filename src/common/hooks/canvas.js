@@ -29,3 +29,9 @@ export function useCanvasState() {
     flags,
   };
 }
+
+export function useCurrentCanvasEntity() {
+  const it = useSelector(L.get(['canvas', 'current']));
+
+  return it;
+}
