@@ -1,0 +1,46 @@
+@use 'sass:map';
+@use '../base/settings' as S;
+@use '../base/definitions' as D;
+@use '../util/_index' as U;
+
+@mixin make-info-panel-style($prefix) {
+  $p: unquote($prefix);
+
+  .#{$p} {
+    @include U.position(absolute, bottom-right);
+    z-index: map.get(D.$z-index, menu);
+    margin: 0 S.$body-offset S.$body-offset 0;
+    border: solid 2px S.$blueprint-blue-light;
+    background: S.$blueprint-blue-dark;
+
+    .divide-x > * + * {
+      border-left: solid 2px S.$blueprint-blue-light;
+    }
+
+    .divide-y > * + * {
+      border-top: solid 2px S.$blueprint-blue-light;
+    }
+
+    .flex {
+      display: flex;
+    }
+
+    .flex.center-cross {
+      align-items: center;
+    }
+
+    .flex.center-main {
+      justify-content: center;
+    }
+
+    .flex.vertical {
+      flex-direction: column;
+    }
+  }
+
+  .#{$p}__content {
+    padding: map.get(D.$spacing, '03');
+  }
+}
+
+@include make-info-panel-style('info-panel');

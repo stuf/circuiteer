@@ -1,11 +1,13 @@
-@import './definitions';
+@use 'sass:map';
+@use './definitions' as D;
+@use './settings' as S;
 
 @mixin font-size($size) {
-  font-size: map-get($font-size, $size);
+  font-size: map.get(D.$font-size, $size);
 }
 
 @mixin font-weight($weight) {
-  font-weight: map-get($font-weight, $weight);
+  font-weight: map.get(D.$font-weight, $weight);
 }
 
 //
@@ -19,7 +21,7 @@
 }
 
 @mixin padding($size, $dir: null) {
-  $px: map-get($spacing, $size);
+  $px: map.get(D.$spacing, $size);
 
   @if $dir == x {
     padding-left: $px;
@@ -43,7 +45,7 @@
 }
 
 @mixin margin($size, $dir: null) {
-  $px: map-get($spacing, $size);
+  $px: map.get(D.$spacing, $size);
 
   @if $dir == x {
     margin-left: $px;
@@ -61,9 +63,9 @@
 //
 
 @mixin border($dir: null) {
-  $w: map-get($default-border, width);
-  $c: map-get($default-border, color);
-  $s: map-get($default-border, style);
+  $w: map.get(S.$default-border, width);
+  $c: map.get(S.$default-border, color);
+  $s: map.get(S.$default-border, style);
 
   $b: $s $w $c;
 

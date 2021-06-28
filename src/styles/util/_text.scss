@@ -1,22 +1,30 @@
-@use "sass:string";
+@use 'sass:map';
 
-@import '../base/definitions';
-@import '../base/mixins';
+@use '../base/definitions' as D;
+@use '../base/mixins' as M;
 
-@each $name, $size in $font-size {
-  .text-#{$name} {
-    @include font-size($size);
+@each $key, $value in D.$font-size {
+  .font-#{$key} {
+    font-size: $value;
   }
 }
 
-@each $family, $value in $font-family {
-  .font-#{$family} {
-    font-family: unquote($value);
+@each $key, $value in D.$font-weight {
+  .font-#{$key} {
+    font-weight: $value;
   }
 }
 
-@each $weight, $value in $font-weight {
-  .font-#{$weight} {
-    @include font-weight($value);
+@each $key, $value in D.$font-style {
+  .font-#{$key} {
+    font-style: $value;
   }
+}
+
+.text-heading {
+  font-size: map.get(D.$font-size, '06');
+}
+
+.font-narrow {
+  font-family: 'Routed Gothic Narrow';
 }

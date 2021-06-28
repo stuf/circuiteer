@@ -1,11 +1,13 @@
+@use '../base/mixins' as M;
+
 .divide-x {
   > * + * {
-    @include border(left);
+    @include M.border(left);
   }
 }
 
 .divide-y {
   > * + * {
-    @include border(top);
+    @include M.border(top);
   }
 }

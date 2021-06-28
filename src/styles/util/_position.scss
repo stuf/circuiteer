@@ -1,3 +1,5 @@
+@use 'sass:map';
+
 $position: (
   absolute: absolute,
   relative: relative,
@@ -5,8 +7,43 @@ $position: (
   static: static,
 );
 
-@mixin position($pos) {
-  position: map-get($position, $pos);
+$presets: (
+  top-left: (
+    top: 0,
+    left: 0,
+  ),
+  top-right: (
+    top: 0,
+    right: 0,
+  ),
+  bottom-left: (
+    bottom: 0,
+    left: 0,
+  ),
+  bottom-right: (
+    bottom: 0,
+    right: 0,
+  ),
+  inset-y: (
+    bottom: 0,
+    top: 0,
+  ),
+  inset-x: (
+    left: 0,
+    right: 0,
+  ),
+);
+
+@mixin position($pos, $maybePreset: null) {
+  position: map.get($position, $pos);
+
+  @if $maybePreset {
+    $o: map.get($presets, $maybePreset);
+
+    @each $key, $value in $o {
+      #{$key}: $value;
+    }
+  }
 }
 
 @each $name, $value in $position {

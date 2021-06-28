@@ -56,3 +56,9 @@
   $blueprint-blue-dark,
   $blueprint-blue-light
 );
+
+@include make-checkbox-style(
+  'checkbox-invert',
+  $blueprint-blue-light,
+  $blueprint-blue-dark
+);
