@@ -29,16 +29,6 @@ export function Info(props) {
     };
   }, [flags.flags.showEfficiencyPercentage, currentLocation]);
 
-  const powerʼ = useMemo(
-    () => ({
-      producers: power.producers,
-      consumers: power.consumers,
-    }),
-    [power],
-  );
-
-  console.log(powerʼ);
-
   const blocks = [
     {
       label: 'Location',

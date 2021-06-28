@@ -1,6 +1,5 @@
-import { Info, EntityPalette } from 'components/canvas';
-import { AutosizeCanvasElement } from 'containers/CanvasElement';
-import { Menu } from 'containers/Menu';
+import { EntityPalette } from 'components/canvas';
+import { AutosizeCanvasElement, InfoPanel, Menu, MenuToggle } from 'containers';
 
 import { getLogger } from 'common/logger';
 
@@ -37,12 +36,14 @@ export function MainView() {
   return (
     <main className="view">
       <AutosizeCanvasElement />
-      <Info location={location} power={power} flags={flags} />
+      <InfoPanel />
       <EntityPalette
         isAdding={canvasState.flags.isAddingNew}
         gameObjects={gameObjects}
         isCurrentlyAdding={false}
       />
+
+      <MenuToggle />
       <Menu />
     </main>
   );

@@ -1,10 +1,10 @@
+import * as R from 'ramda';
 import clsx from 'clsx';
 import { useDispatch } from 'react-redux';
-import { setCurrentEntity, addingNew } from 'state/canvas';
+import { addingNew } from 'state/canvas';
 
 import { Tier } from 'common/constants';
-import { useCanvasState } from 'common/hooks/canvas';
-import { show } from 'common/util';
+import { actions } from 'common/util';
 
 /**
  *
@@ -27,7 +27,6 @@ export function EntityPalette(props) {
   const { gameObjects } = props;
 
   const update = useDispatch();
-  const canvasState = useCanvasState();
   const objects = Object.values(gameObjects.entities);
 
   const uneven = objects.length % 2 === 1;
@@ -46,10 +45,7 @@ export function EntityPalette(props) {
           <div
             key={i}
             className="entity-palette__list-item"
-            onClick={e => {
-              update(addingNew(o));
-              console.log(show({ canvasState }));
-            }}
+            onClick={actions(R.compose(update, addingNew, R.always(o)))}
           >
             {o.id}
             <div className="entity-palette__list-item-stats">

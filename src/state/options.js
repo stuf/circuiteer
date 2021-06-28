@@ -7,7 +7,11 @@ const name = 'options';
 const createAction = createPrefixedActionCreator(name);
 
 const initialState = {
-  flags: {},
+  flags: {
+    locationEfficiency: true,
+    powerBreakdown: false,
+    stateDebug: true,
+  },
 };
 
 //

@@ -1,7 +1,77 @@
+/* eslint-disable jest/valid-title */
 import { Point, Size } from './algebra';
 
+const name = {
+  semigroup: 'Semigroup',
+  semigroupoid: 'Semigroupoid',
+  monoid: 'Monoid',
+  functor: 'Functor',
+  applicative: 'Applicative',
+  apply: 'Apply',
+  alt: 'Alt',
+  plus: 'Plus',
+};
+
+const law = {
+  assoc: 'Associativity',
+  compose: 'Composition',
+  distributivity: 'Distributivity',
+  idLeft: 'Left identity',
+  idRight: 'Right identity',
+  id: 'Identity',
+  homomorphism: 'Homomorphism',
+  interchange: 'Interchange',
+  annihilation: 'Annihilation',
+};
+
+const label = {
+  semi: {
+    assoc:
+      'Semigroup: associativity; S.concat(S.concat(a, b), c) ≡ S.concat(a, S.concat(b, c))',
+  },
+  monoid: {
+    idLeft: '',
+    idRight: '',
+  },
+  functor: {
+    id: '',
+    compose: '',
+  },
+  apply: {
+    compose: '',
+  },
+  applicative: {
+    id: '',
+    homomorphism: '',
+    interchange: '',
+  },
+  alt: {
+    assoc: '',
+    distributivity: '',
+  },
+  plus: {
+    idRight: 'P.alt(a, P.zero()) ≡ a',
+    idLeft: 'P.alt(P.zero(), a) ≡ a',
+    annihilation: 'P.map(f, P.zero()) ≡ P.zero()',
+  },
+  semigroupAssoc:
+    'Semigroup: associativity; S.concat(S.concat(a, b), c) ≡ S.concat(a, S.concat(b, c))',
+  monoidRightId: 'Monoid: right identity; M.concat(a, M.empty()) ≡ a',
+  monoidLeftId: 'Monoid: left identity; M.concat(M.empty(), a) ≡ a',
+  functorId: 'Functor: identity; F.map(x => x, a) ≡ a',
+  functorComp:
+    'Functor: composition; F.map(x => f(g(x)), a) ≡ F.map(f, F.map(g, a))',
+  applyComp:
+    'A.ap(A.ap(A.map(f => g => x => f(g(x)), a), u), v) ≡ A.ap(a, A.ap(u, v))',
+  apId: 'Applicative: identity; A.ap(A.of(x => x), v) ≡ v',
+  apHomomorphism:
+    'Applicative: homomorphism; A.ap(A.of(f), A.of(x)) ≡ A.of(f(x))',
+  apInterchange:
+    'Applicative: interchange; A.ap(u, A.of(y)) ≡ A.ap(A.of(f => f(y)), u)',
+};
+
 describe('Point', () => {
-  test('Semigroup: associativity; S.concat(S.concat(a, b), c) ≡ S.concat(a, S.concat(b, c))', () => {
+  test(label.semigroupAssoc, () => {
     const a = { x: 1, y: 1 };
     const b = { x: 2, y: 2 };
     const c = { x: 3, y: 3 };
@@ -11,25 +81,25 @@ describe('Point', () => {
     );
   });
 
-  test('Monoid: right identity; M.concat(a, M.empty()) ≡ a', () => {
+  test(label.monoidRightId, () => {
     const a = { x: 1, y: 1 };
     expect(Point.concat(a, Point.empty())).toEqual(a);
   });
 
-  test('Monoid: left identity; M.concat(M.empty(), a) ≡ a', () => {
+  test(label.monoidLeftId, () => {
     const a = { x: 1, y: 1 };
 
     expect(Point.concat(Point.empty(), a)).toEqual(a);
   });
 
-  test('Functor: identity; F.map(x => x, a) ≡ a', () => {
+  test(label.functorId, () => {
     const a = { x: 1, y: 1 };
     const f = x => x;
 
     expect(Point.map(f, a)).toEqual(a);
   });
 
-  test('Functor: composition; F.map(x => f(g(x)), a) ≡ F.map(f, F.map(g, a))', () => {
+  test(label.functorComp, () => {
     const a = { x: 12, y: -12 };
     const f = x => ({ x: x.x * -2, y: x.y * -2 });
     const g = x => ({ x: x.x * x.x, y: x.y * x.y });

@@ -6,13 +6,13 @@ export function State(props) {
     <aside className="debug-state">
       <dl>
         <dt>Action</dt>
-        <dd>{state.action ?? 'none'}</dd>
+        <dd className="font-narrow">{state.action ?? 'none'}</dd>
 
         <dt>ID</dt>
-        <dd>{state.id ?? 'none'}</dd>
+        <dd className="font-narrow">{state.id ?? 'none'}</dd>
 
         <dt>Position</dt>
-        <dd>
+        <dd className="font-narrow">
           {origin.x && origin.y && (
             <>
               {origin.x}, {origin.y}
@@ -23,7 +23,7 @@ export function State(props) {
         </dd>
 
         <dt>Size</dt>
-        <dd>
+        <dd className="font-narrow">
           {state.width} &times; {state.height}
         </dd>
       </dl>
