@@ -1,5 +1,6 @@
 import { EntityPalette } from 'components/canvas';
 import { AutosizeCanvasElement, InfoPanel, Menu, MenuToggle } from 'containers';
+import { Patterns } from 'components/svg';
 
 import { getLogger } from 'common/logger';
 
@@ -35,6 +36,7 @@ export function MainView() {
 
   return (
     <main className="view">
+      <Patterns />
       <AutosizeCanvasElement />
       <InfoPanel />
       <EntityPalette

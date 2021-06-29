@@ -1,3 +1,5 @@
+import { useTranslation } from 'react-i18next';
+
 import { useGameLocations } from 'common/hooks/locations';
 import { useOptionFlags } from 'common/hooks/options';
 import { usePowerBreakdown } from 'common/hooks/derived';
@@ -28,73 +30,106 @@ const optionFlags = [
  * @returns
  */
 function Breakdown(props) {
+  const { t } = useTranslation();
   const { power } = props;
 
-  const solarBonus =
-    (power.breakdown.solar?.adjusted ?? 0) - (power.breakdown.solar?.raw ?? 0);
-  const windBonus =
-    (power.breakdown.wind?.adjusted ?? 0) - (power.breakdown.wind?.raw ?? 0);
+  // const solarBonus =
+  //   (power.breakdown.solar?.adjusted ?? 0) - (power.breakdown.solar?.raw ?? 0);
+  // const windBonus =
+  //   (power.breakdown.wind?.adjusted ?? 0) - (power.breakdown.wind?.raw ?? 0);
+
+  // console.log({ solarBonus, windBonus });
+  const getDiff = k => {
+    const vals = power.breakdown[k];
+    if (!vals) return null;
+
+    return vals.adjusted - vals.raw;
+  };
+
+  const solarBonus = getDiff('solar');
+  const windBonus = getDiff('wind');
 
   return (
     <Flex vertical>
       <Block>
         <Content>
-          <ShowInfo label="powerBreakdown" narrow>
-            <dl>
+          <ShowInfo label={t('ui:powerBreakdown')} narrow>
+            <dl className="mt-02">
               {power.breakdown.constant && (
-                <>
-                  <dt>constant</dt>
+                <div className="row">
+                  <dt>{t('ui:powerType.constant')}</dt>
                   <dd>{withSign(power.breakdown.constant?.adjusted)}</dd>
-                </>
+                </div>
               )}
 
               {power.breakdown.solar && (
-                <>
-                  <dt>solar</dt>
+                <div className="row">
+                  <dt>{t('ui:powerType.solar')}</dt>
                   <dd>{withSign(power.breakdown.solar?.adjusted)}</dd>
-                </>
+                </div>
               )}
 
               {power.breakdown.wind && (
-                <>
-                  <dt>wind</dt>
+                <div className="row">
+                  <dt>{t('ui:powerType.wind')}</dt>
                   <dd>{withSign(power.breakdown.wind?.adjusted)}</dd>
-                </>
+                </div>
               )}
 
               {power.breakdown.powered && (
-                <>
-                  <dt>powered</dt>
+                <div className="row">
+                  <dt>{t('ui:powerType.powered')}</dt>
                   <dd>{withSign(power.breakdown.powered?.adjusted)}</dd>
+                </div>
+              )}
+
+              {(solarBonus || windBonus) && (
+                <>
+                  <hr />
+
+                  <div className="row">
+                    <dt>{t('ui:locationAdjusted')}</dt>
+                    <dd></dd>
+                  </div>
+
+                  {solarBonus && (
+                    <div className="row">
+                      <dt>{t('ui:powerType.solar')}</dt>
+                      <dd>{withSign(solarBonus)}</dd>
+                    </div>
+                  )}
+
+                  {windBonus && (
+                    <div className="row">
+                      <dt>{t('ui:powerType.wind')}</dt>
+                      <dd>{withSign(windBonus)}</dd>
+                    </div>
+                  )}
                 </>
               )}
 
               <hr />
-              <dt>location adj.</dt>
-              <dd></dd>
 
-              <dt>solar</dt>
-              <dd>{withSign(solarBonus)}</dd>
+              <div className="row">
+                <dt>{t('ui:production')}</dt>
+                <dd>{withSign(power.sum.production.adjusted)}</dd>
+              </div>
 
-              <dt>wind</dt>
-              <dd>{withSign(windBonus)}</dd>
-
-              <hr />
-
-              <dt>production</dt>
-              <dd>{withSign(power.sum.production.adjusted)}</dd>
-
-              <dt>usage</dt>
-              <dd>{withSign(power.sum.usage.adjusted)}</dd>
+              <div className="row">
+                <dt>{t('ui:usage')}</dt>
+                <dd>{withSign(power.sum.usage.adjusted)}</dd>
+              </div>
 
               <hr />
 
-              <dt>sum</dt>
-              <dd>
-                {withSign(
-                  power.sum.production.adjusted + power.sum.usage.adjusted,
-                )}
-              </dd>
+              <div className="row">
+                <dt>{t('ui:sum')}</dt>
+                <dd>
+                  {withSign(
+                    power.sum.production.adjusted + power.sum.usage.adjusted,
+                  )}
+                </dd>
+              </div>
             </dl>
           </ShowInfo>
         </Content>
@@ -104,6 +139,7 @@ function Breakdown(props) {
 }
 
 export function InfoPanel(props) {
+  const { t } = useTranslation();
   const locations = useGameLocations();
   const flags = useOptionFlags();
 
@@ -131,15 +167,20 @@ export function InfoPanel(props) {
         <Flex vertical center main divide>
           <Block>
             <Content>
-              <ShowInfo label="Name" narrow size="12">
+              <ShowInfo label={t('ui:name')} narrow size="12">
                 Circuiteer<sub>&omega;</sub>
               </ShowInfo>
             </Content>
           </Block>
           <Block>
             <Content>
-              <ShowInfo label="Location" narrow size="08" content="poo poo">
-                {locations.current}
+              <ShowInfo
+                label={t('ui:location')}
+                narrow
+                size="08"
+                content="poo poo"
+              >
+                {t(`game:location.${locations.current}`)}
               </ShowInfo>
             </Content>
           </Block>
@@ -149,7 +190,7 @@ export function InfoPanel(props) {
                 <Content>
                   <ShowInfo
                     {...number}
-                    label="Solar efficiency"
+                    label={t('ui:efficiency.solar')}
                     content={locationEff.solar}
                   />
                 </Content>
@@ -158,7 +199,7 @@ export function InfoPanel(props) {
                 <Content>
                   <ShowInfo
                     {...number}
-                    label="Wind efficiency"
+                    label={t('ui:efficiency.wind')}
                     content={locationEff.wind}
                   />
                 </Content>
@@ -172,8 +213,10 @@ export function InfoPanel(props) {
                   <ShowInfo
                     {...number}
                     className="nowrap"
-                    label="Production"
-                    content={`${pwr.sum.production.adjusted} U/s`}
+                    label={t('ui:production')}
+                    content={t('ui:unit.perSec', {
+                      value: pwr.sum.production.adjusted,
+                    })}
                   />
                 </Content>
               </Block>
@@ -182,7 +225,7 @@ export function InfoPanel(props) {
                   <ShowInfo
                     {...number}
                     className="nowrap"
-                    label="Usage"
+                    label={t('ui:usage')}
                     content={`${pwr.sum.usage.adjusted} U/s`}
                   />
                 </Content>
@@ -192,13 +235,13 @@ export function InfoPanel(props) {
         </Flex>
         <Block>
           <Content>
-            <ShowInfo narrow label="Options">
+            <ShowInfo narrow label={t('ui:options')}>
               <ul className="space-y mt-03">
                 {optionFlags.map(({ label, key }, i) => (
                   <li key={`option-${i}`}>
                     <Checkbox
                       invert
-                      label={label}
+                      label={t(`ui:option.${label}`)}
                       checked={flags.flags[key]}
                       onChange={toggleFlag(key)}
                     />
