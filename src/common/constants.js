@@ -24,6 +24,7 @@ export const Action = {
 
 export const Pattern = {
   DIAGONAL: 'diagonal',
+  DOTTED_GRID: 'dotted-grid',
 };
 
 //
