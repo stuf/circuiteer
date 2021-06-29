@@ -105,7 +105,7 @@ export function CanvasElement(props) {
 
       logger.info('add new element at %s, %s', pos.x, pos.y);
 
-      update(setCurrentEntity({ id: newId, entity: o.id }));
+      update(setCurrentEntity({ id: newId, entity: { id: o.id } }));
       update(addObject({ id: newId, pos, size: o.size, entity: o.id }));
       update(addedNew());
       return;

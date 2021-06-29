@@ -1,9 +1,18 @@
+import { useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 
+import { setCurrent } from 'state/location';
 import { useGameLocations } from 'common/hooks/locations';
 import { useOptionFlags } from 'common/hooks/options';
 import { usePowerBreakdown } from 'common/hooks/derived';
-import { ShowInfo, Checkbox, Block, Content, Flex } from 'components/ui';
+import {
+  ShowInfo,
+  Checkbox,
+  Block,
+  Content,
+  Flex,
+  Dropdown,
+} from 'components/ui';
 
 import { percent, show, withSign } from 'common/util';
 import { EfficiencyI } from 'common/constants';
@@ -33,14 +42,8 @@ function Breakdown(props) {
   const { t } = useTranslation();
   const { power } = props;
 
-  // const solarBonus =
-  //   (power.breakdown.solar?.adjusted ?? 0) - (power.breakdown.solar?.raw ?? 0);
-  // const windBonus =
-  //   (power.breakdown.wind?.adjusted ?? 0) - (power.breakdown.wind?.raw ?? 0);
-
-  // console.log({ solarBonus, windBonus });
   const getDiff = k => {
-    const vals = power.breakdown[k];
+    const vals = power?.breakdown[k];
     if (!vals) return null;
 
     return vals.adjusted - vals.raw;
@@ -139,11 +142,12 @@ function Breakdown(props) {
 }
 
 export function InfoPanel(props) {
+  const update = useDispatch();
   const { t } = useTranslation();
   const locations = useGameLocations();
   const flags = useOptionFlags();
 
-  const currentLocation = locations.entities[locations.current];
+  const currentLocation = locations?.entities[locations?.current] || {};
   const pwr = usePowerBreakdown();
   console.log(show({ pwr }));
 
@@ -164,6 +168,7 @@ export function InfoPanel(props) {
     <div className="info-panel">
       <Flex divide>
         {flags.flags.powerBreakdown && <Breakdown power={pwr} />}
+
         <Flex vertical center main divide>
           <Block>
             <Content>
@@ -180,7 +185,19 @@ export function InfoPanel(props) {
                 size="08"
                 content="poo poo"
               >
-                {t(`game:location.${locations.current}`)}
+                <Dropdown
+                  id="asd"
+                  value={locations.current}
+                  choices={Object.values(locations.entities)}
+                  onChange={e => {
+                    update(setCurrent(e.target.value));
+                  }}
+                  renderChoice={({ item, i }) => (
+                    <option value={item.id}>
+                      {t(`game:location.${item.id}`)}
+                    </option>
+                  )}
+                />
               </ShowInfo>
             </Content>
           </Block>
@@ -237,7 +254,7 @@ export function InfoPanel(props) {
           <Content>
             <ShowInfo narrow label={t('ui:options')}>
               <ul className="space-y mt-03">
-                {optionFlags.map(({ label, key }, i) => (
+                {optionFlags.map(({ children, label, key }, i) => (
                   <li key={`option-${i}`}>
                     <Checkbox
                       invert

@@ -1,0 +1,1 @@
+export { EntityPalette } from './EntityPalette';
