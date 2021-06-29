@@ -6,9 +6,11 @@ export const getCanvasObjectStyle = obj => {
   const pos = obj.pos;
   const transform = `translateX(${pos.x}px) translateY(${pos.y}px)`;
 
-  return {
+  const style = {
     width: size.width,
     height: size.height,
     transform,
   };
+
+  return style;
 };
