@@ -1,13 +1,15 @@
 import clsx from 'clsx';
+import { memo } from 'react';
 
 export { Checkbox } from './Checkbox';
+export { Dropdown } from './Dropdown';
 
 const cns = {
   block: 'info-panel__block',
   content: 'info-panel__content',
 };
 
-export function Block(props) {
+export const Block = memo(props => {
   const { className, flex, children } = props;
 
   return (
@@ -15,9 +17,9 @@ export function Block(props) {
       {children}
     </div>
   );
-}
+});
 
-export function Content(props) {
+export const Content = memo(props => {
   const { className, flex, children } = props;
 
   return (
@@ -25,15 +27,10 @@ export function Content(props) {
       {children}
     </div>
   );
-}
+});
 
-export function Flex(props) {
+export const Flex = memo(props => {
   const { center, divide, main, cross, vertical } = props;
-
-  console.assert(
-    center && (main || cross),
-    'If center is specified, either cross or main must be defined, too',
-  );
 
   let axis;
   if (center && main) {
@@ -51,4 +48,24 @@ export function Flex(props) {
   ];
 
   return <div className={clsx(_className)}>{props.children}</div>;
-}
+});
+
+export const ShowInfo = memo(props => {
+  const { size = null, narrow, label, content, className, children } = props;
+
+  return (
+    <>
+      <div className="font-02">{label}</div>
+      <div
+        className={clsx(
+          className,
+          size && `font-${size}`,
+          'font-italic',
+          narrow && 'font-narrow',
+        )}
+      >
+        {children || content}
+      </div>
+    </>
+  );
+});

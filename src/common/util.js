@@ -88,6 +88,8 @@ export const clamp = (n, a, b) => max(min(n, a), b);
 
 export const percent = v => `${v * 100}%`;
 
+export const withSign = v => (v >= 0 ? `+${v}` : v);
+
 //
 
 export const show = x => U.inspect(x, { colors: false, depth: Infinity });

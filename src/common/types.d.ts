@@ -150,5 +150,18 @@ declare namespace Hooks {
       ids: string[];
       entities: Record<string, Data.PopulatedCanvasObject>;
     }
+
+    export interface UsePowerBreakdownHook {
+      sum: {
+        production: number;
+        usage: number;
+      };
+      breakdown: {
+        [k: 'onDemand' | 'solar' | 'wind' | 'powered' | 'constant']: {
+          raw: number;
+          adjusted: number;
+        };
+      };
+    }
   }
 }

@@ -30,4 +30,18 @@ export const objects = [
     powerType: 'onDemand',
     size: DefaultSize[3],
   },
+  {
+    id: 'mediumWindTurbine',
+    tier: 2,
+    power: 5,
+    powerType: 'wind',
+    size: DefaultSize[2],
+  },
+  {
+    id: 'mediumSolarPanel',
+    tier: 2,
+    power: 4,
+    powerType: 'solar',
+    size: DefaultSize[2],
+  },
 ];

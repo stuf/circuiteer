@@ -16,7 +16,7 @@ export const setCurrent = createAction('setCurrent');
 const initialState = {
   ids: [],
   entities: {},
-  current: 'calidor',
+  current: 'atrox',
 };
 
 //

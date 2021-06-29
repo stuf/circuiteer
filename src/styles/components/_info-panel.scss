@@ -36,6 +36,33 @@
     .flex.vertical {
       flex-direction: column;
     }
+
+    dl {
+      width: 10rem;
+      // border: solid 1px #fff;
+      display: grid;
+      grid-template-columns: auto 2rem;
+
+      dt,
+      dd {
+        // border: dashed 1px #fff;
+      }
+
+      dd {
+        text-align: right;
+        margin: 0;
+      }
+
+      hr {
+        margin: 0;
+        height: 2px;
+        border: none;
+        margin: map.get(D.$spacing, '03') 0 map.get(D.$spacing, '02');
+        background-color: S.$blueprint-blue-light;
+        grid-column: span 2;
+        width: 100%;
+      }
+    }
   }
 
   .#{$p}__content {

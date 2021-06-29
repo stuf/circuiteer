@@ -10,25 +10,26 @@ import { posL, sizeL, stateL } from 'common/lens';
 import { getLogger } from 'common/logger';
 import { getCanvasObjectStyle } from 'common/canvas';
 import { useUsageObjectThings } from 'common/hooks/derived';
-import { show } from 'common/util';
-import { useCanvasState, useCurrentCanvasEntity } from 'common/hooks/canvas';
+import { useCanvasState } from 'common/hooks/canvas';
 
 import { AutosizeUnderlay, Entity, Ghost, State } from 'components/canvas';
 
 import { addObject, updateObject } from 'state/objects';
 import { setCurrentEntity, clearCurrentEntity, addedNew } from 'state/canvas';
+import { useOptionFlags } from 'common/hooks/options';
 
 const logger = getLogger('CanvasElement');
 
 const posIn = L.get(posL);
 const sizeIn = L.get(sizeL);
-const stateIn = L.get(stateL);
+const stateIn = L.get(stateL); // eslint-disable-line
 
 export function CanvasElement(props) {
   const width = props.parentWidth ?? props.width;
   const height = props.parentHeight ?? props.height;
   const update = useDispatch();
 
+  const { flags } = useOptionFlags();
   const objects = useUsageObjectThings();
   const objectList = useMemo(
     () => Object.values(objects.entities),
@@ -180,7 +181,7 @@ export function CanvasElement(props) {
         style={{ width, height }}
         {...{ onMouseDown, onMouseMove, onMouseUp }}
       >
-        <State state={state} />
+        {flags.stateDebug && <State state={state} />}
         {showGhost && (
           <Ghost
             pos={{ x: state.x, y: state.y }}

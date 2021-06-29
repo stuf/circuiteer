@@ -19,3 +19,10 @@ export function useGameLocations() {
 
   return { current, ids, entities, actions };
 }
+
+export function useCurrentLocationEfficiency() {
+  const { current, entities } = useGameLocations();
+  const { solar, wind } = entities[current];
+
+  return { solar, wind };
+}
