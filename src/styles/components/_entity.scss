@@ -21,6 +21,11 @@
   //   border: solid 2px #f00;
   // }
 
+  .#{$p}__label {
+    padding: 0 1rem;
+    text-align: center;
+  }
+
   .#{$p}__toggles {
     position: absolute;
     left: 0.5rem;
