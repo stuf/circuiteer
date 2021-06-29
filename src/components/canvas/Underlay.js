@@ -3,6 +3,7 @@ import clsx from 'clsx';
 import { Group } from '@visx/group';
 import { PatternLines } from '@visx/pattern';
 import { withParentSizeModern } from '@visx/responsive';
+import { Pattern } from 'common/constants';
 
 export function Underlay(props) {
   const width = props.parentWidth ?? props.width;
@@ -99,7 +100,7 @@ export function Underlay(props) {
           <rect
             width={width - margin * 2}
             height={height - margin * 2}
-            fill="url(#grid)"
+            fill={`url(#${Pattern.DOTTED_GRID})`}
             stroke="#e4eaf6"
             strokeWidth={2}
           />

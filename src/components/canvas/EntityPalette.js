@@ -1,5 +1,6 @@
 import * as R from 'ramda';
 import clsx from 'clsx';
+import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
 import { addingNew } from 'state/canvas';
 
@@ -24,6 +25,7 @@ const onDragStart = (e, o, fn) => {
  * @returns
  */
 export function EntityPalette(props) {
+  const { t } = useTranslation();
   const { gameObjects } = props;
 
   const update = useDispatch();
@@ -33,7 +35,9 @@ export function EntityPalette(props) {
 
   return (
     <div className={clsx('entity-palette')}>
-      <header className="entity-palette__head">Modules</header>
+      <header className="entity-palette__head">
+        {t('ui:entityPalette.title')}
+      </header>
 
       <div
         className={clsx(
@@ -47,10 +51,10 @@ export function EntityPalette(props) {
             className="entity-palette__list-item"
             onClick={actions(R.compose(update, addingNew, R.always(o)))}
           >
-            {o.id}
+            <div className="nowrap">{t(`game:entity.${o.id}`)}</div>
             <div className="entity-palette__list-item-stats">
               <span>{o.power}</span>
-              <span>{Tier[o.tier]}</span>
+              <span>{t(`game:tier.${Tier[o.tier]}`)}</span>
             </div>
           </div>
         ))}
