@@ -1,0 +1,21 @@
+{
+  "tier": {
+    "small": "Small",
+    "medium": "Medium",
+    "large": "Large",
+    "extraLarge": "Extra Large",
+    "other": "Other"
+  },
+  "location": {
+    "atrox": "Atrox"
+  },
+  "entity": {
+    "qtRtg": "QT-RTG",
+    "rtg": "RTG",
+    "soilCentrifuge": "Soil Centrifuge",
+    "mediumPrinter": "Medium Printer",
+    "mediumWindTurbine": "Medium Wind Turbine",
+    "mediumSolarPanel": "Medium Solar Panel",
+    "largePrinter": "Large Printer"
+  }
+}

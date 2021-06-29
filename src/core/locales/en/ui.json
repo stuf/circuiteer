@@ -1,0 +1,39 @@
+{
+  "efficiency": {
+    "solar": "Solar eff.",
+    "wind": "Wind eff."
+  },
+  "production": "Production",
+  "usage": "Usage",
+  "sum": "Sum",
+  "options": "Options",
+  "name": "Name",
+  "location": "Location",
+  "option": {
+    "locationEfficiency": "Location eff.",
+    "powerBreakdown": "Power breakdown",
+    "stateDebug": "State debug"
+  },
+  "powerType": {
+    "constant": "Constant",
+    "powered": "Powered",
+    "solar": "Solar",
+    "wind": "Wind",
+    "onDemand": "On demand"
+  },
+  "unit": {
+    "perSec": "{{ value }} U/s"
+  },
+  "debug": {
+    "action": "Action",
+    "id": "ID",
+    "origin": "Origin",
+    "pos": "Position",
+    "size": "Size"
+  },
+  "entityPalette": {
+    "title": "Entities"
+  },
+  "powerBreakdown": "Power breakdown",
+  "locationAdjusted": "Location-adjusted"
+}
