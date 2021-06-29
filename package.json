@@ -1,18 +1,33 @@
 {
-  "name": "beta-circ",
-  "version": "0.1.0",
+  "name": "@etm12/circuiteer",
+  "version": "0.3.0",
+  "description": "Plan Astroneer bases, get overview of power usage and consumption",
   "private": true,
+  "keywords": [
+    "react",
+    "partial lenses",
+    "astroneer",
+    "blueprint",
+    "planner"
+  ],
+  "author": {
+    "email": "stefan@rimaila.fi",
+    "name": "Stefan Rimaila",
+    "url": "https://github.com/stuf"
+  },
+  "contributors": [],
   "scripts": {
     "dev": "BROWSER=none PORT=7070 yarn start",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "test:cov": "yarn test --coverage --watchAll=false"
   },
   "jest": {
     "collectCoverageFrom": [
       "!**/*.d.ts",
-      "!src/(components|containers|state)/index.js"
+      "!src/(components|containers|state|common|core|views)/**/index.js"
     ]
   },
   "eslintConfig": {
