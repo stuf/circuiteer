@@ -1,0 +1,21 @@
+@use 'sass:map';
+@use '../../base/mixins' as M;
+@use '../../base/settings' as S;
+@use '../../util/_index' as U;
+
+@mixin make-ruler-style($prefix) {
+  $p: unquote($prefix);
+
+  .#{$p} {
+    @include U.position(absolute, top-left);
+    transform: translateY(-100%);
+    // border: solid 1px #f00;
+  }
+
+  .#{$p}--vertical {
+    transform: translateY(100%) rotate(-90deg);
+    transform-origin: bottom left;
+  }
+}
+
+@include make-ruler-style('ruler');

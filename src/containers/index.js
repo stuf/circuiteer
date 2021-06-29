@@ -1,5 +1,4 @@
-export { Canvas, AutosizeCanvas } from './Canvas';
-export { EntityEditor } from './EntityEditor';
-export { Infobar } from './Infobar';
-export { Sidebar } from './Sidebar';
-export { Toolbar } from './Toolbar';
+export { AutosizeCanvasElement, CanvasElement } from './CanvasElement';
+export { InfoPanel } from './InfoPanel';
+export { Menu, MenuToggle } from './Menu';
+export { EntityPalette } from './EntityPalette';

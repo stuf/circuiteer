@@ -1,68 +1,66 @@
+import * as R from 'ramda';
 import * as L from 'partial.lenses';
 import * as I from 'infestines';
-import * as R from 'ramda';
-import * as RJT from '@reduxjs/toolkit';
+import * as RTK from '@reduxjs/toolkit';
+import * as U from 'util';
 
 //
 
-const { round } = Math;
+const { abs, sqrt, pow, min, max } = Math;
 
-// Functions
+//
 
-export const thru = (x, ...fns) => R.pipe(...fns)(x);
+export const curry2 = R.curryN(2);
+
+export const curry3 = R.curryN(3);
+
+export const invokeIf = (f, x) => f(x);
+
+export const createPrefixedActionCreator = prefix => (type, prepareFn) => {
+  const prefixedType = [prefix, type].join('/');
+
+  return RTK.createAction(prefixedType, prepareFn);
+};
+
+export function normalize(items) {
+  const ids = L.collect([L.elems, 'id'], items);
+  const entities = L.modify(L.entries, ([k, v]) => [v.id, v], items);
+
+  return {
+    ids,
+    entities,
+  };
+}
+
+export function denormalize({ ids = [], entities = {} }) {
+  const items = [];
+  for (let i = 0, len = ids.length; i < len; i++) {
+    const id = ids[i];
+    items.push(entities[id]);
+  }
+
+  return items;
+}
+
+//
+
+/**
+ * @template T
+ * @param {import('react').SyntheticEvent<T>} e
+ */
+export const persist = e => e.persist();
 
 /**
  *
- * @param {Function} fn
- * @param {number} ms
- * @returns
+ * @param {Event} e
  */
-export const debounce = (fn, ms) => {
-  let timeout;
-
-  const debounced = I.defineNameU(function debounced(...args) {
-    const deferred = () => {
-      timeout = null;
-
-      fn(...args);
-    };
-
-    clearTimeout(timeout);
-
-    timeout = setTimeout(deferred, ms);
-  }, `debounced<${fn.name}>`);
-
-  return debounced;
-};
-
-export const construct0 = R.constructN(0);
-
-export const construct1 = R.constructN(1);
-
-export const construct2 = R.constructN(2);
+export const preventDefault = e => e.preventDefault();
 
 //
 
-export const screenToGrid = ([mx, my], [sx, sy], roundingFn = round) => [
-  roundingFn(sx / mx),
-  roundingFn(sy / my),
-];
+export const actionsCollect = L.collect([L.flatten, L.when(I.isFunction)]);
 
-export const gridToScreen = ([mx, my], [gx, gy]) => [gx * mx, gy * my];
-
-// #region Functions
-
-export const invokeIf = I.curry(function (x, fn) {
-  return fn && fn(x);
-});
-
-// #endregion
-
-// Actions
-
-const actionsCollect = L.collect([L.flatten, L.when(I.isFunction)]);
-
-export const actions = function actions(...fnsIn) {
+export const actions = (...fnsIn) => {
   const fns = actionsCollect(fnsIn);
 
   switch (fns.length) {
@@ -72,44 +70,26 @@ export const actions = function actions(...fnsIn) {
       return fns[0];
     default:
       return function actions(e) {
-        for (let i = 0, len = fns.length; i < len; i++) {
+        for (let i = 0, n = fns.length; i < n; i++) {
           fns[i](e);
         }
       };
   }
 };
 
-const invokeE = name => I.defineNameU(e => e[name](), name);
+//
 
-export const preventDefault = invokeE('preventDefault');
+export const euclideanDistance = (p1, p2) =>
+  sqrt(pow(abs(p1.x - p2.x), 2) + pow(abs(p1.y - p2.y), 2));
 
-export const stopPropagation = invokeE('stopPropagation');
+export const clamp = (n, a, b) => max(min(n, a), b);
 
 //
 
-export const createPrefixedAction =
-  prefix =>
-  /**
-   *
-   * @param {string} type
-   * @param  {?function} prepareAction
-   * @returns {RJT.ActionCreator}
-   */
-  (type, prepareAction) =>
-    RJT.createAction([prefix, type].join('/'), prepareAction);
+export const percent = v => `${v * 100}%`;
 
-export const createPrefixedAsyncAction = prefix => (type, thunk) => {
-  return RJT.createAsyncThunk([prefix, type].join('/'), (arg, api) => {
-    console.log('create async thunk');
-    return new Promise((resolve, reject) => {
-      console.log('keerp promse');
-      try {
-        console.log('resolve with thunkFn + args', arg);
-        resolve(thunk(arg));
-      } catch (err) {
-        console.log('oh no error!', err);
-        reject(api.rejectWithValue(err));
-      }
-    });
-  });
-};
+export const withSign = v => (v >= 0 ? `+${v}` : v);
+
+//
+
+export const show = x => U.inspect(x, { colors: false, depth: Infinity });

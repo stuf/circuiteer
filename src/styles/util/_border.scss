@@ -1,0 +1,13 @@
+@use '../base/mixins' as M;
+
+.divide-x {
+  > * + * {
+    @include M.border(left);
+  }
+}
+
+.divide-y {
+  > * + * {
+    @include M.border(top);
+  }
+}

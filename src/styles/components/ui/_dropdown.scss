@@ -1,0 +1,27 @@
+@use 'sass:map';
+@use '../../base/settings' as S;
+@use '../../base/definitions' as D;
+@use '../../util/_index' as U;
+
+@mixin make-dropdown-style($prefix, $color1, $color2) {
+  $p: unquote($prefix);
+
+  .#{$p} {
+    position: relative;
+  }
+
+  .#{$p} select {
+    display: block;
+    width: 100%;
+    background: $color1;
+    color: $color2;
+    border: none;
+    padding: 0;
+  }
+}
+
+@include make-dropdown-style(
+  'dropdown',
+  S.$blueprint-blue-dark,
+  S.$blueprint-blue-light
+);

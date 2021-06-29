@@ -1,7 +1,0 @@
-.sidebar {
-}
-
-.sidebar--root {
-  @apply px-4 py-2;
-  @apply space-y-4;
-}

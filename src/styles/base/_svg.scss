@@ -1,0 +1,21 @@
+////
+/// Base SVG element styles
+////
+@use 'sass:map';
+@use '../base/settings' as S;
+
+.stroke-light {
+  stroke: S.$blueprint-blue-light;
+}
+
+.stroke-dashed {
+  stroke-dasharray: 5 5;
+}
+
+.stroke-thin {
+  stroke-width: 1px;
+}
+
+.fill-light {
+  fill: S.$blueprint-blue-light;
+}

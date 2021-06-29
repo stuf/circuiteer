@@ -1,72 +1,42 @@
 import * as L from 'partial.lenses';
-import * as R from 'ramda';
 import { createSlice, original } from '@reduxjs/toolkit';
 
-import { createPrefixedAction } from 'common/util';
+import { createPrefixedActionCreator } from 'common/util';
 
 const name = 'options';
-const createAction = createPrefixedAction(name);
+const createAction = createPrefixedActionCreator(name);
 
-//
-
-export const togglePowerStatus = createAction('togglePowerStatus');
-
-export const toggleHideInvalid = createAction('toggleHideInvalid');
-
-export const toggleEntityEditor = createAction('toggleEntityEditor');
-
-export const toggleShoppingList = createAction('toggleShoppingList');
-
-export const toggleEfficiencyAsMultiplier = createAction(
-  'toggleEfficiencyAsMultiplier',
-);
-
-export const toggleMaterialRequirementBreakdown = createAction(
-  'toggleMaterialRequirementBreakdown',
-);
-
-export const toggleFlag = createAction('toggleFlag');
-
-//
-
-const toggle = f => R.compose(L.modify(['flags', f], R.not), original);
-
-/**
- * @type {App.State.Options}
- */
 const initialState = {
   flags: {
-    hideInvalid: false,
-    showPowerStatus: true,
-    showEditor: true,
-    showShoppingList: true,
-    showEfficiencyAsMultiplier: false,
-    materialRequirementBreakdown: false,
+    locationEfficiency: true,
+    powerBreakdown: false,
+    stateDebug: true,
   },
 };
+
+//
+
+export const toggleFlag = createAction('toggleFlag');
+export const setFlag = createAction('setFlag');
+export const setFlags = createAction('setFlags');
+
+//
 
 const slice = createSlice({
   name,
   initialState,
   reducers: {},
-  extraReducers: builder => {
+  extraReducers: builder =>
     builder
-      .addCase(togglePowerStatus, toggle('showPowerStatus'))
-      .addCase(toggleHideInvalid, toggle('hideInvalid'))
-      .addCase(toggleEntityEditor, toggle('showEditor'))
-      .addCase(toggleShoppingList, toggle('showShoppingList'))
-      .addCase(
-        toggleMaterialRequirementBreakdown,
-        toggle('materialRequirementBreakdown'),
+      .addCase(toggleFlag, (s, a) =>
+        L.modify(['flags', a.payload], x => !x, original(s)),
       )
-      .addCase(
-        toggleEfficiencyAsMultiplier,
-        toggle('showEfficiencyAsMultiplier'),
+      .addCase(setFlag, (s, a) =>
+        L.set(['flags', a.payload.flag], a.payload.value, original(s)),
       )
-      .addCase(toggleFlag, (s, a) => {
-        s.flags[a.payload] = !s.flags[a.payload];
-      });
-  },
+      .addCase(setFlags, (s, a) => L.assign('flags', a.payload, original(s))),
 });
 
-export default slice.reducer;
+const reducer = slice.reducer;
+
+export default reducer;

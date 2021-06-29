@@ -1,0 +1,109 @@
+@use 'sass:map';
+@use '../base/settings' as S;
+@use '../base/definitions' as D;
+
+$info-block-border-color: map-get($default-border, color);
+$info-block-border-width: 2px;
+$info-block-border-style: solid;
+
+$info-block-border: $info-block-border-style $info-block-border-width
+  $info-block-border-color;
+
+$info-block-pad: 0.4rem;
+
+$info-label-font-size: 0.8rem;
+
+@mixin make-info-style {
+  $offset: S.$body-offset !default;
+
+  @include position(absolute);
+  background-color: $blueprint-blue-dark;
+  z-index: map.get(D.$z-index, 'overlay');
+  pointer-events: all;
+  right: $offset;
+  bottom: $offset;
+  min-width: 28rem;
+
+  &__child {
+    border-top: $info-block-border;
+
+    &:first-child {
+      border-top: none;
+    }
+  }
+}
+
+.info__table {
+  border-collapse: collapse;
+  width: 100%;
+
+  td {
+    @include border;
+    padding: $info-block-pad;
+    vertical-align: top;
+
+    &:first-child {
+      width: 100px;
+    }
+  }
+}
+
+.info {
+  .cols {
+    display: flex;
+  }
+}
+
+.info {
+  @include make-info-style();
+}
+
+.info__header {
+  @include border;
+  border-bottom: none;
+  padding: $info-block-pad * 2 $info-block-pad;
+  font-size: 2rem;
+
+  sub {
+    text-transform: lowercase;
+  }
+
+  &-title,
+  &-subtitle {
+    display: inline-block;
+  }
+
+  &-title {
+  }
+
+  &-subtitle {
+  }
+}
+
+.info__block {
+  padding: $info-block-pad;
+
+  &--horizontal {
+    display: flex;
+  }
+}
+
+.info-label {
+  font-size: $info-label-font-size;
+  padding-bottom: $info-block-pad * 0.5;
+  margin-bottom: $info-block-pad * 0.5;
+}
+
+.info-value {
+  font-family: 'Routed Gothic Narrow';
+  font-style: italic;
+
+  &--big {
+    font-size: 2rem;
+  }
+}
+
+.info-checkbox {
+  display: flex;
+  align-items: center;
+}

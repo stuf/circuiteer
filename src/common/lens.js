@@ -1,35 +1,44 @@
-import * as R from 'ramda';
 import * as L from 'partial.lenses';
-import { Matrix } from 'common/linear';
+import { Action } from './constants';
 
-const { round } = Math;
+export const asNormalized = L.pickIn({
+  ids: L.define([]),
+  entities: L.define({}),
+});
 
-const construct1 = R.constructN(1);
+export const gameEntities = ['entities', L.define([])];
 
-export const gridI = ([gw, gh]) =>
-  L.iso(
-    ([x, y]) => [round(x / gw), round(y / gh)],
-    ([x, y]) => [x * gw, y * gh],
-  );
+export const canvasObject = L.pickIn({
+  id: [],
+  pos: L.define({ x: 0, y: 0 }),
+  size: L.define({ width: 0, height: 0 }),
+  entity: L.define('undefined'),
+  disabled: L.define(false),
+  locked: L.define(false),
+});
 
-export const matrixI = L.iso(
-  construct1(Matrix),
-  R.pipe(R.prop('data'), R.invoker(0, 'flat')),
-);
+// #region CanvasElement
+/**
+ * Focus on the `x` and `y` properties
+ */
+export const posL = L.props('x', 'y');
 
 /**
- * Handle a screen-space point as a grid-space point.
- * Performs rounding, so loss of precision will happen
- * when coordinates are between [0..gridX] and [0..gridY].
- *
- * @param {Point} gxy
- * @param {Function} roundingFn
- * @returns
+ * Focus on the `width` and `height` properties
  */
-export const asGridPointI = (gxy, roundingFn = Math.round) => [
-  matrixI,
-  L.iso(
-    R.pipe(R.invoker(1, 'div')(gxy), R.map(roundingFn)),
-    R.invoker(1, 'mul')(gxy),
-  ),
-];
+export const sizeL = L.props('width', 'height');
+
+/**
+ * Focus on an object and ensure it has a specific minimal
+ * structure.
+ */
+export const stateL = L.pickIn({
+  action: L.define(Action.NONE),
+  id: L.define(null),
+  x: L.define(0),
+  y: L.define(0),
+  width: L.define(0),
+  height: L.define(0),
+  origin: posL,
+});
+// #endregion

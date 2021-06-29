@@ -1,0 +1,58 @@
+@use 'sass:map';
+@use '../../base/definitions' as D;
+@use '../../base/settings' as S;
+
+@mixin make-button-style($prefix, $color1, $color2) {
+  $p: unquote($prefix);
+
+  $font-size: (
+    'small': map.get(D.$font-size, '01'),
+    'regular': inherit,
+  );
+
+  $pad: (
+    'small': map.get(D.$spacing, '02') map.get(D.$spacing, '03'),
+    'regular': map.get(D.$spacing, '04') map.get(D.$spacing, '05'),
+  );
+
+  .#{$p} {
+    @include border;
+    background-color: $color1;
+    border-color: $color2;
+    color: $color2;
+    display: inline-flex;
+    align-items: center;
+    height: 2.5rem;
+    padding: map.get($pad, 'regular');
+    font-size: map.get($font-size, 'regular');
+    cursor: pointer;
+
+    &.#{$p}--small {
+      padding: map.get($pad, 'small');
+      font-size: map.get($font-size, 'small');
+      height: auto;
+    }
+  }
+
+  .#{$p}:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
+
+  .#{$p}:hover:not(:disabled) {
+    background-color: $color2;
+    color: $color1;
+  }
+}
+
+@include make-button-style(
+  'button',
+  S.$blueprint-blue-dark,
+  S.$blueprint-blue-light
+);
+
+@include make-button-style(
+  'button--inverse',
+  S.$blueprint-blue-light,
+  S.$blueprint-blue-dark
+);

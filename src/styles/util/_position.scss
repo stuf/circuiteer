@@ -1,0 +1,92 @@
+@use 'sass:map';
+
+$position: (
+  absolute: absolute,
+  relative: relative,
+  fixed: fixed,
+  static: static,
+);
+
+$presets: (
+  top-left: (
+    top: 0,
+    left: 0,
+  ),
+  top-right: (
+    top: 0,
+    right: 0,
+  ),
+  bottom-left: (
+    bottom: 0,
+    left: 0,
+  ),
+  bottom-right: (
+    bottom: 0,
+    right: 0,
+  ),
+  inset-y: (
+    bottom: 0,
+    top: 0,
+  ),
+  inset-x: (
+    left: 0,
+    right: 0,
+  ),
+);
+
+@mixin position($pos, $maybePreset: null) {
+  position: map.get($position, $pos);
+
+  @if $maybePreset {
+    $o: map.get($presets, $maybePreset);
+
+    @each $key, $value in $o {
+      #{$key}: $value;
+    }
+  }
+}
+
+@each $name, $value in $position {
+  .#{$name} {
+    @include position($name);
+  }
+}
+
+@mixin inset() {
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+}
+
+@mixin make-bottom-right() {
+  bottom: 0;
+  right: 0;
+}
+
+@mixin make-top-right() {
+  top: 0;
+  right: 0;
+}
+
+//
+
+.inset {
+  @include inset;
+}
+
+.bottom-right {
+  @include make-bottom-right;
+}
+
+.top-right {
+  @include make-top-right;
+}
+
+.off-canvas {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 1px;
+  height: 1px;
+}

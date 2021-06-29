@@ -1,0 +1,23 @@
+@use 'sass:map';
+@use '../../base/definitions' as D;
+@use '../../base/settings' as S;
+
+@mixin make-canvas-underlay-style($prefix) {
+  $p: unquote($prefix);
+
+  // $stroke-color: S.$blueprint-blue-light;
+  $stroke-color: S.$blueprint-blue-light;
+
+  .#{$p} {
+    pointer-events: painted;
+    position: relative;
+    z-index: map.get(D.$z-index, 'underlay');
+
+    rect,
+    pattern {
+      stroke: $stroke-color;
+    }
+  }
+}
+
+@include make-canvas-underlay-style('canvas-underlay');

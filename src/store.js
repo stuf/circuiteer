@@ -1,8 +1,9 @@
 import { configureStore } from '@reduxjs/toolkit';
 
-import { preloadedState } from './core/preloaded';
-import * as reducers from './state';
+import * as reducer from './state';
 
-export const store = configureStore({ preloadedState, reducer: reducers });
+export const store = configureStore({
+  reducer,
+});
 
 export default store;

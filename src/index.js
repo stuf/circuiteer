@@ -1,25 +1,27 @@
-import React from 'react';
-import { Provider } from 'react-redux';
-import ReactDOM from 'react-dom';
-import './index.css';
+import React, { StrictMode } from 'react';
+import { render } from 'react-dom';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import store from './store';
-import './core/i18n';
-import './typedef';
+import { Provider } from 'react-redux';
 
-import './containers/Canvas/hooks/useDragging';
+import { store } from './store';
+import 'normalize.css';
+import './styles/index.scss';
+import { getLogger } from 'common/logger';
 
-if (window.Cypress) {
-  window.store = store;
-}
+// Bootstrap
+import './core';
 
-ReactDOM.render(
-  <React.StrictMode>
+const logger = getLogger('main');
+
+logger.log('info', 'entry point init');
+
+render(
+  <StrictMode>
     <Provider store={store}>
       <App />
     </Provider>
-  </React.StrictMode>,
+  </StrictMode>,
   document.getElementById('root'),
 );
 

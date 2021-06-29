@@ -1,8 +1,7 @@
-export { default as application } from './application';
-export { default as drag } from './drag';
-export { default as editor } from './editor';
-export { default as grid } from './grid';
-export { default as location } from './location';
-export { default as modal } from './modal';
-export { default as module } from './module';
+export { default as app } from './app';
+export { default as canvas } from './canvas';
+export { default as gameEntities } from './game-entities';
+export { default as locations } from './location';
+export { default as objects } from './objects';
 export { default as options } from './options';
+export { default as tier } from './tier';

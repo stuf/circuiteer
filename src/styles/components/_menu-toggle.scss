@@ -1,0 +1,31 @@
+@use 'sass:map';
+@use '../base/definitions' as D;
+@use '../base/settings' as S;
+
+@mixin make-menu-toggle-style($prefix) {
+  $p: unquote($prefix);
+
+  $size: 32px;
+
+  .#{$p} {
+    position: absolute;
+    left: S.$body-offset * 0.5;
+    top: S.$body-offset * 0.5;
+    z-index: 200;
+  }
+
+  .#{$p}__button {
+    border: solid 2px S.$blueprint-blue-light;
+    background-color: S.$blueprint-blue-dark;
+    color: S.$blueprint-blue-light;
+    border-radius: 10rem;
+    width: $size;
+    height: $size;
+    font-size: map.get(D.$font-size, '08');
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+@include make-menu-toggle-style('menu-toggle');

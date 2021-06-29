@@ -1,0 +1,65 @@
+@use 'sass:map';
+@use '../base/settings' as S;
+@use '../base/definitions' as D;
+
+@mixin make-menu-style($prefix) {
+  $p: unquote($prefix);
+
+  .#{$p} {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    z-index: map.get(D.$z-index, 'menu');
+
+    width: 320px;
+    background-color: S.$blueprint-blue-light;
+    color: S.$blueprint-blue-dark;
+    padding: map.get(D.$spacing, '04');
+    box-shadow: 0 0 1rem rgba(#000, 0.8);
+  }
+
+  .#{$p}__close {
+    position: absolute;
+    right: 1rem;
+    top: 1rem;
+    background: none;
+    border: none;
+    color: S.$blueprint-blue-dark;
+    font-size: 2rem;
+  }
+
+  .#{$p}__heading {
+    font-size: map.get(D.$font-size, '11');
+    margin-bottom: map.get(D.$spacing, '04');
+  }
+
+  .#{$p}__item {
+    padding: 0 map.get(D.$spacing, '04');
+    height: 48px;
+    display: flex;
+    align-items: center;
+    // border: solid 2px #f00;
+  }
+
+  .#{$p}-underlay {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(#000, 0.4);
+    z-index: map.get(D.$z-index, 'underlay');
+  }
+
+  .#{$p}-root {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: map.get(D.$z-index, 'modal');
+  }
+}
+
+@include make-menu-style('menu');
