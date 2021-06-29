@@ -5,6 +5,16 @@
 @mixin make-button-style($prefix, $color1, $color2) {
   $p: unquote($prefix);
 
+  $font-size: (
+    'small': map.get(D.$font-size, '01'),
+    'regular': inherit,
+  );
+
+  $pad: (
+    'small': map.get(D.$spacing, '02') map.get(D.$spacing, '03'),
+    'regular': map.get(D.$spacing, '04') map.get(D.$spacing, '05'),
+  );
+
   .#{$p} {
     @include border;
     background-color: $color1;
@@ -13,8 +23,15 @@
     display: inline-flex;
     align-items: center;
     height: 2.5rem;
-    padding: map.get(D.$spacing, '04') map.get(D.$spacing, '05');
+    padding: map.get($pad, 'regular');
+    font-size: map.get($font-size, 'regular');
     cursor: pointer;
+
+    &.#{$p}--small {
+      padding: map.get($pad, 'small');
+      font-size: map.get($font-size, 'small');
+      height: auto;
+    }
   }
 
   .#{$p}:disabled {

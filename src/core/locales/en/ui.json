@@ -3,6 +3,7 @@
     "solar": "Solar eff.",
     "wind": "Wind eff."
   },
+  "delete": "Delete",
   "production": "Production",
   "usage": "Usage",
   "sum": "Sum",

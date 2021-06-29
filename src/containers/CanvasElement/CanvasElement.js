@@ -14,7 +14,7 @@ import { useCanvasState } from 'common/hooks/canvas';
 
 import { AutosizeUnderlay, Entity, Ghost, State } from 'components/canvas';
 
-import { addObject, updateObject } from 'state/objects';
+import { addObject, updateObject, deleteObject } from 'state/objects';
 import { setCurrentEntity, clearCurrentEntity, addedNew } from 'state/canvas';
 import { useOptionFlags } from 'common/hooks/options';
 
@@ -71,10 +71,10 @@ export function CanvasElement(props) {
           className="canvas-el__object"
           style={getCanvasObjectStyle(o)}
         >
-          <Entity object={o} />
+          <Entity object={o} onDelete={() => update(deleteObject(o))} />
         </div>
       )),
-    [objectList],
+    [objectList, update],
   );
 
   const showGhost = useMemo(

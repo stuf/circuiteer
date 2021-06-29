@@ -1,4 +1,7 @@
+import { useTranslation } from 'react-i18next';
+
 export function Ghost(props) {
+  const { t } = useTranslation();
   const { pos, size, id } = props;
 
   return (
@@ -10,7 +13,7 @@ export function Ghost(props) {
         transform: `translateX(${pos.x}px) translateY(${pos.y}px)`,
       }}
     >
-      {id}
+      {t(`game:entity.${id}`)}
     </div>
   );
 }
