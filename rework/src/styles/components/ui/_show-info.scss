@@ -1,0 +1,33 @@
+@use 'sass:map';
+@use '../../util/_index' as U;
+@use '../../base/definitions' as D;
+@use '../../base/settings' as S;
+
+@mixin make-show-info-style($prefix) {
+  $p: unquote($prefix);
+
+  $_label-font-size: map.get(D.$font-size, '02');
+
+  .#{$p} {
+    padding: map.get(D.$spacing, '03');
+  }
+
+  .#{$p}.content--no-pad {
+    // border: solid 2px #00f;
+    padding: 0;
+  }
+
+  .#{$p}__label {
+    font-size: $_label-font-size;
+  }
+
+  .#{$p}.content--no-pad .#{$p}__label {
+    padding: map.get(D.$spacing, '03');
+  }
+
+  .#{$p}__content {
+    // border: solid 2px #f00;
+  }
+}
+
+@include make-show-info-style('show-info');

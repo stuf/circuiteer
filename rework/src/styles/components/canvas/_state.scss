@@ -1,0 +1,46 @@
+@use 'sass:map';
+@use '../../base/definitions' as D;
+@use '../../base/settings' as S;
+
+@mixin make-state-style($prefix) {
+  $p: unquote($prefix);
+  $pad: map.get(D.$spacing, '02');
+
+  .#{$p} {
+    position: absolute;
+    left: S.$body-offset;
+    bottom: S.$body-offset;
+    @include border;
+    background-color: $blueprint-blue-dark;
+    z-index: map.get(D.$z-index, 'overlay');
+    // width: 10rem;
+
+    dl {
+      dt,
+      dd {
+        padding: 0 $pad;
+        margin: 0;
+        font-weight: normal;
+      }
+
+      dt {
+        padding-top: $pad;
+        font-size: map.get(D.$font-size, '02');
+      }
+
+      dd {
+        padding-bottom: $pad;
+        font-size: map.get(D.$font-size, '06');
+        font-style: italic;
+      }
+
+      dt {
+        &:not(:first-child) {
+          @include border(top);
+        }
+      }
+    }
+  }
+}
+
+@include make-state-style('debug-state');

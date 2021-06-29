@@ -1,0 +1,27 @@
+@use 'sass:map';
+@use '../base/settings' as S;
+@use '../base/definitions' as D;
+
+$flex-grow: (1, 2, 3, 4);
+
+@each $value in $flex-grow {
+  .flex-#{$value} {
+    flex: $value;
+  }
+}
+
+.flex {
+  display: flex;
+}
+
+.flex.center-cross {
+  align-items: center;
+}
+
+.flex.center-main {
+  justify-content: center;
+}
+
+.flex.vertical {
+  flex-direction: column;
+}

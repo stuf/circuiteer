@@ -1,0 +1,137 @@
+@import '../util/position';
+
+$canvas-card-border-color: rgba(#000, 1);
+$canvas-card-border-width: 1px;
+$canvas-card-bg: rgba(#fff, 1);
+$canvas-card-radius: $radius-md;
+
+$cns-adding-new: unquote('adding-new');
+
+.canvas {
+  // border: dashed 2px #00f;
+  height: 100%;
+  position: relative;
+  user-select: none;
+  z-index: $canvas-main-z;
+}
+
+.canvas--#{$cns-adding-new} {
+  border: solid 4px #f00;
+}
+
+.canvas__card {
+  // pointer-events: none;
+  position: absolute;
+  left: 0;
+  top: 0;
+  border: $card-border-style $card-border-width $card-border-color;
+  background-color: $card-bg-color;
+  border-radius: $canvas-card-radius;
+  z-index: $canvas-main-z + 1;
+}
+
+.canvas__card:hover .canvas__card-controls {
+  display: block;
+}
+
+.canvas__card--current {
+  border: dashed 2px #f00;
+}
+
+.canvas__card-ghost {
+  left: 0;
+  top: 0;
+  pointer-events: none;
+
+  // border: dotted 2px #00f;
+  border: dotted 2px $base-border-color;
+  border-radius: $canvas-card-radius;
+  background-color: rgba($card-bg-color, 0.7);
+  z-index: $canvas-ghost-z;
+}
+
+//
+
+// Canvas underlay
+
+// .canvas-underlay {
+//   // border: solid 2px #f00;
+//   z-index: $canvas-underlay-z;
+//   // opacity: 0;
+//   // background: #f00;
+//   pointer-events: none;
+//   @include position(absolute);
+//   @include inset;
+//   // border: solid 2px #f0f;
+// }
+
+// .canvas-underlay--#{$cns-adding-new} {
+//   opacity: 0.5;
+// }
+
+// Canvas overlay
+.canvas-overlay {
+  // border: dotted 2px #fff;
+  pointer-events: none;
+  z-index: $canvas-overlay-z;
+  opacity: 0.5;
+  @include position(absolute);
+  @include inset;
+}
+
+// Canvas card controls
+.canvas__card-controls {
+  display: none;
+  position: absolute;
+  right: 0;
+  top: 0;
+  transform: translateX(100%);
+  border: solid 2px #f00;
+  background-color: #fff;
+
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0.5rem 0 0;
+
+    &:first-child {
+      margin-top: 0;
+    }
+
+    button {
+      display: block;
+      width: 100%;
+      text-align: left;
+    }
+  }
+}
+
+//
+
+.module-palette {
+  border: solid 2px #f00;
+  padding: map-get($spacing, '02');
+  width: 15rem;
+  max-height: 50vh;
+  z-index: 11;
+}
+
+.module-palette__items {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 0.25rem;
+}
+
+.module-palette__items > * {
+  border: solid 2px #f00;
+  padding: map-get($spacing, '02');
+}
+
+//
+
+.canvas-debug {
+  display: none;
+  border: solid 2px $base-border-color;
+  @include padding('03');
+  @include margin('03');
+}

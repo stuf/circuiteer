@@ -1,0 +1,34 @@
+@use 'sass:map';
+
+@use '../base/definitions' as D;
+@use '../base/mixins' as M;
+
+@each $key, $value in D.$font-size {
+  .font-#{$key} {
+    font-size: $value;
+  }
+}
+
+@each $key, $value in D.$font-weight {
+  .font-#{$key} {
+    font-weight: $value;
+  }
+}
+
+@each $key, $value in D.$font-style {
+  .font-#{$key} {
+    font-style: $value;
+  }
+}
+
+.text-heading {
+  font-size: map.get(D.$font-size, '06');
+}
+
+.font-narrow {
+  font-family: 'Routed Gothic Narrow';
+}
+
+.nowrap {
+  white-space: nowrap;
+}

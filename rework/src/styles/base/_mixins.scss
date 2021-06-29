@@ -1,0 +1,83 @@
+@use 'sass:map';
+@use './definitions' as D;
+@use './settings' as S;
+
+@mixin font-size($size) {
+  font-size: map.get(D.$font-size, $size);
+}
+
+@mixin font-weight($weight) {
+  font-weight: map.get(D.$font-weight, $weight);
+}
+
+//
+
+@mixin padding-reset($dir: null) {
+  @if $dir {
+    padding-#{$dir}: 0;
+  } @else {
+    padding: 0;
+  }
+}
+
+@mixin padding($size, $dir: null) {
+  $px: map.get(D.$spacing, $size);
+
+  @if $dir == x {
+    padding-left: $px;
+    padding-right: $px;
+  } @else if $dir == y {
+    padding-top: $px;
+    padding-bottom: $px;
+  } @else if $dir {
+    padding-#{$dir}: $px;
+  } @else {
+    padding: $px;
+  }
+}
+
+@mixin margin-reset($dir: null) {
+  @if $dir {
+    margin-#{$dir}: 0;
+  } @else {
+    margin: 0;
+  }
+}
+
+@mixin margin($size, $dir: null) {
+  $px: map.get(D.$spacing, $size);
+
+  @if $dir == x {
+    margin-left: $px;
+    margin-right: $px;
+  } @else if $dir == y {
+    margin-top: $px;
+    margin-bottom: $px;
+  } @else if $dir {
+    margin-#{$dir}: $px;
+  } @else {
+    margin: $px;
+  }
+}
+
+//
+
+@mixin border($dir: null) {
+  $w: map.get(S.$default-border, width);
+  $c: map.get(S.$default-border, color);
+  $s: map.get(S.$default-border, style);
+
+  $b: $s $w $c;
+
+  @if $dir == x {
+    border-top: $b;
+    border-bottom: $b;
+  } @else if $dir == y {
+    border-left: $b;
+    border-right: $b;
+  } @else if $dir {
+    border-#{$dir}: $b;
+  } @else {
+    border: $b;
+  }
+}

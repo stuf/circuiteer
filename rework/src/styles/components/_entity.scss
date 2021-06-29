@@ -1,0 +1,62 @@
+@use '../util/_index' as U;
+
+@mixin make-entity-style($prefix) {
+  $p: unquote($prefix);
+
+  @include border;
+  border-radius: $radius-md;
+  background: $blueprint-blue-dark;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  gap: 0.25rem;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-style: italic;
+  pointer-events: visible;
+  user-select: none;
+
+  .#{$p}__label {
+    padding: 0 1rem;
+    text-align: center;
+  }
+
+  .#{$p}__toggles {
+    position: absolute;
+    left: 0.5rem;
+    bottom: 0.5rem;
+    pointer-events: all;
+    display: none;
+  }
+
+  .#{$p}__stats {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    font-size: map-get($font-size, '01');
+  }
+
+  .#{$p}__power-type {
+    position: absolute;
+    left: 0.5rem;
+    top: 0.5rem;
+    font-size: map-get($font-size, '01');
+  }
+
+  .#{$p}__controls {
+    @include U.position(absolute);
+    bottom: 4px;
+    right: 4px;
+    pointer-events: all;
+
+    button {
+      border-color: transparent;
+      border-radius: 4px;
+    }
+  }
+}
+
+.entity {
+  @include make-entity-style($prefix: 'entity');
+}

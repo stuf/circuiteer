@@ -1,0 +1,63 @@
+{
+  "name": "beta-circ",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "BROWSER=none PORT=7070 yarn start",
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "jest": {
+    "collectCoverageFrom": [
+      "!**/*.d.ts",
+      "!src/(components|containers|state)/index.js"
+    ]
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "dependencies": {
+    "@reduxjs/toolkit": "^1.6.0",
+    "@testing-library/jest-dom": "^5.11.4",
+    "@testing-library/react": "^11.1.0",
+    "@testing-library/user-event": "^12.1.10",
+    "@visx/event": "^1.7.0",
+    "@visx/group": "^1.7.0",
+    "@visx/pattern": "^1.7.0",
+    "@visx/responsive": "^1.10.1",
+    "clsx": "^1.1.1",
+    "i18next": "^20.3.2",
+    "infestines": "^0.4.11",
+    "normalize.css": "^8.0.1",
+    "partial.lenses": "^14.17.0",
+    "ramda": "^0.27.1",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-i18next": "^11.11.0",
+    "react-redux": "^7.2.4",
+    "react-scripts": "4.0.3",
+    "sass": "^1.35.1",
+    "web-vitals": "^1.0.1",
+    "winston": "^3.3.3"
+  },
+  "devDependencies": {
+    "@testing-library/react-hooks": "^7.0.0"
+  }
+}
