@@ -1,8 +1,0 @@
-.barval {
-  @apply fill-white;
-}
-
-.barval tspan {
-  text-anchor: end;
-  alignment-baseline: middle;
-}
