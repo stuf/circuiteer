@@ -13,7 +13,7 @@ export const Block = memo(props => {
   const { className, flex, children } = props;
 
   return (
-    <div className={clsx(cns.block, className, flex && `flex-${flex}`)}>
+    <div className={clsx('block', className, flex && `flex-${flex}`)}>
       {children}
     </div>
   );
@@ -23,7 +23,7 @@ export const Content = memo(props => {
   const { className, flex, children } = props;
 
   return (
-    <div className={clsx(cns.content, className, flex && `flex-${flex}`)}>
+    <div className={clsx('content', className, flex && `flex-${flex}`)}>
       {children}
     </div>
   );
@@ -51,13 +51,22 @@ export const Flex = memo(props => {
 });
 
 export const ShowInfo = memo(props => {
-  const { size = null, narrow, label, content, className, children } = props;
+  const {
+    size = null,
+    narrow,
+    label,
+    content,
+    className,
+    children,
+    noPadContent,
+  } = props;
 
   return (
-    <>
-      <div className="font-02">{label}</div>
+    <div className={clsx('show-info', noPadContent && 'content--no-pad')}>
+      <div className="show-info__label font-02">{label}</div>
       <div
         className={clsx(
+          'show-info__content',
           className,
           size && `font-${size}`,
           'font-italic',
@@ -66,6 +75,6 @@ export const ShowInfo = memo(props => {
       >
         {children || content}
       </div>
-    </>
+    </div>
   );
 });

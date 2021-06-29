@@ -8,7 +8,7 @@ export function State(props) {
 
   return (
     <aside className="debug-state">
-      <Flex divide vertical>
+      <Flex divide>
         <Block>
           <Content>
             <ShowInfo

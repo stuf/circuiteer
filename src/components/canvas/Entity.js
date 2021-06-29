@@ -1,5 +1,7 @@
 import { useTranslation } from 'react-i18next';
 
+import { Delete } from 'components/icon';
+
 /**
  * @param {object} props
  * @param {Data.PopulatedCanvasObject} props.object
