@@ -13,6 +13,19 @@ Point.add = Point.Add;
 
 export const Size = {};
 
+Size.Add = {
+  concat: curry2((a, b) => ({
+    width: a.width + b.width,
+    height: a.height + b.height,
+  })),
+
+  empty: () => ({ width: 0, height: 0 }),
+
+  map: curry2((f, a) => f(a)),
+
+  of: a => ({ width: a, height: a }),
+};
+
 Size.Multiply = {
   concat: curry2((a, b) => ({
     width: a.width * b.width,
@@ -25,5 +38,7 @@ Size.Multiply = {
 
   of: a => ({ width: a, height: a }),
 };
+
+Size.add = Size.Add;
 
 Size.mul = Size.Multiply;
