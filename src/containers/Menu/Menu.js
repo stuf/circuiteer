@@ -7,7 +7,7 @@ export function Menu(props) {
   const {
     title = (
       <>
-        Circuiteer<sub>&eta;</sub>
+        Circuiteer<sub>&gamma;</sub>
       </>
     ),
   } = props;

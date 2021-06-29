@@ -168,7 +168,7 @@ export function InfoPanel(props) {
           <Block>
             <Content>
               <ShowInfo label={t('ui:name')} narrow size="12">
-                Circuiteer<sub>&omega;</sub>
+                Circuiteer<sub>&gamma;</sub>
               </ShowInfo>
             </Content>
           </Block>
