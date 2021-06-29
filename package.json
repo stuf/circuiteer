@@ -27,7 +27,8 @@
   "jest": {
     "collectCoverageFrom": [
       "!**/*.d.ts",
-      "!src/(components|containers|state|common|core|views)/**/index.js"
+      "!src/(components|containers|state|common|core|views)/**/index.js",
+      "!**/*.json"
     ]
   },
   "eslintConfig": {
