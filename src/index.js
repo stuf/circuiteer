@@ -9,6 +9,9 @@ import 'normalize.css';
 import './styles/index.scss';
 import { getLogger } from 'common/logger';
 
+// Bootstrap
+import './core';
+
 const logger = getLogger('main');
 
 logger.log('info', 'entry point init');
