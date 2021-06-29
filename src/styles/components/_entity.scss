@@ -14,14 +14,8 @@
   align-items: center;
   justify-content: center;
   font-style: italic;
-  pointer-events: none;
+  pointer-events: visible;
   user-select: none;
-
-  // border: solid 2px #f00;
-
-  // .#{$p}__label {
-  //   border: solid 2px #f00;
-  // }
 
   .#{$p}__label {
     padding: 0 1rem;
@@ -51,8 +45,15 @@
   }
 
   .#{$p}__controls {
-    @include U.position(absolute, bottom-right);
+    @include U.position(absolute);
+    bottom: 4px;
+    right: 4px;
     pointer-events: all;
+
+    button {
+      border-color: transparent;
+      border-radius: 4px;
+    }
   }
 }
 

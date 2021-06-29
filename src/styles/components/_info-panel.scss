@@ -13,30 +13,6 @@
     border: solid 2px S.$blueprint-blue-light;
     background: S.$blueprint-blue-dark;
 
-    .divide-x > * + * {
-      border-left: solid 2px S.$blueprint-blue-light;
-    }
-
-    .divide-y > * + * {
-      border-top: solid 2px S.$blueprint-blue-light;
-    }
-
-    .flex {
-      display: flex;
-    }
-
-    .flex.center-cross {
-      align-items: center;
-    }
-
-    .flex.center-main {
-      justify-content: center;
-    }
-
-    .flex.vertical {
-      flex-direction: column;
-    }
-
     dl {
       .row {
         display: grid;
@@ -68,9 +44,9 @@
     }
   }
 
-  .#{$p}__content {
-    padding: map.get(D.$spacing, '03');
-  }
+  // .#{$p}__content {
+  //   padding: map.get(D.$spacing, '03');
+  // }
 }
 
 @include make-info-panel-style('info-panel');

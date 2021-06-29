@@ -9,3 +9,19 @@ $flex-grow: (1, 2, 3, 4);
     flex: $value;
   }
 }
+
+.flex {
+  display: flex;
+}
+
+.flex.center-cross {
+  align-items: center;
+}
+
+.flex.center-main {
+  justify-content: center;
+}
+
+.flex.vertical {
+  flex-direction: column;
+}

@@ -13,7 +13,7 @@
     @include border;
     background-color: $blueprint-blue-dark;
     z-index: map.get(D.$z-index, 'overlay');
-    width: 10rem;
+    // width: 10rem;
 
     dl {
       dt,

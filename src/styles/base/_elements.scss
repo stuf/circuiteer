@@ -79,12 +79,6 @@ input[type='checkbox'] {
 }
 
 select {
-  display: block;
-  width: 100%;
-  background: $blueprint-blue-dark;
-  color: $blueprint-blue-light;
-  border: none;
-  @include border(bottom);
 }
 
 a {
