@@ -14,6 +14,21 @@ import { useCurrentLocationEfficiency } from './locations';
 
 const logger = getLogger('hooks/derived');
 
+export function useCurrentTierModules() {
+  const currentTier = useSelector(L.get(['tier', 'current']));
+  const gameObjects = useNormalizedGameObjects();
+
+  const tierObjects = useMemo(() => {
+    const objs = L.collect(
+      ['entities', L.values, L.when(o => o.tier === currentTier)],
+      gameObjects,
+    );
+    return objs;
+  }, [currentTier, gameObjects]);
+
+  return tierObjects;
+}
+
 /**
  *
  * @returns {Hooks.Derived.UseNormalizedGameObjectsHook}

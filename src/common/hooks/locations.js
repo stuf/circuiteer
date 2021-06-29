@@ -22,7 +22,7 @@ export function useGameLocations() {
 
 export function useCurrentLocationEfficiency() {
   const { current, entities } = useGameLocations();
-  const { solar, wind } = entities[current];
+  const { solar, wind } = entities[current] || { solar: 0, wind: 0 };
 
   return { solar, wind };
 }
