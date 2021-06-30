@@ -73,9 +73,8 @@ const label = {
 describe('Point', () => {
   describe('Add', () => {
     let P;
-
     beforeEach(() => {
-      P = Point.add;
+      P = Point.Add;
     });
 
     test(label.semigroupAssoc, () => {
@@ -116,7 +115,7 @@ describe('Point', () => {
 
 describe('Size', () => {
   describe('Multiply', () => {
-    test(label.semigroupAssoc, () => {
+    test('Semigroup: associativity', () => {
       const a1 = { width: 1, height: 1 };
       const a2 = { width: 4, height: 4 };
 
@@ -129,28 +128,28 @@ describe('Size', () => {
       expect(M.concat(b1, b1)).toEqual({ width: 16, height: 16 });
     });
 
-    test(label.monoidRightId, () => {
+    test('Monoid: right identity', () => {
       const M = Size.Multiply;
       const p = { width: 16, height: 16 };
 
       expect(M.concat(p, M.empty())).toEqual(p);
     });
 
-    test(label.monoidLeftId, () => {
+    test('Monoid: left identity', () => {
       const M = Size.Multiply;
       const p = { width: 16, height: 16 };
 
       expect(M.concat(M.empty(), p)).toEqual(p);
     });
 
-    test(label.functorId, () => {
+    test('Functor: identity', () => {
       const M = Size.Multiply;
       const f = a => a;
 
       expect(M.map(f, M.empty())).toEqual(M.empty());
     });
 
-    test(label.functorComp, () => {
+    test('Functor: composition', () => {
       const M = Size.Multiply;
       const f = a => ({ width: a.width * -2, height: a.height * -2 });
       const g = a => ({

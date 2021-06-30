@@ -11,5 +11,6 @@ test('State', () => {
     width: 100,
     height: 200,
   };
+
   const res = render(<State state={state} />);
 });

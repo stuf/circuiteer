@@ -1,5 +1,3 @@
-import { createElement } from 'react';
-
 const viewboxFor = (width, height) => [0, 0, width, height].join(' ');
 
 const bindSvg = (Component, size = 24) => {

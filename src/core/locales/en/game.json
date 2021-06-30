@@ -7,15 +7,36 @@
     "other": "Other"
   },
   "location": {
+    "sylva": "Sylva",
+    "desolo": "Desolo",
+    "calidor": "Calidor",
+    "vesania": "Vesania",
+    "novus": "Novus",
+    "glacio": "Glacio",
     "atrox": "Atrox"
   },
   "entity": {
     "qtRtg": "QT-RTG",
+    "smallGenerator": "Small Generator",
+    "smallSolarPanel": "Small Solar Panel",
+    "smallWindTurbine": "Small Wind Turbine",
+    "powerCells": "Power Cells",
+    "smallBattery": "Small Battery",
+    "autoArm": "Auto Arm",
     "rtg": "RTG",
+    "fieldShelter": "Field Shelter",
     "soilCentrifuge": "Soil Centrifuge",
+    "smeltingFurnace": "Smelting Furnace",
+    "researchChamber": "Research Chamber",
+    "chemistryLab": "Chemistry Lab",
+    "atmosphericCondenser": "Atmospheric Condenser",
     "mediumPrinter": "Medium Printer",
+    "mediumGenerator": "Medium Generator",
     "mediumWindTurbine": "Medium Wind Turbine",
     "mediumSolarPanel": "Medium Solar Panel",
-    "largePrinter": "Large Printer"
+    "largePrinter": "Large Printer",
+    "largeSolarPanel": "Large Solar Panel",
+    "largeWindTurbine": "Large Wind Turbine",
+    "autoExtractor": "Auto Extractor"
   }
 }
