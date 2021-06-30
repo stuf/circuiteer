@@ -4,11 +4,6 @@ import { memo } from 'react';
 export { Checkbox } from './Checkbox';
 export { Dropdown } from './Dropdown';
 
-const cns = {
-  block: 'info-panel__block',
-  content: 'info-panel__content',
-};
-
 export const Block = memo(props => {
   const { className, flex, children } = props;
 

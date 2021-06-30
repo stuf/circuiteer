@@ -1,6 +1,3 @@
-import * as L from 'partial.lenses';
-import { useDispatch, useSelector } from 'react-redux';
-import { toggleMenu } from 'state/app';
 import { useAppState } from 'common/hooks/app';
 
 export function Menu(props) {

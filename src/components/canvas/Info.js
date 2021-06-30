@@ -5,7 +5,7 @@ import { percent } from 'common/util';
 import { EfficiencyI } from 'common/constants';
 
 /**
- *
+ * @deprecated
  * @param {import('components/canvas/Info').Props} props
  * @returns
  */
