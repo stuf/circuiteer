@@ -30,6 +30,7 @@
     "collectCoverageFrom": [
       "!**/*.d.ts",
       "!src/(components|containers|state|common|core|views)/**/index.js",
+      "!**/*.jsx",
       "!**/*.json"
     ]
   },
