@@ -1,4 +1,5 @@
 import clsx from 'clsx';
+import * as P from 'prop-types';
 
 export function Checkbox(props) {
   const { id, label, children, checked, onChange, invert } = props;
@@ -12,3 +13,12 @@ export function Checkbox(props) {
     </div>
   );
 }
+
+Checkbox.propTypes = {
+  id: P.string.isRequired,
+  label: P.string,
+  children: P.oneOfType([P.node, P.elementType, P.string]),
+  checked: P.bool,
+  onChange: P.func.isRequired,
+  invert: P.bool,
+};
