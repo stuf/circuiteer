@@ -8,7 +8,6 @@ import { setCurrentTier } from 'state/tier';
 import { addingNew } from 'state/canvas';
 
 import { actions, withSign } from 'common/util';
-import { Tier, TierI } from 'common/constants';
 import { useCurrentTierModules } from 'common/hooks/derived';
 
 import { Dropdown, Flex, Block, ShowInfo, Content } from 'components/ui';

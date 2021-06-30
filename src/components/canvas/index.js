@@ -1,5 +1,4 @@
 export { Entity } from './Entity';
-export { EntityPalette } from './EntityPalette';
 export { Ghost } from './Ghost';
 export { Info } from './Info';
 export { Underlay, AutosizeUnderlay } from './Underlay';

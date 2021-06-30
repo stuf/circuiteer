@@ -6,7 +6,9 @@ export function Checkbox(props) {
   return (
     <div className={clsx(!invert ? 'checkbox' : 'checkbox-invert')}>
       <input type="checkbox" {...{ id, checked, onChange }} />
-      <label htmlFor={id}>{children || label}</label>
+      <label aria-label={children || label} htmlFor={id}>
+        {children || label}
+      </label>
     </div>
   );
 }

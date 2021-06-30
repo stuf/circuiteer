@@ -6,6 +6,8 @@ export function State(props) {
   const { state = {} } = props;
   const { origin = {} } = state;
 
+  console.log({ state, origin });
+
   return (
     <aside className="debug-state">
       <Flex divide>
