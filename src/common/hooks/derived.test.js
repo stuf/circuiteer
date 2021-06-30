@@ -6,5 +6,5 @@ import { useCanvasGameObjects } from './derived';
 
 test('useCanvasGameObjects', () => {
   const res = renderHook(() => useCanvasGameObjects(), { wrapper });
-  console.log(res.result.current);
+  // console.log(res.result.current);
 });

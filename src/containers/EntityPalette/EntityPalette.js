@@ -17,14 +17,11 @@ export function EntityPalette(props) {
 
   const update = useDispatch();
   const currentTier = useSelector(L.get(['tier', 'current']));
-  const tiers = useSelector(L.get(['tier', L.log(), 'tiers']));
+  const tiers = useSelector(L.get(['tier', 'tiers']));
   const { t } = useTranslation();
-
-  console.log(tiers);
 
   const currentTierObjects = useCurrentTierModules();
   const shouldPadList = currentTierObjects.length % 2 === 1;
-  console.log({ shouldPadList });
 
   return (
     <section className={clsx('entity-palette divide-y', className)}>

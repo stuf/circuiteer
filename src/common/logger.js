@@ -13,6 +13,7 @@ const logFormat = printf(({ level, message, label, timestamp }) => {
 });
 
 const loggerOptions = labelName => ({
+  level: process.env.NODE_ENV === 'test' ? 'error' : 'info',
   format: combine(label({ label: labelName }), splat(), timestamp(), logFormat),
   transports: [new transports.Console()],
 });

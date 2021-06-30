@@ -9,7 +9,7 @@ test('Checkbox', async () => {
     <Checkbox id="label" label="Label" onChange={fn} />,
   );
 
-  logRoles(container);
+  // logRoles(container);
 
   const el = await findByRole('checkbox');
   act(() => {
