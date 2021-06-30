@@ -19,7 +19,7 @@
   "scripts": {
     "dev": "BROWSER=none PORT=7070 yarn start",
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "SKIP_PREFLIGHT_CHECK=true react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "test:cov": "yarn test --coverage --watchAll=false",
