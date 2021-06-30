@@ -1,3 +1,4 @@
+import * as P from 'prop-types';
 import { useTranslation } from 'react-i18next';
 
 export function Ghost(props) {
@@ -17,3 +18,15 @@ export function Ghost(props) {
     </div>
   );
 }
+
+Ghost.propTypes = {
+  pos: P.exact({
+    x: P.number,
+    y: P.number,
+  }).isRequired,
+  size: P.exact({
+    width: P.number,
+    height: P.number,
+  }).isRequired,
+  id: P.string.isRequired,
+};

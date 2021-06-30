@@ -1,3 +1,4 @@
+import * as P from 'prop-types';
 import { useTranslation } from 'react-i18next';
 
 /**
@@ -36,3 +37,16 @@ export function Entity(props) {
     </>
   );
 }
+
+Entity.propTypes = {
+  object: P.shape({
+    entity: P.shape({
+      id: P.string,
+      power: P.number,
+      powerType: P.oneOf(['constant', 'solar', 'wind', 'powered', 'onDemand']),
+      width: P.number,
+      height: P.number,
+    }),
+  }),
+  onDelete: P.func,
+};

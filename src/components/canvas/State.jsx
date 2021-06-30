@@ -1,3 +1,4 @@
+import * as P from 'prop-types';
 import { useTranslation } from 'react-i18next';
 import { ShowInfo, Flex, Block, Content } from 'components/ui';
 
@@ -58,3 +59,18 @@ export function State(props) {
     </aside>
   );
 }
+
+State.propTypes = {
+  state: P.shape({
+    action: P.oneOf(['none', 'drag', 'addNew']),
+    id: P.string,
+    x: P.number,
+    y: P.number,
+    width: P.number,
+    height: P.number,
+    origin: P.shape({
+      x: P.number,
+      y: P.number,
+    }),
+  }),
+};

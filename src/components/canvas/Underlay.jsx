@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-// import * as R from 'ramda';
+import * as P from 'prop-types';
 import { Group } from '@visx/group';
 import { PatternLines } from '@visx/pattern';
 import { withParentSizeModern } from '@visx/responsive';
@@ -9,12 +9,10 @@ export function Underlay(props) {
   const width = props.parentWidth ?? props.width;
   const height = props.parentHeight ?? props.height;
   const pos = props.pos ?? {};
-  // const size = props.size ?? {};
 
   const { isAddingNew } = props;
 
   const margin = 20;
-  // const hasSize = !R.isEmpty(size);
 
   const x = pos.x;
   const y = pos.y;
@@ -110,4 +108,24 @@ export function Underlay(props) {
   );
 }
 
+Underlay.propTypes = {
+  width: P.number,
+  height: P.number,
+  pos: P.exact({
+    x: P.number,
+    y: P.number,
+  }),
+  isAddingNew: P.bool,
+};
+
 export const AutosizeUnderlay = withParentSizeModern(Underlay);
+
+AutosizeUnderlay.propTypes = {
+  parentWidth: P.number,
+  parentHeight: P.number,
+  pos: P.exact({
+    x: P.number,
+    y: P.number,
+  }),
+  isAddingNew: P.bool,
+};
