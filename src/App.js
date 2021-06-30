@@ -1,8 +1,9 @@
 import { MainView } from './views/Main';
-import { useDebugObjects } from './common/hooks/dev';
+import { useApplicationBootstrap } from './core/bootstrap';
 
 function App() {
-  useDebugObjects();
+  // Bootstrap
+  useApplicationBootstrap();
 
   return <MainView />;
 }

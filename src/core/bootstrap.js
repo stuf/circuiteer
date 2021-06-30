@@ -15,12 +15,13 @@ import { flags } from 'dev/options';
 import app from 'dev/app';
 import tiers from 'dev/tier';
 
-export function useDebugObjects() {
+/**
+ * @todo As alternative, just initialize the store with a specific state
+ */
+export function useApplicationBootstrap() {
   const update = useDispatch();
 
   useEffect(() => {
-    if (process.env.NODE_ENV !== 'development') return;
-
     update(setObjects(objects));
     update(setGameObjects(gameObjects));
     update(setLocations(locationObjects));
