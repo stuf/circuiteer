@@ -4,6 +4,10 @@
   .#{$p} {
     // border: solid 2px #f00;
   }
+
+  .#{$p}__object {
+    // border: solid 2px #f00;
+  }
 }
 
 @include make-canvas-el-style('canvas-el');

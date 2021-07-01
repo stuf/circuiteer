@@ -43,6 +43,14 @@ $font-style: (
 
 //
 
+$text-align: (
+  'left': left,
+  'center': 'center',
+  'right': 'right',
+) !default;
+
+//
+
 $spacing: (
   '01': 0.125rem,
   '02': 0.25rem,

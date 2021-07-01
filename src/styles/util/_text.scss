@@ -1,5 +1,6 @@
 @use 'sass:map';
 
+@use '../base/settings' as S;
 @use '../base/definitions' as D;
 @use '../base/mixins' as M;
 
@@ -16,9 +17,19 @@
 }
 
 @each $key, $value in D.$font-style {
-  .font-#{$key} {
-    font-style: $value;
+  .font-#{unquote($key)} {
+    font-style: unquote($value);
   }
+}
+
+@each $key, $value in D.$text-align {
+  .text-#{$key} {
+    text-align: $value;
+  }
+}
+
+.font-narrow {
+  font-family: S.$font-family-sans-serif-narrow;
 }
 
 .text-heading {

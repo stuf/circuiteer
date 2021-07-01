@@ -14,7 +14,7 @@
   align-items: center;
   justify-content: center;
   font-style: italic;
-  pointer-events: visible;
+  pointer-events: none;
   user-select: none;
 
   .#{$p}__label {
