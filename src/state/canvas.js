@@ -2,6 +2,14 @@ import * as L from 'partial.lenses';
 import { createSlice, original } from '@reduxjs/toolkit';
 import { createPrefixedActionCreator } from 'common/util';
 
+import {
+  stateL,
+  currentObject,
+  addingNewObject,
+  draggedObject,
+  externalObject,
+} from './lenses/canvas';
+
 const name = 'canvas';
 const createAction = createPrefixedActionCreator(name);
 
@@ -14,11 +22,6 @@ const initialState = {
   external: null,
   move: null,
 };
-
-const currentObject = ['current', L.define(null)];
-const addingNewObject = ['adding', L.required(null)];
-const draggedObject = ['drag', L.required(null)];
-const externalObject = ['external', L.required(null)];
 
 //
 
@@ -90,7 +93,8 @@ const slice = createSlice({
 
           original(s),
         ),
-      ),
+      )
+      .addDefaultCase((s, a) => L.get(stateL, original(s))),
 });
 
 const reducer = slice.reducer;

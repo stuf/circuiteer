@@ -1,3 +1,4 @@
+import * as L from 'partial.lenses';
 import U from 'util';
 import reducer, {
   addObject,
@@ -11,14 +12,46 @@ import reducer, {
   unlockObject,
 } from './objects';
 
+import { objectL, stateL, findObjectL } from './lenses/objects';
+
 import { replayState, show } from 'common/testutil';
 
-test('identity', () => {
-  const a = { type: 'asd' };
-  const r = reducer({}, a);
-  const e = {};
+describe('reducer', () => {
+  test('identity', () => {
+    const a = { type: 'asd' };
+    const r = reducer({}, a);
+    const e = { entities: [] };
 
-  expect(r).toEqual(e);
+    expect(r).toEqual(e);
+  });
+});
+
+describe('lenses', () => {
+  test('stateL', () => {
+    expect(L.get(stateL, null)).toEqual({ entities: [] });
+  });
+
+  test('objectL', () => {
+    expect(L.get(objectL, null)).toEqual({ locked: false, disabled: false });
+  });
+
+  test('findObjectL', () => {
+    const s1 = { entities: [{ id: '123' }] };
+    const se = { entities: [] };
+
+    const objL = findObjectL('123');
+
+    expect(L.get(objL, s1)).toEqual({ id: '123' });
+    expect(L.get(objL, se)).toBeUndefined();
+
+    expect(L.set(objL, { id: '234' }, s1)).toEqual({
+      entities: [{ id: '234' }],
+    });
+
+    expect(L.set(objL, { id: '123' }, se)).toEqual({
+      entities: [{ id: '123' }],
+    });
+  });
 });
 
 describe('actions', () => {
@@ -52,33 +85,35 @@ describe('actions', () => {
     expect(r).toEqual(e);
   });
 
-  test('updateObject: insert', () => {
-    const a = updateObject({ id: '1', name: 'turbokakn' });
-    const r = reducer({}, a);
-    const e = { entities: [{ id: '1', name: 'turbokakn' }] };
+  describe('updateObject', () => {
+    test('update nonexistent -> insert', () => {
+      const a = updateObject({ id: '1', name: 'turbokakn' });
+      const r = reducer({}, a);
+      const e = { entities: [{ id: '1', name: 'turbokakn' }] };
 
-    expect(r).toEqual(e);
-  });
+      expect(r).toEqual(e);
+    });
 
-  test('updateObject: merge', () => {
-    const a = updateObject({ id: '1', name: 'turbokakn' });
-    const r = reducer(
-      {
+    test('update existing', () => {
+      const a = updateObject({ id: '1', name: 'turbokakn' });
+      const r = reducer(
+        {
+          entities: [
+            { id: '-1', foo: true },
+            { id: '1', foo: true },
+          ],
+        },
+        a,
+      );
+      const e = {
         entities: [
           { id: '-1', foo: true },
-          { id: '1', foo: true },
+          { id: '1', name: 'turbokakn', foo: true },
         ],
-      },
-      a,
-    );
-    const e = {
-      entities: [
-        { id: '-1', foo: true },
-        { id: '1', name: 'turbokakn', foo: true },
-      ],
-    };
+      };
 
-    expect(r).toEqual(e);
+      expect(r).toEqual(e);
+    });
   });
 
   test('deleteObject', () => {
@@ -89,35 +124,39 @@ describe('actions', () => {
     expect(r).toEqual(e);
   });
 
-  test('lockObject', () => {
-    const a = lockObject({ id: '1' });
-    const r = reducer({ entities: [{ id: '1' }] }, a);
-    const e = { entities: [{ id: '1', locked: true, disabled: false }] };
+  describe('lock', () => {
+    test('lockObject', () => {
+      const a = lockObject({ id: '1' });
+      const r = reducer({ entities: [{ id: '1' }] }, a);
+      const e = { entities: [{ id: '1', locked: true, disabled: false }] };
 
-    expect(r).toEqual(e);
+      expect(r).toEqual(e);
+    });
+
+    test('unlockObject', () => {
+      const a = unlockObject({ id: '1' });
+      const r = reducer({ entities: [{ id: '1' }] }, a);
+      const e = { entities: [{ id: '1', locked: false, disabled: false }] };
+
+      expect(r).toEqual(e);
+    });
   });
 
-  test('unlockObject', () => {
-    const a = unlockObject({ id: '1' });
-    const r = reducer({ entities: [{ id: '1' }] }, a);
-    const e = { entities: [{ id: '1', locked: false, disabled: false }] };
+  describe('disable', () => {
+    test('enableObject', () => {
+      const a = enableObject({ id: '1' });
+      const r = reducer({ entities: [{ id: '1', disabled: true }] }, a);
+      const e = { entities: [{ id: '1', disabled: false, locked: false }] };
 
-    expect(r).toEqual(e);
-  });
+      expect(r).toEqual(e);
+    });
 
-  test('enableObject', () => {
-    const a = enableObject({ id: '1' });
-    const r = reducer({ entities: [{ id: '1', disabled: true }] }, a);
-    const e = { entities: [{ id: '1', disabled: false, locked: false }] };
+    test('disableObject', () => {
+      const a = disableObject({ id: '1' });
+      const r = reducer({ entities: [{ id: '1', disabled: false }] }, a);
+      const e = { entities: [{ id: '1', disabled: true, locked: false }] };
 
-    expect(r).toEqual(e);
-  });
-
-  test('disableObject', () => {
-    const a = disableObject({ id: '1' });
-    const r = reducer({ entities: [{ id: '1', disabled: false }] }, a);
-    const e = { entities: [{ id: '1', disabled: true, locked: false }] };
-
-    expect(r).toEqual(e);
+      expect(r).toEqual(e);
+    });
   });
 });

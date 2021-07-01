@@ -5,6 +5,7 @@ import * as L from 'partial.lenses';
 import { createSlice, original } from '@reduxjs/toolkit';
 
 import { createPrefixedActionCreator } from 'common/util';
+import { stateL, objectL, findObjectL } from './lenses/objects';
 
 const name = 'objects';
 const createAction = createPrefixedActionCreator(name);
@@ -23,8 +24,6 @@ export const disableObject = createAction('disableObject');
 export const toggleObject = createAction('toggleObject');
 
 //
-
-const findObjectL = id => ['entities', L.define([]), L.find(o => o.id === id)];
 
 const normalizeObjectL = L.pickIn({
   id: [],
@@ -92,7 +91,8 @@ const slice = createSlice({
           true,
           original(s),
         ),
-      ),
+      )
+      .addDefaultCase(s => L.get([stateL], original(s))),
 });
 
 const reducer = slice.reducer;
