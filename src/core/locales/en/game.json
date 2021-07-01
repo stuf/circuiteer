@@ -17,11 +17,13 @@
   },
   "entity": {
     "qtRtg": "QT-RTG",
+    "smallPrinter": "Small Printer",
     "smallGenerator": "Small Generator",
     "smallSolarPanel": "Small Solar Panel",
     "smallWindTurbine": "Small Wind Turbine",
     "powerCells": "Power Cells",
     "smallBattery": "Small Battery",
+    "portableOxygenator": "Portable Oxygenator",
     "autoArm": "Auto Arm",
     "rtg": "RTG",
     "fieldShelter": "Field Shelter",
@@ -34,9 +36,17 @@
     "mediumGenerator": "Medium Generator",
     "mediumWindTurbine": "Medium Wind Turbine",
     "mediumSolarPanel": "Medium Solar Panel",
+    "mediumShredder": "Medium Shredder",
+    "mediumBattery": "Medium Battery",
     "largePrinter": "Large Printer",
     "largeSolarPanel": "Large Solar Panel",
     "largeWindTurbine": "Large Wind Turbine",
-    "autoExtractor": "Auto Extractor"
+    "largeShredder": "Large Shredder",
+    "autoExtractor": "Auto Extractor",
+    "xlWindTurbine": "XL Wind Turbine",
+    "extraLargeShredder": "Extra Large Shredder",
+    "solarArray": "Solar Array",
+    "shuttle": "Shuttle",
+    "wreckedSolarArray": "Wrecked Solar Array"
   }
 }
