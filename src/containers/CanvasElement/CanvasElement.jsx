@@ -31,10 +31,9 @@ export function CanvasElement(props) {
 
   const { flags } = useOptionFlags();
   const objects = useUsageObjectThings();
-  const objectList = useMemo(
-    () => Object.values(objects.entities),
-    [objects.entities],
-  );
+  const objectList = useMemo(() => Object.values(objects.entities), [
+    objects.entities,
+  ]);
 
   // eslint-disable-next-line
   const [state, setState] = useState(L.get(stateL, {}));
@@ -142,21 +141,14 @@ export function CanvasElement(props) {
     // eslint-disable-next-line
     const { action, id } = state;
 
+    const pos = { x: e.clientX, y: e.clientY };
+
     if (!id) {
-      const pos = { x: e.clientX, y: e.clientY };
       setState(L.set(L.props('x', 'y'), pos));
       return;
     }
 
-    const { devicePixelRatio } = window;
-    const { movementX: x, movementY: y } = e;
-
-    setState(
-      L.modify(
-        [stateL, posL],
-        Point.add.concat({ x: x / devicePixelRatio, y: y / devicePixelRatio }),
-      ),
-    );
+    setState(L.set([stateL, posL], pos));
   };
 
   const onMouseUp = e => {

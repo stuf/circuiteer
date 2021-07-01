@@ -52,11 +52,11 @@ export function EntityPalette(props) {
                 {currentTierObjects.map((o, i) => (
                   <li
                     key={o.id}
-                    className="entity-palette__list-item"
+                    className="entity-palette__list-item font-narrow divide-y"
                     onClick={actions(R.compose(update, addingNew, R.always(o)))}
                   >
                     <div>{t(`game:entity.${o.id}`)}</div>
-                    <div>
+                    <div className="text-right">
                       {t('ui:unit.perSec', { value: withSign(o.power) })}
                     </div>
                   </li>
