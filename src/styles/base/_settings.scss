@@ -1,8 +1,9 @@
 @use 'sass:map';
+@use 'sass:color';
 @use 'definitions' as D;
 
 $font-family-mono: 'Jetbrains Mono' !default;
-$font-family-sans-serif: 'National Park' !default;
+$font-family-sans-serif: 'Routed Gothic' !default;
 $font-family-sans-serif-narrow: 'Routed Gothic Narrow' !default;
 
 // Might not be needed, too many typefaces
@@ -24,7 +25,15 @@ $canvas-ghost-z: 10 !default;
 
 //
 
-$blueprint-blue-dark: #405cb1;
+$color: (
+  'prussian-blue': #003153,
+);
+
+// $blueprint-blue-dark: #405cb1;
+$blueprint-blue-dark: color.adjust(
+  map.get($color, 'prussian-blue'),
+  $lightness: 10%
+);
 $blueprint-blue-medium: #98aedd;
 $blueprint-blue-light: #e4eaf6;
 

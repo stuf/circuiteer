@@ -1,0 +1,44 @@
+@use 'sass:map';
+@use '../../base/definitions' as D;
+@use '../../base/settings' as S;
+
+@mixin make-guide-layer-style($prefix) {
+  $p: unquote($prefix);
+
+  .#{$p} {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 200px;
+    height: 200px;
+    z-index: 30;
+    pointer-events: none;
+  }
+
+  .#{$p}__guide-line {
+    stroke: S.$blueprint-blue-light;
+    stroke-dasharray: 1 2;
+    stroke-width: 1px;
+
+    &.--center {
+      stroke-dasharray: 2 5;
+    }
+  }
+
+  .#{$p}__ruler line {
+    // stroke-width: 4px;
+    // stroke: #f00;
+    stroke: S.$blueprint-blue-light;
+  }
+
+  .#{$p}__label {
+    fill: S.$blueprint-blue-light;
+    font-size: map.get(D.$font-size, '01');
+  }
+
+  .#{$p}__arrow-marker {
+    fill: S.$blueprint-blue-light;
+  }
+}
+
+@include make-guide-layer-style('guide-layer');
