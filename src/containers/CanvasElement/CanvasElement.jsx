@@ -1,18 +1,24 @@
+import clsx from 'clsx';
 import * as L from 'partial.lenses';
 import { nanoid } from '@reduxjs/toolkit';
 import { useState, useMemo, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { withParentSizeModern } from '@visx/responsive';
 
-import { Point } from 'common/algebra';
 import { Action } from 'common/constants';
-import { posL, sizeL, stateL } from 'common/lens';
+import { clientL, posL, sizeL, stateL } from 'common/lens';
 import { getLogger } from 'common/logger';
 import { getCanvasObjectStyle } from 'common/canvas';
 import { useUsageObjectThings } from 'common/hooks/derived';
 import { useCanvasState } from 'common/hooks/canvas';
 
-import { AutosizeUnderlay, Entity, Ghost, State } from 'components/canvas';
+import {
+  AutosizeUnderlay,
+  AutosizeGuideLayer,
+  Entity,
+  Ghost,
+  State,
+} from 'components/canvas';
 
 import { addObject, updateObject, deleteObject } from 'state/objects';
 import { setCurrentEntity, clearCurrentEntity, addedNew } from 'state/canvas';
@@ -39,10 +45,15 @@ export function CanvasElement(props) {
   const [state, setState] = useState(L.get(stateL, {}));
 
   // eslint-disable-next-line
-  const statePos = useMemo(() => posIn(state), [state]);
+  const statePos = useMemo(() => posIn(state.actual), [state]);
 
   // eslint-disable-next-line
   const stateSize = useMemo(() => sizeIn(state), [state]);
+
+  const currentObject = useMemo(
+    () => (state.hovering ? objects.entities[state.hovering] : null),
+    [state.hovering, objects.entities],
+  );
 
   const cs = useCanvasState();
   useEffect(() => {
@@ -61,19 +72,27 @@ export function CanvasElement(props) {
     }
   }, [cs.flags.isAddingNew, cs.adding?.entity, state.action]);
 
+  const canvasObjectCSS = useMemo(
+    () => objectList.map((o, i) => getCanvasObjectStyle(o)),
+    [objectList],
+  );
+
   const children = useMemo(
     () =>
       objectList.map((o, i) => (
         <div
           key={o.id}
           id={o.id}
-          className="canvas-el__object"
-          style={getCanvasObjectStyle(o)}
+          className={clsx(
+            'canvas-el__object',
+            o.id === currentObject?.id && 'canvas-el__object--current',
+          )}
+          style={canvasObjectCSS[i]}
         >
           <Entity object={o} onDelete={() => update(deleteObject(o))} />
         </div>
       )),
-    [objectList, update],
+    [objectList, currentObject?.id, canvasObjectCSS, update],
   );
 
   const showGhost = useMemo(
@@ -87,6 +106,9 @@ export function CanvasElement(props) {
     /** @type {HTMLDivElement} */
     const t = e.target;
     const id = t.getAttribute('id');
+    const clickedPos = L.get(clientL, e);
+    const elRect = t.getBoundingClientRect();
+    const elOffset = { x: clickedPos.x - elRect.x, y: clickedPos.y - elRect.y };
 
     // If we don't have an ID, bail out immediately
     // TODO: This type of handling is probably just relevant when dragging elements
@@ -120,44 +142,78 @@ export function CanvasElement(props) {
     update(setCurrentEntity({ id, entity }));
 
     setState(
-      L.set(
-        [
-          stateL,
-          L.pick({
-            action: 'action',
-            id: 'id',
-            pos: posL,
-            size: sizeL,
-            origin: 'origin',
-          }),
-        ],
-        { action: Action.DRAG, id, pos, size, origin: pos },
-      ),
+      L.transform([
+        stateL,
+        L.seq(
+          ['action', L.setOp(Action.DRAG)],
+          ['id', L.setOp(id)],
+          [posL, L.setOp(pos)],
+          [sizeL, L.setOp(size)],
+          ['offset', posL, L.setOp(elOffset)],
+          ['origin', posL, L.setOp(pos)],
+          ['actual', posL, L.setOp(clickedPos)],
+        ),
+      ]),
     );
   };
 
   /** @param {MouseEvent} e */
   const onMouseMove = e => {
     // eslint-disable-next-line
-    const { action, id } = state;
+    const { action, offset, id } = state;
 
-    const pos = { x: e.clientX, y: e.clientY };
+    const currentlyOver = e.target.getAttribute('id');
 
+    // If we're not moving anything, update the current mouse pos and bail
     if (!id) {
-      setState(L.set(L.props('x', 'y'), pos));
+      const xy = L.get(clientL, e);
+      setState(
+        L.transform([
+          stateL,
+          L.seq(
+            [posL, L.setOp(xy)],
+            ['actual', posL, L.setOp(xy)],
+            ['hovering', L.setOp(currentlyOver)],
+          ),
+        ]),
+      );
       return;
     }
 
-    setState(L.set([stateL, posL], pos));
+    // However, if we're dragging something, we need to account for the offset
+    // between the clicked position and the element's origin, and subtract the offset
+    // from the current mouse position
+    if (action === Action.DRAG) {
+      const xy = L.get(clientL, e);
+      const pos_ = L.get(L.props('x', 'y', 'offset'), state);
+      const newPos = { x: xy.x - pos_.offset.x, y: xy.y - pos_.offset.y };
+
+      setState(
+        L.transform([
+          stateL,
+          L.seq([posL, L.setOp(newPos)], ['actual', L.setOp(xy)]),
+        ]),
+      );
+
+      // setState(L.set([stateL, posL], _xy));
+      return;
+    }
   };
 
   const onMouseUp = e => {
     const { id } = state;
+
     if (!id && state.action === Action.ADD_NEW) return;
     else if (!id) {
       logger.info('no current ID, bailing out');
       return;
     } else {
+      logger.info(
+        'update object `%s` position to (%s, %s)',
+        id,
+        state.x,
+        state.y,
+      );
       update(updateObject({ id, pos: { x: state.x, y: state.y } }));
       update(clearCurrentEntity());
 
@@ -183,6 +239,7 @@ export function CanvasElement(props) {
         )}
         <div className="canvas-el__body">{children}</div>
         <AutosizeUnderlay pos={statePos} size={stateSize} />
+        <AutosizeGuideLayer object={currentObject} />
       </section>
     </>
   );

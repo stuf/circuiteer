@@ -149,7 +149,6 @@ export function InfoPanel(props) {
 
   const currentLocation = locations?.entities[locations?.current] || {};
   const pwr = usePowerBreakdown();
-  console.log(show({ pwr }));
 
   const showEffFn = flags.flags.locationEfficiency
     ? percent
@@ -173,7 +172,7 @@ export function InfoPanel(props) {
           <Block>
             <Content>
               <ShowInfo label={t('ui:name')} narrow size="12">
-                Circuiteer<sub>&gamma;</sub>
+                Circuiteer₀
               </ShowInfo>
             </Content>
           </Block>
