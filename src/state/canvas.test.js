@@ -1,6 +1,6 @@
 import reducer, { addingNew, dragStart, dragStop } from './canvas';
 
-test('identity', () => {
+test.skip('identity', () => {
   const a = { type: 'asd' };
   const r = reducer({}, a);
   const e = {};
