@@ -14,7 +14,7 @@ import {
   Dropdown,
 } from 'components/ui';
 
-import { percent, show, withSign } from 'common/util';
+import { percent, withSign } from 'common/util';
 import { EfficiencyI } from 'common/constants';
 
 const optionFlags = [
