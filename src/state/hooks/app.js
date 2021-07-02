@@ -1,5 +1,4 @@
 import * as L from 'partial.lenses';
-import { useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { toggleGuideLayer } from 'state/app';
 
