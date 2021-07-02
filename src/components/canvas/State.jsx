@@ -5,7 +5,7 @@ import { ShowInfo, Flex, Block, Content } from 'components/ui';
 export function State(props) {
   const { t } = useTranslation();
   const { state = {} } = props;
-  const { origin = {} } = state;
+  const { origin = {}, offset = {}, actual = {} } = state;
 
   return (
     <aside className="debug-state">
@@ -30,7 +30,7 @@ export function State(props) {
               size={'08'}
               content="none"
             >
-              {state.id}
+              {state.id || state.hovering}
             </ShowInfo>
           </Content>
         </Block>
@@ -45,6 +45,20 @@ export function State(props) {
           <Content>
             <ShowInfo label={t('ui:debug.pos')} narrow size="08">
               {state.x}, {state.y}
+            </ShowInfo>
+          </Content>
+        </Block>
+        <Block>
+          <Content>
+            <ShowInfo label={t('ui:debug.offset')} narrow size="08">
+              {offset.x ?? 0}, {offset.y ?? 0}
+            </ShowInfo>
+          </Content>
+        </Block>
+        <Block>
+          <Content>
+            <ShowInfo label={t('ui:debug.actual')} narrow size="08">
+              {actual.x ?? 0}, {actual.y ?? 0}
             </ShowInfo>
           </Content>
         </Block>

@@ -72,28 +72,7 @@ export function Underlay(props) {
         {crosshair.map((ch, i) => (
           <line key={`ch-${i}`} {...ch} />
         ))}
-        {/* <line {...yPosTick} /> */}
-        {/* <line {...xPosTickExt} />
-        <line {...yPosTickExt} /> */}
 
-        {/* <text
-          fill="none"
-          stroke="#fff"
-          x={24}
-          y={64}
-          strokeDasharray="4 3"
-          style={{ fontSize: 64 }}
-        >
-          <tspan alignmentBaseline="text-bottom">Circuiteer</tspan>
-          <tspan
-            alignmentBaseline="central"
-            stroke="none"
-            fill="#fff"
-            style={{ fontSize: 24 }}
-          >
-            Beta
-          </tspan>
-        </text> */}
         <Group left={margin} top={margin}>
           <rect
             width={width - margin * 2}
