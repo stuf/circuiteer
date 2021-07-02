@@ -16,6 +16,7 @@
     "atrox": "Atrox"
   },
   "entity": {
+    "undefined": "",
     "qtRtg": "QT-RTG",
     "smallPrinter": "Small Printer",
     "smallGenerator": "Small Generator",

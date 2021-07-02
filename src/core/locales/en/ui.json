@@ -30,6 +30,8 @@
     "id": "ID",
     "origin": "Origin",
     "pos": "Position",
+    "offset": "Offset",
+    "actual": "Actual",
     "size": "Size"
   },
   "entityPalette": {
