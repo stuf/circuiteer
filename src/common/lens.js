@@ -35,10 +35,28 @@ export const sizeL = L.props('width', 'height');
 export const stateL = L.pickIn({
   action: L.define(Action.NONE),
   id: L.define(null),
+  hovering: L.define(null),
   x: L.define(0),
   y: L.define(0),
   width: L.define(0),
   height: L.define(0),
   origin: posL,
+  offset: posL,
+  actual: posL,
 });
 // #endregion
+
+export const movementL = L.pick({
+  x: 'movementX',
+  y: 'movementY',
+});
+
+export const clientL = L.pick({
+  x: 'clientX',
+  y: 'clientY',
+});
+
+export const mousePosL = L.pick({
+  delta: movementL,
+  pos: clientL,
+});

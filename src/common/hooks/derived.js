@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux';
 import { useCanvasObjects } from './objects';
 import { useGameEntities } from './game-entities';
 import { DefaultSize } from 'common/defaults';
-import { normalize, show } from 'common/util';
+import { normalize } from 'common/util';
 import { canvasObject } from 'common/lens';
 // import { useGameLocations } from './locations';
 
@@ -118,14 +118,14 @@ export function usePowerEfficiency() {
     consumers: L.collect(whenCons, objects),
   };
 
-  console.log(power);
+  // console.log(power);
 
   const sum = {
     producers: L.sum(['producers', L.elems], power),
     consumers: L.sum(['consumers', L.elems], power),
   };
 
-  console.log(sum);
+  // console.log(sum);
 
   return { power, sum };
 }
@@ -161,14 +161,14 @@ export function usePowerBreakdown() {
   const eff = useCurrentLocationEfficiency();
 
   const entities = L.collect(L.query('entity'), objects);
-  console.log({ entities, eff });
+  // console.log({ entities, eff });
 
   const totals = {};
   for (let i = 0, len = entities.length; i < len; i++) {
     const entity = entities[i];
     const { power, powerType } = entity;
     const adjustScalar = eff[powerType] ?? 1;
-    console.log('powerType', powerType);
+    // console.log('powerType', powerType);
 
     totals[powerType] = L.transform(
       L.seq(
@@ -201,7 +201,7 @@ export function usePowerBreakdown() {
     adjusted: L.sum(adjWhenNeg, totalsʼ),
   };
 
-  console.log(show({ production, usage }));
+  // console.log(show({ production, usage }));
 
   return { sum: { production, usage }, breakdown: totalsʼ };
 }
