@@ -5,7 +5,7 @@ import * as L from 'partial.lenses';
 import { createSlice, original } from '@reduxjs/toolkit';
 
 import { createPrefixedActionCreator } from 'common/util';
-import { stateL, objectL, findObjectL } from './lenses/objects';
+import { stateL, findObjectL } from './lenses/objects';
 
 const name = 'objects';
 const createAction = createPrefixedActionCreator(name);

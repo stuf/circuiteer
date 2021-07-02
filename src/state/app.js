@@ -3,6 +3,7 @@ import * as R from 'ramda';
 import { createSlice, original } from '@reduxjs/toolkit';
 
 import { createPrefixedActionCreator } from 'common/util';
+import { stateL, gridSizeL } from './lenses/app';
 
 //
 
@@ -13,15 +14,22 @@ const initialState = {
   menu: {
     visible: false,
   },
-  tier: 1,
+  grid: {
+    size: {
+      width: null,
+      height: null,
+    },
+  },
 };
 
 //
 
 export const toggleMenu = createAction('toggleMenu');
-export const setTier = createAction('setTier');
+export const setGridSize = createAction('setGridSize');
 
 //
+
+const handleAction = fn => (s, a = {}) => fn(original(s), a.payload);
 
 const slice = createSlice({
   name,
@@ -29,10 +37,15 @@ const slice = createSlice({
   reducers: {},
   extraReducers: builder =>
     builder
-      .addCase(toggleMenu, s =>
-        L.modify(['menu', 'visible'], R.not, original(s)),
+      .addCase(
+        toggleMenu,
+        handleAction(s => L.modify([stateL, 'menu', 'visible'], R.not, s)),
       )
-      .addCase(setTier, (s, a) => L.set('tier', a.payload.tier, original(s))),
+      .addCase(
+        setGridSize,
+        handleAction((s, p) => L.set(gridSizeL, p, s)),
+      )
+      .addDefaultCase(s => L.get(stateL, original(s))),
 });
 
 const reducer = slice.reducer;
