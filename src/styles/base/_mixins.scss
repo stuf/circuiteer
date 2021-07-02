@@ -10,6 +10,18 @@
   font-weight: map.get(D.$font-weight, $weight);
 }
 
+@mixin font-normal {
+  font-style: normal;
+}
+
+@mixin font-half-italic {
+  font-style: oblique;
+}
+
+@mixin font-italic {
+  font-style: italic;
+}
+
 //
 
 @mixin padding-reset($dir: null) {

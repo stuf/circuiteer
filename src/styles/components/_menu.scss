@@ -17,6 +17,12 @@
     color: S.$blueprint-blue-dark;
     padding: map.get(D.$spacing, '04');
     box-shadow: 0 0 1rem rgba(#000, 0.8);
+    display: flex;
+    flex-direction: column;
+
+    > * {
+      border: solid 1px #f00;
+    }
   }
 
   .#{$p}__close {
@@ -30,6 +36,8 @@
   }
 
   .#{$p}__heading {
+    font-family: S.$font-family-sans-serif;
+    font-style: italic;
     font-size: map.get(D.$font-size, '11');
     margin-bottom: map.get(D.$spacing, '04');
   }
