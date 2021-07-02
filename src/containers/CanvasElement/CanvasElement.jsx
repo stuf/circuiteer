@@ -21,6 +21,7 @@ import {
 } from 'components/canvas';
 
 import { addObject, updateObject, deleteObject } from 'state/objects';
+import { useAppSettings } from 'state/hooks/app';
 import { setCurrentEntity, clearCurrentEntity, addedNew } from 'state/canvas';
 import { useOptionFlags } from 'common/hooks/options';
 
@@ -34,6 +35,7 @@ export function CanvasElement(props) {
   const width = props.parentWidth ?? props.width;
   const height = props.parentHeight ?? props.height;
   const update = useDispatch();
+  const appSettings = useAppSettings();
 
   const { flags } = useOptionFlags();
   const objects = useUsageObjectThings();
@@ -239,7 +241,9 @@ export function CanvasElement(props) {
         )}
         <div className="canvas-el__body">{children}</div>
         <AutosizeUnderlay pos={statePos} size={stateSize} />
-        <AutosizeGuideLayer object={currentObject} />
+        {appSettings.guideLayer.visible && (
+          <AutosizeGuideLayer object={currentObject} />
+        )}
       </section>
     </>
   );

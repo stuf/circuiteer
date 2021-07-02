@@ -13,7 +13,8 @@
   "option": {
     "locationEfficiency": "Location eff.",
     "powerBreakdown": "Power breakdown",
-    "stateDebug": "State debug"
+    "stateDebug": "State debug",
+    "showGuideLayer": "Show guide layer"
   },
   "powerType": {
     "constant": "Constant",

@@ -60,6 +60,19 @@ declare namespace Callback {
   }
 }
 
+declare namespace State {
+  export namespace Hooks {
+    export interface UseAppSettingsHook {
+      grid: {
+        size: Data.Size;
+      };
+      guideLayer: {
+        visible: boolean;
+      };
+    }
+  }
+}
+
 declare namespace Hooks {
   export namespace App {
     export interface UseAppStateHook {

@@ -16,6 +16,7 @@ import {
 
 import { percent, withSign } from 'common/util';
 import { EfficiencyI } from 'common/constants';
+import { useGuideLayerToggle } from 'state/hooks/app';
 
 const optionFlags = [
   {
@@ -146,6 +147,7 @@ export function InfoPanel(props) {
   const { t } = useTranslation();
   const locations = useGameLocations();
   const flags = useOptionFlags();
+  const [showGuideLayer, toggleGuideLayer] = useGuideLayerToggle();
 
   const currentLocation = locations?.entities[locations?.current] || {};
   const pwr = usePowerBreakdown();
@@ -263,6 +265,14 @@ export function InfoPanel(props) {
                     />
                   </li>
                 ))}
+                <li>
+                  <Checkbox
+                    invert
+                    label={t(`ui:option.showGuideLayer`)}
+                    checked={showGuideLayer}
+                    onChange={toggleGuideLayer}
+                  />
+                </li>
               </ul>
             </ShowInfo>
           </Content>
