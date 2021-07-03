@@ -1,0 +1,34 @@
+@use 'sass:map';
+@use '../base/settings' as S;
+@use '../base/definitions' as D;
+@use '../util/_index' as U;
+
+@mixin make-entity-palette-item-style($prefix) {
+  $p: unquote($prefix);
+
+  .#{$p} {
+    // border: solid 2px #f00;
+    height: 4rem;
+    display: flex;
+    flex-direction: column;
+    padding: map.get(D.$spacing, '02') map.get(D.$spacing, '03');
+
+    &.--consumer {
+      .#{$p}__name {
+        border-bottom-style: dotted;
+      }
+    }
+  }
+
+  .#{$p}__name {
+    border-bottom: solid 2px S.$blueprint-blue-light;
+    flex: 1;
+  }
+
+  .#{$p}__meta {
+    // border: dashed 2px #0f0;
+    text-align: right;
+  }
+}
+
+@include make-entity-palette-item-style('entity-palette-item');
