@@ -2,7 +2,7 @@ import * as L from 'partial.lenses';
 import { useDispatch, useSelector } from 'react-redux';
 import { toggleGuideLayer } from 'state/app';
 
-import { StateL, gridSizeL, guideLayerL, visibleL } from '../lenses/app';
+import { StateL } from '../lenses/app';
 
 /**
  *

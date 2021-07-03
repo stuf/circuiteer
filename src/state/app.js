@@ -3,7 +3,7 @@ import * as R from 'ramda';
 import { createSlice, original } from '@reduxjs/toolkit';
 
 import { createPrefixedActionCreator } from 'common/util';
-import { stateL, StateL, gridSizeL, guideLayerL, visibleL } from './lenses/app';
+import { stateL, StateL } from './lenses/app';
 
 //
 
