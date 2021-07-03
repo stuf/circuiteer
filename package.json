@@ -17,9 +17,9 @@
   },
   "contributors": [],
   "scripts": {
-    "dev": "BROWSER=none PORT=7070 yarn start",
+    "dev": "cross-env BROWSER=none PORT=7070 yarn start",
     "start": "react-scripts start",
-    "build": "SKIP_PREFLIGHT_CHECK=true react-scripts build",
+    "build": "cross-env SKIP_PREFLIGHT_CHECK=true react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "test:cov": "yarn test --coverage --watchAll=false",
@@ -94,6 +94,7 @@
     "@storybook/node-logger": "^6.3.2",
     "@storybook/preset-create-react-app": "^3.1.7",
     "@storybook/react": "^6.3.2",
-    "@testing-library/react-hooks": "^7.0.0"
+    "@testing-library/react-hooks": "^7.0.0",
+    "cross-env": "^7.0.3"
   }
 }
